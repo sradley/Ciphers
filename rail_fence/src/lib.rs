@@ -1,5 +1,5 @@
 //! # Rail-fence Cipher
-//! 
+//!
 //! ...
 
 #[cfg(test)]
@@ -36,7 +36,7 @@ pub fn cipher(plaintext: String, key: usize) -> String {
         let mut i = line;
         while i < plaintext.len() {
             ciphertext.push(*plaintext.get(i).unwrap());
-            
+
             if line == 0 || j % 2 == 0 {
                 i += skip;
             } else {
@@ -66,7 +66,7 @@ pub fn decipher(ciphertext: String, key: usize) -> String {
     while line < key - 1 {
         let skip = 2 * (key - line - 1);
         let mut j = 0usize;
-        
+
         let mut i = line;
         while i < ciphertext.len() {
             plaintext[i] = *ciphertext.get(k).unwrap();
