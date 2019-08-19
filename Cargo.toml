@@ -1,0 +1,8 @@
+[workspace]
+
+members = [
+    "atbash",
+    "rot13",
+    "caesar",
+    "affine",
+]
