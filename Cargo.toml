@@ -5,4 +5,5 @@ members = [
     "rot13",
     "caesar",
     "affine",
+    "rail_fence",
 ]

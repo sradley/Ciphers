@@ -13,6 +13,10 @@ name = "caesar"
 version = "0.1.0"
 
 [[package]]
+name = "rail_fence"
+version = "0.1.0"
+
+[[package]]
 name = "rot13"
 version = "0.1.0"
 
