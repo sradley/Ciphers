@@ -25,7 +25,7 @@ mod tests {
 
 /// `cipher` function ...
 pub fn cipher(plaintext: String, key: usize) -> String {
-    let mut ciphertext: Vec<u8> = vec![];
+    let mut ciphertext = vec![];
     let plaintext: Vec<u8> = plaintext.bytes().collect();
 
     let mut line = 0usize;
@@ -58,7 +58,7 @@ pub fn cipher(plaintext: String, key: usize) -> String {
 
 /// `decipher` function ...
 pub fn decipher(ciphertext: String, key: usize) -> String {
-    let mut plaintext: Vec<u8> = vec![0; ciphertext.len()];
+    let mut plaintext = vec![0u8; ciphertext.len()];
     let ciphertext: Vec<u8> = ciphertext.bytes().collect();
     let mut k = 0usize;
 

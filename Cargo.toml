@@ -6,4 +6,5 @@ members = [
     "caesar",
     "affine",
     "rail_fence",
+    "polybius_square",
 ]
