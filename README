@@ -43,6 +43,7 @@ Currently supported ciphers:
  * Running Key
  * Substitution
  * Vigenere
+ * Four-Square
 
 2. INSTALLATION
 ---------------
@@ -58,7 +59,7 @@ use ciphers::vigenere;
 
 // encipher
 let plaintext = String::from("SOMEXAMPLETEXTHERE");
-let key       = String::from("EXAMPLEKEY");
+let key = String::from("EXAMPLEKEY");
 
 let ciphertext = vigenere::cipher(plaintext, key);
 println!("{}", ciphertext);

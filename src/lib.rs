@@ -116,6 +116,7 @@ pub mod autokey;
 pub mod beaufort;
 pub mod caesar;
 pub mod columnar_transposition;
+pub mod four_square;
 pub mod polybius_square;
 pub mod porta;
 pub mod rail_fence;
