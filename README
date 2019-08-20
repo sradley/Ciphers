@@ -26,7 +26,23 @@ SOFTWARE.
 1. DESCRIPTION
 --------------
 
-...
+Ciphers is a Rust library that provides an implementation of many different
+classical ciphers.
+
+Currently supported ciphers:
+    * Affine
+    * Atbash
+    * Autokey
+    * Beaufort
+    * Caesar
+    * Columnar Transposition
+    * Polybius Square
+    * Porta
+    * Rail-fence
+    * Rot13
+    * Running Key
+    * Substitution
+    * Vigenere
 
 2. INSTALLATION
 ---------------
