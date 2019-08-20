@@ -9,4 +9,5 @@ members = [
     "polybius_square",
     "substitution",
     "columnar_transposition",
+    "autokey",
 ]
