@@ -7,32 +7,32 @@ mod tests {
     /// `cipher` test function ...
     #[test]
     fn cipher() {
-        let plaintext = String::from("DEFEND THE EAST WALL OF THE CASTLE");
+        let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
         let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
 
         let ciphertext = crate::cipher(plaintext, key);
-        assert_eq!(ciphertext, "GIUIFG CEI IPRC TPNN DU CEI QPRCNI");
+        assert_eq!(ciphertext, "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
     }
 
     /// `decipher` test function ...
     #[test]
     fn decipher() {
-        let ciphertext = String::from("GIUIFG CEI IPRC TPNN DU CEI QPRCNI");
+        let ciphertext = String::from("GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
         let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
 
         let plaintext = crate::decipher(ciphertext, key);
-        assert_eq!(plaintext, "DEFEND THE EAST WALL OF THE CASTLE");
+        assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
     }
 }
 
 /// `cipher` function ...
 /// 
 /// ```
-/// let plaintext = String::from("DEFEND THE EAST WALL OF THE CASTLE");
+/// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
 /// let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
 ///
 /// let ciphertext = substitution::cipher(plaintext, key);
-/// assert_eq!(ciphertext, "GIUIFG CEI IPRC TPNN DU CEI QPRCNI");
+/// assert_eq!(ciphertext, "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
 /// ```
 pub fn cipher(plaintext: String, key: String) -> String {
     assert_eq!(key.len(), 26);
@@ -41,10 +41,7 @@ pub fn cipher(plaintext: String, key: String) -> String {
 
     let ciphertext = plaintext
         .bytes()
-        .map(move |c| match c {
-            65u8...90u8 => key[(c - 'A' as u8) as usize],
-            _ => c,
-        })
+        .map(move |c| key[(c - 'A' as u8) as usize])
         .collect();
 
     String::from_utf8(ciphertext).unwrap()
@@ -53,21 +50,18 @@ pub fn cipher(plaintext: String, key: String) -> String {
 /// `decipher` function ...
 /// 
 /// ```
-/// let ciphertext = String::from("GIUIFG CEI IPRC TPNN DU CEI QPRCNI");
+/// let ciphertext = String::from("GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
 /// let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
 ///
 /// let plaintext = substitution::decipher(ciphertext, key);
-/// assert_eq!(plaintext, "DEFEND THE EAST WALL OF THE CASTLE");
+/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
 /// ```
 pub fn decipher(ciphertext: String, key: String) -> String {
     assert_eq!(key.len(), 26);
 
     let plaintext = ciphertext
         .bytes()
-        .map(move |c| match c {
-            65u8...90u8 => key.find(move |i: char| i == c as char).unwrap() as u8 + 'A' as u8,
-            _ => c,
-        })
+        .map(move |c| key.find(move |i: char| i == c as char).unwrap() as u8 + 'A' as u8)
         .collect();
 
     String::from_utf8(plaintext).unwrap()
