@@ -1,6 +1,8 @@
 //! # Four-Square Cipher
 //!
 //! ...
+//! 
+//! TODO: handle unwraps (i.e. when trying to find a letter that's not in the alphabet)
 
 static ALPHABET: [u8; 25] = [
     65, 66, 67, 68, 69, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,

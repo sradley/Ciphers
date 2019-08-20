@@ -1,6 +1,8 @@
 //! # Ciphers
 //!
 //! ...
+//! 
+//! TODO: handle inputs
 
 static TABULA_RECTA: [[u8; 26]; 26] = [
     [
@@ -125,3 +127,4 @@ pub mod rot13;
 pub mod running_key;
 pub mod substitution;
 pub mod vigenere;
+//pub mod adfgx;

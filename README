@@ -80,3 +80,4 @@ println!("{}", deciphered);
  * Trifid
  * Transposition
  * Straddle Checkerboard
+ * Hill

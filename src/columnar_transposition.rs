@@ -74,7 +74,7 @@ pub fn decipher(ciphertext: String, key: String) -> String {
             key_map
                 .get_mut(&sorted_key[i])
                 .unwrap()
-                .push(ciphertext[i * (key.len() - 1) + j]);
+                .push(ciphertext[i * (ciphertext.len() / key.len()) + j]);
         }
     }
 
