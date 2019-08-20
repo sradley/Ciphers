@@ -13,4 +13,5 @@ members = [
     "beaufort",
     "porta",
     "running_key",
+    "vigenere",
 ]

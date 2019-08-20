@@ -48,3 +48,7 @@ version = "0.1.0"
 name = "substitution"
 version = "0.1.0"
 
+[[package]]
+name = "vigenere"
+version = "0.1.0"
+
