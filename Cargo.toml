@@ -12,4 +12,5 @@ members = [
     "autokey",
     "beaufort",
     "porta",
+    "running_key",
 ]
