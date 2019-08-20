@@ -13,6 +13,10 @@ name = "autokey"
 version = "0.1.0"
 
 [[package]]
+name = "beaufort"
+version = "0.1.0"
+
+[[package]]
 name = "caesar"
 version = "0.1.0"
 
