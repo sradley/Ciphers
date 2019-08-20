@@ -30,19 +30,19 @@ Ciphers is a Rust library that provides implementations of several different
 classical ciphers.
 
 Currently supported ciphers:
-    * Affine
-    * Atbash
-    * Autokey
-    * Beaufort
-    * Caesar
-    * Columnar Transposition
-    * Polybius Square
-    * Porta
-    * Rail-fence
-    * Rot13
-    * Running Key
-    * Substitution
-    * Vigenere
+ * Affine
+ * Atbash
+ * Autokey
+ * Beaufort
+ * Caesar
+ * Columnar Transposition
+ * Polybius Square
+ * Porta
+ * Rail-fence
+ * Rot13
+ * Running Key
+ * Substitution
+ * Vigenere
 
 2. INSTALLATION
 ---------------
@@ -52,13 +52,18 @@ Currently supported ciphers:
 3. USAGE
 --------
 
-...
+E.g. using the Vigenere cipher.
+```
+use ciphers::vigenere;
 
-4. NEEDS REFACTORING
---------------------
+// encipher
+let plaintext = String::from("SOMEXAMPLETEXTHERE");
+let key       = String::from("EXAMPLEKEY");
 
-* Autokey Cipher
-* Beaufort Cipher
-* Polybius Square Cipher
-* Running Key Cipher
-* Vigenere Cipher
+let ciphertext = vigenere::cipher(plaintext, key);
+println!("{}", ciphertext);
+
+// decipher
+let deciphered = vigenere::decipher(ciphertext, key);
+println!("{}", deciphered);
+```

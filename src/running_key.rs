@@ -25,7 +25,7 @@ pub fn cipher(plaintext: String, key: String) -> String {
             let y = key[i] as usize - 'A' as usize;
             let x = c as usize - 'A' as usize;
 
-            TABULA_RECTA[y][x] as u8
+            TABULA_RECTA[y][x]
         })
         .collect();
 
@@ -51,16 +51,7 @@ pub fn decipher(ciphertext: String, key: String) -> String {
         .enumerate()
         .map(move |(i, c)| {
             let y = key[i] as usize - 'A' as usize;
-
-            let mut x = 0u8;
-            for j in 0..TABULA_RECTA[y].len() {
-                if TABULA_RECTA[y][j] as u8 == c {
-                    x = j as u8;
-                    break;
-                }
-            }
-
-            x + 'A' as u8
+            TABULA_RECTA[y].iter().position(|&j| j == c).unwrap() as u8 + 'A' as u8
         })
         .collect();
 

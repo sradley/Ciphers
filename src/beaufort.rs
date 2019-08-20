@@ -20,15 +20,10 @@ pub fn cipher(plaintext: String, key: String) -> String {
         .bytes()
         .enumerate()
         .map(|(i, c)| {
-            let mut x = 0usize;
-            for j in 0..TABULA_RECTA[c as usize - 'A' as usize].len() {
-                if TABULA_RECTA[c as usize - 'A' as usize][j] as u8 == key[i % key.len()] {
-                    x = j;
-                    break;
-                }
-            }
+            let y = c as usize - 'A' as usize;
+            let x = TABULA_RECTA[y].iter().position(|&j| j == key[i % key.len()]).unwrap();
 
-            TABULA_RECTA[0][x] as u8
+            TABULA_RECTA[0][x]
         })
         .collect();
 

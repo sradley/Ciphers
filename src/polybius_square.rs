@@ -17,17 +17,10 @@
 pub fn cipher(plaintext: String, key: String) -> String {
     assert_eq!(key.len(), 25);
 
-    let key = key.as_bytes();
     let mut ciphertext: Vec<u8> = Vec::with_capacity(plaintext.len());
 
     for c in plaintext.bytes() {
-        let mut i = 0u8;
-        for j in 0..key.len() {
-            if key[j] == c {
-                i = j as u8;
-                break;
-            }
-        }
+        let i = key.find(move |j| j == c as char).unwrap() as u8;
 
         ciphertext.push((i / 5) + 'A' as u8);
         ciphertext.push((i % 5) + 'A' as u8);

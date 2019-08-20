@@ -21,12 +21,12 @@ pub fn cipher(plaintext: String, key: String) -> String {
         .iter()
         .enumerate()
         .map(|(i, c)| {
-            if i < key.len() {
-                TABULA_RECTA[key[i] as usize - 'A' as usize][*c as usize - 'A' as usize] as u8
-            } else {
-                TABULA_RECTA[plaintext[i - key.len()] as usize - 'A' as usize]
-                    [*c as usize - 'A' as usize] as u8
-            }
+            let y = match i {
+                i if i < key.len() => key[i] as usize - 'A' as usize,
+                _ => plaintext[i - key.len()] as usize - 'A' as usize,
+            };
+
+            TABULA_RECTA[y][*c as usize - 'A' as usize]
         })
         .collect();
 
@@ -48,29 +48,14 @@ pub fn decipher(ciphertext: String, key: String) -> String {
 
     let mut plaintext: Vec<u8> = Vec::with_capacity(ciphertext.len());
     for (i, c) in ciphertext.iter().enumerate() {
-        if i < key.len() {
-            let y = key[i] as usize - 'A' as usize;
-            let mut x = 0u8;
-            for j in 0..TABULA_RECTA[y].len() {
-                if *c == TABULA_RECTA[y][j] as u8 {
-                    x = j as u8;
-                    break;
-                }
-            }
+        let y = match i {
+            i if i < key.len() => key[i] as usize - 'A' as usize,
+            _ => plaintext[i - key.len()] as usize - 'A' as usize,
+        };
 
-            plaintext.push(x + 'A' as u8);
-        } else {
-            let y = plaintext[i - key.len()] as usize - 'A' as usize;
-            let mut x = 0u8;
-            for j in 0..TABULA_RECTA[y].len() {
-                if *c == TABULA_RECTA[y][j] as u8 {
-                    x = j as u8;
-                    break;
-                }
-            }
-
-            plaintext.push(x + 'A' as u8);
-        }
+        plaintext.push(
+            TABULA_RECTA[y].iter().position(|&j| j == *c).unwrap() as u8 + 'A' as u8
+        );
     }
 
     String::from_utf8(plaintext).unwrap()
