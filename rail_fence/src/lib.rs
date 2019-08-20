@@ -24,6 +24,13 @@ mod tests {
 }
 
 /// `cipher` function ...
+/// 
+/// ```
+/// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+///
+/// let ciphertext = rail_fence::cipher(plaintext, 4);
+/// assert_eq!(ciphertext, "DTTFSEDHSWOTATFNEAALHCLEELEE");
+/// ```
 pub fn cipher(plaintext: String, key: usize) -> String {
     let mut ciphertext = vec![];
     let plaintext: Vec<u8> = plaintext.bytes().collect();
@@ -57,6 +64,13 @@ pub fn cipher(plaintext: String, key: usize) -> String {
 }
 
 /// `decipher` function ...
+/// 
+/// ```
+/// let ciphertext = String::from("DTTFSEDHSWOTATFNEAALHCLEELEE");
+/// 
+/// let plaintext = rail_fence::decipher(ciphertext, 4);
+/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
+/// ```
 pub fn decipher(ciphertext: String, key: usize) -> String {
     let mut plaintext = vec![0u8; ciphertext.len()];
     let ciphertext: Vec<u8> = ciphertext.bytes().collect();

@@ -24,6 +24,13 @@ mod tests {
 }
 
 /// `cipher` function ...
+/// 
+/// ```
+/// let plaintext = String::from("ATTACK AT DAWN");
+///
+/// let ciphertext = rot13::cipher(plaintext);
+/// assert_eq!(ciphertext, "NGGNPX NG QNJA");
+/// ```
 pub fn cipher(plaintext: String) -> String {
     let plaintext = plaintext
         .bytes()
@@ -37,6 +44,13 @@ pub fn cipher(plaintext: String) -> String {
 }
 
 /// `decipher` function ...
+/// 
+/// ```
+/// let ciphertext = String::from("NGGNPX NG QNJA");
+///
+/// let plaintext = rot13::decipher(ciphertext);
+/// assert_eq!(plaintext, "ATTACK AT DAWN");
+/// ```
 pub fn decipher(ciphertext: String) -> String {
     cipher(ciphertext)
 }

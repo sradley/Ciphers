@@ -29,6 +29,17 @@ mod tests {
 }
 
 /// `cipher` function ...
+/// 
+/// ```
+/// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+/// let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
+///
+/// let ciphertext = polybius_square::cipher(plaintext, key);
+/// assert_eq!(
+///      ciphertext,
+///     "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC"
+/// );
+/// ```
 pub fn cipher(plaintext: String, key: String) -> String {
     assert_eq!(key.len(), 25);
 
@@ -52,6 +63,14 @@ pub fn cipher(plaintext: String, key: String) -> String {
 }
 
 /// `decipher` function ...
+/// 
+/// ```
+/// let ciphertext = String::from("CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
+/// let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
+///
+/// let plaintext = polybius_square::decipher(ciphertext, key);
+/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
+/// ```
 pub fn decipher(ciphertext: String, key: String) -> String {
     assert_eq!(key.len(), 25);
     assert_eq!(ciphertext.len() % 2, 0);

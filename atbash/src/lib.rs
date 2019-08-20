@@ -24,6 +24,13 @@ mod tests {
 }
 
 /// `cipher` function ...
+/// 
+/// ```
+/// let plaintext = String::from("ATTACK AT DAWN");
+///
+/// let ciphertext = atbash::cipher(plaintext);
+/// assert_eq!(ciphertext, "ZGGZXP ZG WZDM");
+/// ```
 pub fn cipher(plaintext: String) -> String {
     let plaintext: Vec<u8> = plaintext
         .bytes()
@@ -37,6 +44,13 @@ pub fn cipher(plaintext: String) -> String {
 }
 
 /// `decipher` function ...
+/// 
+/// ```
+/// let ciphertext = String::from("ZGGZXP ZG WZDM");
+///
+/// let plaintext = atbash::decipher(ciphertext);
+/// assert_eq!(plaintext, "ATTACK AT DAWN");
+/// ```
 pub fn decipher(ciphertext: String) -> String {
     cipher(ciphertext)
 }

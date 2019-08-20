@@ -26,6 +26,14 @@ mod tests {
 }
 
 /// `cipher` function ...
+/// 
+/// ```
+/// let plaintext = String::from("DEFEND THE EAST WALL OF THE CASTLE");
+/// let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
+///
+/// let ciphertext = substitution::cipher(plaintext, key);
+/// assert_eq!(ciphertext, "GIUIFG CEI IPRC TPNN DU CEI QPRCNI");
+/// ```
 pub fn cipher(plaintext: String, key: String) -> String {
     assert_eq!(key.len(), 26);
 
@@ -43,6 +51,14 @@ pub fn cipher(plaintext: String, key: String) -> String {
 }
 
 /// `decipher` function ...
+/// 
+/// ```
+/// let ciphertext = String::from("GIUIFG CEI IPRC TPNN DU CEI QPRCNI");
+/// let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
+///
+/// let plaintext = substitution::decipher(ciphertext, key);
+/// assert_eq!(plaintext, "DEFEND THE EAST WALL OF THE CASTLE");
+/// ```
 pub fn decipher(ciphertext: String, key: String) -> String {
     assert_eq!(key.len(), 26);
 

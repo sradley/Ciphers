@@ -28,6 +28,14 @@ mod tests {
 }
 
 /// `cipher` function ...
+/// 
+/// ```
+/// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+/// let key = String::from("GERMAN");
+///
+/// let ciphertext = columnar_transposition::cipher(plaintext, key);
+/// assert_eq!(ciphertext, "NALCXEHWTTDTTFSEELEEDSOAXFEAHL")
+/// ```
 pub fn cipher(plaintext: String, key: String) -> String {
     let plaintext = plaintext.as_bytes();
     let mut key: Vec<u8> = key.bytes().collect();
@@ -63,6 +71,14 @@ pub fn cipher(plaintext: String, key: String) -> String {
 }
 
 /// `decipher` function ...
+/// 
+/// ```
+/// let ciphertext = String::from("NALCXEHWTTDTTFSEELEEDSOAXFEAHL");
+/// let key = String::from("GERMAN");
+///
+/// let plaintext = columnar_transposition::decipher(ciphertext, key);
+/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLEXX");
+/// ```
 pub fn decipher(ciphertext: String, key: String) -> String {
     let ciphertext = ciphertext.as_bytes();
     let key: Vec<u8> = key.bytes().collect();

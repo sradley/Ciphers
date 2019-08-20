@@ -24,6 +24,13 @@ mod tests {
 }
 
 /// `cipher` function ...
+/// 
+/// ```
+/// let plaintext = String::from("DEFEND THE EAST WALL OF THE CASTLE");
+///
+/// let ciphertext = affine::cipher(plaintext, 7, 11);
+/// assert_eq!(ciphertext, "GNUNYG OIN NLHO JLKK FU OIN ZLHOKN");
+/// ```
 pub fn cipher(plaintext: String, a: u16, b: u16) -> String {
     let plaintext = plaintext
         .bytes()
@@ -37,6 +44,13 @@ pub fn cipher(plaintext: String, a: u16, b: u16) -> String {
 }
 
 /// `decipher` function ...
+/// 
+/// ```
+/// let ciphertext = String::from("GNUNYG OIN NLHO JLKK FU OIN ZLHOKN");
+///
+/// let plaintext = affine::decipher(ciphertext, 7, 11);
+/// assert_eq!(plaintext, "DEFEND THE EAST WALL OF THE CASTLE");
+/// ```
 pub fn decipher(ciphertext: String, a: i32, b: i32) -> String {
     let a_inv = invmod(a, 26).unwrap();
 

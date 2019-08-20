@@ -42,6 +42,20 @@ mod tests {
 }
 
 /// `cipher` function ...
+/// 
+/// ```
+/// let plaintext = String::from("DEFEND THE EAST WALL OF THE CASTLE");
+///
+/// let ciphertext = caesar::cipher(plaintext, 1);
+/// assert_eq!(ciphertext, "EFGFOE UIF FBTU XBMM PG UIF DBTUMF");
+/// ```
+/// 
+/// ```
+/// let plaintext = String::from("DEFEND THE EAST WALL OF THE CASTLE");
+///
+/// let ciphertext = caesar::cipher(plaintext, 25);
+/// assert_eq!(ciphertext, "CDEDMC SGD DZRS VZKK NE SGD BZRSKD");
+/// ```
 pub fn cipher(plaintext: String, rotations: u8) -> String {
     let plaintext = plaintext
         .bytes()
@@ -55,6 +69,20 @@ pub fn cipher(plaintext: String, rotations: u8) -> String {
 }
 
 /// `decipher` function ...
+/// 
+/// ```
+/// let ciphertext = String::from("EFGFOE UIF FBTU XBMM PG UIF DBTUMF");
+///
+/// let plaintext = caesar::decipher(ciphertext, 1);
+/// assert_eq!(plaintext, "DEFEND THE EAST WALL OF THE CASTLE");
+/// ```
+/// 
+/// ```
+/// let ciphertext = String::from("CDEDMC SGD DZRS VZKK NE SGD BZRSKD");
+///
+/// let plaintext = caesar::decipher(ciphertext, 25);
+/// assert_eq!(plaintext, "DEFEND THE EAST WALL OF THE CASTLE");
+/// ```
 pub fn decipher(ciphertext: String, rotations: u8) -> String {
     let ciphertext = ciphertext
         .bytes()
