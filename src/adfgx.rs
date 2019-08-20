@@ -14,13 +14,13 @@ use crate::{columnar_transposition, polybius_square};
 /// let keyword = String::from("GERMAN");
 ///
 /// let ciphertext = adfgx::cipher(plaintext, key, keyword);
-/// assert_eq!(ciphertext, "FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
+/// assert_eq!(ciphertext, "FFDGDDADXXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFXADAFDXDDXXDDADGXXGXX");
 /// ```
 pub fn cipher(plaintext: String, key: String, keyword: String) -> String {
-    columnar_transposition::cipher(
-        polybius_square::cipher(plaintext, key, String::from("ADFGX")),
-        keyword,
-    )
+    let step1 = polybius_square::cipher(plaintext, key, String::from("ADFGX"));
+    let step2 = columnar_transposition::cipher(step1, keyword);
+
+    step2
 }
 
 /// `cipher` function ...
@@ -28,12 +28,12 @@ pub fn cipher(plaintext: String, key: String, keyword: String) -> String {
 /// ```
 /// use ciphers::adfgx;
 ///
-/// let ciphertext = String::from("FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
+/// let ciphertext = String::from("FFDGDDADXXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFXADAFDXDDXXDDADGXXGXX");
 /// let key = String::from("PHQGMEAYNOFDXKRCVSZWBUTIL");
 /// let keyword = String::from("GERMAN");
 ///
 /// let plaintext = adfgx::decipher(ciphertext, key, keyword);
-/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
+/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLELL");
 /// ```
 pub fn decipher(ciphertext: String, key: String, keyword: String) -> String {
     polybius_square::decipher(

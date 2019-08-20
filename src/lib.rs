@@ -112,6 +112,7 @@ static TABULA_RECTA: [[u8; 26]; 26] = [
 ];
 
 // re-exports
+pub mod adfgx;
 pub mod affine;
 pub mod atbash;
 pub mod autokey;
@@ -127,4 +128,3 @@ pub mod rot13;
 pub mod running_key;
 pub mod substitution;
 pub mod vigenere;
-//pub mod adfgx;

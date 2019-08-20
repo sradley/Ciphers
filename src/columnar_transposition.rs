@@ -14,32 +14,37 @@ use std::collections::HashMap;
 /// assert_eq!(ciphertext, "NALCXEHWTTDTTFSEELEEDSOAXFEAHL")
 /// ```
 pub fn cipher(plaintext: String, key: String) -> String {
-    let plaintext = plaintext.as_bytes();
     let mut key: Vec<u8> = key.bytes().collect();
-    let mut key_map: HashMap<u8, Vec<u8>> = HashMap::with_capacity(key.len());
+    let plaintext = plaintext.as_bytes();
+    let mut matrix: HashMap<u8, Vec<u8>> = HashMap::with_capacity(key.len());
 
     for k in key.iter() {
-        key_map.insert(*k, vec![]);
+        matrix.insert(*k, vec![]);
     }
 
-    for i in (0..plaintext.len()).step_by(key.len()) {
-        for j in 0..key.len() {
-            if i + j >= plaintext.len() {
-                // insert 'X'
-                key_map.get_mut(&key[j]).unwrap().push(88u8);
-            } else {
-                // default
-                key_map.get_mut(&key[j]).unwrap().push(plaintext[i + j]);
-            }
+    let len = if plaintext.len() % key.len() == 0 {
+        plaintext.len()
+    } else {
+        plaintext.len() + key.len() - plaintext.len() % key.len()
+    };
+
+    // populate matrix
+    for i in 0..len {
+        if i < plaintext.len() {
+            matrix
+                .get_mut(&key[i % key.len()])
+                .unwrap()
+                .push(plaintext[i]);
+        } else {
+            matrix.get_mut(&key[i % key.len()]).unwrap().push('X' as u8);
         }
     }
 
-    // sort alphabetically
     key.sort();
 
-    let mut ciphertext: Vec<u8> = Vec::with_capacity(plaintext.len());
+    let mut ciphertext = vec![];
     for k in key.iter() {
-        for byte in key_map.get(&k).unwrap() {
+        for byte in matrix.get(&k).unwrap() {
             ciphertext.push(*byte);
         }
     }
@@ -57,32 +62,29 @@ pub fn cipher(plaintext: String, key: String) -> String {
 /// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLEXX");
 /// ```
 pub fn decipher(ciphertext: String, key: String) -> String {
-    let ciphertext = ciphertext.as_bytes();
     let key: Vec<u8> = key.bytes().collect();
-    let mut key_map: HashMap<u8, Vec<u8>> = HashMap::with_capacity(key.len());
+    let ciphertext = ciphertext.as_bytes();
+    let mut matrix: HashMap<u8, Vec<u8>> = HashMap::with_capacity(key.len());
 
-    for k in key.iter() {
-        key_map.insert(*k, vec![]);
-    }
-
-    // sort key alphabetically
     let mut sorted_key = key.clone();
     sorted_key.sort();
 
-    for i in 0..key.len() {
-        for j in 0..(ciphertext.len() / key.len()) {
-            key_map
-                .get_mut(&sorted_key[i])
-                .unwrap()
-                .push(ciphertext[i * (ciphertext.len() / key.len()) + j]);
-        }
+    for k in sorted_key.iter() {
+        matrix.insert(*k, vec![]);
     }
 
-    let mut plaintext: Vec<u8> = Vec::with_capacity(ciphertext.len());
-    for i in 0..(ciphertext.len() / key.len()) {
-        for k in key.iter() {
-            plaintext.push(key_map.get(&k).unwrap()[i]);
-        }
+    for i in 0..ciphertext.len() {
+        matrix
+            .get_mut(&sorted_key[i / (ciphertext.len() / key.len())])
+            .unwrap()
+            .push(ciphertext[i]);
+    }
+
+    eprintln!("{:#?}", matrix);
+
+    let mut plaintext = vec![];
+    for i in 0..ciphertext.len() {
+        plaintext.push(matrix.get(&key[i % key.len()]).unwrap()[i % ciphertext.len() / key.len()]);
     }
 
     String::from_utf8(plaintext).unwrap()
