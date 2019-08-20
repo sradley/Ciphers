@@ -3,7 +3,7 @@
 //! ...
 
 /// `cipher` function ...
-/// 
+///
 /// ```
 /// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
 /// let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
@@ -30,7 +30,7 @@ pub fn cipher(plaintext: String, key: String) -> String {
 }
 
 /// `decipher` function ...
-/// 
+///
 /// ```
 /// let ciphertext = String::from("CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
 /// let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");

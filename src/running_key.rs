@@ -1,5 +1,5 @@
 //! # Running Key Cipher
-//! 
+//!
 //! ...
 
 use crate::TABULA_RECTA;

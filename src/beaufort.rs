@@ -1,5 +1,5 @@
 //! # Beaufort Cipher
-//! 
+//!
 //! ...
 
 use crate::TABULA_RECTA;
@@ -21,7 +21,10 @@ pub fn cipher(plaintext: String, key: String) -> String {
         .enumerate()
         .map(|(i, c)| {
             let y = c as usize - 'A' as usize;
-            let x = TABULA_RECTA[y].iter().position(|&j| j == key[i % key.len()]).unwrap();
+            let x = TABULA_RECTA[y]
+                .iter()
+                .position(|&j| j == key[i % key.len()])
+                .unwrap();
 
             TABULA_RECTA[0][x]
         })

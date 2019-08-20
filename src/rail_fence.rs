@@ -3,7 +3,7 @@
 //! ...
 
 /// `cipher` function ...
-/// 
+///
 /// ```
 /// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
 ///
@@ -43,10 +43,10 @@ pub fn cipher(plaintext: String, key: usize) -> String {
 }
 
 /// `decipher` function ...
-/// 
+///
 /// ```
 /// let ciphertext = String::from("DTTFSEDHSWOTATFNEAALHCLEELEE");
-/// 
+///
 /// let plaintext = ciphers::rail_fence::decipher(ciphertext, 4);
 /// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
 /// ```

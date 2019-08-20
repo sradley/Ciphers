@@ -53,9 +53,7 @@ pub fn decipher(ciphertext: String, key: String) -> String {
             _ => plaintext[i - key.len()] as usize - 'A' as usize,
         };
 
-        plaintext.push(
-            TABULA_RECTA[y].iter().position(|&j| j == *c).unwrap() as u8 + 'A' as u8
-        );
+        plaintext.push(TABULA_RECTA[y].iter().position(|&j| j == *c).unwrap() as u8 + 'A' as u8);
     }
 
     String::from_utf8(plaintext).unwrap()

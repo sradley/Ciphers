@@ -3,14 +3,14 @@
 //! ...
 
 /// `cipher` function ...
-/// 
+///
 /// ```
 /// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
 ///
 /// let ciphertext = ciphers::caesar::cipher(plaintext, 1);
 /// assert_eq!(ciphertext, "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
 /// ```
-/// 
+///
 /// ```
 /// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
 ///
@@ -27,14 +27,14 @@ pub fn cipher(plaintext: String, rotations: u8) -> String {
 }
 
 /// `decipher` function ...
-/// 
+///
 /// ```
 /// let ciphertext = String::from("EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
 ///
 /// let plaintext = ciphers::caesar::decipher(ciphertext, 1);
 /// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
 /// ```
-/// 
+///
 /// ```
 /// let ciphertext = String::from("CDEDMCSGDDZRSVZKKNESGDBZRSKD");
 ///

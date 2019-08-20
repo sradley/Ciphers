@@ -5,7 +5,7 @@
 use std::collections::HashMap;
 
 /// `cipher` function ...
-/// 
+///
 /// ```
 /// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
 /// let key = String::from("GERMAN");
@@ -48,7 +48,7 @@ pub fn cipher(plaintext: String, key: String) -> String {
 }
 
 /// `decipher` function ...
-/// 
+///
 /// ```
 /// let ciphertext = String::from("NALCXEHWTTDTTFSEELEEDSOAXFEAHL");
 /// let key = String::from("GERMAN");
