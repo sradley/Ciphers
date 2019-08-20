@@ -1,14 +1,14 @@
 //! # ADFGX Cipher
-//! 
+//!
 //! ...
 
-use crate::{polybius_square, columnar_transposition};
+use crate::{columnar_transposition, polybius_square};
 
 /// `cipher` function ...
-/// 
+///
 /// ```
 /// use ciphers::adfgx;
-/// 
+///
 /// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
 /// let key = String::from("PHQGMEAYNOFDXKRCVSZWBUTIL");
 /// let keyword = String::from("GERMAN");
@@ -24,10 +24,10 @@ pub fn cipher(plaintext: String, key: String, keyword: String) -> String {
 }
 
 /// `cipher` function ...
-/// 
+///
 /// ```
 /// use ciphers::adfgx;
-/// 
+///
 /// let ciphertext = String::from("FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
 /// let key = String::from("PHQGMEAYNOFDXKRCVSZWBUTIL");
 /// let keyword = String::from("GERMAN");

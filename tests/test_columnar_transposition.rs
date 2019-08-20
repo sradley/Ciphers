@@ -27,7 +27,10 @@ fn cipher_large() {
     let key = String::from("ZYXWVUTSRQPON");
 
     let ciphertext = columnar_transposition::cipher(plaintext, key);
-    assert_eq!(ciphertext, "MZMZLYLYKXKXJWJWIVIVHUHUGTGTFSFSERERDQDQCPCPBOBOANAN")
+    assert_eq!(
+        ciphertext,
+        "MZMZLYLYKXKXJWJWIVIVHUHUGTGTFSFSERERDQDQCPCPBOBOANAN"
+    )
 }
 
 /// `decipher_large` test function ...
@@ -37,5 +40,8 @@ fn decipher_large() {
     let key = String::from("ZYXWVUTSRQPON");
 
     let plaintext = columnar_transposition::decipher(ciphertext, key);
-    assert_eq!(plaintext, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        plaintext,
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    );
 }

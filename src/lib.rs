@@ -1,7 +1,7 @@
 //! # Ciphers
 //!
 //! ...
-//! 
+//!
 //! TODO: handle inputs
 
 static TABULA_RECTA: [[u8; 26]; 26] = [

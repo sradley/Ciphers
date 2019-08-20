@@ -27,7 +27,10 @@ fn cipher_large() {
     let key = String::from("ZYXWVUTSRQPONMLKIHGFEDCBA");
 
     let ciphertext = playfair::cipher(plaintext, key);
-    assert_eq!(ciphertext, "EABCAKFGHYFPLMNOUQRSQZVWXYEABCAKFGHYFPLMNOUQRSQZVWXY");
+    assert_eq!(
+        ciphertext,
+        "EABCAKFGHYFPLMNOUQRSQZVWXYEABCAKFGHYFPLMNOUQRSQZVWXY"
+    );
 }
 
 /// `decipher_large` test function ...
@@ -37,5 +40,8 @@ fn decipher_large() {
     let key = String::from("ZYXWVUTSRQPONMLKIHGFEDCBA");
 
     let plaintext = playfair::decipher(ciphertext, key);
-    assert_eq!(plaintext, "ABCDEFGHIXKLMNOPQRSTUVWXYZABCDEFGHIXKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        plaintext,
+        "ABCDEFGHIXKLMNOPQRSTUVWXYZABCDEFGHIXKLMNOPQRSTUVWXYZ"
+    );
 }

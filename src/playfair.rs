@@ -1,7 +1,7 @@
 //! # Playfair Cipher
 //!
 //! ...
-//! 
+//!
 //! TODO: handle unwraps (i.e. when trying to find a character that's not in the square)
 
 /// `cipher` function ...

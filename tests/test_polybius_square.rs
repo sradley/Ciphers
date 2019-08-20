@@ -72,7 +72,10 @@ fn decipher_abcde_large() {
     let chars = String::from("ABCDE");
 
     let plaintext = polybius_square::decipher(ciphertext, key, chars);
-    assert_eq!(plaintext, "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        plaintext,
+        "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
+    );
 }
 
 /// `cipher_zebra_large` test function ...
@@ -97,5 +100,8 @@ fn decipher_zebra_large() {
     let chars = String::from("ZEBRA");
 
     let plaintext = polybius_square::decipher(ciphertext, key, chars);
-    assert_eq!(plaintext, "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        plaintext,
+        "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
+    );
 }

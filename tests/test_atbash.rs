@@ -24,7 +24,10 @@ fn cipher_large() {
     let plaintext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
     let ciphertext = atbash::cipher(plaintext);
-    assert_eq!(ciphertext, "ZYXWVUTSRQPONMLKJIHGFEDCBAZYXWVUTSRQPONMLKJIHGFEDCBA");
+    assert_eq!(
+        ciphertext,
+        "ZYXWVUTSRQPONMLKJIHGFEDCBAZYXWVUTSRQPONMLKJIHGFEDCBA"
+    );
 }
 
 /// `decipher_large` test function ...
@@ -33,5 +36,8 @@ fn decipher_large() {
     let ciphertext = String::from("ZYXWVUTSRQPONMLKJIHGFEDCBAZYXWVUTSRQPONMLKJIHGFEDCBA");
 
     let plaintext = atbash::decipher(ciphertext);
-    assert_eq!(plaintext, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        plaintext,
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    );
 }

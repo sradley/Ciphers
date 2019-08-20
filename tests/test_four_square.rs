@@ -30,7 +30,10 @@ fn cipher_large() {
     let key2 = String::from("ZYXWVUTSRQPONMLKJIHGFEDCB");
 
     let ciphertext = four_square::cipher(plaintext, key1, key2);
-    assert_eq!(ciphertext, "BZDXAQHTIRFLMOOMQKSIPBWEYCBZDXAQHTIRFLMOOMQKSIPBWEYC");
+    assert_eq!(
+        ciphertext,
+        "BZDXAQHTIRFLMOOMQKSIPBWEYCBZDXAQHTIRFLMOOMQKSIPBWEYC"
+    );
 }
 
 /// `decipher_large` test function ...
@@ -39,7 +42,10 @@ fn decipher_large() {
     let ciphertext = String::from("BZDXAQHTIRFLMOOMQKSIPBWEYCBZDXAQHTIRFLMOOMQKSIPBWEYC");
     let key1 = String::from("ABCDEFGHIJKLMNOPQRSTUVWXY");
     let key2 = String::from("ZYXWVUTSRQPONMLKJIHGFEDCB");
-    
+
     let plaintext = four_square::decipher(ciphertext, key1, key2);
-    assert_eq!(plaintext, "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        plaintext,
+        "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
+    );
 }

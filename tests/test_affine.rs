@@ -24,7 +24,10 @@ fn cipher_large() {
     let plaintext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
     let ciphertext = affine::cipher(plaintext, 3, 13);
-    assert_eq!(ciphertext, "NQTWZCFILORUXADGJMPSVYBEHKNQTWZCFILORUXADGJMPSVYBEHK");
+    assert_eq!(
+        ciphertext,
+        "NQTWZCFILORUXADGJMPSVYBEHKNQTWZCFILORUXADGJMPSVYBEHK"
+    );
 }
 
 /// `decipher_large` test function ...
@@ -33,5 +36,8 @@ fn decipher_large() {
     let ciphertext = String::from("NQTWZCFILORUXADGJMPSVYBEHKNQTWZCFILORUXADGJMPSVYBEHK");
 
     let plaintext = affine::decipher(ciphertext, 3, 13);
-    assert_eq!(plaintext, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        plaintext,
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    );
 }

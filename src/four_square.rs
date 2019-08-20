@@ -1,7 +1,7 @@
 //! # Four-Square Cipher
 //!
 //! ...
-//! 
+//!
 //! TODO: handle unwraps (i.e. when trying to find a letter that's not in the alphabet)
 
 static ALPHABET: [u8; 25] = [
