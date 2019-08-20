@@ -61,7 +61,7 @@ pub fn decipher(ciphertext: String, key: String) -> String {
 
     let plaintext = ciphertext
         .bytes()
-        .map(move |c| key.find(move |i: char| i == c as char).unwrap() as u8 + 'A' as u8)
+        .map(move |c| key.find(move |i| i == c as char).unwrap() as u8 + 'A' as u8)
         .collect();
 
     String::from_utf8(plaintext).unwrap()
