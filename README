@@ -44,6 +44,7 @@ Currently supported ciphers:
  * Substitution
  * Vigenere
  * Four-Square
+ * Playfair
 
 2. INSTALLATION
 ---------------
@@ -68,3 +69,14 @@ println!("{}", ciphertext);
 let deciphered = vigenere::decipher(ciphertext, key);
 println!("{}", deciphered);
 ```
+
+4. TO BE IMPLEMENTED
+--------------------
+
+ * Gronsfeld
+ * ADFGX
+ * ADFGVX
+ * Bifid
+ * Trifid
+ * Transposition
+ * Straddle Checkerboard
