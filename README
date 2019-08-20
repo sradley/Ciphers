@@ -26,7 +26,7 @@ SOFTWARE.
 1. DESCRIPTION
 --------------
 
-Ciphers is a Rust library that provides an implementation of many different
+Ciphers is a Rust library that provides implementations of several different
 classical ciphers.
 
 Currently supported ciphers:
