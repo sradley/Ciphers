@@ -1,21 +1,47 @@
 //! # Porta Cipher
-//! 
+//!
 //! ...
 
 static PORTA_TABLEU: [[char; 13]; 13] = [
-    ['N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],
-    ['O','P','Q','R','S','T','U','V','W','X','Y','Z','N'],
-    ['P','Q','R','S','T','U','V','W','X','Y','Z','N','O'],
-    ['Q','R','S','T','U','V','W','X','Y','Z','N','O','P'],
-    ['R','S','T','U','V','W','X','Y','Z','N','O','P','Q'],
-    ['S','T','U','V','W','X','Y','Z','N','O','P','Q','R'],
-    ['T','U','V','W','X','Y','Z','N','O','P','Q','R','S'],
-    ['U','V','W','X','Y','Z','N','O','P','Q','R','S','T'],
-    ['V','W','X','Y','Z','N','O','P','Q','R','S','T','U'],
-    ['W','X','Y','Z','N','O','P','Q','R','S','T','U','V'],
-    ['X','Y','Z','N','O','P','Q','R','S','T','U','V','W'],
-    ['Y','Z','N','O','P','Q','R','S','T','U','V','W','X'],
-    ['Z','N','O','P','Q','R','S','T','U','V','W','X','Y'],
+    [
+        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+    ],
+    [
+        'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'N',
+    ],
+    [
+        'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'N', 'O',
+    ],
+    [
+        'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'N', 'O', 'P',
+    ],
+    [
+        'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'N', 'O', 'P', 'Q',
+    ],
+    [
+        'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'N', 'O', 'P', 'Q', 'R',
+    ],
+    [
+        'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'N', 'O', 'P', 'Q', 'R', 'S',
+    ],
+    [
+        'U', 'V', 'W', 'X', 'Y', 'Z', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+    ],
+    [
+        'V', 'W', 'X', 'Y', 'Z', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
+    ],
+    [
+        'W', 'X', 'Y', 'Z', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+    ],
+    [
+        'X', 'Y', 'Z', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
+    ],
+    [
+        'Y', 'Z', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+    ],
+    [
+        'Z', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
+    ],
 ];
 
 #[cfg(test)]
@@ -42,7 +68,7 @@ mod tests {
 }
 
 /// `cipher` function ...
-/// 
+///
 /// ```
 /// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
 /// let key = String::from("FORTIFICATION");
@@ -53,7 +79,9 @@ mod tests {
 pub fn cipher(plaintext: String, key: String) -> String {
     let key = key.as_bytes();
 
-    let ciphertext = plaintext.bytes().enumerate()
+    let ciphertext = plaintext
+        .bytes()
+        .enumerate()
         .map(move |(i, c)| {
             let y = (key[i % key.len()] as usize - 'A' as usize) / 2;
 
@@ -65,7 +93,7 @@ pub fn cipher(plaintext: String, key: String) -> String {
                         break;
                     }
                 }
-                return x + 'A' as u8
+                return x + 'A' as u8;
             }
 
             PORTA_TABLEU[y][c as usize - 'A' as usize] as u8
@@ -76,7 +104,7 @@ pub fn cipher(plaintext: String, key: String) -> String {
 }
 
 /// `decipher` function ...
-/// 
+///
 /// ```
 /// let ciphertext = String::from("SYNNJSCVRNRLAHUTUKUCVRYRLANY");
 /// let key = String::from("FORTIFICATION");
