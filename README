@@ -41,7 +41,7 @@ Currently supported ciphers:
  * Rail-fence
  * Rot13
  * Running Key
- * Substitution
+ * Simple Substitution
  * Vigenere
  * Four-Square
  * Playfair
