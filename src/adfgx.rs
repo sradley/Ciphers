@@ -17,10 +17,10 @@ use crate::{columnar_transposition, polybius_square};
 /// assert_eq!(ciphertext, "FFDGDDADXXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFXADAFDXDDXXDDADGXXGXX");
 /// ```
 pub fn cipher(plaintext: String, key: String, keyword: String) -> String {
-    let step1 = polybius_square::cipher(plaintext, key, String::from("ADFGX"));
-    let step2 = columnar_transposition::cipher(step1, keyword);
-
-    step2
+    columnar_transposition::cipher(
+        polybius_square::cipher(plaintext, key, String::from("ADFGX")),
+        keyword
+    )
 }
 
 /// `cipher` function ...
