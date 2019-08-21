@@ -2,7 +2,6 @@
 //!
 //! ...
 //!
-//! TODO: implement without padding
 
 use std::collections::HashMap;
 

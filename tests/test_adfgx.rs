@@ -1,5 +1,5 @@
 use ciphers::adfgx;
-/*
+
 /// `cipher` test function ...
 #[test]
 fn cipher() {
@@ -21,4 +21,3 @@ fn decipher() {
     let plaintext = adfgx::decipher(ciphertext, key, keyword);
     assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
-*/
