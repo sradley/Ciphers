@@ -7,17 +7,17 @@ fn cipher_small() {
     let key = String::from("GERMAN");
 
     let ciphertext = columnar_transposition::cipher(plaintext, key);
-    assert_eq!(ciphertext, "NALCXEHWTTDTTFSEELEEDSOAXFEAHL")
+    assert_eq!(ciphertext, "NALCEHWTTDTTFSEELEEDSOAFEAHL")
 }
 
 /// `decipher_small` test function ...
 #[test]
 fn decipher_small() {
-    let ciphertext = String::from("NALCXEHWTTDTTFSEELEEDSOAXFEAHL");
+    let ciphertext = String::from("NALCEHWTTDTTFSEELEEDSOAFEAHL");
     let key = String::from("GERMAN");
 
     let plaintext = columnar_transposition::decipher(ciphertext, key);
-    assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLEXX");
+    assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `cipher_large` test function ...
