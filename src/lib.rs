@@ -112,6 +112,7 @@ static TABULA_RECTA: [[u8; 26]; 26] = [
 ];
 
 // re-exports
+pub mod adfgvx;
 pub mod adfgx;
 pub mod affine;
 pub mod atbash;

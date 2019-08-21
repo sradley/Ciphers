@@ -8,7 +8,10 @@ fn cipher_small() {
     let keyword = String::from("GERMAN");
 
     let ciphertext = adfgx::cipher(plaintext, key, keyword);
-    assert_eq!(ciphertext, "FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
+    assert_eq!(
+        ciphertext,
+        "FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX"
+    );
 }
 
 /// `decipher_small` test function ...
@@ -48,5 +51,8 @@ fn decipher_large() {
     let keyword = String::from("ABCDEFGHIJKLMN");
 
     let plaintext = adfgx::decipher(ciphertext, key, keyword);
-    assert_eq!(plaintext, "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        plaintext,
+        "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
+    );
 }

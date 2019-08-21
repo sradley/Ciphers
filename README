@@ -45,6 +45,7 @@ Currently supported ciphers:
  * Vigenere
  * Four-Square
  * Playfair
+ * ADFGX
 
 2. INSTALLATION
 ---------------
@@ -74,7 +75,6 @@ println!("{}", deciphered);
 --------------------
 
  * Gronsfeld
- * ADFGX
  * ADFGVX
  * Bifid
  * Trifid
