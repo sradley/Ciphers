@@ -2,31 +2,53 @@
 //!
 //! ...
 
-/// `cipher` function ...
-///
-/// ```
-/// let plaintext = String::from("ATTACKATDAWN");
-///
-/// let ciphertext = ciphers::atbash::cipher(plaintext);
-/// assert_eq!(ciphertext, "ZGGZXPZGWZDM");
-/// ```
-pub fn cipher(plaintext: String) -> String {
-    let plaintext = plaintext
-        .bytes()
-        .map(|c| 'Z' as u8 - c + 'A' as u8)
-        .collect();
+use crate::Cipher;
 
-    String::from_utf8(plaintext).unwrap()
+/// `Atbash` struct ...
+pub struct Atbash;
+
+impl Atbash {
+    /// `Atbash` constructor ...
+    pub fn new() -> Self {
+        Self {}
+    }
 }
 
-/// `decipher` function ...
-///
-/// ```
-/// let ciphertext = String::from("ZGGZXPZGWZDM");
-///
-/// let plaintext = ciphers::atbash::decipher(ciphertext);
-/// assert_eq!(plaintext, "ATTACKATDAWN");
-/// ```
-pub fn decipher(ciphertext: String) -> String {
-    cipher(ciphertext)
+impl Cipher for Atbash {
+    /// `encipher` method ...
+    /// 
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::atbash::Atbash;
+    /// 
+    /// let plaintext = String::from("ATTACKATDAWN");
+    /// let atbash = Atbash::new();
+    ///
+    /// let ciphertext = atbash.encipher(plaintext);
+    /// assert_eq!(ciphertext, "ZGGZXPZGWZDM");
+    /// ```
+    fn encipher(&self, ptext: String) -> String {
+        let ctext = ptext
+            .bytes()
+            .map(|c| 90 - c + 65)
+            .collect();
+
+        String::from_utf8(ctext).unwrap()
+    }
+
+    /// `decipher` method ...
+    /// 
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::atbash::Atbash;
+    /// 
+    /// let ciphertext = String::from("ZGGZXPZGWZDM");
+    /// let atbash = Atbash::new();
+    ///
+    /// let plaintext = atbash.decipher(ciphertext);
+    /// assert_eq!(plaintext, "ATTACKATDAWN");
+    /// ```
+    fn decipher(&self, ctext: String) -> String {
+        self.encipher(ctext)
+    }
 }

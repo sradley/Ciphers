@@ -1,11 +1,13 @@
-use ciphers::atbash;
+use ciphers::Cipher;
+use ciphers::atbash::Atbash;
 
-/// `cipher_small` test function ...
+/// `encipher_small` test function ...
 #[test]
-fn cipher_small() {
+fn encipher_small() {
     let plaintext = String::from("ATTACKATDAWN");
+    let atbash = Atbash::new();
 
-    let ciphertext = atbash::cipher(plaintext);
+    let ciphertext = atbash.encipher(plaintext);
     assert_eq!(ciphertext, "ZGGZXPZGWZDM");
 }
 
@@ -13,17 +15,19 @@ fn cipher_small() {
 #[test]
 fn decipher_small() {
     let ciphertext = String::from("ZGGZXPZGWZDM");
+    let atbash = Atbash::new();
 
-    let plaintext = atbash::decipher(ciphertext);
+    let plaintext = atbash.decipher(ciphertext);
     assert_eq!(plaintext, "ATTACKATDAWN");
 }
 
-/// `cipher_large` test function ...
+/// `encipher_large` test function ...
 #[test]
-fn cipher_large() {
+fn encipher_large() {
     let plaintext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    let atbash = Atbash::new();
 
-    let ciphertext = atbash::cipher(plaintext);
+    let ciphertext = atbash.encipher(plaintext);
     assert_eq!(
         ciphertext,
         "ZYXWVUTSRQPONMLKJIHGFEDCBAZYXWVUTSRQPONMLKJIHGFEDCBA"
@@ -34,8 +38,9 @@ fn cipher_large() {
 #[test]
 fn decipher_large() {
     let ciphertext = String::from("ZYXWVUTSRQPONMLKJIHGFEDCBAZYXWVUTSRQPONMLKJIHGFEDCBA");
+    let atbash = Atbash::new();
 
-    let plaintext = atbash::decipher(ciphertext);
+    let plaintext = atbash.decipher(ciphertext);
     assert_eq!(
         plaintext,
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
