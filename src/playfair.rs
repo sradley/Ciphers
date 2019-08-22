@@ -36,7 +36,7 @@ impl Cipher for Playfair {
     fn encipher(&self, ptext: String) -> String {
         let mut ptext: Vec<u8> = ptext.bytes().collect();
         if ptext.len() % 2 != 0 {
-            ptext.push('X' as u8);
+            ptext.push(88);
         }
 
         let key = self.key.as_bytes();
@@ -44,7 +44,7 @@ impl Cipher for Playfair {
         let mut ctext = Vec::with_capacity(ptext.len());
         for i in (0..ptext.len()).step_by(2) {
             if ptext[i] == ptext[i + 1] {
-                ptext[i + 1] = 'X' as u8;
+                ptext[i + 1] = 88;
             }
 
             let yx1 = key.iter().position(|&c| c == ptext[i]).unwrap();

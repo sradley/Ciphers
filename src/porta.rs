@@ -2,6 +2,8 @@
 //!
 //! ...
 
+use crate::Cipher;
+
 static PORTA_TABLEU: [[u8; 13]; 13] = [
     [78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90],
     [79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 78],
@@ -18,42 +20,64 @@ static PORTA_TABLEU: [[u8; 13]; 13] = [
     [90, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89],
 ];
 
-/// `cipher` function ...
-///
-/// ```
-/// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
-/// let key = String::from("FORTIFICATION");
-///
-/// let ciphertext = ciphers::porta::cipher(plaintext, key);
-/// assert_eq!(ciphertext, "SYNNJSCVRNRLAHUTUKUCVRYRLANY");
-/// ```
-pub fn cipher(plaintext: String, key: String) -> String {
-    let key = key.as_bytes();
-
-    let ciphertext = plaintext
-        .bytes()
-        .enumerate()
-        .map(move |(i, c)| {
-            let y = (key[i % key.len()] as usize - 'A' as usize) / 2;
-            match c {
-                78...90 => PORTA_TABLEU[y].iter().position(|&j| j == c).unwrap() as u8 + 'A' as u8,
-                _ => PORTA_TABLEU[y][c as usize - 'A' as usize] as u8,
-            }
-        })
-        .collect();
-
-    String::from_utf8(ciphertext).unwrap()
+/// `Porta` struct ...
+pub struct Porta {
+    key: String,
 }
 
-/// `decipher` function ...
-///
-/// ```
-/// let ciphertext = String::from("SYNNJSCVRNRLAHUTUKUCVRYRLANY");
-/// let key = String::from("FORTIFICATION");
-///
-/// let plaintext = ciphers::porta::decipher(ciphertext, key);
-/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
-/// ```
-pub fn decipher(ciphertext: String, key: String) -> String {
-    cipher(ciphertext, key)
+impl Porta {
+    /// `Porta` constructor
+    pub fn new(key: String) -> Self {
+        Self { key }
+    }
+}
+
+impl Cipher for Porta {
+    /// `encipher` method ...
+    ///
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::porta::Porta;
+    ///
+    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+    /// let key = String::from("FORTIFICATION");
+    /// let porta = Porta::new(key);
+    ///
+    /// let ctext = porta.encipher(ptext);
+    /// assert_eq!(ctext, "SYNNJSCVRNRLAHUTUKUCVRYRLANY");
+    /// ```
+    fn encipher(&self, ptext: String) -> String {
+        let key = self.key.as_bytes();
+
+        let ctext = ptext
+            .bytes()
+            .enumerate()
+            .map(move |(i, c)| {
+                let y = (key[i % key.len()] as usize - 65) / 2;
+                match c {
+                    78...90 => PORTA_TABLEU[y].iter().position(|&j| j == c).unwrap() as u8 + 65,
+                    _ => PORTA_TABLEU[y][c as usize - 65],
+                }
+            })
+            .collect();
+
+        String::from_utf8(ctext).unwrap()
+    }
+
+    /// `decipher` method ...
+    ///
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::porta::Porta;
+    ///
+    /// let ctext = String::from("SYNNJSCVRNRLAHUTUKUCVRYRLANY");
+    /// let key = String::from("FORTIFICATION");
+    /// let porta = Porta::new(key);
+    ///
+    /// let ptext = porta.decipher(ctext);
+    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// ```
+    fn decipher(&self, ctext: String) -> String {
+        self.encipher(ctext)
+    }
 }
