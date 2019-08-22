@@ -2,85 +2,109 @@
 //!
 //! ...
 
-/// `cipher` function ...
-///
-/// ```
-/// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
-///
-/// let ciphertext = ciphers::rail_fence::cipher(plaintext, 4);
-/// assert_eq!(ciphertext, "DTTFSEDHSWOTATFNEAALHCLEELEE");
-/// ```
-pub fn cipher(plaintext: String, key: usize) -> String {
-    let mut ciphertext = vec![];
-    let plaintext: Vec<u8> = plaintext.bytes().collect();
+use crate::Cipher;
 
-    let mut line = 0usize;
-    while line < key - 1 {
-        let skip = 2 * (key - line - 1);
-        let mut j = 0usize;
-
-        let mut i = line;
-        while i < plaintext.len() {
-            ciphertext.push(*plaintext.get(i).unwrap());
-
-            if line == 0 || j % 2 == 0 {
-                i += skip;
-            } else {
-                i += 2 * (key - 1) - skip;
-            }
-
-            j += 1;
-        }
-
-        line += 1;
-    }
-
-    for i in (line..plaintext.len()).step_by(2 * (key - 1)) {
-        ciphertext.push(*plaintext.get(i).unwrap());
-    }
-
-    String::from_utf8(ciphertext).unwrap()
+/// `RailFence` struct ...
+pub struct RailFence {
+    key: usize,
 }
 
-/// `decipher` function ...
-///
-/// ```
-/// let ciphertext = String::from("DTTFSEDHSWOTATFNEAALHCLEELEE");
-///
-/// let plaintext = ciphers::rail_fence::decipher(ciphertext, 4);
-/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
-/// ```
-pub fn decipher(ciphertext: String, key: usize) -> String {
-    let mut plaintext = vec![0u8; ciphertext.len()];
-    let ciphertext: Vec<u8> = ciphertext.bytes().collect();
-    let mut k = 0usize;
+impl RailFence {
+    /// `RailFence` constructor ...
+    pub fn new(key: usize) -> Self {
+        Self { key }
+    }
+}
 
-    let mut line = 0usize;
-    while line < key - 1 {
-        let skip = 2 * (key - line - 1);
-        let mut j = 0usize;
+impl Cipher for RailFence {
+    /// `encipher` method ...
+    ///
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::rail_fence::RailFence;
+    ///
+    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+    /// let rail_fence = RailFence::new(4);
+    ///
+    /// let ctext = rail_fence.encipher(ptext);
+    /// assert_eq!(ctext, "DTTFSEDHSWOTATFNEAALHCLEELEE");
+    /// ```
+    fn encipher(&self, ptext: String) -> String {
+        let mut ctext = Vec::with_capacity(ptext.len());
+        let ptext: Vec<u8> = ptext.bytes().collect();
 
-        let mut i = line;
-        while i < ciphertext.len() {
-            plaintext[i] = *ciphertext.get(k).unwrap();
-            k += 1;
+        let mut line = 0usize;
+        while line < self.key - 1 {
+            let skip = 2 * (self.key - line - 1);
+            let mut j = 0usize;
 
-            if line == 0 || j % 2 == 0 {
-                i += skip;
-            } else {
-                i += 2 * (key - 1) - skip;
+            let mut i = line;
+            while i < ptext.len() {
+                ctext.push(*ptext.get(i).unwrap());
+
+                if line == 0 || j % 2 == 0 {
+                    i += skip;
+                } else {
+                    i += 2 * (self.key - 1) - skip;
+                }
+
+                j += 1;
             }
 
-            j += 1;
+            line += 1;
         }
 
-        line += 1;
+        for i in (line..ptext.len()).step_by(2 * (self.key - 1)) {
+            ctext.push(*ptext.get(i).unwrap());
+        }
+
+        String::from_utf8(ctext).unwrap()
     }
 
-    for i in (line..ciphertext.len()).step_by(2 * (key - 1)) {
-        plaintext[i] = *ciphertext.get(k).unwrap();
-        k += 1;
-    }
+    /// `decipher` method ...
+    ///
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::rail_fence::RailFence;
+    ///
+    /// let ctext = String::from("DTTFSEDHSWOTATFNEAALHCLEELEE");
+    /// let rail_fence = RailFence::new(4);
+    ///
+    /// let ptext = rail_fence.decipher(ctext);
+    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// ```
+    fn decipher(&self, ctext: String) -> String {
+        let mut ptext = vec![0u8; ctext.len()];
+        let ctext: Vec<u8> = ctext.bytes().collect();
+        let mut k = 0usize;
 
-    String::from_utf8(plaintext).unwrap()
+        let mut line = 0usize;
+        while line < self.key - 1 {
+            let skip = 2 * (self.key - line - 1);
+            let mut j = 0usize;
+
+            let mut i = line;
+            while i < ctext.len() {
+                ptext[i] = *ctext.get(k).unwrap();
+                k += 1;
+
+                if line == 0 || j % 2 == 0 {
+                    i += skip;
+                } else {
+                    i += 2 * (self.key - 1) - skip;
+                }
+
+                j += 1;
+            }
+
+            line += 1;
+        }
+
+        for i in (line..ctext.len()).step_by(2 * (self.key - 1)) {
+            ptext[i] = *ctext.get(k).unwrap();
+            k += 1;
+        }
+
+        String::from_utf8(ptext).unwrap()
+    }
 }
