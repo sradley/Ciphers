@@ -1,47 +1,46 @@
-use ciphers::beaufort;
+use ciphers::Cipher;
+use ciphers::beaufort::Beaufort;
 
-/// `cipher_small` test function ...
+/// `encipher_small` test function ...
 #[test]
-fn cipher_small() {
-    let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+fn encipher_small() {
+    let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     let key = String::from("FORTIFICATION");
+    let beaufort = Beaufort::new(key);
 
-    let ciphertext = beaufort::cipher(plaintext, key);
-    assert_eq!(ciphertext, "CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
+    let ctext = beaufort.encipher(ptext);
+    assert_eq!(ctext, "CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
 }
 
 /// `decipher_small` test function ...
 #[test]
 fn decipher_small() {
-    let ciphertext = String::from("CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
+    let ctext = String::from("CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
     let key = String::from("FORTIFICATION");
+    let beaufort = Beaufort::new(key);
 
-    let plaintext = beaufort::decipher(ciphertext, key);
-    assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    let ptext = beaufort.decipher(ctext);
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `cipher_large` test function ...
+/// `encipher_large` test function ...
 #[test]
-fn cipher_large() {
-    let plaintext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+fn encipher_large() {
+    let ptext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     let key = String::from("ZYXWVUTSRQPON");
+    let beaufort = Beaufort::new(key);
 
-    let ciphertext = beaufort::cipher(plaintext, key);
-    assert_eq!(
-        ciphertext,
-        "ZXVTRPNLJHFDBMKIGECAYWUSQOZXVTRPNLJHFDBMKIGECAYWUSQO"
-    );
+    let ctext = beaufort.encipher(ptext);
+    assert_eq!(ctext, "ZXVTRPNLJHFDBMKIGECAYWUSQOZXVTRPNLJHFDBMKIGECAYWUSQO");
 }
 
 /// `decipher_large` test function ...
 #[test]
 fn decipher_large() {
-    let ciphertext = String::from("ZXVTRPNLJHFDBMKIGECAYWUSQOZXVTRPNLJHFDBMKIGECAYWUSQO");
+    let ctext = String::from("ZXVTRPNLJHFDBMKIGECAYWUSQOZXVTRPNLJHFDBMKIGECAYWUSQO");
     let key = String::from("ZYXWVUTSRQPON");
+    let beaufort = Beaufort::new(key);
 
-    let plaintext = beaufort::decipher(ciphertext, key);
-    assert_eq!(
-        plaintext,
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    );
+    let ptext = beaufort.decipher(ctext);
+    assert_eq!(ptext, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
 }

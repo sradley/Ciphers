@@ -31,10 +31,7 @@ fn encipher_large() {
     let autokey = Autokey::new(key);
 
     let ctext = autokey.encipher(ptext);
-    assert_eq!(
-        ctext,
-        "ZZZZZZZZZZZZZNPRTVXZBDFHJLNPRTVXZBDFHJLNPRTVXZBDFHJL"
-    );
+    assert_eq!(ctext, "ZZZZZZZZZZZZZNPRTVXZBDFHJLNPRTVXZBDFHJLNPRTVXZBDFHJL");
 }
 
 /// `decipher_large` test function ...
@@ -45,8 +42,5 @@ fn decipher_large() {
     let autokey = Autokey::new(key);
 
     let ptext = autokey.decipher(ctext);
-    assert_eq!(
-        ptext,
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    );
+    assert_eq!(ptext, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
 }

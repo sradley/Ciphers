@@ -2,46 +2,56 @@
 //!
 //! ...
 
-use crate::TABULA_RECTA;
+use crate::{Cipher, TABULA_RECTA};
 
-/// `cipher` function ...
-///
-/// ```
-/// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
-/// let key = String::from("FORTIFICATION");
-///
-/// let ciphertext = ciphers::beaufort::cipher(plaintext, key);
-/// assert_eq!(ciphertext, "CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
-/// ```
-pub fn cipher(plaintext: String, key: String) -> String {
-    let key = key.as_bytes();
-
-    let ciphertext = plaintext
-        .bytes()
-        .enumerate()
-        .map(|(i, c)| {
-            let y = c as usize - 'A' as usize;
-            let x = TABULA_RECTA[y]
-                .iter()
-                .position(|&j| j == key[i % key.len()])
-                .unwrap();
-
-            TABULA_RECTA[0][x]
-        })
-        .collect();
-
-    String::from_utf8(ciphertext).unwrap()
+/// `Beaufort` struct ...
+pub struct Beaufort {
+    key: String,
 }
 
-/// `decipher` function ...
-///
-/// ```
-/// let ciphertext = String::from("CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
-/// let key = String::from("FORTIFICATION");
-///
-/// let plaintext = ciphers::beaufort::decipher(ciphertext, key);
-/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
-/// ```
-pub fn decipher(ciphertext: String, key: String) -> String {
-    cipher(ciphertext, key)
+impl Beaufort {
+    /// `Beaufort` constructor ...
+    pub fn new(key: String) -> Self {
+        Self { key }
+    }
+}
+
+impl Cipher for Beaufort {
+    /// `encipher` method ...
+    /// 
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::beaufort::Beaufort;
+    /// 
+    /// ```
+    fn encipher(&self, ptext: String) -> String {
+        let key = self.key.as_bytes();
+
+        let ctext = ptext
+            .bytes()
+            .enumerate()
+            .map(|(i, c)| {
+                let y = c as usize - 'A' as usize;
+                let x = TABULA_RECTA[y]
+                    .iter()
+                    .position(|&j| j == key[i % key.len()])
+                    .unwrap();
+
+                TABULA_RECTA[0][x]
+            })
+            .collect();
+
+        String::from_utf8(ctext).unwrap()
+    }
+
+    /// `decipher` method ...
+    /// 
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::beaufort::Beaufort;
+    /// 
+    /// ```
+    fn decipher(&self, ctext: String) -> String {
+        self.encipher(ctext)
+    }
 }
