@@ -2,44 +2,62 @@
 //!
 //! ...
 
-/// `cipher` function ...
-///
-/// ```
-/// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
-/// let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
-///
-/// let ciphertext = ciphers::substitution::cipher(plaintext, key);
-/// assert_eq!(ciphertext, "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
-/// ```
-pub fn cipher(plaintext: String, key: String) -> String {
-    assert_eq!(key.len(), 26);
+use crate::Cipher;
 
-    let key = key.as_bytes();
-
-    let ciphertext = plaintext
-        .bytes()
-        .map(move |c| key[(c - 'A' as u8) as usize])
-        .collect();
-
-    String::from_utf8(ciphertext).unwrap()
+/// `Substitution` struct ...
+pub struct Substitution {
+    key: String,
 }
 
-/// `decipher` function ...
-///
-/// ```
-/// let ciphertext = String::from("GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
-/// let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
-///
-/// let plaintext = ciphers::substitution::decipher(ciphertext, key);
-/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
-/// ```
-pub fn decipher(ciphertext: String, key: String) -> String {
-    assert_eq!(key.len(), 26);
+impl Substitution {
+    /// `Substitution` constructor ...
+    pub fn new(key: String) -> Self {
+        assert_eq!(key.len(), 26);
+        Self { key }
+    }
+}
 
-    let plaintext = ciphertext
-        .bytes()
-        .map(move |c| key.find(move |i| i == c as char).unwrap() as u8 + 'A' as u8)
-        .collect();
+impl Cipher for Substitution {
+    /// `encipher` method ...
+    ///
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::substitution::Substitution;
+    ///
+    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+    /// let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
+    /// let substitution = Substitution::new(key);
+    ///
+    /// let ctext = substitution.encipher(ptext);
+    /// assert_eq!(ctext, "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
+    /// ```
+    fn encipher(&self, ptext: String) -> String {
+        let key = self.key.as_bytes();
 
-    String::from_utf8(plaintext).unwrap()
+        let ctext = ptext.bytes().map(move |c| key[(c - 65) as usize]).collect();
+
+        String::from_utf8(ctext).unwrap()
+    }
+
+    /// `decipher` method ...
+    ///
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::substitution::Substitution;
+    ///
+    /// let ctext = String::from("GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
+    /// let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
+    /// let substitution = Substitution::new(key);
+    ///
+    /// let ptext = substitution.decipher(ctext);
+    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// ```
+    fn decipher(&self, ctext: String) -> String {
+        let ptext = ctext
+            .bytes()
+            .map(move |c| self.key.find(move |i| i == c as char).unwrap() as u8 + 65)
+            .collect();
+
+        String::from_utf8(ptext).unwrap()
+    }
 }
