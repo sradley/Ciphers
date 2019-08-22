@@ -1,34 +1,38 @@
-use ciphers::substitution;
+use ciphers::substitution::Substitution;
+use ciphers::Cipher;
 
-/// `cipher_small` test function ...
+/// `encipher_small` test function ...
 #[test]
-fn cipher_small() {
-    let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+fn encipher_small() {
+    let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
+    let substitution = Substitution::new(key);
 
-    let ciphertext = substitution::cipher(plaintext, key);
-    assert_eq!(ciphertext, "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
+    let ctext = substitution.encipher(ptext);
+    assert_eq!(ctext, "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
 }
 
 /// `decipher_small` test function ...
 #[test]
 fn decipher_small() {
-    let ciphertext = String::from("GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
+    let ctext = String::from("GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
     let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
+    let substitution = Substitution::new(key);
 
-    let plaintext = substitution::decipher(ciphertext, key);
-    assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    let ptext = substitution.decipher(ctext);
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `cipher_large` test function ...
+/// `encipher_large` test function ...
 #[test]
-fn cipher_large() {
-    let plaintext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+fn encipher_large() {
+    let ptext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
+    let substitution = Substitution::new(key);
 
-    let ciphertext = substitution::cipher(plaintext, key);
+    let ctext = substitution.encipher(ptext);
     assert_eq!(
-        ciphertext,
+        ctext,
         "PHQGIUMEAYLNOFDXJKRCVSTZWBPHQGIUMEAYLNOFDXJKRCVSTZWB"
     );
 }
@@ -36,12 +40,13 @@ fn cipher_large() {
 /// `decipher_large` test function ...
 #[test]
 fn decipher_large() {
-    let ciphertext = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWBPHQGIUMEAYLNOFDXJKRCVSTZWB");
+    let ctext = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWBPHQGIUMEAYLNOFDXJKRCVSTZWB");
     let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
+    let substitution = Substitution::new(key);
 
-    let plaintext = substitution::decipher(ciphertext, key);
+    let ptext = substitution.decipher(ctext);
     assert_eq!(
-        plaintext,
+        ptext,
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }

@@ -1,34 +1,38 @@
-use ciphers::porta;
+use ciphers::porta::Porta;
+use ciphers::Cipher;
 
-/// `cipher_small` test function ...
+/// `encipher_small` test function ...
 #[test]
-fn cipher_small() {
-    let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+fn encipher_small() {
+    let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     let key = String::from("FORTIFICATION");
+    let porta = Porta::new(key);
 
-    let ciphertext = porta::cipher(plaintext, key);
-    assert_eq!(ciphertext, "SYNNJSCVRNRLAHUTUKUCVRYRLANY");
+    let ctext = porta.encipher(ptext);
+    assert_eq!(ctext, "SYNNJSCVRNRLAHUTUKUCVRYRLANY");
 }
 
 /// `decipher_small` test function ...
 #[test]
 fn decipher_small() {
-    let ciphertext = String::from("SYNNJSCVRNRLAHUTUKUCVRYRLANY");
+    let ctext = String::from("SYNNJSCVRNRLAHUTUKUCVRYRLANY");
     let key = String::from("FORTIFICATION");
+    let porta = Porta::new(key);
 
-    let plaintext = porta::decipher(ciphertext, key);
-    assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    let ptext = porta.decipher(ctext);
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `cipher_large` test function ...
+/// `encipher_large` test function ...
 #[test]
-fn cipher_large() {
-    let plaintext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+fn encipher_large() {
+    let ptext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     let key = String::from("ZYXWVUTSRQPON");
+    let porta = Porta::new(key);
 
-    let ciphertext = porta::cipher(plaintext, key);
+    let ctext = porta.encipher(ptext);
     assert_eq!(
-        ciphertext,
+        ctext,
         "ZNNOOPPQQRRSSBCEFHIKLABDEGZNNOOPPQQRRSSBCEFHIKLABDEG"
     );
 }
@@ -36,12 +40,13 @@ fn cipher_large() {
 /// `decipher_large` test function ...
 #[test]
 fn decipher_large() {
-    let ciphertext = String::from("ZNNOOPPQQRRSSBCEFHIKLABDEGZNNOOPPQQRRSSBCEFHIKLABDEG");
+    let ctext = String::from("ZNNOOPPQQRRSSBCEFHIKLABDEGZNNOOPPQQRRSSBCEFHIKLABDEG");
     let key = String::from("ZYXWVUTSRQPON");
+    let porta = Porta::new(key);
 
-    let plaintext = porta::decipher(ciphertext, key);
+    let ptext = porta.decipher(ctext);
     assert_eq!(
-        plaintext,
+        ptext,
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }

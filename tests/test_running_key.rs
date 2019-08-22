@@ -1,34 +1,38 @@
-use ciphers::running_key;
+use ciphers::running_key::RunningKey;
+use ciphers::Cipher;
 
-/// `cipher_small` test function ...
+/// `encipher_small` test function ...
 #[test]
-fn cipher_small() {
-    let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+fn encipher_small() {
+    let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     let key = String::from("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
+    let running_key = RunningKey::new(key);
 
-    let ciphertext = running_key::cipher(plaintext, key);
-    assert_eq!(ciphertext, "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
+    let ctext = running_key.encipher(ptext);
+    assert_eq!(ctext, "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
 }
 
 /// `decipher_small` test function ...
 #[test]
 fn decipher_small() {
-    let ciphertext = String::from("KSBHBHLALIDMVGKYZKYAHXUAAWGM");
+    let ctext = String::from("KSBHBHLALIDMVGKYZKYAHXUAAWGM");
     let key = String::from("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
+    let running_key = RunningKey::new(key);
 
-    let plaintext = running_key::decipher(ciphertext, key);
-    assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    let ptext = running_key.decipher(ctext);
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `cipher_large` test function ...
+/// `encipher_large` test function ...
 #[test]
-fn cipher_large() {
-    let plaintext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+fn encipher_large() {
+    let ptext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     let key = String::from("ZNNOOPPQQRRSSBCEFHIKLABDEGZNNOOPPQQRRSSBCEFHIKLABDEGA");
+    let running_key = RunningKey::new(key);
 
-    let ciphertext = running_key::cipher(plaintext, key);
+    let ctext = running_key.encipher(ptext);
     assert_eq!(
-        ciphertext,
+        ctext,
         "ZOPRSUVXYABDEOQTVYADFVXACFZOPRSUVXYABDEOQTVYADFVXACF"
     );
 }
@@ -36,12 +40,13 @@ fn cipher_large() {
 /// `decipher_large` test function ...
 #[test]
 fn decipher_large() {
-    let ciphertext = String::from("ZOPRSUVXYABDEOQTVYADFVXACFZOPRSUVXYABDEOQTVYADFVXACF");
+    let ctext = String::from("ZOPRSUVXYABDEOQTVYADFVXACFZOPRSUVXYABDEOQTVYADFVXACF");
     let key = String::from("ZNNOOPPQQRRSSBCEFHIKLABDEGZNNOOPPQQRRSSBCEFHIKLABDEGA");
+    let running_key = RunningKey::new(key);
 
-    let plaintext = running_key::decipher(ciphertext, key);
+    let ptext = running_key.decipher(ctext);
     assert_eq!(
-        plaintext,
+        ptext,
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }

@@ -1,34 +1,38 @@
-use ciphers::playfair;
+use ciphers::playfair::Playfair;
+use ciphers::Cipher;
 
-/// `cipher_small` test function ...
+/// `encipher_small` test function ...
 #[test]
-fn cipher_small() {
-    let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+fn encipher_small() {
+    let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     let key = String::from("ZGPTFOIHMUWDRCNYKEQAXVSBL");
+    let playfair = Playfair::new(key);
 
-    let ciphertext = playfair::cipher(plaintext, key);
-    assert_eq!(ciphertext, "RKPAWRPMYSELZCLFXUZFRSNQBPSA");
+    let ctext = playfair.encipher(ptext);
+    assert_eq!(ctext, "RKPAWRPMYSELZCLFXUZFRSNQBPSA");
 }
 
 /// `decipher_small` test function ...
 #[test]
 fn decipher_small() {
-    let ciphertext = String::from("RKPAWRPMYSELZCLFXUZFRSNQBPSA");
+    let ctext = String::from("RKPAWRPMYSELZCLFXUZFRSNQBPSA");
     let key = String::from("ZGPTFOIHMUWDRCNYKEQAXVSBL");
+    let playfair = Playfair::new(key);
 
-    let plaintext = playfair::decipher(ciphertext, key);
-    assert_eq!(plaintext, "DEFENDTHEXASTWALLOFTHECASTLE");
+    let ptext = playfair.decipher(ctext);
+    assert_eq!(ptext, "DEFENDTHEXASTWALLOFTHECASTLE");
 }
 
-/// `cipher_large` test function ...
+/// `encipher_large` test function ...
 #[test]
-fn cipher_large() {
-    let plaintext = String::from("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
+fn encipher_large() {
+    let ptext = String::from("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
     let key = String::from("ZYXWVUTSRQPONMLKIHGFEDCBA");
+    let playfair = Playfair::new(key);
 
-    let ciphertext = playfair::cipher(plaintext, key);
+    let ctext = playfair.encipher(ptext);
     assert_eq!(
-        ciphertext,
+        ctext,
         "EABCAKFGHYFPLMNOUQRSQZVWXYEABCAKFGHYFPLMNOUQRSQZVWXY"
     );
 }
@@ -36,12 +40,13 @@ fn cipher_large() {
 /// `decipher_large` test function ...
 #[test]
 fn decipher_large() {
-    let ciphertext = String::from("EABCAKFGHYFPLMNOUQRSQZVWXYEABCAKFGHYFPLMNOUQRSQZVWXY");
+    let ctext = String::from("EABCAKFGHYFPLMNOUQRSQZVWXYEABCAKFGHYFPLMNOUQRSQZVWXY");
     let key = String::from("ZYXWVUTSRQPONMLKIHGFEDCBA");
+    let playfair = Playfair::new(key);
 
-    let plaintext = playfair::decipher(ciphertext, key);
+    let ptext = playfair.decipher(ctext);
     assert_eq!(
-        plaintext,
+        ptext,
         "ABCDEFGHIXKLMNOPQRSTUVWXYZABCDEFGHIXKLMNOPQRSTUVWXYZ"
     );
 }

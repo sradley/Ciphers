@@ -1,12 +1,14 @@
-use ciphers::vigenere;
+use ciphers::vigenere::Vigenere;
+use ciphers::Cipher;
 
-/// `cipher_small` test function ...
+/// `encipher_small` test function ...
 #[test]
-fn cipher_small() {
+fn encipher_small() {
     let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     let key = String::from("FORTIFICATION");
+    let vigenere = Vigenere::new(key);
 
-    let ciphertext = vigenere::cipher(plaintext, key);
+    let ciphertext = vigenere.encipher(plaintext);
     assert_eq!(ciphertext, "ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
 }
 
@@ -15,18 +17,20 @@ fn cipher_small() {
 fn decipher_small() {
     let ciphertext = String::from("ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
     let key = String::from("FORTIFICATION");
+    let vigenere = Vigenere::new(key);
 
-    let plaintext = vigenere::decipher(ciphertext, key);
+    let plaintext = vigenere.decipher(ciphertext);
     assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `cipher_large` test function ...
+/// `encipher_large` test function ...
 #[test]
-fn cipher_large() {
+fn encipher_large() {
     let plaintext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     let key = String::from("AYLNOFDXJKRCVSTZWB");
+    let vigenere = Vigenere::new(key);
 
-    let ciphertext = vigenere::cipher(plaintext, key);
+    let ciphertext = vigenere.encipher(plaintext);
     assert_eq!(
         ciphertext,
         "AZNQSKJERTBNHFHOMSSRFIKCBWJLTFZXZGEKKJXACUTOBDLXRPRY"
@@ -38,8 +42,9 @@ fn cipher_large() {
 fn decipher_large() {
     let ciphertext = String::from("AZNQSKJERTBNHFHOMSSRFIKCBWJLTFZXZGEKKJXACUTOBDLXRPRY");
     let key = String::from("AYLNOFDXJKRCVSTZWB");
+    let vigenere = Vigenere::new(key);
 
-    let plaintext = vigenere::decipher(ciphertext, key);
+    let plaintext = vigenere.decipher(ciphertext);
     assert_eq!(
         plaintext,
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
