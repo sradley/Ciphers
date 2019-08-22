@@ -1,31 +1,35 @@
-use ciphers::affine;
+use ciphers::Cipher;
+use ciphers::affine::Affine;
 
-/// `cipher_small` test function ...
+/// `encipher_small` test function ...
 #[test]
-fn cipher_small() {
-    let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+fn encipher_small() {
+    let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+    let affine = Affine::new(7, 11);
 
-    let ciphertext = affine::cipher(plaintext, 7, 11);
-    assert_eq!(ciphertext, "GNUNYGOINNLHOJLKKFUOINZLHOKN");
+    let ctext = affine.encipher(ptext);
+    assert_eq!(ctext, "GNUNYGOINNLHOJLKKFUOINZLHOKN");
 }
 
 /// `decipher_small` test function ...
 #[test]
 fn decipher_small() {
-    let ciphertext = String::from("GNUNYGOINNLHOJLKKFUOINZLHOKN");
+    let ctext = String::from("GNUNYGOINNLHOJLKKFUOINZLHOKN");
+    let affine = Affine::new(7, 11);
 
-    let plaintext = affine::decipher(ciphertext, 7, 11);
-    assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    let ptext = affine.decipher(ctext);
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `cipher_large` test function ...
+/// `encipher_large` test function ...
 #[test]
-fn cipher_large() {
-    let plaintext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+fn encipher_large() {
+    let ptext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    let affine = Affine::new(3, 13);
 
-    let ciphertext = affine::cipher(plaintext, 3, 13);
+    let ctext = affine.encipher(ptext);
     assert_eq!(
-        ciphertext,
+        ctext,
         "NQTWZCFILORUXADGJMPSVYBEHKNQTWZCFILORUXADGJMPSVYBEHK"
     );
 }
@@ -33,11 +37,12 @@ fn cipher_large() {
 /// `decipher_large` test function ...
 #[test]
 fn decipher_large() {
-    let ciphertext = String::from("NQTWZCFILORUXADGJMPSVYBEHKNQTWZCFILORUXADGJMPSVYBEHK");
+    let ctext = String::from("NQTWZCFILORUXADGJMPSVYBEHKNQTWZCFILORUXADGJMPSVYBEHK");
+    let affine = Affine::new(3, 13);
 
-    let plaintext = affine::decipher(ciphertext, 3, 13);
+    let ptext = affine.decipher(ctext);
     assert_eq!(
-        plaintext,
+        ptext,
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }

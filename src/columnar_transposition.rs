@@ -1,7 +1,6 @@
 //! # Columnar Transposition Cipher
 //!
 //! ...
-//!
 
 use std::collections::HashMap;
 

@@ -39,7 +39,6 @@ Currently supported ciphers:
  * Polybius Square
  * Porta
  * Rail-fence
- * Rot13
  * Running Key
  * Simple Substitution
  * Vigenere
@@ -75,6 +74,7 @@ println!("{}", deciphered);
 4. TO BE IMPLEMENTED
 --------------------
 
+ * Rot13
  * Gronsfeld
  * Bifid
  * Trifid
