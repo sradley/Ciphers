@@ -21,11 +21,11 @@ impl Cipher for Atbash {
     /// use ciphers::Cipher;
     /// use ciphers::atbash::Atbash;
     /// 
-    /// let plaintext = String::from("ATTACKATDAWN");
+    /// let ptext = String::from("ATTACKATDAWN");
     /// let atbash = Atbash::new();
     ///
-    /// let ciphertext = atbash.encipher(plaintext);
-    /// assert_eq!(ciphertext, "ZGGZXPZGWZDM");
+    /// let ctext = atbash.encipher(ptext);
+    /// assert_eq!(ctext, "ZGGZXPZGWZDM");
     /// ```
     fn encipher(&self, ptext: String) -> String {
         let ctext = ptext
@@ -42,11 +42,11 @@ impl Cipher for Atbash {
     /// use ciphers::Cipher;
     /// use ciphers::atbash::Atbash;
     /// 
-    /// let ciphertext = String::from("ZGGZXPZGWZDM");
+    /// let ctext = String::from("ZGGZXPZGWZDM");
     /// let atbash = Atbash::new();
     ///
-    /// let plaintext = atbash.decipher(ciphertext);
-    /// assert_eq!(plaintext, "ATTACKATDAWN");
+    /// let ptext = atbash.decipher(ctext);
+    /// assert_eq!(ptext, "ATTACKATDAWN");
     /// ```
     fn decipher(&self, ctext: String) -> String {
         self.encipher(ctext)

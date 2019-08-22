@@ -1,34 +1,38 @@
-use ciphers::autokey;
+use ciphers::Cipher;
+use ciphers::autokey::Autokey;
 
-/// `cipher_small` test function ...
+/// `encipher_small` test function ...
 #[test]
-fn cipher_small() {
-    let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+fn encipher_small() {
+    let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     let key = String::from("FORTIFICATION");
+    let autokey = Autokey::new(key);
 
-    let ciphertext = autokey::cipher(plaintext, key);
-    assert_eq!(ciphertext, "ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
+    let ctext = autokey.encipher(ptext);
+    assert_eq!(ctext, "ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
 }
 
 /// `decipher_small` test function ...
 #[test]
 fn decipher_small() {
-    let ciphertext = String::from("ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
+    let ctext = String::from("ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
     let key = String::from("FORTIFICATION");
+    let autokey = Autokey::new(key);
 
-    let plaintext = autokey::decipher(ciphertext, key);
-    assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    let ptext = autokey.decipher(ctext);
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `cipher_large` test function ...
+/// `encipher_large` test function ...
 #[test]
-fn cipher_large() {
-    let plaintext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+fn encipher_large() {
+    let ptext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     let key = String::from("ZYXWVUTSRQPON");
+    let autokey = Autokey::new(key);
 
-    let ciphertext = autokey::cipher(plaintext, key);
+    let ctext = autokey.encipher(ptext);
     assert_eq!(
-        ciphertext,
+        ctext,
         "ZZZZZZZZZZZZZNPRTVXZBDFHJLNPRTVXZBDFHJLNPRTVXZBDFHJL"
     );
 }
@@ -36,12 +40,13 @@ fn cipher_large() {
 /// `decipher_large` test function ...
 #[test]
 fn decipher_large() {
-    let ciphertext = String::from("ZZZZZZZZZZZZZNPRTVXZBDFHJLNPRTVXZBDFHJLNPRTVXZBDFHJL");
+    let ctext = String::from("ZZZZZZZZZZZZZNPRTVXZBDFHJLNPRTVXZBDFHJLNPRTVXZBDFHJL");
     let key = String::from("ZYXWVUTSRQPON");
+    let autokey = Autokey::new(key);
 
-    let plaintext = autokey::decipher(ciphertext, key);
+    let ptext = autokey.decipher(ctext);
     assert_eq!(
-        plaintext,
+        ptext,
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
