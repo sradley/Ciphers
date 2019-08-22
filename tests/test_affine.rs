@@ -1,5 +1,5 @@
-use ciphers::Cipher;
 use ciphers::affine::Affine;
+use ciphers::Cipher;
 
 /// `encipher_small` test function ...
 #[test]
@@ -28,7 +28,10 @@ fn encipher_large() {
     let affine = Affine::new(3, 13);
 
     let ctext = affine.encipher(ptext);
-    assert_eq!(ctext, "NQTWZCFILORUXADGJMPSVYBEHKNQTWZCFILORUXADGJMPSVYBEHK");
+    assert_eq!(
+        ctext,
+        "NQTWZCFILORUXADGJMPSVYBEHKNQTWZCFILORUXADGJMPSVYBEHK"
+    );
 }
 
 /// `decipher_large` test function ...
@@ -38,5 +41,8 @@ fn decipher_large() {
     let affine = Affine::new(3, 13);
 
     let ptext = affine.decipher(ctext);
-    assert_eq!(ptext, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        ptext,
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    );
 }

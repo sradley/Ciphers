@@ -1,37 +1,41 @@
-use ciphers::four_square;
+use ciphers::four_square::FourSquare;
+use ciphers::Cipher;
 
-/// `cipher_small` test function ...
+/// `encipher_small` test function ...
 #[test]
-fn cipher_small() {
-    let plaintext = String::from("ATTACKATDAWN");
+fn encipher_small() {
+    let ptext = String::from("ATTACKATDAWN");
     let key1 = String::from("ZGPTFOIHMUWDRCNYKEQAXVSBL");
     let key2 = String::from("MFNBDCRHSAXYOGVITUEWLQZKP");
+    let four_square = FourSquare::new(key1, key2);
 
-    let ciphertext = four_square::cipher(plaintext, key1, key2);
-    assert_eq!(ciphertext, "TIYBFHTIZBSY");
+    let ctext = four_square.encipher(ptext);
+    assert_eq!(ctext, "TIYBFHTIZBSY");
 }
 
 /// `decipher_small` test function ...
 #[test]
 fn decipher_small() {
-    let ciphertext = String::from("TIYBFHTIZBSY");
+    let ctext = String::from("TIYBFHTIZBSY");
     let key1 = String::from("ZGPTFOIHMUWDRCNYKEQAXVSBL");
     let key2 = String::from("MFNBDCRHSAXYOGVITUEWLQZKP");
+    let four_square = FourSquare::new(key1, key2);
 
-    let plaintext = four_square::decipher(ciphertext, key1, key2);
-    assert_eq!(plaintext, "ATTACKATDAWN");
+    let ptext = four_square.decipher(ctext);
+    assert_eq!(ptext, "ATTACKATDAWN");
 }
 
-/// `cipher_large` test function ...
+/// `encipher_large` test function ...
 #[test]
-fn cipher_large() {
-    let plaintext = String::from("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
+fn encipher_large() {
+    let ptext = String::from("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
     let key1 = String::from("ABCDEFGHIJKLMNOPQRSTUVWXY");
     let key2 = String::from("ZYXWVUTSRQPONMLKJIHGFEDCB");
+    let four_square = FourSquare::new(key1, key2);
 
-    let ciphertext = four_square::cipher(plaintext, key1, key2);
+    let ctext = four_square.encipher(ptext);
     assert_eq!(
-        ciphertext,
+        ctext,
         "BZDXAQHTIRFLMOOMQKSIPBWEYCBZDXAQHTIRFLMOOMQKSIPBWEYC"
     );
 }
@@ -39,13 +43,14 @@ fn cipher_large() {
 /// `decipher_large` test function ...
 #[test]
 fn decipher_large() {
-    let ciphertext = String::from("BZDXAQHTIRFLMOOMQKSIPBWEYCBZDXAQHTIRFLMOOMQKSIPBWEYC");
+    let ctext = String::from("BZDXAQHTIRFLMOOMQKSIPBWEYCBZDXAQHTIRFLMOOMQKSIPBWEYC");
     let key1 = String::from("ABCDEFGHIJKLMNOPQRSTUVWXY");
     let key2 = String::from("ZYXWVUTSRQPONMLKJIHGFEDCB");
+    let four_square = FourSquare::new(key1, key2);
 
-    let plaintext = four_square::decipher(ciphertext, key1, key2);
+    let ptext = four_square.decipher(ctext);
     assert_eq!(
-        plaintext,
+        ptext,
         "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
     );
 }

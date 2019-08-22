@@ -1,5 +1,5 @@
-use ciphers::Cipher;
 use ciphers::polybius_square::PolybiusSquare;
+use ciphers::Cipher;
 
 /// `encipher_abcde_small` test function ...
 #[test]
@@ -37,7 +37,10 @@ fn encipher_zebra_small() {
     let ps = PolybiusSquare::new(key, chars);
 
     let ctext = ps.encipher(ptext);
-    assert_eq!(ctext, "BAEBBREBBEBAAEZEEBEBERAZAEARERBZBZBBBRAEZEEBRRERAZAEBZEB");
+    assert_eq!(
+        ctext,
+        "BAEBBREBBEBAAEZEEBEBERAZAEARERBZBZBBBRAEZEEBRRERAZAEBZEB"
+    );
 }
 
 /// `decipher_zebra_small` test function ...
@@ -80,7 +83,10 @@ fn decipher_abcde_large() {
     let ps = PolybiusSquare::new(key, chars);
 
     let ptext = ps.decipher(ctext);
-    assert_eq!(ptext, "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        ptext,
+        "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
+    );
 }
 
 /// `encipher_zebra_large` test function ...
@@ -111,5 +117,8 @@ fn decipher_zebra_large() {
     let ps = PolybiusSquare::new(key, chars);
 
     let ptext = ps.decipher(ctext);
-    assert_eq!(ptext, "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        ptext,
+        "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
+    );
 }

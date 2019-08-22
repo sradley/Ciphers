@@ -1,5 +1,5 @@
-use ciphers::Cipher;
 use ciphers::adfgvx::ADFGVX;
+use ciphers::Cipher;
 
 /// `encipher_small` test function ...
 #[test]
@@ -56,5 +56,8 @@ fn decipher_large() {
     let adfgvx = ADFGVX::new(key, keyword);
 
     let ptext = adfgvx.decipher(ctext);
-    assert_eq!(ptext, "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        ptext,
+        "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
+    );
 }

@@ -1,5 +1,5 @@
-use ciphers::Cipher;
 use ciphers::atbash::Atbash;
+use ciphers::Cipher;
 
 /// `encipher_small` test function ...
 #[test]
@@ -28,7 +28,10 @@ fn encipher_large() {
     let atbash = Atbash::new();
 
     let ctext = atbash.encipher(ptext);
-    assert_eq!(ctext, "ZYXWVUTSRQPONMLKJIHGFEDCBAZYXWVUTSRQPONMLKJIHGFEDCBA");
+    assert_eq!(
+        ctext,
+        "ZYXWVUTSRQPONMLKJIHGFEDCBAZYXWVUTSRQPONMLKJIHGFEDCBA"
+    );
 }
 
 /// `decipher_large` test function ...
@@ -38,5 +41,8 @@ fn decipher_large() {
     let atbash = Atbash::new();
 
     let ptext = atbash.decipher(ctext);
-    assert_eq!(ptext, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        ptext,
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    );
 }

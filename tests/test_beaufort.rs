@@ -1,5 +1,5 @@
-use ciphers::Cipher;
 use ciphers::beaufort::Beaufort;
+use ciphers::Cipher;
 
 /// `encipher_small` test function ...
 #[test]
@@ -31,7 +31,10 @@ fn encipher_large() {
     let beaufort = Beaufort::new(key);
 
     let ctext = beaufort.encipher(ptext);
-    assert_eq!(ctext, "ZXVTRPNLJHFDBMKIGECAYWUSQOZXVTRPNLJHFDBMKIGECAYWUSQO");
+    assert_eq!(
+        ctext,
+        "ZXVTRPNLJHFDBMKIGECAYWUSQOZXVTRPNLJHFDBMKIGECAYWUSQO"
+    );
 }
 
 /// `decipher_large` test function ...
@@ -42,5 +45,8 @@ fn decipher_large() {
     let beaufort = Beaufort::new(key);
 
     let ptext = beaufort.decipher(ctext);
-    assert_eq!(ptext, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        ptext,
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    );
 }

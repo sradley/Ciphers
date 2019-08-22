@@ -1,5 +1,5 @@
-use ciphers::Cipher;
 use ciphers::columnar_transposition::ColumnarTransposition;
+use ciphers::Cipher;
 
 /// `encipher_small` test function ...
 #[test]
@@ -31,7 +31,10 @@ fn encipher_large() {
     let ct = ColumnarTransposition::new(key);
 
     let ctext = ct.encipher(ptext);
-    assert_eq!(ctext, "MZMZLYLYKXKXJWJWIVIVHUHUGTGTFSFSERERDQDQCPCPBOBOANAN");
+    assert_eq!(
+        ctext,
+        "MZMZLYLYKXKXJWJWIVIVHUHUGTGTFSFSERERDQDQCPCPBOBOANAN"
+    );
 }
 
 /// `decipher_large` test function ...
@@ -42,5 +45,8 @@ fn decipher_large() {
     let ct = ColumnarTransposition::new(key);
 
     let ptext = ct.decipher(ctext);
-    assert_eq!(ptext, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        ptext,
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    );
 }

@@ -1,5 +1,5 @@
-use ciphers::Cipher;
 use ciphers::caesar::Caesar;
+use ciphers::Cipher;
 
 /// `encipher_rot1_small` test function ...
 #[test]
@@ -48,7 +48,10 @@ fn encipher_rot1_large() {
     let caesar = Caesar::new(1);
 
     let ctext = caesar.encipher(ptext);
-    assert_eq!(ctext, "BCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZA");
+    assert_eq!(
+        ctext,
+        "BCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZA"
+    );
 }
 
 /// `decipher_rot1_large` test function ...
@@ -58,7 +61,10 @@ fn decipher_rot1_large() {
     let caesar = Caesar::new(1);
 
     let ptext = caesar.decipher(ctext);
-    assert_eq!(ptext, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        ptext,
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    );
 }
 
 /// `encipher_rot25_large` test function ...
@@ -68,7 +74,10 @@ fn encipher_rot25_large() {
     let caesar = Caesar::new(25);
 
     let ctext = caesar.encipher(ptext);
-    assert_eq!(ctext, "ZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXY");
+    assert_eq!(
+        ctext,
+        "ZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXY"
+    );
 }
 
 /// `decipher_rot25_large` test function ...
@@ -78,5 +87,8 @@ fn decipher_rot25_large() {
     let caesar = Caesar::new(25);
 
     let ptext = caesar.decipher(ctext);
-    assert_eq!(ptext, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    assert_eq!(
+        ptext,
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    );
 }
