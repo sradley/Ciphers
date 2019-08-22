@@ -57,18 +57,19 @@ Currently supported ciphers:
 
 E.g. using the Vigenere cipher.
 ```
-use ciphers::vigenere;
+use ciphers::Cipher;
+use ciphers::vigenere::Vigenere;
+
+let vigenere = Vigenere::new(String::from("EXAMPLEKEY"));
+let ptext = String::from("SOMEXAMPLETEXTHERE");
 
 // encipher
-let plaintext = String::from("SOMEXAMPLETEXTHERE");
-let key = String::from("EXAMPLEKEY");
-
-let ciphertext = vigenere::cipher(plaintext, key);
-println!("{}", ciphertext);
+let ctext = vigenere.encipher(ptext);
+println!("{}", ctext);
 
 // decipher
-let deciphered = vigenere::decipher(ciphertext, key);
-println!("{}", deciphered);
+let ptext = vigenere.decipher(ctext);
+println!("{}", ptext);
 ```
 
 4. TO BE IMPLEMENTED
