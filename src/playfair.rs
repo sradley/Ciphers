@@ -21,11 +21,11 @@ impl Playfair {
 
 impl Cipher for Playfair {
     /// `encipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::playfair::Playfair;
-    /// 
+    ///
     /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let key = String::from("ZGPTFOIHMUWDRCNYKEQAXVSBL");
     /// let playfair = Playfair::new(key);
@@ -72,11 +72,11 @@ impl Cipher for Playfair {
     }
 
     /// `decipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::playfair::Playfair;
-    /// 
+    ///
     /// let ctext = String::from("RKPAWRPMYSELZCLFXUZFRSNQBPSA");
     /// let key = String::from("ZGPTFOIHMUWDRCNYKEQAXVSBL");
     /// let playfair = Playfair::new(key);
