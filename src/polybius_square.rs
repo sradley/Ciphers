@@ -4,59 +4,79 @@
 //!
 //! TODO: handle unwraps (i.e. when trying to find a character that's not in the square)
 
-/// `cipher` function ...
-///
-/// ```
-/// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
-/// let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
-/// let chars = String::from("ABCDE");
-///
-/// let ciphertext = ciphers::polybius_square::cipher(plaintext, key, chars);
-/// assert_eq!(
-///      ciphertext,
-///     "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC"
-/// );
-/// ```
-pub fn cipher(plaintext: String, key: String, chars: String) -> String {
-    assert_eq!(key.len(), chars.len() * chars.len());
+use crate::Cipher;
 
-    let chars = chars.as_bytes();
-    let mut ciphertext: Vec<u8> = Vec::with_capacity(plaintext.len());
-
-    for c in plaintext.bytes() {
-        let i = key.find(move |j| j == c as char).unwrap();
-
-        ciphertext.push(chars[i / chars.len()]);
-        ciphertext.push(chars[i % chars.len()]);
-    }
-
-    String::from_utf8(ciphertext).unwrap()
+/// `PolybiusSquare` struct ...
+pub struct PolybiusSquare {
+    key: String,
+    chars: String,
 }
 
-/// `decipher` function ...
-///
-/// ```
-/// let ciphertext = String::from("CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
-/// let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
-/// let chars = String::from("ABCDE");
-///
-/// let plaintext = ciphers::polybius_square::decipher(ciphertext, key, chars);
-/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
-/// ```
-pub fn decipher(ciphertext: String, key: String, chars: String) -> String {
-    assert_eq!(key.len(), chars.len() * chars.len());
-    assert_eq!(ciphertext.len() % 2, 0);
+impl PolybiusSquare {
+    /// `PolybiusSquare` constructor ...
+    pub fn new(key: String, chars: String) -> Self {
+        assert_eq!(key.len(), chars.len() * chars.len());
+        Self { key, chars }
+    }
+}
 
-    let key = key.as_bytes();
-    let ciphertext = ciphertext.as_bytes();
-    let mut plaintext: Vec<u8> = Vec::with_capacity(ciphertext.len());
+impl Cipher for PolybiusSquare {
+    /// `encipher` method ...
+    /// 
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::polybius_square::PolybiusSquare;
+    /// 
+    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+    /// let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
+    /// let chars = String::from("ABCDE");
+    /// let ps = PolybiusSquare::new(key, chars);
+    ///
+    /// let ctext = ps.encipher(ptext);
+    /// assert_eq!(ctext, "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
+    /// ```
+    fn encipher(&self, ptext: String) -> String {
+        let chars = self.chars.as_bytes();
+        let mut ctext: Vec<u8> = Vec::with_capacity(ptext.len());
 
-    for i in (0..ciphertext.len()).step_by(2) {
-        let y = chars.find(|c| c == ciphertext[i] as char).unwrap();
-        let x = chars.find(|c| c == ciphertext[i + 1] as char).unwrap();
+        for c in ptext.bytes() {
+            let i = self.key.find(move |j| j == c as char).unwrap();
 
-        plaintext.push(key[y * chars.len() + x]);
+            ctext.push(chars[i / chars.len()]);
+            ctext.push(chars[i % chars.len()]);
+        }
+
+        String::from_utf8(ctext).unwrap()
     }
 
-    String::from_utf8(plaintext).unwrap()
+    /// `decipher` method ...
+    /// 
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::polybius_square::PolybiusSquare;
+    /// 
+    /// let ctext = String::from("CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
+    /// let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
+    /// let chars = String::from("ABCDE");
+    /// let ps = PolybiusSquare::new(key, chars);
+    ///
+    /// let ptext = ps.decipher(ctext);
+    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// ```
+    fn decipher(&self, ctext: String) -> String {
+        assert_eq!(ctext.len() % 2, 0);
+
+        let key = self.key.as_bytes();
+        let ctext = ctext.as_bytes();
+        let mut ptext: Vec<u8> = Vec::with_capacity(ctext.len());
+
+        for i in (0..ctext.len()).step_by(2) {
+            let y = self.chars.find(|c| c == ctext[i] as char).unwrap();
+            let x = self.chars.find(|c| c == ctext[i + 1] as char).unwrap();
+
+            ptext.push(key[y * self.chars.len() + x]);
+        }
+
+        String::from_utf8(ptext).unwrap()
+    }
 }

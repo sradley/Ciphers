@@ -1,15 +1,17 @@
-use ciphers::polybius_square;
+use ciphers::Cipher;
+use ciphers::polybius_square::PolybiusSquare;
 
-/// `cipher_abcde_small` test function ...
+/// `encipher_abcde_small` test function ...
 #[test]
-fn cipher_abcde_small() {
-    let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+fn encipher_abcde_small() {
+    let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
     let chars = String::from("ABCDE");
+    let ps = PolybiusSquare::new(key, chars);
 
-    let ciphertext = polybius_square::cipher(plaintext, key, chars);
+    let ctext = ps.encipher(ptext);
     assert_eq!(
-        ciphertext,
+        ctext,
         "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC"
     );
 }
@@ -17,49 +19,50 @@ fn cipher_abcde_small() {
 /// `decipher_abcde_small` test function ...
 #[test]
 fn decipher_abcde_small() {
-    let ciphertext = String::from("CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
+    let ctext = String::from("CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
     let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
     let chars = String::from("ABCDE");
+    let ps = PolybiusSquare::new(key, chars);
 
-    let plaintext = polybius_square::decipher(ciphertext, key, chars);
-    assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    let ptext = ps.decipher(ctext);
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `cipher_zebra_small` test function ...
+/// `encipher_zebra_small` test function ...
 #[test]
-fn cipher_zebra_small() {
-    let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+fn encipher_zebra_small() {
+    let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
     let chars = String::from("ZEBRA");
+    let ps = PolybiusSquare::new(key, chars);
 
-    let ciphertext = polybius_square::cipher(plaintext, key, chars);
-    assert_eq!(
-        ciphertext,
-        "BAEBBREBBEBAAEZEEBEBERAZAEARERBZBZBBBRAEZEEBRRERAZAEBZEB"
-    );
+    let ctext = ps.encipher(ptext);
+    assert_eq!(ctext, "BAEBBREBBEBAAEZEEBEBERAZAEARERBZBZBBBRAEZEEBRRERAZAEBZEB");
 }
 
 /// `decipher_zebra_small` test function ...
 #[test]
 fn decipher_zebra_small() {
-    let ciphertext = String::from("BAEBBREBBEBAAEZEEBEBERAZAEARERBZBZBBBRAEZEEBRRERAZAEBZEB");
+    let ctext = String::from("BAEBBREBBEBAAEZEEBEBERAZAEARERBZBZBBBRAEZEEBRRERAZAEBZEB");
     let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
     let chars = String::from("ZEBRA");
+    let ps = PolybiusSquare::new(key, chars);
 
-    let plaintext = polybius_square::decipher(ciphertext, key, chars);
-    assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    let ptext = ps.decipher(ctext);
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `cipher_abcde_large` test function ...
+/// `encipher_abcde_large` test function ...
 #[test]
-fn cipher_abcde_large() {
-    let plaintext = String::from("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
+fn encipher_abcde_large() {
+    let ptext = String::from("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
     let key = String::from("ZYXWVUTSRQPONMLKIHGFEDCBA");
     let chars = String::from("ABCDE");
+    let ps = PolybiusSquare::new(key, chars);
 
-    let ciphertext = polybius_square::cipher(plaintext, key, chars);
+    let ctext = ps.encipher(ptext);
     assert_eq!(
-        ciphertext,
+        ctext,
         "EEEDECEBEADEDDDCDBDBDACECDCCCBCABEBDBCBBBAAEADACABAAEEEDECEBEADEDDDCDBDBDACECDCCCBCABEBDBC\
         BBBAAEADACABAA"
     );
@@ -68,30 +71,29 @@ fn cipher_abcde_large() {
 /// `decipher_abcde_large` test function ...
 #[test]
 fn decipher_abcde_large() {
-    let ciphertext = String::from(
+    let ctext = String::from(
         "EEEDECEBEADEDDDCDBDBDACECDCCCBCABEBDBCBBBAAEADACABAAEEEDECEBEADEDDDCDBDBDACECDCCCBCABEBDBC\
         BBBAAEADACABAA"
     );
     let key = String::from("ZYXWVUTSRQPONMLKIHGFEDCBA");
     let chars = String::from("ABCDE");
+    let ps = PolybiusSquare::new(key, chars);
 
-    let plaintext = polybius_square::decipher(ciphertext, key, chars);
-    assert_eq!(
-        plaintext,
-        "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
-    );
+    let ptext = ps.decipher(ctext);
+    assert_eq!(ptext, "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
 }
 
-/// `cipher_zebra_large` test function ...
+/// `encipher_zebra_large` test function ...
 #[test]
-fn cipher_zebra_large() {
-    let plaintext = String::from("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
+fn encipher_zebra_large() {
+    let ptext = String::from("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
     let key = String::from("ZYXWVUTSRQPONMLKIHGFEDCBA");
     let chars = String::from("ZEBRA");
+    let ps = PolybiusSquare::new(key, chars);
 
-    let ciphertext = polybius_square::cipher(plaintext, key, chars);
+    let ctext = ps.encipher(ptext);
     assert_eq!(
-        ciphertext,
+        ctext,
         "AAARABAEAZRARRRBRERERZBABRBBBEBZEAEREBEEEZZAZRZBZEZZAAARABAEAZRARRRBRERERZBABRBBBEBZEAEREB\
         EEEZZAZRZBZEZZ"
     );
@@ -100,16 +102,14 @@ fn cipher_zebra_large() {
 /// `decipher_zebra_large` test function ...
 #[test]
 fn decipher_zebra_large() {
-    let ciphertext = String::from(
+    let ctext = String::from(
         "AAARABAEAZRARRRBRERERZBABRBBBEBZEAEREBEEEZZAZRZBZEZZAAARABAEAZRARRRBRERERZBABRBBBEBZEAEREB\
         EEEZZAZRZBZEZZ"
     );
     let key = String::from("ZYXWVUTSRQPONMLKIHGFEDCBA");
     let chars = String::from("ZEBRA");
+    let ps = PolybiusSquare::new(key, chars);
 
-    let plaintext = polybius_square::decipher(ciphertext, key, chars);
-    assert_eq!(
-        plaintext,
-        "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
-    );
+    let ptext = ps.decipher(ctext);
+    assert_eq!(ptext, "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
 }

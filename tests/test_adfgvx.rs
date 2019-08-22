@@ -1,15 +1,17 @@
-use ciphers::adfgvx;
+use ciphers::Cipher;
+use ciphers::adfgvx::ADFGVX;
 
-/// `cipher_small` test function ...
+/// `encipher_small` test function ...
 #[test]
-fn cipher_small() {
-    let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+fn encipher_small() {
+    let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     let key = String::from("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8");
     let keyword = String::from("GERMAN");
+    let adfgvx = ADFGVX::new(key, keyword);
 
-    let ciphertext = adfgvx::cipher(plaintext, key, keyword);
+    let ctext = adfgvx.encipher(ptext);
     assert_eq!(
-        ciphertext,
+        ctext,
         "FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX"
     );
 }
@@ -17,24 +19,26 @@ fn cipher_small() {
 /// `decipher_small` test function ...
 #[test]
 fn decipher_small() {
-    let ciphertext = String::from("FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX");
+    let ctext = String::from("FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX");
     let key = String::from("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8");
     let keyword = String::from("GERMAN");
+    let adfgvx = ADFGVX::new(key, keyword);
 
-    let plaintext = adfgvx::decipher(ciphertext, key, keyword);
-    assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    let ptext = adfgvx.decipher(ctext);
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `cipher_large` test function ...
+/// `encipher_large` test function ...
 #[test]
-fn cipher_large() {
-    let plaintext = String::from("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
+fn encipher_large() {
+    let ptext = String::from("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
     let key = String::from("KNGC3FWOAEQ1ZYXBP5LT0U2684SJ97VDHIRM");
     let keyword = String::from("ABCDEFGHIJKLMN");
+    let adfgvx = ADFGVX::new(key, keyword);
 
-    let ciphertext = adfgvx::cipher(plaintext, key, keyword);
+    let ctext = adfgvx.encipher(ptext);
     assert_eq!(
-        ciphertext,
+        ctext,
         "DXDXAXDFFFDAGGVFFXFDXAXFGGVADAVDAXDFDGVFGGVFGAFAXAXFAXGDAVDXXDDGVFAAGGAFAFDGAXGDXDXXXDFFDA\
         AAGFXFDFDGGGVA"
     );
@@ -43,16 +47,14 @@ fn cipher_large() {
 /// `decipher_large` test function ...
 #[test]
 fn decipher_large() {
-    let ciphertext = String::from(
+    let ctext = String::from(
         "DXDXAXDFFFDAGGVFFXFDXAXFGGVADAVDAXDFDGVFGGVFGAFAXAXFAXGDAVDXXDDGVFAAGGAFAFDGAXGDXDXXXDFFDA\
         AAGFXFDFDGGGVA"
     );
     let key = String::from("KNGC3FWOAEQ1ZYXBP5LT0U2684SJ97VDHIRM");
     let keyword = String::from("ABCDEFGHIJKLMN");
+    let adfgvx = ADFGVX::new(key, keyword);
 
-    let plaintext = adfgvx::decipher(ciphertext, key, keyword);
-    assert_eq!(
-        plaintext,
-        "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
-    );
+    let ptext = adfgvx.decipher(ctext);
+    assert_eq!(ptext, "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
 }

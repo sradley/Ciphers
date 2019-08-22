@@ -3,88 +3,111 @@
 //! ...
 
 use std::collections::HashMap;
+use crate::Cipher;
 
-/// `cipher` function ...
-///
-/// ```
-/// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
-/// let key = String::from("GERMAN");
-///
-/// let ciphertext = ciphers::columnar_transposition::cipher(plaintext, key);
-/// assert_eq!(ciphertext, "NALCEHWTTDTTFSEELEEDSOAFEAHL")
-/// ```
-pub fn cipher(plaintext: String, key: String) -> String {
-    let mut key: Vec<u8> = key.bytes().collect();
-    let plaintext = plaintext.as_bytes();
-    let mut matrix: HashMap<u8, Vec<u8>> = HashMap::with_capacity(key.len());
-
-    // populate matrix
-    for i in 0..plaintext.len() {
-        matrix.entry(key[i % key.len()]).or_insert(vec![]);
-        matrix
-            .get_mut(&key[i % key.len()])
-            .unwrap()
-            .push(plaintext[i]);
-    }
-
-    key.sort();
-
-    let mut ciphertext = vec![];
-    for k in key.iter() {
-        for byte in matrix.get(&k).unwrap() {
-            ciphertext.push(*byte);
-        }
-    }
-
-    String::from_utf8(ciphertext).unwrap()
+/// `ColumnarTransposition` struct ...
+pub struct ColumnarTransposition {
+    key: String,
 }
 
-/// `decipher` function ...
-///
-/// ```
-/// let ciphertext = String::from("NALCEHWTTDTTFSEELEEDSOAFEAHL");
-/// let key = String::from("GERMAN");
-///
-/// let plaintext = ciphers::columnar_transposition::decipher(ciphertext, key);
-/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
-/// ```
-pub fn decipher(ciphertext: String, key: String) -> String {
-    let key: Vec<u8> = key.bytes().collect();
-    let ciphertext = ciphertext.as_bytes();
-    let mut matrix: HashMap<u8, Vec<u8>> = HashMap::with_capacity(key.len());
-
-    let mut sorted_key = key.clone();
-    sorted_key.sort();
-
-    for k in sorted_key.iter() {
-        matrix.insert(*k, vec![]);
+impl ColumnarTransposition {
+    /// `ColumnarTransposition` constructor ...
+    pub fn new(key: String) -> Self {
+        Self { key }
     }
+}
 
-    // populate matrix
-    let mut i = 0usize;
-    let mut k = 0usize;
-    while i < ciphertext.len() {
-        // calculate length of current entry
-        let col = key.iter().position(|&c| c == sorted_key[k]).unwrap();
-        let len = if col < ciphertext.len() % key.len() {
-            ciphertext.len() / key.len() + 1
-        } else {
-            ciphertext.len() / key.len()
-        };
+impl Cipher for ColumnarTransposition {
+    /// `encipher` method ...
+    /// 
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::columnar_transposition::ColumnarTransposition;
+    /// 
+    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+    /// let key = String::from("GERMAN");
+    /// let ct = ColumnarTransposition::new(key);
+    ///
+    /// let ctext = ct.encipher(ptext);
+    /// assert_eq!(ctext, "NALCEHWTTDTTFSEELEEDSOAFEAHL")
+    /// ```
+    fn encipher(&self, ptext: String) -> String {
+        let mut key: Vec<u8> = self.key.bytes().collect();
+        let ptext = ptext.as_bytes();
+        let mut matrix: HashMap<u8, Vec<u8>> = HashMap::with_capacity(key.len());
 
-        for _ in 0..len {
-            matrix.entry(sorted_key[k]).or_insert(vec![]);
-            matrix.get_mut(&sorted_key[k]).unwrap().push(ciphertext[i]);
-            i += 1;
+        // populate matrix
+        for i in 0..ptext.len() {
+            matrix.entry(key[i % key.len()]).or_insert(vec![]);
+            matrix
+                .get_mut(&key[i % key.len()])
+                .unwrap()
+                .push(ptext[i]);
         }
 
-        k += 1;
+        key.sort();
+
+        let mut ctext = vec![];
+        for k in key.iter() {
+            for byte in matrix.get(&k).unwrap() {
+                ctext.push(*byte);
+            }
+        }
+
+        String::from_utf8(ctext).unwrap()
     }
 
-    let mut plaintext = vec![];
-    for i in 0..ciphertext.len() {
-        plaintext.push(matrix.get_mut(&key[i % key.len()]).unwrap().remove(0));
-    }
+    /// `decipher` method ...
+    /// 
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::columnar_transposition::ColumnarTransposition;
+    /// 
+    /// let ctext = String::from("NALCEHWTTDTTFSEELEEDSOAFEAHL");
+    /// let key = String::from("GERMAN");
+    /// let ct = ColumnarTransposition::new(key);
+    ///
+    /// let ptext = ct.decipher(ctext);
+    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// ```
+    fn decipher(&self, ctext: String) -> String {
+        let key: Vec<u8> = self.key.bytes().collect();
+        let ctext = ctext.as_bytes();
+        let mut matrix: HashMap<u8, Vec<u8>> = HashMap::with_capacity(key.len());
 
-    String::from_utf8(plaintext).unwrap()
+        let mut sorted_key = key.clone();
+        sorted_key.sort();
+
+        for k in sorted_key.iter() {
+            matrix.insert(*k, vec![]);
+        }
+
+        // populate matrix
+        let mut i = 0usize;
+        let mut k = 0usize;
+        while i < ctext.len() {
+            // calculate length of current entry
+            let col = key.iter().position(|&c| c == sorted_key[k]).unwrap();
+            let len = if col < ctext.len() % key.len() {
+                ctext.len() / key.len() + 1
+            } else {
+                ctext.len() / key.len()
+            };
+
+            for _ in 0..len {
+                matrix.entry(sorted_key[k]).or_insert(vec![]);
+                matrix.get_mut(&sorted_key[k]).unwrap().push(ctext[i]);
+                i += 1;
+            }
+
+            k += 1;
+        }
+
+        let mut ptext = vec![];
+        for i in 0..ctext.len() {
+            ptext.push(matrix.get_mut(&key[i % key.len()]).unwrap().remove(0));
+        }
+
+        String::from_utf8(ptext).unwrap()
+    }
 }

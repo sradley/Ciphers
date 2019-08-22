@@ -1,13 +1,15 @@
-use ciphers::adfgx;
+use ciphers::Cipher;
+use ciphers::adfgx::ADFGX;
 
-/// `cipher_small` test function ...
+/// `encipher_small` test function ...
 #[test]
-fn cipher_small() {
+fn encipher_small() {
     let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     let key = String::from("PHQGMEAYNOFDXKRCVSZWBUTIL");
     let keyword = String::from("GERMAN");
+    let adfgx = ADFGX::new(key, keyword);
 
-    let ciphertext = adfgx::cipher(plaintext, key, keyword);
+    let ciphertext = adfgx.encipher(plaintext);
     assert_eq!(
         ciphertext,
         "FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX"
@@ -20,19 +22,21 @@ fn decipher_small() {
     let ciphertext = String::from("FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
     let key = String::from("PHQGMEAYNOFDXKRCVSZWBUTIL");
     let keyword = String::from("GERMAN");
+    let adfgx = ADFGX::new(key, keyword);
 
-    let plaintext = adfgx::decipher(ciphertext, key, keyword);
+    let plaintext = adfgx.decipher(ciphertext);
     assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `cipher_large` test function ...
+/// `encipher_large` test function ...
 #[test]
-fn cipher_large() {
+fn encipher_large() {
     let plaintext = String::from("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
     let key = String::from("GEHDOSWILFQRCKUXZMNBPATVY");
     let keyword = String::from("ABCDEFGHIJKLMN");
+    let adfgx = ADFGX::new(key, keyword);
 
-    let ciphertext = adfgx::cipher(plaintext, key, keyword);
+    let ciphertext = adfgx.encipher(plaintext);
     assert_eq!(
         ciphertext,
         "XAAXFDFGDFXGFFAAGDXDAFFXXFADGGDXFDFGADDGFFAADGADAFFXDGXGGDXXFFADDGAGFDGADAGXDGXXAAXXFFDFXG\
@@ -49,8 +53,9 @@ fn decipher_large() {
     );
     let key = String::from("GEHDOSWILFQRCKUXZMNBPATVY");
     let keyword = String::from("ABCDEFGHIJKLMN");
+    let adfgx = ADFGX::new(key, keyword);
 
-    let plaintext = adfgx::decipher(ciphertext, key, keyword);
+    let plaintext = adfgx.decipher(ciphertext);
     assert_eq!(
         plaintext,
         "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"

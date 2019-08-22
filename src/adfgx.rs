@@ -2,45 +2,64 @@
 //!
 //! ...
 
-use crate::{columnar_transposition, polybius_square};
+use crate::Cipher;
+use crate::columnar_transposition::ColumnarTransposition;
+use crate::polybius_square::PolybiusSquare;
 
-/// `cipher` function ...
-///
-/// ```
-/// use ciphers::adfgx;
-///
-/// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
-/// let key = String::from("PHQGMEAYNOFDXKRCVSZWBUTIL");
-/// let keyword = String::from("GERMAN");
-///
-/// let ciphertext = adfgx::cipher(plaintext, key, keyword);
-/// assert_eq!(ciphertext, "FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
-/// ```
-pub fn cipher(plaintext: String, key: String, keyword: String) -> String {
-    assert_eq!(key.len(), 25);
-    columnar_transposition::cipher(
-        polybius_square::cipher(plaintext, key, String::from("ADFGX")),
-        keyword,
-    )
+/// `ADFGX` struct ...
+pub struct ADFGX {
+    key: String,
+    keyword: String,
 }
 
-/// `cipher` function ...
-///
-/// ```
-/// use ciphers::adfgx;
-///
-/// let ciphertext = String::from("FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
-/// let key = String::from("PHQGMEAYNOFDXKRCVSZWBUTIL");
-/// let keyword = String::from("GERMAN");
-///
-/// let plaintext = adfgx::decipher(ciphertext, key, keyword);
-/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
-/// ```
-pub fn decipher(ciphertext: String, key: String, keyword: String) -> String {
-    assert_eq!(key.len(), 25);
-    polybius_square::decipher(
-        columnar_transposition::decipher(ciphertext, keyword),
-        key,
-        String::from("ADFGX"),
-    )
+impl ADFGX {
+    /// `ADFGX` constructor ...
+    pub fn new(key: String, keyword: String) -> Self {
+        assert_eq!(key.len(), 25);
+        Self { key, keyword }
+    }
+}
+
+impl Cipher for ADFGX {
+    /// `encipher` method ...
+    /// 
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::adfgx::ADFGX;
+    /// 
+    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+    /// let key = String::from("PHQGMEAYNOFDXKRCVSZWBUTIL");
+    /// let keyword = String::from("GERMAN");
+    /// let adfgx = ADFGX::new(key, keyword);
+    ///
+    /// let ctext = adfgx.encipher(ptext);
+    /// assert_eq!(ctext, "FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
+    /// ```
+    fn encipher(&self, ptext: String) -> String {
+        let ps = PolybiusSquare::new(self.key.clone(), String::from("ADFGX"));
+        let ct = ColumnarTransposition::new(self.keyword.clone());
+
+        ct.encipher(ps.encipher(ptext))
+    }
+
+    /// `decipher` method ...
+    /// 
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::adfgx::ADFGX;
+    /// 
+    /// let ctext = String::from("FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
+    /// let key = String::from("PHQGMEAYNOFDXKRCVSZWBUTIL");
+    /// let keyword = String::from("GERMAN");
+    /// let adfgx = ADFGX::new(key, keyword);
+    ///
+    /// let ptext = adfgx.decipher(ctext);
+    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// ```
+    fn decipher(&self, ctext: String) -> String {
+        let ps = PolybiusSquare::new(self.key.clone(), String::from("ADFGX"));
+        let ct = ColumnarTransposition::new(self.keyword.clone());
+
+        ps.decipher(ct.decipher(ctext))
+    }
 }
