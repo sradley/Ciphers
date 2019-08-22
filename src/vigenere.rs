@@ -2,54 +2,76 @@
 //!
 //! ...
 
-use crate::TABULA_RECTA;
+use crate::{Cipher, TABULA_RECTA};
 
-/// `cipher` function ...
-///
-/// ```
-/// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
-/// let key = String::from("FORTIFICATION");
-///
-/// let ciphertext = ciphers::vigenere::cipher(plaintext, key);
-/// assert_eq!(ciphertext, "ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
-/// ```
-pub fn cipher(plaintext: String, key: String) -> String {
-    let key = key.as_bytes();
-
-    let ciphertext = plaintext
-        .bytes()
-        .enumerate()
-        .map(move |(i, c)| {
-            let y = key[i % key.len()] as usize - 'A' as usize;
-            let x = c as usize - 'A' as usize;
-
-            TABULA_RECTA[y][x]
-        })
-        .collect();
-
-    String::from_utf8(ciphertext).unwrap()
+/// `Vigenere` struct ...
+pub struct Vigenere {
+    key: String,
 }
 
-/// `decipher` function ...
-///
-/// ```
-/// let ciphertext = String::from("ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
-/// let key = String::from("FORTIFICATION");
-///
-/// let plaintext = ciphers::vigenere::decipher(ciphertext, key);
-/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
-/// ```
-pub fn decipher(ciphertext: String, key: String) -> String {
-    let key = key.as_bytes();
+impl Vigenere {
+    /// `Vigenere` constructor ...
+    pub fn new(key: String) -> Self {
+        Self { key }
+    }
+}
 
-    let plaintext = ciphertext
-        .bytes()
-        .enumerate()
-        .map(move |(i, c)| {
-            let y = key[i % key.len()] as usize - 'A' as usize;
-            TABULA_RECTA[y].iter().position(|&j| j == c).unwrap() as u8 + 'A' as u8
-        })
-        .collect();
+impl Cipher for Vigenere {
+    /// `encipher` method ...
+    ///
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::vigenere::Vigenere;
+    ///
+    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+    /// let key = String::from("FORTIFICATION");
+    /// let vigenere = Vigenere::new(key);
+    ///
+    /// let ctext = vigenere.encipher(ptext);
+    /// assert_eq!(ctext, "ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
+    /// ```
+    fn encipher(&self, ptext: String) -> String {
+        let key = self.key.as_bytes();
 
-    String::from_utf8(plaintext).unwrap()
+        let ctext = ptext
+            .bytes()
+            .enumerate()
+            .map(move |(i, c)| {
+                let y = key[i % key.len()] as usize - 65;
+                let x = c as usize - 65;
+
+                TABULA_RECTA[y][x]
+            })
+            .collect();
+
+        String::from_utf8(ctext).unwrap()
+    }
+
+    /// `decipher` method ...
+    ///
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::vigenere::Vigenere;
+    ///
+    /// let ctext = String::from("ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
+    /// let key = String::from("FORTIFICATION");
+    /// let vigenere = Vigenere::new(key);
+    ///
+    /// let ptext = vigenere.decipher(ctext);
+    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// ```
+    fn decipher(&self, ctext: String) -> String {
+        let key = self.key.as_bytes();
+
+        let ptext = ctext
+            .bytes()
+            .enumerate()
+            .map(move |(i, c)| {
+                let y = key[i % key.len()] as usize - 65;
+                TABULA_RECTA[y].iter().position(|&j| j == c).unwrap() as u8 + 65
+            })
+            .collect();
+
+        String::from_utf8(ptext).unwrap()
+    }
 }
