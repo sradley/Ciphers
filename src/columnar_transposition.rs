@@ -2,8 +2,8 @@
 //!
 //! ...
 
-use std::collections::HashMap;
 use crate::Cipher;
+use std::collections::HashMap;
 
 /// `ColumnarTransposition` struct ...
 pub struct ColumnarTransposition {
@@ -19,11 +19,11 @@ impl ColumnarTransposition {
 
 impl Cipher for ColumnarTransposition {
     /// `encipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::columnar_transposition::ColumnarTransposition;
-    /// 
+    ///
     /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let key = String::from("GERMAN");
     /// let ct = ColumnarTransposition::new(key);
@@ -39,10 +39,7 @@ impl Cipher for ColumnarTransposition {
         // populate matrix
         for i in 0..ptext.len() {
             matrix.entry(key[i % key.len()]).or_insert(vec![]);
-            matrix
-                .get_mut(&key[i % key.len()])
-                .unwrap()
-                .push(ptext[i]);
+            matrix.get_mut(&key[i % key.len()]).unwrap().push(ptext[i]);
         }
 
         key.sort();
@@ -58,11 +55,11 @@ impl Cipher for ColumnarTransposition {
     }
 
     /// `decipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::columnar_transposition::ColumnarTransposition;
-    /// 
+    ///
     /// let ctext = String::from("NALCEHWTTDTTFSEELEEDSOAFEAHL");
     /// let key = String::from("GERMAN");
     /// let ct = ColumnarTransposition::new(key);

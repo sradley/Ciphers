@@ -2,9 +2,9 @@
 //!
 //! ...
 
-use crate::Cipher;
 use crate::columnar_transposition::ColumnarTransposition;
 use crate::polybius_square::PolybiusSquare;
+use crate::Cipher;
 
 /// `ADFGX` struct ...
 pub struct ADFGX {
@@ -22,11 +22,11 @@ impl ADFGX {
 
 impl Cipher for ADFGX {
     /// `encipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::adfgx::ADFGX;
-    /// 
+    ///
     /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let key = String::from("PHQGMEAYNOFDXKRCVSZWBUTIL");
     /// let keyword = String::from("GERMAN");
@@ -43,11 +43,11 @@ impl Cipher for ADFGX {
     }
 
     /// `decipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::adfgx::ADFGX;
-    /// 
+    ///
     /// let ctext = String::from("FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
     /// let key = String::from("PHQGMEAYNOFDXKRCVSZWBUTIL");
     /// let keyword = String::from("GERMAN");

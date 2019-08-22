@@ -18,11 +18,11 @@ impl Caesar {
 
 impl Cipher for Caesar {
     /// `encipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::caesar::Caesar;
-    /// 
+    ///
     /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let caesar = Caesar::new(1);
     ///
@@ -39,11 +39,11 @@ impl Cipher for Caesar {
     }
 
     /// `decipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::caesar::Caesar;
-    /// 
+    ///
     /// let ctext = String::from("EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
     /// let caesar = Caesar::new(1);
     ///

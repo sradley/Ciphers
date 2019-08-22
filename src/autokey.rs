@@ -18,11 +18,11 @@ impl Autokey {
 
 impl Cipher for Autokey {
     /// `encipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::autokey::Autokey;
-    /// 
+    ///
     /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let key = String::from("FORTIFICATION");
     /// let autokey = Autokey::new(key);
@@ -51,11 +51,11 @@ impl Cipher for Autokey {
     }
 
     /// `decipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::autokey::Autokey;
-    /// 
+    ///
     /// let ctext = String::from("ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
     /// let key = String::from("FORTIFICATION");
     /// let autokey = Autokey::new(key);

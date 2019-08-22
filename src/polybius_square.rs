@@ -22,11 +22,11 @@ impl PolybiusSquare {
 
 impl Cipher for PolybiusSquare {
     /// `encipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::polybius_square::PolybiusSquare;
-    /// 
+    ///
     /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
     /// let chars = String::from("ABCDE");
@@ -50,11 +50,11 @@ impl Cipher for PolybiusSquare {
     }
 
     /// `decipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::polybius_square::PolybiusSquare;
-    /// 
+    ///
     /// let ctext = String::from("CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
     /// let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
     /// let chars = String::from("ABCDE");

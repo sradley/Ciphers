@@ -16,11 +16,11 @@ impl Atbash {
 
 impl Cipher for Atbash {
     /// `encipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::atbash::Atbash;
-    /// 
+    ///
     /// let ptext = String::from("ATTACKATDAWN");
     /// let atbash = Atbash::new();
     ///
@@ -28,20 +28,17 @@ impl Cipher for Atbash {
     /// assert_eq!(ctext, "ZGGZXPZGWZDM");
     /// ```
     fn encipher(&self, ptext: String) -> String {
-        let ctext = ptext
-            .bytes()
-            .map(|c| 90 - c + 65)
-            .collect();
+        let ctext = ptext.bytes().map(|c| 90 - c + 65).collect();
 
         String::from_utf8(ctext).unwrap()
     }
 
     /// `decipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::atbash::Atbash;
-    /// 
+    ///
     /// let ctext = String::from("ZGGZXPZGWZDM");
     /// let atbash = Atbash::new();
     ///

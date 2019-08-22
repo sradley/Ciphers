@@ -18,11 +18,11 @@ impl Beaufort {
 
 impl Cipher for Beaufort {
     /// `encipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::beaufort::Beaufort;
-    /// 
+    ///
     /// ```
     fn encipher(&self, ptext: String) -> String {
         let key = self.key.as_bytes();
@@ -45,11 +45,11 @@ impl Cipher for Beaufort {
     }
 
     /// `decipher` method ...
-    /// 
+    ///
     /// ```
     /// use ciphers::Cipher;
     /// use ciphers::beaufort::Beaufort;
-    /// 
+    ///
     /// ```
     fn decipher(&self, ctext: String) -> String {
         self.encipher(ctext)
