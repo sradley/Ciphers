@@ -2,58 +2,80 @@
 //!
 //! ...
 
-use crate::TABULA_RECTA;
+use crate::{Cipher, TABULA_RECTA};
 
-/// `cipher` function ...
-///
-/// ```
-/// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
-/// let key = String::from("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
-///
-/// let ciphertext = ciphers::running_key::cipher(plaintext, key);
-/// assert_eq!(ciphertext, "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
-/// ```
-pub fn cipher(plaintext: String, key: String) -> String {
-    assert!(key.len() >= plaintext.len());
-
-    let key = key.as_bytes();
-
-    let ciphertext = plaintext
-        .bytes()
-        .enumerate()
-        .map(move |(i, c)| {
-            let y = key[i] as usize - 'A' as usize;
-            let x = c as usize - 'A' as usize;
-
-            TABULA_RECTA[y][x]
-        })
-        .collect();
-
-    String::from_utf8(ciphertext).unwrap()
+/// `RunningKey` struct ...
+pub struct RunningKey {
+    key: String,
 }
 
-/// `decipher` function ...
-///
-/// ```
-/// let ciphertext = String::from("KSBHBHLALIDMVGKYZKYAHXUAAWGM");
-/// let key = String::from("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
-///
-/// let plaintext = ciphers::running_key::decipher(ciphertext, key);
-/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
-/// ```
-pub fn decipher(ciphertext: String, key: String) -> String {
-    assert!(key.len() >= ciphertext.len());
+impl RunningKey {
+    /// `RunningKey` constructor ...
+    pub fn new(key: String) -> Self {
+        Self { key }
+    }
+}
 
-    let key = key.as_bytes();
+impl Cipher for RunningKey {
+    /// `encipher` method ...
+    ///
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::running_key::RunningKey;
+    ///
+    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+    /// let key = String::from("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
+    /// let running_key = RunningKey::new(key);
+    ///
+    /// let ctext = running_key.encipher(ptext);
+    /// assert_eq!(ctext, "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
+    /// ```
+    fn encipher(&self, ptext: String) -> String {
+        assert!(self.key.len() >= ptext.len());
 
-    let plaintext = ciphertext
-        .bytes()
-        .enumerate()
-        .map(move |(i, c)| {
-            let y = key[i] as usize - 'A' as usize;
-            TABULA_RECTA[y].iter().position(|&j| j == c).unwrap() as u8 + 'A' as u8
-        })
-        .collect();
+        let key = self.key.as_bytes();
 
-    String::from_utf8(plaintext).unwrap()
+        let ctext = ptext
+            .bytes()
+            .enumerate()
+            .map(move |(i, c)| {
+                let y = key[i] as usize - 65;
+                let x = c as usize - 65;
+
+                TABULA_RECTA[y][x]
+            })
+            .collect();
+
+        String::from_utf8(ctext).unwrap()
+    }
+
+    /// `decipher` method ...
+    ///
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::running_key::RunningKey;
+    ///
+    /// let ctext = String::from("KSBHBHLALIDMVGKYZKYAHXUAAWGM");
+    /// let key = String::from("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
+    /// let running_key = RunningKey::new(key);
+    ///
+    /// let ptext = running_key.decipher(ctext);
+    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// ```
+    fn decipher(&self, ctext: String) -> String {
+        assert!(self.key.len() >= ctext.len());
+
+        let key = self.key.as_bytes();
+
+        let ptext = ctext
+            .bytes()
+            .enumerate()
+            .map(move |(i, c)| {
+                let y = key[i] as usize - 65;
+                TABULA_RECTA[y].iter().position(|&j| j == c).unwrap() as u8 + 65
+            })
+            .collect();
+
+        String::from_utf8(ptext).unwrap()
+    }
 }

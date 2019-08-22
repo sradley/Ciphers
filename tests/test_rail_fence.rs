@@ -7,7 +7,7 @@ fn encipher_small() {
     let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     let rail_fence = RailFence::new(4);
 
-    let ctext = rail_fence.encipher(ptext, 4);
+    let ctext = rail_fence.encipher(ptext,);
     assert_eq!(ctext, "DTTFSEDHSWOTATFNEAALHCLEELEE");
 }
 
@@ -17,7 +17,7 @@ fn decipher_small() {
     let ctext = String::from("DTTFSEDHSWOTATFNEAALHCLEELEE");
     let rail_fence = RailFence::new(4);
 
-    let ptext = rail_fence.decipher(ctext, 4);
+    let ptext = rail_fence.decipher(ctext);
     assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
@@ -27,7 +27,7 @@ fn encipher_large() {
     let ptext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     let rail_fence = RailFence::new(6);
 
-    let ctext = rail_fence.encipher(ptext, 6);
+    let ctext = rail_fence.encipher(ptext);
     assert_eq!(
         ctext,
         "AKUEOYBJLTVDFNPXZCIMSWCGMQWDHNRXBHLRVEGOQYAIKSUFPZJT"
@@ -40,7 +40,7 @@ fn decipher_large() {
     let ctext = String::from("AKUEOYBJLTVDFNPXZCIMSWCGMQWDHNRXBHLRVEGOQYAIKSUFPZJT");
     let rail_fence = RailFence::new(6);
 
-    let ptext = rail_fence.decipher(ctext, 6);
+    let ptext = rail_fence.decipher(ctext);
     assert_eq!(
         ptext,
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
