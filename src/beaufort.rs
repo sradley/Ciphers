@@ -31,7 +31,7 @@ impl Cipher for Beaufort {
             .bytes()
             .enumerate()
             .map(|(i, c)| {
-                let y = c as usize - 'A' as usize;
+                let y = c as usize - 65;
                 let x = TABULA_RECTA[y]
                     .iter()
                     .position(|&j| j == key[i % key.len()])

@@ -33,7 +33,7 @@ impl Cipher for Affine {
     fn encipher(&self, ptext: String) -> String {
         let ctext = ptext
             .bytes()
-            .map(move |c| ((self.a * (c as i32 - 'A' as i32) + self.b) % 26) as u8 + 'A' as u8)
+            .map(move |c| ((self.a * (c as i32 - 65) + self.b) % 26) as u8 + 65)
             .collect();
 
         String::from_utf8(ctext).unwrap()
@@ -56,9 +56,7 @@ impl Cipher for Affine {
 
         let ptext = ctext
             .bytes()
-            .map(move |c| {
-                (((a_inv * (c as i32 - 'A' as i32 - self.b)) % 26 + 26) % 26) as u8 + 'A' as u8
-            })
+            .map(move |c| (((a_inv * (c as i32 - 65 - self.b)) % 26 + 26) % 26) as u8 + 65)
             .collect();
 
         String::from_utf8(ptext).unwrap()

@@ -1,85 +1,82 @@
-use ciphers::caesar;
+use ciphers::Cipher;
+use ciphers::caesar::Caesar;
 
-/// `cipher_rot1_small` test function ...
+/// `encipher_rot1_small` test function ...
 #[test]
-fn cipher_rot1_small() {
-    let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+fn encipher_rot1_small() {
+    let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+    let caesar = Caesar::new(1);
 
-    let ciphertext = caesar::cipher(plaintext, 1);
-    assert_eq!(ciphertext, "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
+    let ctext = caesar.encipher(ptext);
+    assert_eq!(ctext, "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
 }
 
 /// `decipher_rot1_small` test function ...
 #[test]
 fn decipher_rot1_small() {
-    let ciphertext = String::from("EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
+    let ctext = String::from("EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
+    let caesar = Caesar::new(1);
 
-    let plaintext = caesar::decipher(ciphertext, 1);
-    assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    let ptext = caesar.decipher(ctext);
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `test_rot25_small` test function ...
+/// `encipher_rot25_small` test function ...
 #[test]
-fn cipher_rot25_small() {
-    let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+fn encipher_rot25_small() {
+    let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+    let caesar = Caesar::new(25);
 
-    let ciphertext = caesar::cipher(plaintext, 25);
-    assert_eq!(ciphertext, "CDEDMCSGDDZRSVZKKNESGDBZRSKD");
+    let ctext = caesar.encipher(ptext);
+    assert_eq!(ctext, "CDEDMCSGDDZRSVZKKNESGDBZRSKD");
 }
 
 /// `decipher_rot25_small` test function ...
 #[test]
 fn decipher_rot25_small() {
-    let ciphertext = String::from("CDEDMCSGDDZRSVZKKNESGDBZRSKD");
+    let ctext = String::from("CDEDMCSGDDZRSVZKKNESGDBZRSKD");
+    let caesar = Caesar::new(25);
 
-    let plaintext = caesar::decipher(ciphertext, 25);
-    assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    let ptext = caesar.decipher(ctext);
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `cipher_rot1_large` test function ...
+/// `encipher_rot1_large` test function ...
 #[test]
-fn cipher_rot1_large() {
-    let plaintext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+fn encipher_rot1_large() {
+    let ptext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    let caesar = Caesar::new(1);
 
-    let ciphertext = caesar::cipher(plaintext, 1);
-    assert_eq!(
-        ciphertext,
-        "BCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZA"
-    );
+    let ctext = caesar.encipher(ptext);
+    assert_eq!(ctext, "BCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZA");
 }
 
 /// `decipher_rot1_large` test function ...
 #[test]
 fn decipher_rot1_large() {
-    let ciphertext = String::from("BCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZA");
+    let ctext = String::from("BCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZA");
+    let caesar = Caesar::new(1);
 
-    let plaintext = caesar::decipher(ciphertext, 1);
-    assert_eq!(
-        plaintext,
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    );
+    let ptext = caesar.decipher(ctext);
+    assert_eq!(ptext, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
 }
 
-/// `test_rot25_large` test function ...
+/// `encipher_rot25_large` test function ...
 #[test]
-fn cipher_rot25_large() {
-    let plaintext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+fn encipher_rot25_large() {
+    let ptext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    let caesar = Caesar::new(25);
 
-    let ciphertext = caesar::cipher(plaintext, 25);
-    assert_eq!(
-        ciphertext,
-        "ZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXY"
-    );
+    let ctext = caesar.encipher(ptext);
+    assert_eq!(ctext, "ZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXY");
 }
 
 /// `decipher_rot25_large` test function ...
 #[test]
 fn decipher_rot25_large() {
-    let ciphertext = String::from("ZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXY");
+    let ctext = String::from("ZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXY");
+    let caesar = Caesar::new(25);
 
-    let plaintext = caesar::decipher(ciphertext, 25);
-    assert_eq!(
-        plaintext,
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    );
+    let ptext = caesar.decipher(ctext);
+    assert_eq!(ptext, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
 }

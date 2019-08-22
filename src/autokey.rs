@@ -39,11 +39,11 @@ impl Cipher for Autokey {
             .enumerate()
             .map(|(i, c)| {
                 let y = match i {
-                    i if i < key.len() => key[i] as usize - 'A' as usize,
-                    _ => ptext[i - key.len()] as usize - 'A' as usize,
+                    i if i < key.len() => key[i] as usize - 65,
+                    _ => ptext[i - key.len()] as usize - 65,
                 };
 
-                TABULA_RECTA[y][*c as usize - 'A' as usize]
+                TABULA_RECTA[y][*c as usize - 65]
             })
             .collect();
 
@@ -70,11 +70,11 @@ impl Cipher for Autokey {
         let mut ptext: Vec<u8> = Vec::with_capacity(ctext.len());
         for (i, c) in ctext.iter().enumerate() {
             let y = match i {
-                i if i < key.len() => key[i] as usize - 'A' as usize,
-                _ => ptext[i - key.len()] as usize - 'A' as usize,
+                i if i < key.len() => key[i] as usize - 65,
+                _ => ptext[i - key.len()] as usize - 65,
             };
 
-            ptext.push(TABULA_RECTA[y].iter().position(|&j| j == *c).unwrap() as u8 + 'A' as u8);
+            ptext.push(TABULA_RECTA[y].iter().position(|&j| j == *c).unwrap() as u8 + 65);
         }
 
         String::from_utf8(ptext).unwrap()

@@ -2,50 +2,60 @@
 //!
 //! ...
 
-/// `cipher` function ...
-///
-/// ```
-/// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
-///
-/// let ciphertext = ciphers::caesar::cipher(plaintext, 1);
-/// assert_eq!(ciphertext, "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
-/// ```
-///
-/// ```
-/// let plaintext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
-///
-/// let ciphertext = ciphers::caesar::cipher(plaintext, 25);
-/// assert_eq!(ciphertext, "CDEDMCSGDDZRSVZKKNESGDBZRSKD");
-/// ```
-pub fn cipher(plaintext: String, rotations: u8) -> String {
-    let plaintext = plaintext
-        .bytes()
-        .map(move |c| (c + rotations - 'A' as u8) % 26 + 'A' as u8)
-        .collect();
+use crate::Cipher;
 
-    String::from_utf8(plaintext).unwrap()
+/// `Caesar` struct ...
+pub struct Caesar {
+    key: u8,
 }
 
-/// `decipher` function ...
-///
-/// ```
-/// let ciphertext = String::from("EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
-///
-/// let plaintext = ciphers::caesar::decipher(ciphertext, 1);
-/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
-/// ```
-///
-/// ```
-/// let ciphertext = String::from("CDEDMCSGDDZRSVZKKNESGDBZRSKD");
-///
-/// let plaintext = ciphers::caesar::decipher(ciphertext, 25);
-/// assert_eq!(plaintext, "DEFENDTHEEASTWALLOFTHECASTLE");
-/// ```
-pub fn decipher(ciphertext: String, rotations: u8) -> String {
-    let ciphertext = ciphertext
-        .bytes()
-        .map(move |c| (c + (26 - rotations) - 'A' as u8) % 26 + 'A' as u8)
-        .collect();
+impl Caesar {
+    /// `Caesar` constructor ...
+    pub fn new(key: u8) -> Self {
+        Self { key }
+    }
+}
 
-    String::from_utf8(ciphertext).unwrap()
+impl Cipher for Caesar {
+    /// `encipher` method ...
+    /// 
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::caesar::Caesar;
+    /// 
+    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
+    /// let caesar = Caesar::new(1);
+    ///
+    /// let ctext = caesar.encipher(ptext);
+    /// assert_eq!(ctext, "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
+    /// ```
+    fn encipher(&self, ptext: String) -> String {
+        let ctext = ptext
+            .bytes()
+            .map(move |c| (c + self.key - 65) % 26 + 65)
+            .collect();
+
+        String::from_utf8(ctext).unwrap()
+    }
+
+    /// `decipher` method ...
+    /// 
+    /// ```
+    /// use ciphers::Cipher;
+    /// use ciphers::caesar::Caesar;
+    /// 
+    /// let ctext = String::from("EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
+    /// let caesar = Caesar::new(1);
+    ///
+    /// let ptext = caesar.decipher(ctext);
+    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// ```
+    fn decipher(&self, ctext: String) -> String {
+        let ptext = ctext
+            .bytes()
+            .map(move |c| (c + (26 - self.key) - 65) % 26 + 65)
+            .collect();
+
+        String::from_utf8(ptext).unwrap()
+    }
 }
