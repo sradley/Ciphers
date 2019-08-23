@@ -1,4 +1,4 @@
-# Ciphers
+# Ciphers v0.1.0
 
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![crates.io](https://meritbadge.herokuapp.com/ciphers)](https://crates.io/crates/ciphers)
@@ -7,7 +7,7 @@
 Ciphers is a Rust library that provides implementations of many different
 classical ciphers.
 
-**Get started** by looking at the [documentation](https://docs.rs/ciphers)
+**Get started** by looking at the [documentation](https://docs.rs/ciphers).
 
 ## 1. Supported Ciphers
 There are currently **16 different supported ciphers**.
