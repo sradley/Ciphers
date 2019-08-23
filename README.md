@@ -54,7 +54,7 @@ plaintext:  SOMEEXAMPLETEXTHERE
 ```
 
 ## 4. To be Implemented
-There are currently 6 different ciphers to be implemented.
+There are currently **6 different ciphers to be implemented**.
 
 | Transposition | Monoalphabetic | Polyalphabetic | Polygraphic | Other                 |
 | ------------- | -------------- | -------------- | ----------- | --------------------- |
