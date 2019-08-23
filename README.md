@@ -62,8 +62,8 @@ There are currently **6 different ciphers to be implemented**.
 |               |                |                |             | Trifid                |
 |               |                |                |             | Straddle Checkerboard |
 
-## 5. Known Issues
- * Very little in the way of input validation.
- * Can't handle lowercase characters.
+## 5. Backlog
+ * Input validation.
+ * Handling lowercase characters.
  * The Columnar Transposition cipher can't deal with repeated letters in its
    keyword.
