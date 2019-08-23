@@ -4,33 +4,27 @@ use ciphers::Cipher;
 /// `encipher_small` test function ...
 #[test]
 fn encipher_small() {
-    let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
-    let key = String::from("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
-    let running_key = RunningKey::new(key);
+    let running_key = RunningKey::new("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
 
-    let ctext = running_key.encipher(ptext);
+    let ctext = running_key.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     assert_eq!(ctext, "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
 }
 
 /// `decipher_small` test function ...
 #[test]
 fn decipher_small() {
-    let ctext = String::from("KSBHBHLALIDMVGKYZKYAHXUAAWGM");
-    let key = String::from("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
-    let running_key = RunningKey::new(key);
+    let running_key = RunningKey::new("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
 
-    let ptext = running_key.decipher(ctext);
+    let ptext = running_key.decipher("KSBHBHLALIDMVGKYZKYAHXUAAWGM");
     assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_large` test function ...
 #[test]
 fn encipher_large() {
-    let ptext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
-    let key = String::from("ZNNOOPPQQRRSSBCEFHIKLABDEGZNNOOPPQQRRSSBCEFHIKLABDEGA");
-    let running_key = RunningKey::new(key);
+    let running_key = RunningKey::new("ZNNOOPPQQRRSSBCEFHIKLABDEGZNNOOPPQQRRSSBCEFHIKLABDEGA");
 
-    let ctext = running_key.encipher(ptext);
+    let ctext = running_key.encipher("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     assert_eq!(
         ctext,
         "ZOPRSUVXYABDEOQTVYADFVXACFZOPRSUVXYABDEOQTVYADFVXACF"
@@ -40,11 +34,9 @@ fn encipher_large() {
 /// `decipher_large` test function ...
 #[test]
 fn decipher_large() {
-    let ctext = String::from("ZOPRSUVXYABDEOQTVYADFVXACFZOPRSUVXYABDEOQTVYADFVXACF");
-    let key = String::from("ZNNOOPPQQRRSSBCEFHIKLABDEGZNNOOPPQQRRSSBCEFHIKLABDEGA");
-    let running_key = RunningKey::new(key);
+    let running_key = RunningKey::new("ZNNOOPPQQRRSSBCEFHIKLABDEGZNNOOPPQQRRSSBCEFHIKLABDEGA");
 
-    let ptext = running_key.decipher(ctext);
+    let ptext = running_key.decipher("ZOPRSUVXYABDEOQTVYADFVXACFZOPRSUVXYABDEOQTVYADFVXACF");
     assert_eq!(
         ptext,
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"

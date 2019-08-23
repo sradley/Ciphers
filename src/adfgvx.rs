@@ -14,9 +14,12 @@ pub struct ADFGVX {
 
 impl ADFGVX {
     /// `ADFGVX` constructor ...
-    pub fn new(key: String, keyword: String) -> Self {
+    pub fn new(key: &str, keyword: &str) -> Self {
         assert_eq!(key.len(), 36);
-        Self { key, keyword }
+        Self {
+            key: String::from(key),
+            keyword: String::from(keyword),
+        }
     }
 }
 
@@ -27,18 +30,16 @@ impl Cipher for ADFGVX {
     /// use ciphers::Cipher;
     /// use ciphers::adfgvx::ADFGVX;
     ///
-    /// let key = String::from("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8");
-    /// let keyword = String::from("GERMAN");
-    /// let adfgvx = ADFGVX::new(key, keyword);
+    /// let adfgvx = ADFGVX::new("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8", "GERMAN");
     ///
-    /// let ctext = adfgvx.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
+    /// let ctext = adfgvx.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     /// assert_eq!(ctext, "FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX");
     /// ```
-    fn encipher(&self, ptext: String) -> String {
-        let ps = PolybiusSquare::new(self.key.clone(), String::from("ADFGVX"));
-        let ct = ColumnarTransposition::new(self.keyword.clone());
+    fn encipher(&self, ptext: &str) -> String {
+        let ps = PolybiusSquare::new(&self.key, "ADFGVX");
+        let ct = ColumnarTransposition::new(&self.keyword);
 
-        ct.encipher(ps.encipher(ptext))
+        ct.encipher(&ps.encipher(ptext))
     }
 
     /// `decipher` method ...
@@ -47,17 +48,15 @@ impl Cipher for ADFGVX {
     /// use ciphers::Cipher;
     /// use ciphers::adfgvx::ADFGVX;
     ///
-    /// let key = String::from("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8");
-    /// let keyword = String::from("GERMAN");
-    /// let adfgvx = ADFGVX::new(key, keyword);
+    /// let adfgvx = ADFGVX::new("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8", "GERMAN");
     ///
-    /// let ptext = adfgvx.decipher(String::from("FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX"));
+    /// let ptext = adfgvx.decipher("FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX");
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
-        let ps = PolybiusSquare::new(self.key.clone(), String::from("ADFGVX"));
-        let ct = ColumnarTransposition::new(self.keyword.clone());
+    fn decipher(&self, ctext: &str) -> String {
+        let ps = PolybiusSquare::new(&self.key, "ADFGVX");
+        let ct = ColumnarTransposition::new(&self.keyword);
 
-        ps.decipher(ct.decipher(ctext))
+        ps.decipher(&ct.decipher(ctext))
     }
 }

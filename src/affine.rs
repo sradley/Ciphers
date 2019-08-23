@@ -26,10 +26,10 @@ impl Cipher for Affine {
     ///
     /// let affine = Affine::new(7, 11);
     ///
-    /// let ctext = affine.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
+    /// let ctext = affine.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     /// assert_eq!(ctext, "GNUNYGOINNLHOJLKKFUOINZLHOKN");
     /// ```
-    fn encipher(&self, ptext: String) -> String {
+    fn encipher(&self, ptext: &str) -> String {
         let ctext = ptext
             .bytes()
             .map(move |c| ((self.a * (c as i32 - 65) + self.b) % 26) as u8 + 65)
@@ -40,16 +40,16 @@ impl Cipher for Affine {
 
     /// `decipher` method ...
     ///
-    /// ```
+    /// ```W
     /// use ciphers::Cipher;
     /// use ciphers::affine::Affine;
     ///
     /// let affine = Affine::new(7, 11);
     ///
-    /// let ptext = affine.decipher(String::from("GNUNYGOINNLHOJLKKFUOINZLHOKN"));
+    /// let ptext = affine.decipher("GNUNYGOINNLHOJLKKFUOINZLHOKN");
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
+    fn decipher(&self, ctext: &str) -> String {
         let a_inv = invmod(self.a, 26).unwrap();
 
         let ptext = ctext

@@ -4,12 +4,9 @@ use ciphers::Cipher;
 /// `encipher_small` test function ...
 #[test]
 fn encipher_small() {
-    let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
-    let key = String::from("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8");
-    let keyword = String::from("GERMAN");
-    let adfgvx = ADFGVX::new(key, keyword);
+    let adfgvx = ADFGVX::new("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8", "GERMAN");
 
-    let ctext = adfgvx.encipher(ptext);
+    let ctext = adfgvx.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     assert_eq!(
         ctext,
         "FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX"
@@ -19,24 +16,18 @@ fn encipher_small() {
 /// `decipher_small` test function ...
 #[test]
 fn decipher_small() {
-    let ctext = String::from("FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX");
-    let key = String::from("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8");
-    let keyword = String::from("GERMAN");
-    let adfgvx = ADFGVX::new(key, keyword);
+    let adfgvx = ADFGVX::new("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8", "GERMAN");
 
-    let ptext = adfgvx.decipher(ctext);
+    let ptext = adfgvx.decipher("FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX");
     assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_large` test function ...
 #[test]
 fn encipher_large() {
-    let ptext = String::from("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
-    let key = String::from("KNGC3FWOAEQ1ZYXBP5LT0U2684SJ97VDHIRM");
-    let keyword = String::from("ABCDEFGHIJKLMN");
-    let adfgvx = ADFGVX::new(key, keyword);
+    let adfgvx = ADFGVX::new("KNGC3FWOAEQ1ZYXBP5LT0U2684SJ97VDHIRM", "ABCDEFGHIJKLMN");
 
-    let ctext = adfgvx.encipher(ptext);
+    let ctext = adfgvx.encipher("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
     assert_eq!(
         ctext,
         "DXDXAXDFFFDAGGVFFXFDXAXFGGVADAVDAXDFDGVFGGVFGAFAXAXFAXGDAVDXXDDGVFAAGGAFAFDGAXGDXDXXXDFFDA\
@@ -47,15 +38,12 @@ fn encipher_large() {
 /// `decipher_large` test function ...
 #[test]
 fn decipher_large() {
-    let ctext = String::from(
+    let adfgvx = ADFGVX::new("KNGC3FWOAEQ1ZYXBP5LT0U2684SJ97VDHIRM", "ABCDEFGHIJKLMN");
+
+    let ptext = adfgvx.decipher(
         "DXDXAXDFFFDAGGVFFXFDXAXFGGVADAVDAXDFDGVFGGVFGAFAXAXFAXGDAVDXXDDGVFAAGGAFAFDGAXGDXDXXXDFFDA\
         AAGFXFDFDGGGVA"
     );
-    let key = String::from("KNGC3FWOAEQ1ZYXBP5LT0U2684SJ97VDHIRM");
-    let keyword = String::from("ABCDEFGHIJKLMN");
-    let adfgvx = ADFGVX::new(key, keyword);
-
-    let ptext = adfgvx.decipher(ctext);
     assert_eq!(
         ptext,
         "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"

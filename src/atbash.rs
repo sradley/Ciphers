@@ -23,10 +23,10 @@ impl Cipher for Atbash {
     ///
     /// let atbash = Atbash::new();
     ///
-    /// let ctext = atbash.encipher(String::from("ATTACKATDAWN"));
+    /// let ctext = atbash.encipher("ATTACKATDAWN");
     /// assert_eq!(ctext, "ZGGZXPZGWZDM");
     /// ```
-    fn encipher(&self, ptext: String) -> String {
+    fn encipher(&self, ptext: &str) -> String {
         let ctext = ptext.bytes().map(|c| 90 - c + 65).collect();
 
         String::from_utf8(ctext).unwrap()
@@ -40,10 +40,10 @@ impl Cipher for Atbash {
     ///
     /// let atbash = Atbash::new();
     ///
-    /// let ptext = atbash.decipher(String::from("ZGGZXPZGWZDM"));
+    /// let ptext = atbash.decipher("ZGGZXPZGWZDM");
     /// assert_eq!(ptext, "ATTACKATDAWN");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
+    fn decipher(&self, ctext: &str) -> String {
         self.encipher(ctext)
     }
 }

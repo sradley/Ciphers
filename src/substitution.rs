@@ -11,9 +11,11 @@ pub struct Substitution {
 
 impl Substitution {
     /// `Substitution` constructor ...
-    pub fn new(key: String) -> Self {
+    pub fn new(key: &str) -> Self {
         assert_eq!(key.len(), 26);
-        Self { key }
+        Self {
+            key: String::from(key),
+        }
     }
 }
 
@@ -24,13 +26,12 @@ impl Cipher for Substitution {
     /// use ciphers::Cipher;
     /// use ciphers::substitution::Substitution;
     ///
-    /// let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
-    /// let substitution = Substitution::new(key);
+    /// let substitution = Substitution::new("PHQGIUMEAYLNOFDXJKRCVSTZWB");
     ///
-    /// let ctext = substitution.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
+    /// let ctext = substitution.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     /// assert_eq!(ctext, "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
     /// ```
-    fn encipher(&self, ptext: String) -> String {
+    fn encipher(&self, ptext: &str) -> String {
         let key = self.key.as_bytes();
 
         let ctext = ptext.bytes().map(move |c| key[(c - 65) as usize]).collect();
@@ -44,13 +45,12 @@ impl Cipher for Substitution {
     /// use ciphers::Cipher;
     /// use ciphers::substitution::Substitution;
     ///
-    /// let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
-    /// let substitution = Substitution::new(key);
+    /// let substitution = Substitution::new("PHQGIUMEAYLNOFDXJKRCVSTZWB");
     ///
-    /// let ptext = substitution.decipher(String::from("GIUIFGCEIIPRCTPNNDUCEIQPRCNI"));
+    /// let ptext = substitution.decipher("GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
+    fn decipher(&self, ctext: &str) -> String {
         let ptext = ctext
             .bytes()
             .map(move |c| self.key.find(move |i| i == c as char).unwrap() as u8 + 65)

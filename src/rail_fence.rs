@@ -25,10 +25,10 @@ impl Cipher for RailFence {
     ///
     /// let rail_fence = RailFence::new(4);
     ///
-    /// let ctext = rail_fence.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
+    /// let ctext = rail_fence.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     /// assert_eq!(ctext, "DTTFSEDHSWOTATFNEAALHCLEELEE");
     /// ```
-    fn encipher(&self, ptext: String) -> String {
+    fn encipher(&self, ptext: &str) -> String {
         let mut ctext = Vec::with_capacity(ptext.len());
         let ptext: Vec<u8> = ptext.bytes().collect();
 
@@ -66,13 +66,12 @@ impl Cipher for RailFence {
     /// use ciphers::Cipher;
     /// use ciphers::rail_fence::RailFence;
     ///
-    /// let ctext = String::from("DTTFSEDHSWOTATFNEAALHCLEELEE");
     /// let rail_fence = RailFence::new(4);
     ///
-    /// let ptext = rail_fence.decipher(ctext);
+    /// let ptext = rail_fence.decipher("DTTFSEDHSWOTATFNEAALHCLEELEE");
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
+    fn decipher(&self, ctext: &str) -> String {
         let mut ptext = vec![0u8; ctext.len()];
         let ctext: Vec<u8> = ctext.bytes().collect();
         let mut k = 0usize;

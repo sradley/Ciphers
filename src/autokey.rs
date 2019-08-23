@@ -11,8 +11,10 @@ pub struct Autokey {
 
 impl Autokey {
     /// `Autokey` constructor ...
-    pub fn new(key: String) -> Self {
-        Self { key }
+    pub fn new(key: &str) -> Self {
+        Self {
+            key: String::from(key),
+        }
     }
 }
 
@@ -23,13 +25,12 @@ impl Cipher for Autokey {
     /// use ciphers::Cipher;
     /// use ciphers::autokey::Autokey;
     ///
-    /// let key = String::from("FORTIFICATION");
-    /// let autokey = Autokey::new(key);
+    /// let autokey = Autokey::new("FORTIFICATION");
     ///
-    /// let ctext = autokey.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
+    /// let ctext = autokey.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     /// assert_eq!(ctext, "ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
     /// ```
-    fn encipher(&self, ptext: String) -> String {
+    fn encipher(&self, ptext: &str) -> String {
         let key = self.key.as_bytes();
         let ptext: Vec<u8> = ptext.bytes().collect();
 
@@ -55,13 +56,12 @@ impl Cipher for Autokey {
     /// use ciphers::Cipher;
     /// use ciphers::autokey::Autokey;
     ///
-    /// let key = String::from("FORTIFICATION");
-    /// let autokey = Autokey::new(key);
+    /// let autokey = Autokey::new("FORTIFICATION");
     ///
-    /// let ptext = autokey.decipher(String::from("ISWXVIBJEXIGGZEQPBIMOIGAKMHE"));
+    /// let ptext = autokey.decipher("ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
+    fn decipher(&self, ctext: &str) -> String {
         let key = self.key.as_bytes();
         let ctext: Vec<u8> = ctext.bytes().collect();
 

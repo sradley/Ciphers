@@ -14,9 +14,12 @@ pub struct ADFGX {
 
 impl ADFGX {
     /// `ADFGX` constructor ...
-    pub fn new(key: String, keyword: String) -> Self {
+    pub fn new(key: &str, keyword: &str) -> Self {
         assert_eq!(key.len(), 25);
-        Self { key, keyword }
+        Self {
+            key: String::from(key),
+            keyword: String::from(keyword),
+        }
     }
 }
 
@@ -27,18 +30,16 @@ impl Cipher for ADFGX {
     /// use ciphers::Cipher;
     /// use ciphers::adfgx::ADFGX;
     ///
-    /// let key = String::from("PHQGMEAYNOFDXKRCVSZWBUTIL");
-    /// let keyword = String::from("GERMAN");
-    /// let adfgx = ADFGX::new(key, keyword);
+    /// let adfgx = ADFGX::new("PHQGMEAYNOFDXKRCVSZWBUTIL", "GERMAN");
     ///
-    /// let ctext = adfgx.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
+    /// let ctext = adfgx.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     /// assert_eq!(ctext, "FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
     /// ```
-    fn encipher(&self, ptext: String) -> String {
-        let ps = PolybiusSquare::new(self.key.clone(), String::from("ADFGX"));
-        let ct = ColumnarTransposition::new(self.keyword.clone());
+    fn encipher(&self, ptext: &str) -> String {
+        let ps = PolybiusSquare::new(&self.key, "ADFGX");
+        let ct = ColumnarTransposition::new(&self.keyword);
 
-        ct.encipher(ps.encipher(ptext))
+        ct.encipher(&ps.encipher(ptext))
     }
 
     /// `decipher` method ...
@@ -47,17 +48,15 @@ impl Cipher for ADFGX {
     /// use ciphers::Cipher;
     /// use ciphers::adfgx::ADFGX;
     ///
-    /// let key = String::from("PHQGMEAYNOFDXKRCVSZWBUTIL");
-    /// let keyword = String::from("GERMAN");
-    /// let adfgx = ADFGX::new(key, keyword);
+    /// let adfgx = ADFGX::new("PHQGMEAYNOFDXKRCVSZWBUTIL", "GERMAN");
     ///
-    /// let ptext = adfgx.decipher(String::from("FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX"));
+    /// let ptext = adfgx.decipher("FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
-        let ps = PolybiusSquare::new(self.key.clone(), String::from("ADFGX"));
-        let ct = ColumnarTransposition::new(self.keyword.clone());
+    fn decipher(&self, ctext: &str) -> String {
+        let ps = PolybiusSquare::new(&self.key, "ADFGX");
+        let ct = ColumnarTransposition::new(&self.keyword);
 
-        ps.decipher(ct.decipher(ctext))
+        ps.decipher(&ct.decipher(ctext))
     }
 }

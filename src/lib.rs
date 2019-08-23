@@ -26,10 +26,10 @@ pub mod vigenere;
 /// `Cipher` trait ...
 pub trait Cipher {
     /// `encipher` method ...
-    fn encipher(&self, ptext: String) -> String;
+    fn encipher(&self, ptext: &str) -> String;
 
     /// `decipher` method ...
-    fn decipher(&self, ctext: String) -> String;
+    fn decipher(&self, ctext: &str) -> String;
 }
 
 static TABULA_RECTA: [[u8; 26]; 26] = [

@@ -36,15 +36,14 @@ use ciphers::Cipher;
 use ciphers::vigenere::Vigenere;
 
 fn main() {
-    let vigenere = Vigenere::new(String::from("EXAMPLEKEY"));
-    let ptext = String::from("SOMEEXAMPLETEXTHERE");
+    let vigenere = Vigenere::new("EXAMPLEKEY");
 
     // encipher
-    let ctext = vigenere.encipher(ptext);
+    let ctext = vigenere.encipher("SOMEEXAMPLETEXTHERE");
     println!("ciphertext: {}", ctext);
 
     // decipher
-    let ptext = vigenere.decipher(ctext);
+    let ptext = vigenere.decipher(&ctext);
     println!("plaintext:  {}", ptext);
 }
 ```

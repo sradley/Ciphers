@@ -4,33 +4,27 @@ use ciphers::Cipher;
 /// `encipher_small` test function ...
 #[test]
 fn encipher_small() {
-    let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
-    let key = String::from("FORTIFICATION");
-    let beaufort = Beaufort::new(key);
+    let beaufort = Beaufort::new("FORTIFICATION");
 
-    let ctext = beaufort.encipher(ptext);
+    let ctext = beaufort.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     assert_eq!(ctext, "CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
 }
 
 /// `decipher_small` test function ...
 #[test]
 fn decipher_small() {
-    let ctext = String::from("CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
-    let key = String::from("FORTIFICATION");
-    let beaufort = Beaufort::new(key);
+    let beaufort = Beaufort::new("FORTIFICATION");
 
-    let ptext = beaufort.decipher(ctext);
+    let ptext = beaufort.decipher("CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
     assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_large` test function ...
 #[test]
 fn encipher_large() {
-    let ptext = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
-    let key = String::from("ZYXWVUTSRQPON");
-    let beaufort = Beaufort::new(key);
+    let beaufort = Beaufort::new("ZYXWVUTSRQPON");
 
-    let ctext = beaufort.encipher(ptext);
+    let ctext = beaufort.encipher("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     assert_eq!(
         ctext,
         "ZXVTRPNLJHFDBMKIGECAYWUSQOZXVTRPNLJHFDBMKIGECAYWUSQO"
@@ -40,11 +34,9 @@ fn encipher_large() {
 /// `decipher_large` test function ...
 #[test]
 fn decipher_large() {
-    let ctext = String::from("ZXVTRPNLJHFDBMKIGECAYWUSQOZXVTRPNLJHFDBMKIGECAYWUSQO");
-    let key = String::from("ZYXWVUTSRQPON");
-    let beaufort = Beaufort::new(key);
+    let beaufort = Beaufort::new("ZYXWVUTSRQPON");
 
-    let ptext = beaufort.decipher(ctext);
+    let ptext = beaufort.decipher("ZXVTRPNLJHFDBMKIGECAYWUSQOZXVTRPNLJHFDBMKIGECAYWUSQO");
     assert_eq!(
         ptext,
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"

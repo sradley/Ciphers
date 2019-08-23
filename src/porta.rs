@@ -27,8 +27,10 @@ pub struct Porta {
 
 impl Porta {
     /// `Porta` constructor
-    pub fn new(key: String) -> Self {
-        Self { key }
+    pub fn new(key: &str) -> Self {
+        Self {
+            key: String::from(key),
+        }
     }
 }
 
@@ -39,13 +41,12 @@ impl Cipher for Porta {
     /// use ciphers::Cipher;
     /// use ciphers::porta::Porta;
     ///
-    /// let key = String::from("FORTIFICATION");
-    /// let porta = Porta::new(key);
+    /// let porta = Porta::new("FORTIFICATION");
     ///
-    /// let ctext = porta.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
+    /// let ctext = porta.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     /// assert_eq!(ctext, "SYNNJSCVRNRLAHUTUKUCVRYRLANY");
     /// ```
-    fn encipher(&self, ptext: String) -> String {
+    fn encipher(&self, ptext: &str) -> String {
         let key = self.key.as_bytes();
 
         let ctext = ptext
@@ -69,13 +70,12 @@ impl Cipher for Porta {
     /// use ciphers::Cipher;
     /// use ciphers::porta::Porta;
     ///
-    /// let key = String::from("FORTIFICATION");
-    /// let porta = Porta::new(key);
+    /// let porta = Porta::new("FORTIFICATION");
     ///
-    /// let ptext = porta.decipher(String::from("SYNNJSCVRNRLAHUTUKUCVRYRLANY"));
+    /// let ptext = porta.decipher("SYNNJSCVRNRLAHUTUKUCVRYRLANY");
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
+    fn decipher(&self, ctext: &str) -> String {
         self.encipher(ctext)
     }
 }

@@ -11,8 +11,10 @@ pub struct RunningKey {
 
 impl RunningKey {
     /// `RunningKey` constructor ...
-    pub fn new(key: String) -> Self {
-        Self { key }
+    pub fn new(key: &str) -> Self {
+        Self {
+            key: String::from(key),
+        }
     }
 }
 
@@ -23,13 +25,12 @@ impl Cipher for RunningKey {
     /// use ciphers::Cipher;
     /// use ciphers::running_key::RunningKey;
     ///
-    /// let key = String::from("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
-    /// let running_key = RunningKey::new(key);
+    /// let running_key = RunningKey::new("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
     ///
-    /// let ctext = running_key.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
+    /// let ctext = running_key.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     /// assert_eq!(ctext, "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
     /// ```
-    fn encipher(&self, ptext: String) -> String {
+    fn encipher(&self, ptext: &str) -> String {
         assert!(self.key.len() >= ptext.len());
 
         let key = self.key.as_bytes();
@@ -54,13 +55,12 @@ impl Cipher for RunningKey {
     /// use ciphers::Cipher;
     /// use ciphers::running_key::RunningKey;
     ///
-    /// let key = String::from("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
-    /// let running_key = RunningKey::new(key);
+    /// let running_key = RunningKey::new("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
     ///
-    /// let ptext = running_key.decipher(String::from("KSBHBHLALIDMVGKYZKYAHXUAAWGM"));
+    /// let ptext = running_key.decipher("KSBHBHLALIDMVGKYZKYAHXUAAWGM");
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
+    fn decipher(&self, ctext: &str) -> String {
         assert!(self.key.len() >= ctext.len());
 
         let key = self.key.as_bytes();

@@ -11,8 +11,10 @@ pub struct Vigenere {
 
 impl Vigenere {
     /// `Vigenere` constructor ...
-    pub fn new(key: String) -> Self {
-        Self { key }
+    pub fn new(key: &str) -> Self {
+        Self {
+            key: String::from(key),
+        }
     }
 }
 
@@ -23,13 +25,12 @@ impl Cipher for Vigenere {
     /// use ciphers::Cipher;
     /// use ciphers::vigenere::Vigenere;
     ///
-    /// let key = String::from("FORTIFICATION");
-    /// let vigenere = Vigenere::new(key);
+    /// let vigenere = Vigenere::new("FORTIFICATION");
     ///
-    /// let ctext = vigenere.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
+    /// let ctext = vigenere.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     /// assert_eq!(ctext, "ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
     /// ```
-    fn encipher(&self, ptext: String) -> String {
+    fn encipher(&self, ptext: &str) -> String {
         let key = self.key.as_bytes();
 
         let ctext = ptext
@@ -52,13 +53,12 @@ impl Cipher for Vigenere {
     /// use ciphers::Cipher;
     /// use ciphers::vigenere::Vigenere;
     ///
-    /// let key = String::from("FORTIFICATION");
-    /// let vigenere = Vigenere::new(key);
+    /// let vigenere = Vigenere::new("FORTIFICATION");
     ///
-    /// let ptext = vigenere.decipher(String::from("ISWXVIBJEXIGGBOCEWKBJEVIGGQS"));
+    /// let ptext = vigenere.decipher("ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
+    fn decipher(&self, ctext: &str) -> String {
         let key = self.key.as_bytes();
 
         let ptext = ctext

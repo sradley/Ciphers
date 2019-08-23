@@ -19,10 +19,13 @@ pub struct FourSquare {
 
 impl FourSquare {
     /// `FourSquare` constructor ...
-    pub fn new(key1: String, key2: String) -> Self {
+    pub fn new(key1: &str, key2: &str) -> Self {
         assert_eq!(key1.len(), 25);
         assert_eq!(key2.len(), 25);
-        Self { key1, key2 }
+        Self {
+            key1: String::from(key1),
+            key2: String::from(key2),
+        }
     }
 }
 
@@ -33,14 +36,12 @@ impl Cipher for FourSquare {
     /// use ciphers::Cipher;
     /// use ciphers::four_square::FourSquare;
     ///
-    /// let key1 = String::from("ZGPTFOIHMUWDRCNYKEQAXVSBL");
-    /// let key2 = String::from("MFNBDCRHSAXYOGVITUEWLQZKP");
-    /// let four_square = FourSquare::new(key1, key2);
+    /// let four_square = FourSquare::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", "MFNBDCRHSAXYOGVITUEWLQZKP");
     ///
-    /// let ctext = four_square.encipher(String::from("ATTACKATDAWN"));
+    /// let ctext = four_square.encipher("ATTACKATDAWN");
     /// assert_eq!(ctext, "TIYBFHTIZBSY");
     /// ```
-    fn encipher(&self, ptext: String) -> String {
+    fn encipher(&self, ptext: &str) -> String {
         let mut ptext: Vec<u8> = ptext.bytes().collect();
         if ptext.len() % 2 != 0 {
             ptext.push(88);
@@ -70,14 +71,12 @@ impl Cipher for FourSquare {
     /// use ciphers::Cipher;
     /// use ciphers::four_square::FourSquare;
     ///
-    /// let key1 = String::from("ZGPTFOIHMUWDRCNYKEQAXVSBL");
-    /// let key2 = String::from("MFNBDCRHSAXYOGVITUEWLQZKP");
-    /// let four_square = FourSquare::new(key1, key2);
+    /// let four_square = FourSquare::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", "MFNBDCRHSAXYOGVITUEWLQZKP");
     ///
-    /// let ptext = four_square.decipher( String::from("TIYBFHTIZBSY"));
+    /// let ptext = four_square.decipher("TIYBFHTIZBSY");
     /// assert_eq!(ptext, "ATTACKATDAWN");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
+    fn decipher(&self, ctext: &str) -> String {
         assert_eq!(ctext.len() % 2, 0);
         let ctext = ctext.as_bytes();
 

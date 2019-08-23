@@ -11,8 +11,10 @@ pub struct Beaufort {
 
 impl Beaufort {
     /// `Beaufort` constructor ...
-    pub fn new(key: String) -> Self {
-        Self { key }
+    pub fn new(key: &str) -> Self {
+        Self {
+            key: String::from(key),
+        }
     }
 }
 
@@ -23,13 +25,12 @@ impl Cipher for Beaufort {
     /// use ciphers::Cipher;
     /// use ciphers::beaufort::Beaufort;
     ///
-    /// let key = String::from("FORTIFICATION");
-    /// let beaufort = Beaufort::new(key);
-    /// 
-    /// let ctext = beaufort.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
+    /// let beaufort = Beaufort::new("FORTIFICATION");
+    ///
+    /// let ctext = beaufort.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     /// assert_eq!(ctext, "CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
     /// ```
-    fn encipher(&self, ptext: String) -> String {
+    fn encipher(&self, ptext: &str) -> String {
         let key = self.key.as_bytes();
 
         let ctext = ptext
@@ -55,13 +56,12 @@ impl Cipher for Beaufort {
     /// use ciphers::Cipher;
     /// use ciphers::beaufort::Beaufort;
     ///
-    /// let key = String::from("FORTIFICATION");
-    /// let beaufort = Beaufort::new(key);
+    /// let beaufort = Beaufort::new("FORTIFICATION");
     ///
-    /// let ptext = beaufort.decipher(String::from("CKMPVCPVWPIWUJOGIUAPVWRIWUUK"));
+    /// let ptext = beaufort.decipher("CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
+    fn decipher(&self, ctext: &str) -> String {
         self.encipher(ctext)
     }
 }

@@ -14,9 +14,12 @@ pub struct PolybiusSquare {
 
 impl PolybiusSquare {
     /// `PolybiusSquare` constructor ...
-    pub fn new(key: String, chars: String) -> Self {
+    pub fn new(key: &str, chars: &str) -> Self {
         assert_eq!(key.len(), chars.len() * chars.len());
-        Self { key, chars }
+        Self {
+            key: String::from(key),
+            chars: String::from(chars),
+        }
     }
 }
 
@@ -27,14 +30,12 @@ impl Cipher for PolybiusSquare {
     /// use ciphers::Cipher;
     /// use ciphers::polybius_square::PolybiusSquare;
     ///
-    /// let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
-    /// let chars = String::from("ABCDE");
-    /// let ps = PolybiusSquare::new(key, chars);
+    /// let ps = PolybiusSquare::new("PHQGIUMEAYLNOFDXKRCVSTZWB", "ABCDE");
     ///
-    /// let ctext = ps.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
+    /// let ctext = ps.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     /// assert_eq!(ctext, "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
     /// ```
-    fn encipher(&self, ptext: String) -> String {
+    fn encipher(&self, ptext: &str) -> String {
         let chars = self.chars.as_bytes();
         let mut ctext: Vec<u8> = Vec::with_capacity(ptext.len());
 
@@ -54,14 +55,12 @@ impl Cipher for PolybiusSquare {
     /// use ciphers::Cipher;
     /// use ciphers::polybius_square::PolybiusSquare;
     ///
-    /// let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
-    /// let chars = String::from("ABCDE");
-    /// let ps = PolybiusSquare::new(key, chars);
+    /// let ps = PolybiusSquare::new("PHQGIUMEAYLNOFDXKRCVSTZWB", "ABCDE");
     ///
-    /// let ptext = ps.decipher(String::from("CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC"));
+    /// let ptext = ps.decipher("CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
+    fn decipher(&self, ctext: &str) -> String {
         assert_eq!(ctext.len() % 2, 0);
 
         let key = self.key.as_bytes();

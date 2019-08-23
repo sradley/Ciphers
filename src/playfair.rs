@@ -13,9 +13,11 @@ pub struct Playfair {
 
 impl Playfair {
     /// `Playfair` constructor ...
-    pub fn new(key: String) -> Self {
+    pub fn new(key: &str) -> Self {
         assert_eq!(key.len(), 25);
-        Self { key }
+        Self {
+            key: String::from(key),
+        }
     }
 }
 
@@ -26,13 +28,12 @@ impl Cipher for Playfair {
     /// use ciphers::Cipher;
     /// use ciphers::playfair::Playfair;
     ///
-    /// let key = String::from("ZGPTFOIHMUWDRCNYKEQAXVSBL");
-    /// let playfair = Playfair::new(key);
+    /// let playfair = Playfair::new("ZGPTFOIHMUWDRCNYKEQAXVSBL");
     ///
-    /// let ctext = playfair.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
+    /// let ctext = playfair.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     /// assert_eq!(ctext, "RKPAWRPMYSELZCLFXUZFRSNQBPSA");
     /// ```
-    fn encipher(&self, ptext: String) -> String {
+    fn encipher(&self, ptext: &str) -> String {
         let mut ptext: Vec<u8> = ptext.bytes().collect();
         if ptext.len() % 2 != 0 {
             ptext.push(88);
@@ -76,13 +77,12 @@ impl Cipher for Playfair {
     /// use ciphers::Cipher;
     /// use ciphers::playfair::Playfair;
     ///
-    /// let key = String::from("ZGPTFOIHMUWDRCNYKEQAXVSBL");
-    /// let playfair = Playfair::new(key);
+    /// let playfair = Playfair::new("ZGPTFOIHMUWDRCNYKEQAXVSBL");
     ///
-    /// let ptext = playfair.decipher(String::from("RKPAWRPMYSELZCLFXUZFRSNQBPSA"));
+    /// let ptext = playfair.decipher("RKPAWRPMYSELZCLFXUZFRSNQBPSA");
     /// assert_eq!(ptext, "DEFENDTHEXASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
+    fn decipher(&self, ctext: &str) -> String {
         let ctext = ctext.as_bytes();
         let key = self.key.as_bytes();
 

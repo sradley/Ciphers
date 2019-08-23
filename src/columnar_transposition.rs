@@ -12,8 +12,10 @@ pub struct ColumnarTransposition {
 
 impl ColumnarTransposition {
     /// `ColumnarTransposition` constructor ...
-    pub fn new(key: String) -> Self {
-        Self { key }
+    pub fn new(key: &str) -> Self {
+        Self {
+            key: String::from(key),
+        }
     }
 }
 
@@ -24,13 +26,12 @@ impl Cipher for ColumnarTransposition {
     /// use ciphers::Cipher;
     /// use ciphers::columnar_transposition::ColumnarTransposition;
     ///
-    /// let key = String::from("GERMAN");
-    /// let ct = ColumnarTransposition::new(key);
+    /// let ct = ColumnarTransposition::new("GERMAN");
     ///
-    /// let ctext = ct.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
+    /// let ctext = ct.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     /// assert_eq!(ctext, "NALCEHWTTDTTFSEELEEDSOAFEAHL")
     /// ```
-    fn encipher(&self, ptext: String) -> String {
+    fn encipher(&self, ptext: &str) -> String {
         let mut key: Vec<u8> = self.key.bytes().collect();
         let ptext = ptext.as_bytes();
         let mut matrix: HashMap<u8, Vec<u8>> = HashMap::with_capacity(key.len());
@@ -59,13 +60,12 @@ impl Cipher for ColumnarTransposition {
     /// use ciphers::Cipher;
     /// use ciphers::columnar_transposition::ColumnarTransposition;
     ///
-    /// let key = String::from("GERMAN");
-    /// let ct = ColumnarTransposition::new(key);
+    /// let ct = ColumnarTransposition::new("GERMAN");
     ///
-    /// let ptext = ct.decipher(String::from("NALCEHWTTDTTFSEELEEDSOAFEAHL"));
+    /// let ptext = ct.decipher("NALCEHWTTDTTFSEELEEDSOAFEAHL");
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
+    fn decipher(&self, ctext: &str) -> String {
         let key: Vec<u8> = self.key.bytes().collect();
         let ctext = ctext.as_bytes();
         let mut matrix: HashMap<u8, Vec<u8>> = HashMap::with_capacity(key.len());

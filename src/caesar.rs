@@ -25,10 +25,10 @@ impl Cipher for Caesar {
     ///
     /// let caesar = Caesar::new(1);
     ///
-    /// let ctext = caesar.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
+    /// let ctext = caesar.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     /// assert_eq!(ctext, "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
     /// ```
-    fn encipher(&self, ptext: String) -> String {
+    fn encipher(&self, ptext: &str) -> String {
         let ctext = ptext
             .bytes()
             .map(move |c| (c + self.key - 65) % 26 + 65)
@@ -45,10 +45,10 @@ impl Cipher for Caesar {
     ///
     /// let caesar = Caesar::new(1);
     ///
-    /// let ptext = caesar.decipher(String::from("EFGFOEUIFFBTUXBMMPGUIFDBTUMF"));
+    /// let ptext = caesar.decipher("EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: String) -> String {
+    fn decipher(&self, ctext: &str) -> String {
         let ptext = ctext
             .bytes()
             .map(move |c| (c + (26 - self.key) - 65) % 26 + 65)
