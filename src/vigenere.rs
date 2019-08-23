@@ -18,7 +18,7 @@
 //! > In the 19th century the scheme was misattributed to Blaise de Vigenère (1523 – 1596), and so
 //! acquired its present name.
 
-use crate::{Cipher, TABULA_RECTA};
+use crate::{Cipher, CipherResult, TABULA_RECTA};
 
 /// `Vigenere` struct contains the key for the Vigenere cipher, and implements the functionality of
 /// the `Cipher` trait using the Vigenere cipher method.
@@ -46,9 +46,9 @@ impl Cipher for Vigenere {
     /// let vigenere = Vigenere::new("FORTIFICATION");
     ///
     /// let ctext = vigenere.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    /// assert_eq!(ctext, "ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
+    /// assert_eq!(ctext.unwrap(), "ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
         let key = self.key.as_bytes();
 
@@ -63,7 +63,7 @@ impl Cipher for Vigenere {
             })
             .collect();
 
-        String::from_utf8(ctext).unwrap()
+        Ok(String::from_utf8(ctext).unwrap())
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the Vigenere cipher
@@ -75,9 +75,9 @@ impl Cipher for Vigenere {
     /// let vigenere = Vigenere::new("FORTIFICATION");
     ///
     /// let ptext = vigenere.decipher("ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
-    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         let ctext = ctext.to_ascii_uppercase();
         let key = self.key.as_bytes();
 
@@ -90,6 +90,6 @@ impl Cipher for Vigenere {
             })
             .collect();
 
-        String::from_utf8(ptext).unwrap()
+        Ok(String::from_utf8(ptext).unwrap())
     }
 }

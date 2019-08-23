@@ -14,9 +14,7 @@
 //! X. The letters were chosen deliberately because they are very different from one another in the
 //! Morse code. That reduced the possibility of operator error.
 
-use crate::columnar_transposition::ColumnarTransposition;
-use crate::polybius_square::PolybiusSquare;
-use crate::Cipher;
+use crate::{Cipher, PolybiusSquare, ColumnarTransposition, CipherResult};
 
 /// `ADFGVX` struct contains the key and keyword for the ADFGVX cipher, and implements the
 /// functionality of the `Cipher` trait using the ADFGVX cipher method.
@@ -47,13 +45,13 @@ impl Cipher for ADFGVX {
     /// let adfgvx = ADFGVX::new("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8", "GERMAN");
     ///
     /// let ctext = adfgvx.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    /// assert_eq!(ctext, "FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX");
+    /// assert_eq!(ctext.unwrap(), "FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX");
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         let ps = PolybiusSquare::new(&self.key, "ADFGVX");
         let ct = ColumnarTransposition::new(&self.keyword);
 
-        ct.encipher(&ps.encipher(ptext))
+        ct.encipher(&ps.encipher(ptext)?)
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the ADFGVX cipher
@@ -65,12 +63,12 @@ impl Cipher for ADFGVX {
     /// let adfgvx = ADFGVX::new("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8", "GERMAN");
     ///
     /// let ptext = adfgvx.decipher("FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX");
-    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         let ps = PolybiusSquare::new(&self.key, "ADFGVX");
         let ct = ColumnarTransposition::new(&self.keyword);
 
-        ps.decipher(&ct.decipher(ctext))
+        ps.decipher(&ct.decipher(ctext)?)
     }
 }

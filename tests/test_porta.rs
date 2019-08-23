@@ -6,7 +6,7 @@ fn encipher_small() {
     let porta = Porta::new("FORTIFICATION");
 
     let ctext = porta.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    assert_eq!(ctext, "SYNNJSCVRNRLAHUTUKUCVRYRLANY");
+    assert_eq!(ctext.unwrap(), "SYNNJSCVRNRLAHUTUKUCVRYRLANY");
 }
 
 /// `decipher_small` test function.
@@ -15,7 +15,7 @@ fn decipher_small() {
     let porta = Porta::new("FORTIFICATION");
 
     let ptext = porta.decipher("SYNNJSCVRNRLAHUTUKUCVRYRLANY");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_large` test function.
@@ -25,7 +25,7 @@ fn encipher_large() {
 
     let ctext = porta.encipher("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "ZNNOOPPQQRRSSBCEFHIKLABDEGZNNOOPPQQRRSSBCEFHIKLABDEG"
     );
 }
@@ -37,7 +37,7 @@ fn decipher_large() {
 
     let ptext = porta.decipher("ZNNOOPPQQRRSSBCEFHIKLABDEGZNNOOPPQQRRSSBCEFHIKLABDEG");
     assert_eq!(
-        ptext,
+        ptext.unwrap(),
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
@@ -48,7 +48,7 @@ fn encipher_lowercase() {
     let porta = Porta::new("fortification");
 
     let ctext = porta.encipher("defendtheeastwallofthecastle");
-    assert_eq!(ctext, "SYNNJSCVRNRLAHUTUKUCVRYRLANY");
+    assert_eq!(ctext.unwrap(), "SYNNJSCVRNRLAHUTUKUCVRYRLANY");
 }
 
 /// `decipher_lowercase` test function.
@@ -57,5 +57,5 @@ fn decipher_lowercase() {
     let porta = Porta::new("fortification");
 
     let ptext = porta.decipher("synnjscvrnrlahutukucvryrlany");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }

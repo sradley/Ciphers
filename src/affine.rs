@@ -14,7 +14,7 @@
 //! > As such, it has the weaknesses of all substitution ciphers. Each letter is enciphered with the
 //! function (ax + b) mod 26, where b is the magnitude of the shift.
 
-use crate::Cipher;
+use crate::{Cipher, CipherResult};
 
 /// `Affine` struct stores the two keys for the Affine cipher, and implements the functionality of
 /// the `Cipher` trait using the Affine cipher method.
@@ -41,9 +41,9 @@ impl Cipher for Affine {
     /// let affine = Affine::new(7, 11);
     ///
     /// let ctext = affine.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    /// assert_eq!(ctext, "GNUNYGOINNLHOJLKKFUOINZLHOKN");
+    /// assert_eq!(ctext.unwrap(), "GNUNYGOINNLHOJLKKFUOINZLHOKN");
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
 
         let ctext = ptext
@@ -51,7 +51,7 @@ impl Cipher for Affine {
             .map(move |c| ((self.a * (c as i32 - 65) + self.b) % 26) as u8 + 65)
             .collect();
 
-        String::from_utf8(ctext).unwrap()
+        Ok(String::from_utf8(ctext).unwrap())
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the Affine cipher
@@ -63,9 +63,9 @@ impl Cipher for Affine {
     /// let affine = Affine::new(7, 11);
     ///
     /// let ptext = affine.decipher("GNUNYGOINNLHOJLKKFUOINZLHOKN");
-    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         let ctext = ctext.to_ascii_uppercase();
         let a_inv = invmod(self.a, 26).unwrap();
 
@@ -74,7 +74,7 @@ impl Cipher for Affine {
             .map(move |c| (((a_inv * (c as i32 - 65 - self.b)) % 26 + 26) % 26) as u8 + 65)
             .collect();
 
-        String::from_utf8(ptext).unwrap()
+        Ok(String::from_utf8(ptext).unwrap())
     }
 }
 

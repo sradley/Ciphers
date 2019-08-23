@@ -10,7 +10,7 @@
 //!
 //! TODO: handle unwraps (i.e. when trying to find a character that's not in the square)
 
-use crate::Cipher;
+use crate::{Cipher, CipherResult};
 
 /// `PolybiusSquare` struct contains the key and specified characters for the Polybius Square
 /// cipher, and implements the functionality of the `Cipher` trait using the Polybius Square cipher
@@ -42,9 +42,9 @@ impl Cipher for PolybiusSquare {
     /// let ps = PolybiusSquare::new("PHQGIUMEAYLNOFDXKRCVSTZWB", "ABCDE");
     ///
     /// let ctext = ps.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    /// assert_eq!(ctext, "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
+    /// assert_eq!(ctext.unwrap(), "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
         let chars = self.chars.as_bytes();
         let mut ctext: Vec<u8> = Vec::with_capacity(ptext.len());
@@ -56,7 +56,7 @@ impl Cipher for PolybiusSquare {
             ctext.push(chars[i % chars.len()]);
         }
 
-        String::from_utf8(ctext).unwrap()
+        Ok(String::from_utf8(ctext).unwrap())
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the Polybius Square
@@ -68,9 +68,9 @@ impl Cipher for PolybiusSquare {
     /// let ps = PolybiusSquare::new("PHQGIUMEAYLNOFDXKRCVSTZWB", "ABCDE");
     ///
     /// let ptext = ps.decipher("CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
-    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         assert_eq!(ctext.len() % 2, 0);
         let ctext = ctext.to_ascii_uppercase();
 
@@ -85,6 +85,6 @@ impl Cipher for PolybiusSquare {
             ptext.push(key[y * self.chars.len() + x]);
         }
 
-        String::from_utf8(ptext).unwrap()
+        Ok(String::from_utf8(ptext).unwrap())
     }
 }

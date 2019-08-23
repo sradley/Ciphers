@@ -12,7 +12,7 @@
 //! permutation is defined by the alphabetical order of the letters in the keyword. In this case,
 //! the order would be "6 3 2 4 1 5".
 
-use crate::Cipher;
+use crate::{Cipher, CipherResult};
 use std::collections::HashMap;
 
 /// `ColumnarTransposition` struct contains the key for the Columnar Transposition cipher, and
@@ -42,10 +42,11 @@ impl Cipher for ColumnarTransposition {
     /// let ct = ColumnarTransposition::new("GERMAN");
     ///
     /// let ctext = ct.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    /// assert_eq!(ctext, "NALCEHWTTDTTFSEELEEDSOAFEAHL")
+    /// assert_eq!(ctext.unwrap(), "NALCEHWTTDTTFSEELEEDSOAFEAHL")
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
+
         let mut key: Vec<u8> = self.key.bytes().collect();
         let ptext = ptext.as_bytes();
         let mut matrix: HashMap<u8, Vec<u8>> = HashMap::with_capacity(key.len());
@@ -65,7 +66,7 @@ impl Cipher for ColumnarTransposition {
             }
         }
 
-        String::from_utf8(ctext).unwrap()
+        Ok(String::from_utf8(ctext).unwrap())
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the Columnar
@@ -77,10 +78,11 @@ impl Cipher for ColumnarTransposition {
     /// let ct = ColumnarTransposition::new("GERMAN");
     ///
     /// let ptext = ct.decipher("NALCEHWTTDTTFSEELEEDSOAFEAHL");
-    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         let ctext = ctext.to_ascii_uppercase();
+
         let key: Vec<u8> = self.key.bytes().collect();
         let ctext = ctext.as_bytes();
         let mut matrix: HashMap<u8, Vec<u8>> = HashMap::with_capacity(key.len());
@@ -118,6 +120,6 @@ impl Cipher for ColumnarTransposition {
             ptext.push(matrix.get_mut(&key[i % key.len()]).unwrap().remove(0));
         }
 
-        String::from_utf8(ptext).unwrap()
+        Ok(String::from_utf8(ptext).unwrap())
     }
 }

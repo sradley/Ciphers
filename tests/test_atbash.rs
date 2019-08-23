@@ -6,7 +6,7 @@ fn encipher_small() {
     let atbash = Atbash::new();
 
     let ctext = atbash.encipher("ATTACKATDAWN");
-    assert_eq!(ctext, "ZGGZXPZGWZDM");
+    assert_eq!(ctext.unwrap(), "ZGGZXPZGWZDM");
 }
 
 /// `decipher_small` test function.
@@ -15,7 +15,7 @@ fn decipher_small() {
     let atbash = Atbash::new();
 
     let ptext = atbash.decipher("ZGGZXPZGWZDM");
-    assert_eq!(ptext, "ATTACKATDAWN");
+    assert_eq!(ptext.unwrap(), "ATTACKATDAWN");
 }
 
 /// `encipher_large` test function.
@@ -25,7 +25,7 @@ fn encipher_large() {
 
     let ctext = atbash.encipher("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "ZYXWVUTSRQPONMLKJIHGFEDCBAZYXWVUTSRQPONMLKJIHGFEDCBA"
     );
 }
@@ -37,7 +37,7 @@ fn decipher_large() {
 
     let ptext = atbash.decipher("ZYXWVUTSRQPONMLKJIHGFEDCBAZYXWVUTSRQPONMLKJIHGFEDCBA");
     assert_eq!(
-        ptext,
+        ptext.unwrap(),
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
@@ -48,7 +48,7 @@ fn encipher_lowercase() {
     let atbash = Atbash::new();
 
     let ctext = atbash.encipher("attackatdawn");
-    assert_eq!(ctext, "ZGGZXPZGWZDM");
+    assert_eq!(ctext.unwrap(), "ZGGZXPZGWZDM");
 }
 
 /// `decipher_lowercase` test function.
@@ -57,5 +57,5 @@ fn decipher_lowercase() {
     let atbash = Atbash::new();
 
     let ptext = atbash.decipher("zggzxpzgwzdm");
-    assert_eq!(ptext, "ATTACKATDAWN");
+    assert_eq!(ptext.unwrap(), "ATTACKATDAWN");
 }

@@ -6,7 +6,7 @@ fn encipher_small() {
     let vigenere = Vigenere::new("FORTIFICATION");
 
     let ctext = vigenere.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    assert_eq!(ctext, "ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
+    assert_eq!(ctext.unwrap(), "ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
 }
 
 /// `decipher_small` test function.
@@ -15,7 +15,7 @@ fn decipher_small() {
     let vigenere = Vigenere::new("FORTIFICATION");
 
     let ptext = vigenere.decipher("ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_large` test function.
@@ -25,7 +25,7 @@ fn encipher_large() {
 
     let ctext = vigenere.encipher("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "AZNQSKJERTBNHFHOMSSRFIKCBWJLTFZXZGEKKJXACUTOBDLXRPRY"
     );
 }
@@ -37,7 +37,7 @@ fn decipher_large() {
 
     let ptext = vigenere.decipher("AZNQSKJERTBNHFHOMSSRFIKCBWJLTFZXZGEKKJXACUTOBDLXRPRY");
     assert_eq!(
-        ptext,
+        ptext.unwrap(),
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
@@ -48,7 +48,7 @@ fn encipher_lowercase() {
     let vigenere = Vigenere::new("fortification");
 
     let ctext = vigenere.encipher("defendtheeastwallofthecastle");
-    assert_eq!(ctext, "ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
+    assert_eq!(ctext.unwrap(), "ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
 }
 
 /// `decipher_lowercase` test function.
@@ -57,5 +57,5 @@ fn decipher_lowercase() {
     let vigenere = Vigenere::new("fortification");
 
     let ptext = vigenere.decipher("iswxvibjexiggbocewkbjeviggqs");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }

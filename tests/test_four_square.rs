@@ -6,7 +6,7 @@ fn encipher_small() {
     let four_square = FourSquare::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", "MFNBDCRHSAXYOGVITUEWLQZKP");
 
     let ctext = four_square.encipher("ATTACKATDAWN");
-    assert_eq!(ctext, "TIYBFHTIZBSY");
+    assert_eq!(ctext.unwrap(), "TIYBFHTIZBSY");
 }
 
 /// `decipher_small` test function.
@@ -15,7 +15,7 @@ fn decipher_small() {
     let four_square = FourSquare::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", "MFNBDCRHSAXYOGVITUEWLQZKP");
 
     let ptext = four_square.decipher("TIYBFHTIZBSY");
-    assert_eq!(ptext, "ATTACKATDAWN");
+    assert_eq!(ptext.unwrap(), "ATTACKATDAWN");
 }
 
 /// `encipher_large` test function.
@@ -25,7 +25,7 @@ fn encipher_large() {
 
     let ctext = four_square.encipher("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "BZDXAQHTIRFLMOOMQKSIPBWEYCBZDXAQHTIRFLMOOMQKSIPBWEYC"
     );
 }
@@ -37,7 +37,7 @@ fn decipher_large() {
 
     let ptext = four_square.decipher("BZDXAQHTIRFLMOOMQKSIPBWEYCBZDXAQHTIRFLMOOMQKSIPBWEYC");
     assert_eq!(
-        ptext,
+        ptext.unwrap(),
         "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
     );
 }
@@ -48,7 +48,7 @@ fn encipher_lowercase() {
     let four_square = FourSquare::new("zgptfoihmuwdrcnykeqaxvsbl", "mfnbdcrhsaxyogvituewlqzkp");
 
     let ctext = four_square.encipher("attackatdawn");
-    assert_eq!(ctext, "TIYBFHTIZBSY");
+    assert_eq!(ctext.unwrap(), "TIYBFHTIZBSY");
 }
 
 /// `decipher_lowercase` test function.
@@ -57,5 +57,5 @@ fn decipher_lowercase() {
     let four_square = FourSquare::new("zgptfoihmuwdrcnykeqaxvsbl", "mfnbdcrhsaxyogvituewlqzkp");
 
     let ptext = four_square.decipher("tiybfhtizbsy");
-    assert_eq!(ptext, "ATTACKATDAWN");
+    assert_eq!(ptext.unwrap(), "ATTACKATDAWN");
 }

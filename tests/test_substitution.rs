@@ -6,7 +6,7 @@ fn encipher_small() {
     let substitution = Substitution::new("PHQGIUMEAYLNOFDXJKRCVSTZWB");
 
     let ctext = substitution.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    assert_eq!(ctext, "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
+    assert_eq!(ctext.unwrap(), "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
 }
 
 /// `decipher_small` test function.
@@ -15,7 +15,7 @@ fn decipher_small() {
     let substitution = Substitution::new("PHQGIUMEAYLNOFDXJKRCVSTZWB");
 
     let ptext = substitution.decipher("GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_large` test function.
@@ -25,7 +25,7 @@ fn encipher_large() {
 
     let ctext = substitution.encipher("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "PHQGIUMEAYLNOFDXJKRCVSTZWBPHQGIUMEAYLNOFDXJKRCVSTZWB"
     );
 }
@@ -37,7 +37,7 @@ fn decipher_large() {
 
     let ptext = substitution.decipher("PHQGIUMEAYLNOFDXJKRCVSTZWBPHQGIUMEAYLNOFDXJKRCVSTZWB");
     assert_eq!(
-        ptext,
+        ptext.unwrap(),
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
@@ -48,7 +48,7 @@ fn encipher_lowercase() {
     let substitution = Substitution::new("phqgiumeaylnofdxjkrcvstzwb");
 
     let ctext = substitution.encipher("defendtheeastwallofthecastle");
-    assert_eq!(ctext, "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
+    assert_eq!(ctext.unwrap(), "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
 }
 
 /// `decipher_lowercase` test function.
@@ -57,5 +57,5 @@ fn decipher_lowercase() {
     let substitution = Substitution::new("phqgiumeaylnofdxjkrcvstzwb");
 
     let ptext = substitution.decipher("giuifgceiiprctpnnduceiqprcni");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }

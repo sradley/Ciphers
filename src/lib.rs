@@ -37,15 +37,26 @@ pub use running_key::RunningKey;
 pub use substitution::Substitution;
 pub use vigenere::Vigenere;
 
+/// `CipherInputError` enum ...
+#[derive(Debug)]
+pub enum CipherInputError {
+    NotAlphabetic,
+    NotAlphanumeric,
+    NotInAlphabet,
+}
+
+/// `CipherResult` type ...
+pub type CipherResult = Result<String, CipherInputError>;
+
 /// `Cipher` trait defines the implementation for cipher functionality.
 pub trait Cipher {
     /// `encipher` method should take plaintext as a string reference, and return the ciphertext as
     /// a String object.
-    fn encipher(&self, ptext: &str) -> String;
+    fn encipher(&self, ptext: &str) -> CipherResult;
 
     /// `decipher` method should take the ciphertext as a string reference, and return the plaintext
     /// as a String object.
-    fn decipher(&self, ctext: &str) -> String;
+    fn decipher(&self, ctext: &str) -> CipherResult;
 }
 
 static TABULA_RECTA: [[u8; 26]; 26] = [

@@ -6,7 +6,7 @@ fn encipher_small() {
     let running_key = RunningKey::new("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
 
     let ctext = running_key.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    assert_eq!(ctext, "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
+    assert_eq!(ctext.unwrap(), "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
 }
 
 /// `decipher_small` test function.
@@ -15,7 +15,7 @@ fn decipher_small() {
     let running_key = RunningKey::new("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
 
     let ptext = running_key.decipher("KSBHBHLALIDMVGKYZKYAHXUAAWGM");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_large` test function.
@@ -25,7 +25,7 @@ fn encipher_large() {
 
     let ctext = running_key.encipher("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "ZOPRSUVXYABDEOQTVYADFVXACFZOPRSUVXYABDEOQTVYADFVXACF"
     );
 }
@@ -37,7 +37,7 @@ fn decipher_large() {
 
     let ptext = running_key.decipher("ZOPRSUVXYABDEOQTVYADFVXACFZOPRSUVXYABDEOQTVYADFVXACF");
     assert_eq!(
-        ptext,
+        ptext.unwrap(),
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
@@ -48,7 +48,7 @@ fn encipher_lowercase() {
     let running_key = RunningKey::new("howdoestheduckknowthatsaidvictor");
 
     let ctext = running_key.encipher("defendtheeastwallofthecastle");
-    assert_eq!(ctext, "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
+    assert_eq!(ctext.unwrap(), "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
 }
 
 /// `decipher_lowercase` test function.
@@ -57,5 +57,5 @@ fn decipher_lowercase() {
     let running_key = RunningKey::new("howdoestheduckknowthatsaidvictor");
 
     let ptext = running_key.decipher("ksbhbhlalidmvgkyzkyahxuaawgm");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }

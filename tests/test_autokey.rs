@@ -6,7 +6,7 @@ fn encipher_small() {
     let autokey = Autokey::new("FORTIFICATION");
 
     let ctext = autokey.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    assert_eq!(ctext, "ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
+    assert_eq!(ctext.unwrap(), "ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
 }
 
 /// `decipher_small` test function.
@@ -15,7 +15,7 @@ fn decipher_small() {
     let autokey = Autokey::new("FORTIFICATION");
 
     let ptext = autokey.decipher("ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_large` test function.
@@ -25,7 +25,7 @@ fn encipher_large() {
 
     let ctext = autokey.encipher("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "ZZZZZZZZZZZZZNPRTVXZBDFHJLNPRTVXZBDFHJLNPRTVXZBDFHJL"
     );
 }
@@ -37,7 +37,7 @@ fn decipher_large() {
 
     let ptext = autokey.decipher("ZZZZZZZZZZZZZNPRTVXZBDFHJLNPRTVXZBDFHJLNPRTVXZBDFHJL");
     assert_eq!(
-        ptext,
+        ptext.unwrap(),
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
@@ -48,7 +48,7 @@ fn encipher_lowercase() {
     let autokey = Autokey::new("fortification");
 
     let ctext = autokey.encipher("defendtheeastwallofthecastle");
-    assert_eq!(ctext, "ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
+    assert_eq!(ctext.unwrap(), "ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
 }
 
 /// `decipher_lowercase` test function.
@@ -57,5 +57,5 @@ fn decipher_lowercase() {
     let autokey = Autokey::new("fortification");
 
     let ptext = autokey.decipher("iswxvibjexiggzeqpbimoigakmhe");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }

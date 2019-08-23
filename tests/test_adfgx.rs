@@ -7,7 +7,7 @@ fn encipher_small() {
 
     let ctext = adfgx.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX"
     );
 }
@@ -18,7 +18,7 @@ fn decipher_small() {
     let adfgx = ADFGX::new("PHQGMEAYNOFDXKRCVSZWBUTIL", "GERMAN");
 
     let ptext = adfgx.decipher("FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_large` test function.
@@ -28,7 +28,7 @@ fn encipher_large() {
 
     let ctext = adfgx.encipher("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "XAAXFDFGDFXGFFAAGDXDAFFXXFADGGDXFDFGADDGFFAADGADAFFXDGXGGDXXFFADDGAGFDGADAGXDGXXAAXXFFDFXG\
         AGFGDXDAGXXFAD"
     );
@@ -44,7 +44,7 @@ fn decipher_large() {
         AGFGDXDAGXXFAD"
     );
     assert_eq!(
-        ptext,
+        ptext.unwrap(),
         "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
     );
 }
@@ -56,7 +56,7 @@ fn encipher_lowercase() {
 
     let ctext = adfgx.encipher("defendtheeastwallofthecastle");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX"
     );
 }
@@ -67,5 +67,5 @@ fn decipher_lowercase() {
     let adfgx = ADFGX::new("phqgmeaynofdxkrcvszwbutil", "german");
 
     let ptext = adfgx.decipher("ffdgddadxdafafxaafafdxdxxfdgdagddxxfafadafdxddxddadgxxgx");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }

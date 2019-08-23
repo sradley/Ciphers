@@ -6,7 +6,7 @@ fn encipher_small() {
     let beaufort = Beaufort::new("FORTIFICATION");
 
     let ctext = beaufort.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    assert_eq!(ctext, "CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
+    assert_eq!(ctext.unwrap(), "CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
 }
 
 /// `decipher_small` test function.
@@ -15,7 +15,7 @@ fn decipher_small() {
     let beaufort = Beaufort::new("FORTIFICATION");
 
     let ptext = beaufort.decipher("CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_large` test function.
@@ -25,7 +25,7 @@ fn encipher_large() {
 
     let ctext = beaufort.encipher("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "ZXVTRPNLJHFDBMKIGECAYWUSQOZXVTRPNLJHFDBMKIGECAYWUSQO"
     );
 }
@@ -37,7 +37,7 @@ fn decipher_large() {
 
     let ptext = beaufort.decipher("ZXVTRPNLJHFDBMKIGECAYWUSQOZXVTRPNLJHFDBMKIGECAYWUSQO");
     assert_eq!(
-        ptext,
+        ptext.unwrap(),
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
@@ -48,7 +48,7 @@ fn encipher_lowercase() {
     let beaufort = Beaufort::new("fortification");
 
     let ctext = beaufort.encipher("defendtheeastwallofthecastle");
-    assert_eq!(ctext, "CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
+    assert_eq!(ctext.unwrap(), "CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
 }
 
 /// `decipher_lowercase` test function.
@@ -57,5 +57,5 @@ fn decipher_lowercase() {
     let beaufort = Beaufort::new("fortification");
 
     let ptext = beaufort.decipher("ckmpvcpvwpiwujogiuapvwriwuuk");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }

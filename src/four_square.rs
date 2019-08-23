@@ -17,7 +17,7 @@
 //!
 //! TODO: handle unwraps (i.e. when trying to find a letter that's not in the alphabet)
 
-use crate::Cipher;
+use crate::{Cipher, CipherResult};
 
 static ALPHABET: [u8; 25] = [
     65, 66, 67, 68, 69, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
@@ -54,9 +54,9 @@ impl Cipher for FourSquare {
     /// let four_square = FourSquare::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", "MFNBDCRHSAXYOGVITUEWLQZKP");
     ///
     /// let ctext = four_square.encipher("ATTACKATDAWN");
-    /// assert_eq!(ctext, "TIYBFHTIZBSY");
+    /// assert_eq!(ctext.unwrap(), "TIYBFHTIZBSY");
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
         let mut ptext: Vec<u8> = ptext.bytes().collect();
         if ptext.len() % 2 != 0 {
@@ -78,7 +78,7 @@ impl Cipher for FourSquare {
             ctext.push(key2[y2 * 5 + x1]);
         }
 
-        String::from_utf8(ctext).unwrap()
+        Ok(String::from_utf8(ctext).unwrap())
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the Four-Square
@@ -90,9 +90,9 @@ impl Cipher for FourSquare {
     /// let four_square = FourSquare::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", "MFNBDCRHSAXYOGVITUEWLQZKP");
     ///
     /// let ptext = four_square.decipher("TIYBFHTIZBSY");
-    /// assert_eq!(ptext, "ATTACKATDAWN");
+    /// assert_eq!(ptext.unwrap(), "ATTACKATDAWN");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         assert_eq!(ctext.len() % 2, 0);
         let ctext = ctext.to_ascii_uppercase();
         let ctext = ctext.as_bytes();
@@ -109,6 +109,6 @@ impl Cipher for FourSquare {
             ptext.push(ALPHABET[y2 * 5 + x2]);
         }
 
-        String::from_utf8(ptext).unwrap()
+        Ok(String::from_utf8(ptext).unwrap())
     }
 }

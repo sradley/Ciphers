@@ -14,7 +14,7 @@
 //! out a keyword, removing repeated letters in it, then writing all the remaining letters in the
 //! alphabet in the usual order.
 
-use crate::Cipher;
+use crate::{Cipher, CipherResult};
 
 /// `Substitution` struct contains the key for the Simple Substitution cipher, and implements the
 /// functionality of the `Cipher` trait using the Simple Substitution cipher method.
@@ -43,15 +43,15 @@ impl Cipher for Substitution {
     /// let substitution = Substitution::new("PHQGIUMEAYLNOFDXJKRCVSTZWB");
     ///
     /// let ctext = substitution.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    /// assert_eq!(ctext, "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
+    /// assert_eq!(ctext.unwrap(), "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
         let key = self.key.as_bytes();
 
         let ctext = ptext.bytes().map(move |c| key[(c - 65) as usize]).collect();
 
-        String::from_utf8(ctext).unwrap()
+        Ok(String::from_utf8(ctext).unwrap())
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the Simple
@@ -63,15 +63,15 @@ impl Cipher for Substitution {
     /// let substitution = Substitution::new("PHQGIUMEAYLNOFDXJKRCVSTZWB");
     ///
     /// let ptext = substitution.decipher("GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
-    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         let ctext = ctext.to_ascii_uppercase();
         let ptext = ctext
             .bytes()
             .map(move |c| self.key.find(move |i| i == c as char).unwrap() as u8 + 65)
             .collect();
 
-        String::from_utf8(ptext).unwrap()
+        Ok(String::from_utf8(ptext).unwrap())
     }
 }

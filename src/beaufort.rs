@@ -11,7 +11,7 @@
 //! Vigenère square but in reverse order starting with the letter "Z" in the first row, where the
 //! first row and the last column serve the same purpose.
 
-use crate::{Cipher, TABULA_RECTA};
+use crate::{Cipher, CipherResult, TABULA_RECTA};
 
 /// `Beaufort` struct contains the key for the Beaufort cipher, and implements the functionality of
 /// the `Cipher` trait using the Beaufort cipher method.
@@ -39,9 +39,9 @@ impl Cipher for Beaufort {
     /// let beaufort = Beaufort::new("FORTIFICATION");
     ///
     /// let ctext = beaufort.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    /// assert_eq!(ctext, "CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
+    /// assert_eq!(ctext.unwrap(), "CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
         let key = self.key.as_bytes();
 
@@ -59,7 +59,7 @@ impl Cipher for Beaufort {
             })
             .collect();
 
-        String::from_utf8(ctext).unwrap()
+        Ok(String::from_utf8(ctext).unwrap())
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the Beaufort cipher
@@ -73,9 +73,9 @@ impl Cipher for Beaufort {
     /// let beaufort = Beaufort::new("FORTIFICATION");
     ///
     /// let ptext = beaufort.decipher("CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
-    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         let ctext = ctext.to_ascii_uppercase();
         self.encipher(&ctext)
     }

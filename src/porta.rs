@@ -9,7 +9,7 @@
 //! > The 13 cipher alphabets it uses are
 //! reciprocal, so enciphering is the same as deciphering.
 
-use crate::Cipher;
+use crate::{Cipher, CipherResult};
 
 static PORTA_TABLEU: [[u8; 13]; 13] = [
     [78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90],
@@ -53,9 +53,9 @@ impl Cipher for Porta {
     /// let porta = Porta::new("FORTIFICATION");
     ///
     /// let ctext = porta.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    /// assert_eq!(ctext, "SYNNJSCVRNRLAHUTUKUCVRYRLANY");
+    /// assert_eq!(ctext.unwrap(), "SYNNJSCVRNRLAHUTUKUCVRYRLANY");
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
         let key = self.key.as_bytes();
 
@@ -71,11 +71,13 @@ impl Cipher for Porta {
             })
             .collect();
 
-        String::from_utf8(ctext).unwrap()
+        Ok(String::from_utf8(ctext).unwrap())
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the Porta cipher
     /// and returns the plaintext as a `String` object.
+    /// 
+    /// Note that the Porta cipher is reciprocal.
     ///
     /// ```
     /// use ciphers::{Cipher, Porta};
@@ -83,9 +85,9 @@ impl Cipher for Porta {
     /// let porta = Porta::new("FORTIFICATION");
     ///
     /// let ptext = porta.decipher("SYNNJSCVRNRLAHUTUKUCVRYRLANY");
-    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         self.encipher(ctext)
     }
 }

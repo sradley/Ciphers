@@ -8,7 +8,7 @@
 //! Usually, the book to be used would be agreed ahead of time, while the passage to be used would
 //! be chosen randomly for each message and secretly indicated somewhere in the message.
 
-use crate::{Cipher, TABULA_RECTA};
+use crate::{Cipher, CipherResult, TABULA_RECTA};
 
 /// `RunningKey` struct contains the key for the Running Key cipher, and implements the
 /// functionality of the `Cipher` trait using the Running Key cipher method.
@@ -36,9 +36,9 @@ impl Cipher for RunningKey {
     /// let running_key = RunningKey::new("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
     ///
     /// let ctext = running_key.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    /// assert_eq!(ctext, "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
+    /// assert_eq!(ctext.unwrap(), "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         assert!(self.key.len() >= ptext.len());
         let ptext = ptext.to_ascii_uppercase();
 
@@ -55,7 +55,7 @@ impl Cipher for RunningKey {
             })
             .collect();
 
-        String::from_utf8(ctext).unwrap()
+        Ok(String::from_utf8(ctext).unwrap())
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the Running Key
@@ -67,9 +67,9 @@ impl Cipher for RunningKey {
     /// let running_key = RunningKey::new("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
     ///
     /// let ptext = running_key.decipher("KSBHBHLALIDMVGKYZKYAHXUAAWGM");
-    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         assert!(self.key.len() >= ctext.len());
         let ctext = ctext.to_ascii_uppercase();
 
@@ -84,6 +84,6 @@ impl Cipher for RunningKey {
             })
             .collect();
 
-        String::from_utf8(ptext).unwrap()
+        Ok(String::from_utf8(ptext).unwrap())
     }
 }

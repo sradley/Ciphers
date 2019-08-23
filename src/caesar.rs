@@ -15,7 +15,7 @@
 //! with all single-alphabet substitution ciphers, the Caesar cipher is easily broken and in modern
 //! practice offers essentially no communications security.
 
-use crate::Cipher;
+use crate::{Cipher, CipherResult};
 
 /// `Caesar` struct contains the key for the Caesar cipher, and implements the functionality of
 /// the `Cipher` trait using the Caesar cipher method.
@@ -41,16 +41,16 @@ impl Cipher for Caesar {
     /// let caesar = Caesar::new(1);
     ///
     /// let ctext = caesar.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    /// assert_eq!(ctext, "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
+    /// assert_eq!(ctext.unwrap(), "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
         let ctext = ptext
             .bytes()
             .map(move |c| (c + self.key - 65) % 26 + 65)
             .collect();
 
-        String::from_utf8(ctext).unwrap()
+        Ok(String::from_utf8(ctext).unwrap())
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the Caesar cipher
@@ -62,15 +62,15 @@ impl Cipher for Caesar {
     /// let caesar = Caesar::new(1);
     ///
     /// let ptext = caesar.decipher("EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
-    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         let ctext = ctext.to_ascii_uppercase();
         let ptext = ctext
             .bytes()
             .map(move |c| (c + (26 - self.key) - 65) % 26 + 65)
             .collect();
 
-        String::from_utf8(ptext).unwrap()
+        Ok(String::from_utf8(ptext).unwrap())
     }
 }

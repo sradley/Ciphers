@@ -6,7 +6,7 @@ fn encipher_small() {
     let rail_fence = RailFence::new(4);
 
     let ctext = rail_fence.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    assert_eq!(ctext, "DTTFSEDHSWOTATFNEAALHCLEELEE");
+    assert_eq!(ctext.unwrap(), "DTTFSEDHSWOTATFNEAALHCLEELEE");
 }
 
 /// `decipher_small` test function.
@@ -15,7 +15,7 @@ fn decipher_small() {
     let rail_fence = RailFence::new(4);
 
     let ptext = rail_fence.decipher("DTTFSEDHSWOTATFNEAALHCLEELEE");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_large` test function.
@@ -25,7 +25,7 @@ fn encipher_large() {
 
     let ctext = rail_fence.encipher("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "AKUEOYBJLTVDFNPXZCIMSWCGMQWDHNRXBHLRVEGOQYAIKSUFPZJT"
     );
 }
@@ -37,7 +37,7 @@ fn decipher_large() {
 
     let ptext = rail_fence.decipher("AKUEOYBJLTVDFNPXZCIMSWCGMQWDHNRXBHLRVEGOQYAIKSUFPZJT");
     assert_eq!(
-        ptext,
+        ptext.unwrap(),
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
@@ -48,7 +48,7 @@ fn encipher_lowercase() {
     let rail_fence = RailFence::new(4);
 
     let ctext = rail_fence.encipher("defendtheeastwallofthecastle");
-    assert_eq!(ctext, "DTTFSEDHSWOTATFNEAALHCLEELEE");
+    assert_eq!(ctext.unwrap(), "DTTFSEDHSWOTATFNEAALHCLEELEE");
 }
 
 /// `decipher_lowercase` test function.
@@ -57,5 +57,5 @@ fn decipher_lowercase() {
     let rail_fence = RailFence::new(4);
 
     let ptext = rail_fence.decipher("dttfsedhswotatfneaalhcleelee");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }

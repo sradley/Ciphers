@@ -8,7 +8,7 @@
 //! is reached, the message is written downwards again until the whole plaintext is written out. The
 //! message is then read off in rows.
 
-use crate::Cipher;
+use crate::{Cipher, CipherResult};
 
 /// `RailFence` struct contains the key for the Rail-fence cipher, and implements the functionality
 /// of the `Cipher` trait using the Rail-fence cipher method.
@@ -34,9 +34,9 @@ impl Cipher for RailFence {
     /// let rail_fence = RailFence::new(4);
     ///
     /// let ctext = rail_fence.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    /// assert_eq!(ctext, "DTTFSEDHSWOTATFNEAALHCLEELEE");
+    /// assert_eq!(ctext.unwrap(), "DTTFSEDHSWOTATFNEAALHCLEELEE");
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
         let mut ctext = Vec::with_capacity(ptext.len());
         let ptext: Vec<u8> = ptext.bytes().collect();
@@ -66,7 +66,7 @@ impl Cipher for RailFence {
             ctext.push(*ptext.get(i).unwrap());
         }
 
-        String::from_utf8(ctext).unwrap()
+        Ok(String::from_utf8(ctext).unwrap())
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the Rail-fence
@@ -78,9 +78,9 @@ impl Cipher for RailFence {
     /// let rail_fence = RailFence::new(4);
     ///
     /// let ptext = rail_fence.decipher("DTTFSEDHSWOTATFNEAALHCLEELEE");
-    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         let ctext = ctext.to_ascii_uppercase();
         let mut ptext = vec![0u8; ctext.len()];
         let ctext: Vec<u8> = ctext.bytes().collect();
@@ -113,6 +113,6 @@ impl Cipher for RailFence {
             k += 1;
         }
 
-        String::from_utf8(ptext).unwrap()
+        Ok(String::from_utf8(ptext).unwrap())
     }
 }

@@ -6,7 +6,7 @@ fn encipher_small() {
     let affine = Affine::new(7, 11);
 
     let ctext = affine.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    assert_eq!(ctext, "GNUNYGOINNLHOJLKKFUOINZLHOKN");
+    assert_eq!(ctext.unwrap(), "GNUNYGOINNLHOJLKKFUOINZLHOKN");
 }
 
 /// `decipher_small` test function.
@@ -15,7 +15,7 @@ fn decipher_small() {
     let affine = Affine::new(7, 11);
 
     let ptext = affine.decipher("GNUNYGOINNLHOJLKKFUOINZLHOKN");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_large` test function.
@@ -25,7 +25,7 @@ fn encipher_large() {
 
     let ctext = affine.encipher("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "NQTWZCFILORUXADGJMPSVYBEHKNQTWZCFILORUXADGJMPSVYBEHK"
     );
 }
@@ -37,7 +37,7 @@ fn decipher_large() {
 
     let ptext = affine.decipher("NQTWZCFILORUXADGJMPSVYBEHKNQTWZCFILORUXADGJMPSVYBEHK");
     assert_eq!(
-        ptext,
+        ptext.unwrap(),
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
@@ -48,7 +48,7 @@ fn encipher_lowercase() {
     let affine = Affine::new(7, 11);
 
     let ctext = affine.encipher("defendtheeastwallofthecastle");
-    assert_eq!(ctext, "GNUNYGOINNLHOJLKKFUOINZLHOKN");
+    assert_eq!(ctext.unwrap(), "GNUNYGOINNLHOJLKKFUOINZLHOKN");
 }
 
 /// `decipher_lowercase` test function.
@@ -57,5 +57,5 @@ fn decipher_lowercase() {
     let affine = Affine::new(7, 11);
 
     let ptext = affine.decipher("gnunygoinnlhojlkkfuoinzlhokn");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }

@@ -12,9 +12,7 @@
 //! The letters were chosen deliberately because they are very different from one another in the
 //! Morse code. That reduced the possibility of operator error.
 
-use crate::columnar_transposition::ColumnarTransposition;
-use crate::polybius_square::PolybiusSquare;
-use crate::Cipher;
+use crate::{Cipher, PolybiusSquare, ColumnarTransposition, CipherResult};
 
 /// `ADFGX` struct contains the key and keyword for the ADFGX cipher, and implements the
 /// functionality of the `Cipher` trait using the ADFGX cipher method.
@@ -45,13 +43,13 @@ impl Cipher for ADFGX {
     /// let adfgx = ADFGX::new("PHQGMEAYNOFDXKRCVSZWBUTIL", "GERMAN");
     ///
     /// let ctext = adfgx.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    /// assert_eq!(ctext, "FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
+    /// assert_eq!(ctext.unwrap(), "FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         let ps = PolybiusSquare::new(&self.key, "ADFGX");
         let ct = ColumnarTransposition::new(&self.keyword);
 
-        ct.encipher(&ps.encipher(ptext))
+        ct.encipher(&ps.encipher(ptext)?)
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the ADFGX cipher
@@ -63,12 +61,12 @@ impl Cipher for ADFGX {
     /// let adfgx = ADFGX::new("PHQGMEAYNOFDXKRCVSZWBUTIL", "GERMAN");
     ///
     /// let ptext = adfgx.decipher("FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
-    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         let ps = PolybiusSquare::new(&self.key, "ADFGX");
         let ct = ColumnarTransposition::new(&self.keyword);
 
-        ps.decipher(&ct.decipher(ctext))
+        ps.decipher(&ct.decipher(ctext)?)
     }
 }

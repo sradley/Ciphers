@@ -7,7 +7,7 @@ fn encipher_abcde_small() {
 
     let ctext = ps.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC"
     );
 }
@@ -18,7 +18,7 @@ fn decipher_abcde_small() {
     let ps = PolybiusSquare::new("PHQGIUMEAYLNOFDXKRCVSTZWB", "ABCDE");
 
     let ptext = ps.decipher("CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_zebra_small` test function.
@@ -28,7 +28,7 @@ fn encipher_zebra_small() {
 
     let ctext = ps.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "BAEBBREBBEBAAEZEEBEBERAZAEARERBZBZBBBRAEZEEBRRERAZAEBZEB"
     );
 }
@@ -39,7 +39,7 @@ fn decipher_zebra_small() {
     let ps = PolybiusSquare::new("PHQGIUMEAYLNOFDXKRCVSTZWB", "ZEBRA");
 
     let ptext = ps.decipher("BAEBBREBBEBAAEZEEBEBERAZAEARERBZBZBBBRAEZEEBRRERAZAEBZEB");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_abcde_large` test function.
@@ -49,7 +49,7 @@ fn encipher_abcde_large() {
 
     let ctext = ps.encipher("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "EEEDECEBEADEDDDCDBDBDACECDCCCBCABEBDBCBBBAAEADACABAAEEEDECEBEADEDDDCDBDBDACECDCCCBCABEBDBC\
         BBBAAEADACABAA"
     );
@@ -65,7 +65,7 @@ fn decipher_abcde_large() {
         BBBAAEADACABAA"
     );
     assert_eq!(
-        ptext,
+        ptext.unwrap(),
         "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
     );
 }
@@ -77,7 +77,7 @@ fn encipher_zebra_large() {
 
     let ctext = ps.encipher("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "AAARABAEAZRARRRBRERERZBABRBBBEBZEAEREBEEEZZAZRZBZEZZAAARABAEAZRARRRBRERERZBABRBBBEBZEAEREB\
         EEEZZAZRZBZEZZ"
     );
@@ -93,7 +93,7 @@ fn decipher_zebra_large() {
         EEEZZAZRZBZEZZ"
     );
     assert_eq!(
-        ptext,
+        ptext.unwrap(),
         "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
     );
 }
@@ -105,7 +105,7 @@ fn encipher_lowercase() {
 
     let ctext = ps.encipher("defendtheeastwallofthecastle");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC"
     );
 }
@@ -116,5 +116,5 @@ fn decipher_lowercase() {
     let ps = PolybiusSquare::new("phqgiumeaylnofdxkrcvstzwb", "abcde");
 
     let ptext = ps.decipher("cebccdbccbceebabbcbcbdeaebedbdcacacccdebabbcddbdeaebcabc");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }

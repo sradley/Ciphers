@@ -12,7 +12,7 @@
 //! available, which one was used in encryption can be used as a key, but this does not provide
 //! significantly more security.
 
-use crate::Cipher;
+use crate::{Cipher, CipherResult};
 
 /// `Atbash` struct implements the functionality of the `Cipher` trait using the Atbash cipher
 /// method.
@@ -35,13 +35,13 @@ impl Cipher for Atbash {
     /// let atbash = Atbash::new();
     ///
     /// let ctext = atbash.encipher("ATTACKATDAWN");
-    /// assert_eq!(ctext, "ZGGZXPZGWZDM");
+    /// assert_eq!(ctext.unwrap(), "ZGGZXPZGWZDM");
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
         let ctext = ptext.bytes().map(|c| 90 - c + 65).collect();
 
-        String::from_utf8(ctext).unwrap()
+        Ok(String::from_utf8(ctext).unwrap())
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the Atbash cipher
@@ -55,9 +55,9 @@ impl Cipher for Atbash {
     /// let atbash = Atbash::new();
     ///
     /// let ptext = atbash.decipher("ZGGZXPZGWZDM");
-    /// assert_eq!(ptext, "ATTACKATDAWN");
+    /// assert_eq!(ptext.unwrap(), "ATTACKATDAWN");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         let ctext = ctext.to_ascii_uppercase();
         self.encipher(&ctext)
     }

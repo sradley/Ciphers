@@ -14,7 +14,7 @@
 //!
 //! > In modern cryptography, self-synchronising stream ciphers are autokey ciphers.
 
-use crate::{Cipher, TABULA_RECTA};
+use crate::{Cipher, CipherResult, TABULA_RECTA};
 
 /// `Autokey` struct contains the key for the Autokey cipher, and implements the functionality of
 /// the `Cipher` trait using the Autokey cipher method.
@@ -42,9 +42,9 @@ impl Cipher for Autokey {
     /// let autokey = Autokey::new("FORTIFICATION");
     ///
     /// let ctext = autokey.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    /// assert_eq!(ctext, "ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
+    /// assert_eq!(ctext.unwrap(), "ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
         let key = self.key.as_bytes();
         let ptext: Vec<u8> = ptext.bytes().collect();
@@ -62,7 +62,7 @@ impl Cipher for Autokey {
             })
             .collect();
 
-        String::from_utf8(ctext).unwrap()
+        Ok(String::from_utf8(ctext).unwrap())
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the Autokey cipher
@@ -74,9 +74,9 @@ impl Cipher for Autokey {
     /// let autokey = Autokey::new("FORTIFICATION");
     ///
     /// let ptext = autokey.decipher("ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
-    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         let ctext = ctext.to_ascii_uppercase();
         let key = self.key.as_bytes();
         let ctext: Vec<u8> = ctext.bytes().collect();
@@ -91,6 +91,6 @@ impl Cipher for Autokey {
             ptext.push(TABULA_RECTA[y].iter().position(|&j| j == *c).unwrap() as u8 + 65);
         }
 
-        String::from_utf8(ptext).unwrap()
+        Ok(String::from_utf8(ptext).unwrap())
     }
 }

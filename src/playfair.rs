@@ -19,7 +19,7 @@
 //!
 //! TODO: handle unwraps (i.e. when trying to find a character that's not in the square)
 
-use crate::Cipher;
+use crate::{Cipher, CipherResult};
 
 /// `Playfair` struct contains the key for the Playfair cipher, and implements the functionality of
 /// the `Cipher` trait using the Plaiyfair cipher method.
@@ -48,9 +48,9 @@ impl Cipher for Playfair {
     /// let playfair = Playfair::new("ZGPTFOIHMUWDRCNYKEQAXVSBL");
     ///
     /// let ctext = playfair.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    /// assert_eq!(ctext, "RKPAWRPMYSELZCLFXUZFRSNQBPSA");
+    /// assert_eq!(ctext.unwrap(), "RKPAWRPMYSELZCLFXUZFRSNQBPSA");
     /// ```
-    fn encipher(&self, ptext: &str) -> String {
+    fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
         let mut ptext: Vec<u8> = ptext.bytes().collect();
         if ptext.len() % 2 != 0 {
@@ -86,7 +86,7 @@ impl Cipher for Playfair {
             }
         }
 
-        String::from_utf8(ctext).unwrap()
+        Ok(String::from_utf8(ctext).unwrap())
     }
 
     /// `decipher` method deciphers the given ciphertext (a str reference) using the Playfair cipher
@@ -98,9 +98,9 @@ impl Cipher for Playfair {
     /// let playfair = Playfair::new("ZGPTFOIHMUWDRCNYKEQAXVSBL");
     ///
     /// let ptext = playfair.decipher("RKPAWRPMYSELZCLFXUZFRSNQBPSA");
-    /// assert_eq!(ptext, "DEFENDTHEXASTWALLOFTHECASTLE");
+    /// assert_eq!(ptext.unwrap(), "DEFENDTHEXASTWALLOFTHECASTLE");
     /// ```
-    fn decipher(&self, ctext: &str) -> String {
+    fn decipher(&self, ctext: &str) -> CipherResult {
         let ctext = ctext.to_ascii_uppercase();
         let ctext = ctext.as_bytes();
         let key = self.key.as_bytes();
@@ -128,6 +128,6 @@ impl Cipher for Playfair {
             }
         }
 
-        String::from_utf8(ptext).unwrap()
+        Ok(String::from_utf8(ptext).unwrap())
     }
 }

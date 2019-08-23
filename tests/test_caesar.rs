@@ -6,7 +6,7 @@ fn encipher_rot1_small() {
     let caesar = Caesar::new(1);
 
     let ctext = caesar.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    assert_eq!(ctext, "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
+    assert_eq!(ctext.unwrap(), "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
 }
 
 /// `decipher_rot1_small` test function.
@@ -15,7 +15,7 @@ fn decipher_rot1_small() {
     let caesar = Caesar::new(1);
 
     let ptext = caesar.decipher("EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_rot25_small` test function.
@@ -24,7 +24,7 @@ fn encipher_rot25_small() {
     let caesar = Caesar::new(25);
 
     let ctext = caesar.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    assert_eq!(ctext, "CDEDMCSGDDZRSVZKKNESGDBZRSKD");
+    assert_eq!(ctext.unwrap(), "CDEDMCSGDDZRSVZKKNESGDBZRSKD");
 }
 
 /// `decipher_rot25_small` test function.
@@ -33,7 +33,7 @@ fn decipher_rot25_small() {
     let caesar = Caesar::new(25);
 
     let ptext = caesar.decipher("CDEDMCSGDDZRSVZKKNESGDBZRSKD");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
 /// `encipher_rot1_large` test function.
@@ -43,7 +43,7 @@ fn encipher_rot1_large() {
 
     let ctext = caesar.encipher("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "BCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZA"
     );
 }
@@ -55,7 +55,7 @@ fn decipher_rot1_large() {
 
     let ptext = caesar.decipher("BCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZA");
     assert_eq!(
-        ptext,
+        ptext.unwrap(),
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
@@ -67,7 +67,7 @@ fn encipher_rot25_large() {
 
     let ctext = caesar.encipher("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ");
     assert_eq!(
-        ctext,
+        ctext.unwrap(),
         "ZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXY"
     );
 }
@@ -79,7 +79,7 @@ fn decipher_rot25_large() {
 
     let ptext = caesar.decipher("ZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXY");
     assert_eq!(
-        ptext,
+        ptext.unwrap(),
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
@@ -90,7 +90,7 @@ fn encipher_lowercase() {
     let caesar = Caesar::new(1);
 
     let ctext = caesar.encipher("defendtheeastwallofthecastle");
-    assert_eq!(ctext, "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
+    assert_eq!(ctext.unwrap(), "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
 }
 
 /// `decipher_lowercase` test function.
@@ -99,5 +99,5 @@ fn decipher_lowercase() {
     let caesar = Caesar::new(1);
 
     let ptext = caesar.decipher("efgfoeuiffbtuxbmmpguifdbtumf");
-    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
 }
