@@ -55,11 +55,11 @@ plaintext:  SOMEEXAMPLETEXTHERE
 ## 4. To be Implemented
 There are currently **6 different ciphers to be implemented**.
 
-| Transposition | Monoalphabetic | Polyalphabetic | Polygraphic | Other                 |
-| ------------- | -------------- | -------------- | ----------- | --------------------- |
-|               | Rot13          | Gronsfeld      | Hill        | Bifid                 |
-|               |                |                |             | Trifid                |
-|               |                |                |             | Straddle Checkerboard |
+| Transposition        | Monoalphabetic | Polyalphabetic | Polygraphic | Other                 |
+| -------------------- | -------------- | -------------- | ----------- | --------------------- |
+| Double Transposition | Rot13          | Gronsfeld      | Hill        | Bifid                 |
+|                      |                |                |             | Trifid                |
+|                      |                |                |             | Straddle Checkerboard |
 
 ## 5. Backlog
  * Input validation.
