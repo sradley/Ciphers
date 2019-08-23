@@ -27,12 +27,11 @@ impl Cipher for ADFGX {
     /// use ciphers::Cipher;
     /// use ciphers::adfgx::ADFGX;
     ///
-    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let key = String::from("PHQGMEAYNOFDXKRCVSZWBUTIL");
     /// let keyword = String::from("GERMAN");
     /// let adfgx = ADFGX::new(key, keyword);
     ///
-    /// let ctext = adfgx.encipher(ptext);
+    /// let ctext = adfgx.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
     /// assert_eq!(ctext, "FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
     /// ```
     fn encipher(&self, ptext: String) -> String {
@@ -48,12 +47,11 @@ impl Cipher for ADFGX {
     /// use ciphers::Cipher;
     /// use ciphers::adfgx::ADFGX;
     ///
-    /// let ctext = String::from("FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
     /// let key = String::from("PHQGMEAYNOFDXKRCVSZWBUTIL");
     /// let keyword = String::from("GERMAN");
     /// let adfgx = ADFGX::new(key, keyword);
     ///
-    /// let ptext = adfgx.decipher(ctext);
+    /// let ptext = adfgx.decipher(String::from("FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX"));
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: String) -> String {

@@ -21,10 +21,9 @@ impl Cipher for Atbash {
     /// use ciphers::Cipher;
     /// use ciphers::atbash::Atbash;
     ///
-    /// let ptext = String::from("ATTACKATDAWN");
     /// let atbash = Atbash::new();
     ///
-    /// let ctext = atbash.encipher(ptext);
+    /// let ctext = atbash.encipher(String::from("ATTACKATDAWN"));
     /// assert_eq!(ctext, "ZGGZXPZGWZDM");
     /// ```
     fn encipher(&self, ptext: String) -> String {
@@ -39,10 +38,9 @@ impl Cipher for Atbash {
     /// use ciphers::Cipher;
     /// use ciphers::atbash::Atbash;
     ///
-    /// let ctext = String::from("ZGGZXPZGWZDM");
     /// let atbash = Atbash::new();
     ///
-    /// let ptext = atbash.decipher(ctext);
+    /// let ptext = atbash.decipher(String::from("ZGGZXPZGWZDM"));
     /// assert_eq!(ptext, "ATTACKATDAWN");
     /// ```
     fn decipher(&self, ctext: String) -> String {

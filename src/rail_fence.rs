@@ -23,10 +23,9 @@ impl Cipher for RailFence {
     /// use ciphers::Cipher;
     /// use ciphers::rail_fence::RailFence;
     ///
-    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let rail_fence = RailFence::new(4);
     ///
-    /// let ctext = rail_fence.encipher(ptext);
+    /// let ctext = rail_fence.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
     /// assert_eq!(ctext, "DTTFSEDHSWOTATFNEAALHCLEELEE");
     /// ```
     fn encipher(&self, ptext: String) -> String {

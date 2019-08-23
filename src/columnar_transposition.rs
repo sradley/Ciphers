@@ -24,11 +24,10 @@ impl Cipher for ColumnarTransposition {
     /// use ciphers::Cipher;
     /// use ciphers::columnar_transposition::ColumnarTransposition;
     ///
-    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let key = String::from("GERMAN");
     /// let ct = ColumnarTransposition::new(key);
     ///
-    /// let ctext = ct.encipher(ptext);
+    /// let ctext = ct.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
     /// assert_eq!(ctext, "NALCEHWTTDTTFSEELEEDSOAFEAHL")
     /// ```
     fn encipher(&self, ptext: String) -> String {
@@ -60,11 +59,10 @@ impl Cipher for ColumnarTransposition {
     /// use ciphers::Cipher;
     /// use ciphers::columnar_transposition::ColumnarTransposition;
     ///
-    /// let ctext = String::from("NALCEHWTTDTTFSEELEEDSOAFEAHL");
     /// let key = String::from("GERMAN");
     /// let ct = ColumnarTransposition::new(key);
     ///
-    /// let ptext = ct.decipher(ctext);
+    /// let ptext = ct.decipher(String::from("NALCEHWTTDTTFSEELEEDSOAFEAHL"));
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: String) -> String {

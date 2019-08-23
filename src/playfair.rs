@@ -26,11 +26,10 @@ impl Cipher for Playfair {
     /// use ciphers::Cipher;
     /// use ciphers::playfair::Playfair;
     ///
-    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let key = String::from("ZGPTFOIHMUWDRCNYKEQAXVSBL");
     /// let playfair = Playfair::new(key);
     ///
-    /// let ctext = playfair.encipher(ptext);
+    /// let ctext = playfair.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
     /// assert_eq!(ctext, "RKPAWRPMYSELZCLFXUZFRSNQBPSA");
     /// ```
     fn encipher(&self, ptext: String) -> String {
@@ -77,11 +76,10 @@ impl Cipher for Playfair {
     /// use ciphers::Cipher;
     /// use ciphers::playfair::Playfair;
     ///
-    /// let ctext = String::from("RKPAWRPMYSELZCLFXUZFRSNQBPSA");
     /// let key = String::from("ZGPTFOIHMUWDRCNYKEQAXVSBL");
     /// let playfair = Playfair::new(key);
     ///
-    /// let ptext = playfair.decipher(ctext);
+    /// let ptext = playfair.decipher(String::from("RKPAWRPMYSELZCLFXUZFRSNQBPSA"));
     /// assert_eq!(ptext, "DEFENDTHEXASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: String) -> String {

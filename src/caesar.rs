@@ -23,10 +23,9 @@ impl Cipher for Caesar {
     /// use ciphers::Cipher;
     /// use ciphers::caesar::Caesar;
     ///
-    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let caesar = Caesar::new(1);
     ///
-    /// let ctext = caesar.encipher(ptext);
+    /// let ctext = caesar.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
     /// assert_eq!(ctext, "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
     /// ```
     fn encipher(&self, ptext: String) -> String {
@@ -44,10 +43,9 @@ impl Cipher for Caesar {
     /// use ciphers::Cipher;
     /// use ciphers::caesar::Caesar;
     ///
-    /// let ctext = String::from("EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
     /// let caesar = Caesar::new(1);
     ///
-    /// let ptext = caesar.decipher(ctext);
+    /// let ptext = caesar.decipher(String::from("EFGFOEUIFFBTUXBMMPGUIFDBTUMF"));
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: String) -> String {

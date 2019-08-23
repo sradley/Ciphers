@@ -24,10 +24,9 @@ impl Cipher for Affine {
     /// use ciphers::Cipher;
     /// use ciphers::affine::Affine;
     ///
-    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let affine = Affine::new(7, 11);
     ///
-    /// let ctext = affine.encipher(ptext);
+    /// let ctext = affine.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
     /// assert_eq!(ctext, "GNUNYGOINNLHOJLKKFUOINZLHOKN");
     /// ```
     fn encipher(&self, ptext: String) -> String {
@@ -45,10 +44,9 @@ impl Cipher for Affine {
     /// use ciphers::Cipher;
     /// use ciphers::affine::Affine;
     ///
-    /// let ctext = String::from("GNUNYGOINNLHOJLKKFUOINZLHOKN");
     /// let affine = Affine::new(7, 11);
     ///
-    /// let ptext = affine.decipher(ctext);
+    /// let ptext = affine.decipher(String::from("GNUNYGOINNLHOJLKKFUOINZLHOKN"));
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: String) -> String {

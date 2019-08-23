@@ -33,12 +33,11 @@ impl Cipher for FourSquare {
     /// use ciphers::Cipher;
     /// use ciphers::four_square::FourSquare;
     ///
-    /// let ptext = String::from("ATTACKATDAWN");
     /// let key1 = String::from("ZGPTFOIHMUWDRCNYKEQAXVSBL");
     /// let key2 = String::from("MFNBDCRHSAXYOGVITUEWLQZKP");
     /// let four_square = FourSquare::new(key1, key2);
     ///
-    /// let ctext = four_square.encipher(ptext);
+    /// let ctext = four_square.encipher(String::from("ATTACKATDAWN"));
     /// assert_eq!(ctext, "TIYBFHTIZBSY");
     /// ```
     fn encipher(&self, ptext: String) -> String {
@@ -71,12 +70,11 @@ impl Cipher for FourSquare {
     /// use ciphers::Cipher;
     /// use ciphers::four_square::FourSquare;
     ///
-    /// let ctext = String::from("TIYBFHTIZBSY");
     /// let key1 = String::from("ZGPTFOIHMUWDRCNYKEQAXVSBL");
     /// let key2 = String::from("MFNBDCRHSAXYOGVITUEWLQZKP");
     /// let four_square = FourSquare::new(key1, key2);
     ///
-    /// let ptext = four_square.decipher(ctext);
+    /// let ptext = four_square.decipher( String::from("TIYBFHTIZBSY"));
     /// assert_eq!(ptext, "ATTACKATDAWN");
     /// ```
     fn decipher(&self, ctext: String) -> String {

@@ -23,11 +23,10 @@ impl Cipher for Autokey {
     /// use ciphers::Cipher;
     /// use ciphers::autokey::Autokey;
     ///
-    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let key = String::from("FORTIFICATION");
     /// let autokey = Autokey::new(key);
     ///
-    /// let ctext = autokey.encipher(ptext);
+    /// let ctext = autokey.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
     /// assert_eq!(ctext, "ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
     /// ```
     fn encipher(&self, ptext: String) -> String {
@@ -56,11 +55,10 @@ impl Cipher for Autokey {
     /// use ciphers::Cipher;
     /// use ciphers::autokey::Autokey;
     ///
-    /// let ctext = String::from("ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
     /// let key = String::from("FORTIFICATION");
     /// let autokey = Autokey::new(key);
     ///
-    /// let ptext = autokey.decipher(ctext);
+    /// let ptext = autokey.decipher(String::from("ISWXVIBJEXIGGZEQPBIMOIGAKMHE"));
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: String) -> String {

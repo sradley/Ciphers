@@ -27,12 +27,11 @@ impl Cipher for PolybiusSquare {
     /// use ciphers::Cipher;
     /// use ciphers::polybius_square::PolybiusSquare;
     ///
-    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
     /// let chars = String::from("ABCDE");
     /// let ps = PolybiusSquare::new(key, chars);
     ///
-    /// let ctext = ps.encipher(ptext);
+    /// let ctext = ps.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
     /// assert_eq!(ctext, "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
     /// ```
     fn encipher(&self, ptext: String) -> String {
@@ -55,12 +54,11 @@ impl Cipher for PolybiusSquare {
     /// use ciphers::Cipher;
     /// use ciphers::polybius_square::PolybiusSquare;
     ///
-    /// let ctext = String::from("CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
     /// let key = String::from("PHQGIUMEAYLNOFDXKRCVSTZWB");
     /// let chars = String::from("ABCDE");
     /// let ps = PolybiusSquare::new(key, chars);
     ///
-    /// let ptext = ps.decipher(ctext);
+    /// let ptext = ps.decipher(String::from("CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC"));
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: String) -> String {

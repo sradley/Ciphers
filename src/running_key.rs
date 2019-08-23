@@ -23,11 +23,10 @@ impl Cipher for RunningKey {
     /// use ciphers::Cipher;
     /// use ciphers::running_key::RunningKey;
     ///
-    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let key = String::from("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
     /// let running_key = RunningKey::new(key);
     ///
-    /// let ctext = running_key.encipher(ptext);
+    /// let ctext = running_key.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
     /// assert_eq!(ctext, "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
     /// ```
     fn encipher(&self, ptext: String) -> String {
@@ -55,11 +54,10 @@ impl Cipher for RunningKey {
     /// use ciphers::Cipher;
     /// use ciphers::running_key::RunningKey;
     ///
-    /// let ctext = String::from("KSBHBHLALIDMVGKYZKYAHXUAAWGM");
     /// let key = String::from("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
     /// let running_key = RunningKey::new(key);
     ///
-    /// let ptext = running_key.decipher(ctext);
+    /// let ptext = running_key.decipher(String::from("KSBHBHLALIDMVGKYZKYAHXUAAWGM"));
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: String) -> String {

@@ -23,6 +23,11 @@ impl Cipher for Beaufort {
     /// use ciphers::Cipher;
     /// use ciphers::beaufort::Beaufort;
     ///
+    /// let key = String::from("FORTIFICATION");
+    /// let beaufort = Beaufort::new(key);
+    /// 
+    /// let ctext = beaufort.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
+    /// assert_eq!(ctext, "CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
     /// ```
     fn encipher(&self, ptext: String) -> String {
         let key = self.key.as_bytes();
@@ -50,6 +55,11 @@ impl Cipher for Beaufort {
     /// use ciphers::Cipher;
     /// use ciphers::beaufort::Beaufort;
     ///
+    /// let key = String::from("FORTIFICATION");
+    /// let beaufort = Beaufort::new(key);
+    ///
+    /// let ptext = beaufort.decipher(String::from("CKMPVCPVWPIWUJOGIUAPVWRIWUUK"));
+    /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: String) -> String {
         self.encipher(ctext)

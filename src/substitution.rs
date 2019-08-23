@@ -24,11 +24,10 @@ impl Cipher for Substitution {
     /// use ciphers::Cipher;
     /// use ciphers::substitution::Substitution;
     ///
-    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
     /// let substitution = Substitution::new(key);
     ///
-    /// let ctext = substitution.encipher(ptext);
+    /// let ctext = substitution.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
     /// assert_eq!(ctext, "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
     /// ```
     fn encipher(&self, ptext: String) -> String {
@@ -45,11 +44,10 @@ impl Cipher for Substitution {
     /// use ciphers::Cipher;
     /// use ciphers::substitution::Substitution;
     ///
-    /// let ctext = String::from("GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
     /// let key = String::from("PHQGIUMEAYLNOFDXJKRCVSTZWB");
     /// let substitution = Substitution::new(key);
     ///
-    /// let ptext = substitution.decipher(ctext);
+    /// let ptext = substitution.decipher(String::from("GIUIFGCEIIPRCTPNNDUCEIQPRCNI"));
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: String) -> String {

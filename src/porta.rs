@@ -39,11 +39,10 @@ impl Cipher for Porta {
     /// use ciphers::Cipher;
     /// use ciphers::porta::Porta;
     ///
-    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let key = String::from("FORTIFICATION");
     /// let porta = Porta::new(key);
     ///
-    /// let ctext = porta.encipher(ptext);
+    /// let ctext = porta.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
     /// assert_eq!(ctext, "SYNNJSCVRNRLAHUTUKUCVRYRLANY");
     /// ```
     fn encipher(&self, ptext: String) -> String {
@@ -70,11 +69,10 @@ impl Cipher for Porta {
     /// use ciphers::Cipher;
     /// use ciphers::porta::Porta;
     ///
-    /// let ctext = String::from("SYNNJSCVRNRLAHUTUKUCVRYRLANY");
     /// let key = String::from("FORTIFICATION");
     /// let porta = Porta::new(key);
     ///
-    /// let ptext = porta.decipher(ctext);
+    /// let ptext = porta.decipher(String::from("SYNNJSCVRNRLAHUTUKUCVRYRLANY"));
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: String) -> String {

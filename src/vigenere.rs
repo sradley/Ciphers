@@ -23,11 +23,10 @@ impl Cipher for Vigenere {
     /// use ciphers::Cipher;
     /// use ciphers::vigenere::Vigenere;
     ///
-    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let key = String::from("FORTIFICATION");
     /// let vigenere = Vigenere::new(key);
     ///
-    /// let ctext = vigenere.encipher(ptext);
+    /// let ctext = vigenere.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
     /// assert_eq!(ctext, "ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
     /// ```
     fn encipher(&self, ptext: String) -> String {
@@ -53,11 +52,10 @@ impl Cipher for Vigenere {
     /// use ciphers::Cipher;
     /// use ciphers::vigenere::Vigenere;
     ///
-    /// let ctext = String::from("ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
     /// let key = String::from("FORTIFICATION");
     /// let vigenere = Vigenere::new(key);
     ///
-    /// let ptext = vigenere.decipher(ctext);
+    /// let ptext = vigenere.decipher(String::from("ISWXVIBJEXIGGBOCEWKBJEVIGGQS"));
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: String) -> String {

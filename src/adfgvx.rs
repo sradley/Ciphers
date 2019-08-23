@@ -27,12 +27,11 @@ impl Cipher for ADFGVX {
     /// use ciphers::Cipher;
     /// use ciphers::adfgvx::ADFGVX;
     ///
-    /// let ptext = String::from("DEFENDTHEEASTWALLOFTHECASTLE");
     /// let key = String::from("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8");
     /// let keyword = String::from("GERMAN");
     /// let adfgvx = ADFGVX::new(key, keyword);
     ///
-    /// let ctext = adfgvx.encipher(ptext);
+    /// let ctext = adfgvx.encipher(String::from("DEFENDTHEEASTWALLOFTHECASTLE"));
     /// assert_eq!(ctext, "FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX");
     /// ```
     fn encipher(&self, ptext: String) -> String {
@@ -48,12 +47,11 @@ impl Cipher for ADFGVX {
     /// use ciphers::Cipher;
     /// use ciphers::adfgvx::ADFGVX;
     ///
-    /// let ctext = String::from("FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX");
     /// let key = String::from("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8");
     /// let keyword = String::from("GERMAN");
     /// let adfgvx = ADFGVX::new(key, keyword);
     ///
-    /// let ptext = adfgvx.decipher(ctext);
+    /// let ptext = adfgvx.decipher(String::from("FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX"));
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: String) -> String {
