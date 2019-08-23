@@ -1,7 +1,7 @@
 use ciphers::adfgvx::ADFGVX;
 use ciphers::Cipher;
 
-/// `encipher_small` test function ...
+/// `encipher_small` test function.
 #[test]
 fn encipher_small() {
     let adfgvx = ADFGVX::new("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8", "GERMAN");
@@ -13,7 +13,7 @@ fn encipher_small() {
     );
 }
 
-/// `decipher_small` test function ...
+/// `decipher_small` test function.
 #[test]
 fn decipher_small() {
     let adfgvx = ADFGVX::new("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8", "GERMAN");
@@ -22,7 +22,7 @@ fn decipher_small() {
     assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `encipher_large` test function ...
+/// `encipher_large` test function.
 #[test]
 fn encipher_large() {
     let adfgvx = ADFGVX::new("KNGC3FWOAEQ1ZYXBP5LT0U2684SJ97VDHIRM", "ABCDEFGHIJKLMN");
@@ -35,7 +35,7 @@ fn encipher_large() {
     );
 }
 
-/// `decipher_large` test function ...
+/// `decipher_large` test function.
 #[test]
 fn decipher_large() {
     let adfgvx = ADFGVX::new("KNGC3FWOAEQ1ZYXBP5LT0U2684SJ97VDHIRM", "ABCDEFGHIJKLMN");

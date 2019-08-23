@@ -1,16 +1,34 @@
 //! # Vigenere Cipher
 //!
-//! ...
+//! Implements the functionality for the Vigenere cipher.
+//!
+//! The following is an excerpt from
+//! [Wikipedia](https://en.wikipedia.org/wiki/Vigenère_cipher).
+//! > The Vigenère cipher is a method of encrypting alphabetic text by using a series of interwoven
+//! Caesar ciphers, based on the letters of a keyword. It employs a form of polyalphabetic
+//! substitution.
+//!
+//! > First described by Giovan Battista Bellaso in 1553, the cipher is easy to understand and
+//! implement, but it resisted all attempts to break it until 1863, three centuries later. This
+//! earned it the description le chiffre indéchiffrable (French for 'the indecipherable cipher')
+//! Many people have tried to implement encryption schemes that are essentially Vigenère ciphers.
+//! In 1863, Friedrich Kasiski was the first to publish a general method of deciphering Vigenère
+//! ciphers.
+//!
+//! > In the 19th century the scheme was misattributed to Blaise de Vigenère (1523 – 1596), and so
+//! acquired its present name.
 
 use crate::{Cipher, TABULA_RECTA};
 
-/// `Vigenere` struct ...
+/// `Vigenere` struct contains the key for the Vigenere cipher, and implements the functionality of
+/// the `Cipher` trait using the Vigenere cipher method.
 pub struct Vigenere {
     key: String,
 }
 
 impl Vigenere {
-    /// `Vigenere` constructor ...
+    /// `Vigenere` constructor takes the key for the Vigenere cipher and returns a corresponding
+    /// Vigenere struct.
     pub fn new(key: &str) -> Self {
         Self {
             key: String::from(key),
@@ -19,7 +37,8 @@ impl Vigenere {
 }
 
 impl Cipher for Vigenere {
-    /// `encipher` method ...
+    /// `encipher` method enciphers the given plaintext (a str reference) using the Vignere cipher
+    /// and returns the ciphertext as a `String` object.
     ///
     /// ```
     /// use ciphers::Cipher;
@@ -47,7 +66,8 @@ impl Cipher for Vigenere {
         String::from_utf8(ctext).unwrap()
     }
 
-    /// `decipher` method ...
+    /// `decipher` method deciphers the given ciphertext (a str reference) using the Vigenere cipher
+    /// and returns the plaintext as a `String` object.
     ///
     /// ```
     /// use ciphers::Cipher;

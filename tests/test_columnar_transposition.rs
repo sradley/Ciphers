@@ -1,7 +1,7 @@
 use ciphers::columnar_transposition::ColumnarTransposition;
 use ciphers::Cipher;
 
-/// `encipher_small` test function ...
+/// `encipher_small` test function.
 #[test]
 fn encipher_small() {
     let ct = ColumnarTransposition::new("GERMAN");
@@ -10,7 +10,7 @@ fn encipher_small() {
     assert_eq!(ctext, "NALCEHWTTDTTFSEELEEDSOAFEAHL")
 }
 
-/// `decipher_small` test function ...
+/// `decipher_small` test function.
 #[test]
 fn decipher_small() {
     let ct = ColumnarTransposition::new("GERMAN");
@@ -19,7 +19,7 @@ fn decipher_small() {
     assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `encipher_large` test function ...
+/// `encipher_large` test function.
 #[test]
 fn encipher_large() {
     let ct = ColumnarTransposition::new("ZYXWVUTSRQPON");
@@ -31,7 +31,7 @@ fn encipher_large() {
     );
 }
 
-/// `decipher_large` test function ...
+/// `decipher_large` test function.
 #[test]
 fn decipher_large() {
     let ct = ColumnarTransposition::new("ZYXWVUTSRQPON");

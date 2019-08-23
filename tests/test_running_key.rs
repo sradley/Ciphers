@@ -1,7 +1,7 @@
 use ciphers::running_key::RunningKey;
 use ciphers::Cipher;
 
-/// `encipher_small` test function ...
+/// `encipher_small` test function.
 #[test]
 fn encipher_small() {
     let running_key = RunningKey::new("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
@@ -10,7 +10,7 @@ fn encipher_small() {
     assert_eq!(ctext, "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
 }
 
-/// `decipher_small` test function ...
+/// `decipher_small` test function.
 #[test]
 fn decipher_small() {
     let running_key = RunningKey::new("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
@@ -19,7 +19,7 @@ fn decipher_small() {
     assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `encipher_large` test function ...
+/// `encipher_large` test function.
 #[test]
 fn encipher_large() {
     let running_key = RunningKey::new("ZNNOOPPQQRRSSBCEFHIKLABDEGZNNOOPPQQRRSSBCEFHIKLABDEGA");
@@ -31,7 +31,7 @@ fn encipher_large() {
     );
 }
 
-/// `decipher_large` test function ...
+/// `decipher_large` test function.
 #[test]
 fn decipher_large() {
     let running_key = RunningKey::new("ZNNOOPPQQRRSSBCEFHIKLABDEGZNNOOPPQQRRSSBCEFHIKLABDEGA");

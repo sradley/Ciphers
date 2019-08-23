@@ -1,7 +1,7 @@
 use ciphers::polybius_square::PolybiusSquare;
 use ciphers::Cipher;
 
-/// `encipher_abcde_small` test function ...
+/// `encipher_abcde_small` test function.
 #[test]
 fn encipher_abcde_small() {
     let ps = PolybiusSquare::new("PHQGIUMEAYLNOFDXKRCVSTZWB", "ABCDE");
@@ -13,7 +13,7 @@ fn encipher_abcde_small() {
     );
 }
 
-/// `decipher_abcde_small` test function ...
+/// `decipher_abcde_small` test function.
 #[test]
 fn decipher_abcde_small() {
     let ps = PolybiusSquare::new("PHQGIUMEAYLNOFDXKRCVSTZWB", "ABCDE");
@@ -22,7 +22,7 @@ fn decipher_abcde_small() {
     assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `encipher_zebra_small` test function ...
+/// `encipher_zebra_small` test function.
 #[test]
 fn encipher_zebra_small() {
     let ps = PolybiusSquare::new("PHQGIUMEAYLNOFDXKRCVSTZWB", "ZEBRA");
@@ -34,7 +34,7 @@ fn encipher_zebra_small() {
     );
 }
 
-/// `decipher_zebra_small` test function ...
+/// `decipher_zebra_small` test function.
 #[test]
 fn decipher_zebra_small() {
     let ps = PolybiusSquare::new("PHQGIUMEAYLNOFDXKRCVSTZWB", "ZEBRA");
@@ -43,7 +43,7 @@ fn decipher_zebra_small() {
     assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `encipher_abcde_large` test function ...
+/// `encipher_abcde_large` test function.
 #[test]
 fn encipher_abcde_large() {
     let ps = PolybiusSquare::new("ZYXWVUTSRQPONMLKIHGFEDCBA", "ABCDE");
@@ -56,7 +56,7 @@ fn encipher_abcde_large() {
     );
 }
 
-/// `decipher_abcde_large` test function ...
+/// `decipher_abcde_large` test function.
 #[test]
 fn decipher_abcde_large() {
     let ps = PolybiusSquare::new("ZYXWVUTSRQPONMLKIHGFEDCBA", "ABCDE");
@@ -71,7 +71,7 @@ fn decipher_abcde_large() {
     );
 }
 
-/// `encipher_zebra_large` test function ...
+/// `encipher_zebra_large` test function.
 #[test]
 fn encipher_zebra_large() {
     let ps = PolybiusSquare::new("ZYXWVUTSRQPONMLKIHGFEDCBA", "ZEBRA");
@@ -84,7 +84,7 @@ fn encipher_zebra_large() {
     );
 }
 
-/// `decipher_zebra_large` test function ...
+/// `decipher_zebra_large` test function.
 #[test]
 fn decipher_zebra_large() {
     let ps = PolybiusSquare::new("ZYXWVUTSRQPONMLKIHGFEDCBA", "ZEBRA");

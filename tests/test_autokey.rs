@@ -1,7 +1,7 @@
 use ciphers::autokey::Autokey;
 use ciphers::Cipher;
 
-/// `encipher_small` test function ...
+/// `encipher_small` test function.
 #[test]
 fn encipher_small() {
     let autokey = Autokey::new("FORTIFICATION");
@@ -10,7 +10,7 @@ fn encipher_small() {
     assert_eq!(ctext, "ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
 }
 
-/// `decipher_small` test function ...
+/// `decipher_small` test function.
 #[test]
 fn decipher_small() {
     let autokey = Autokey::new("FORTIFICATION");
@@ -19,7 +19,7 @@ fn decipher_small() {
     assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `encipher_large` test function ...
+/// `encipher_large` test function.
 #[test]
 fn encipher_large() {
     let autokey = Autokey::new("ZYXWVUTSRQPON");
@@ -31,7 +31,7 @@ fn encipher_large() {
     );
 }
 
-/// `decipher_large` test function ...
+/// `decipher_large` test function.
 #[test]
 fn decipher_large() {
     let autokey = Autokey::new("ZYXWVUTSRQPON");

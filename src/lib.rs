@@ -1,8 +1,6 @@
 //! # Ciphers
 //!
-//! ...
-//!
-//! TODO: handle inputs
+//! Ciphers is a Rust library that provides implementations of many different classical ciphers.
 
 // re-exports
 pub mod adfgvx;
@@ -23,12 +21,14 @@ pub mod running_key;
 pub mod substitution;
 pub mod vigenere;
 
-/// `Cipher` trait ...
+/// `Cipher` trait defines the implementation for cipher functionality.
 pub trait Cipher {
-    /// `encipher` method ...
+    /// `encipher` method should take plaintext as a string reference, and return the ciphertext as
+    /// a String object.
     fn encipher(&self, ptext: &str) -> String;
 
-    /// `decipher` method ...
+    /// `decipher` method should take the ciphertext as a string reference, and return the plaintext
+    /// as a String object.
     fn decipher(&self, ctext: &str) -> String;
 }
 

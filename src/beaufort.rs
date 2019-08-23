@@ -1,16 +1,27 @@
 //! # Beaufort Cipher
 //!
-//! ...
+//! Implements the functionality for the Beaufort cipher.
+//!
+//! The following excerpt is from [Wikipedia](https://en.wikipedia.org/wiki/Beaufort_cipher).
+//! > The Beaufort cipher, created by Sir Francis Beaufort, is a substitution cipher similar to the
+//! Vigenère cipher, with a slightly modified enciphering mechanism and tableau. Its most famous
+//! application was in a rotor-based cipher machine, the Hagelin M-209.
+//!
+//! > The Beaufort cipher is based on the Beaufort square which is essentially the same as a
+//! Vigenère square but in reverse order starting with the letter "Z" in the first row, where the
+//! first row and the last column serve the same purpose.
 
 use crate::{Cipher, TABULA_RECTA};
 
-/// `Beaufort` struct ...
+/// `Beaufort` struct contains the key for the Beaufort cipher, and implements the functionality of
+/// the `Cipher` trait using the Beaufort cipher method.
 pub struct Beaufort {
     key: String,
 }
 
 impl Beaufort {
-    /// `Beaufort` constructor ...
+    /// `Beaufort` constructor takes the key for the Beaufort cipher and returns a corresponding
+    /// Beaufort struct.
     pub fn new(key: &str) -> Self {
         Self {
             key: String::from(key),
@@ -19,7 +30,8 @@ impl Beaufort {
 }
 
 impl Cipher for Beaufort {
-    /// `encipher` method ...
+    /// `encipher` method enciphers the given plaintext (a str reference) using the Beaufort cipher
+    /// and returns the ciphertext as a `String` object.
     ///
     /// ```
     /// use ciphers::Cipher;
@@ -50,7 +62,10 @@ impl Cipher for Beaufort {
         String::from_utf8(ctext).unwrap()
     }
 
-    /// `decipher` method ...
+    /// `decipher` method deciphers the given ciphertext (a str reference) using the Beaufort cipher
+    /// and returns the plaintext as a `String` object.
+    ///
+    /// Note that the Beaufort cipher is reciprocal.
     ///
     /// ```
     /// use ciphers::Cipher;

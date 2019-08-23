@@ -1,24 +1,39 @@
 //! # Affine Cipher
 //!
-//! ...
+//! Implements the functionality for the Affine cipher.
+//!
+//! The following is an excerpt from [Wikipedia](https://en.wikipedia.org/wiki/Affine_cipher).
+//! > The affine cipher is a type of monoalphabetic substitution cipher, wherein each letter in an
+//! alphabet is mapped to its numeric equivalent, encrypted using a simple mathematical function,
+//! and converted back to a letter.
+//!
+//! > The formula used means that each letter encrypts to one other letter, and back again, meaning
+//! the cipher is essentially a standard substitution cipher with a rule governing which letter goes
+//! to which.
+//!
+//! > As such, it has the weaknesses of all substitution ciphers. Each letter is enciphered with the
+//! function (ax + b) mod 26, where b is the magnitude of the shift.
 
 use crate::Cipher;
 
-/// `Affine` struct ...
+/// `Affine` struct stores the two keys for the Affine cipher, and implements the functionality of
+/// the `Cipher` trait using the Affine cipher method.
 pub struct Affine {
     a: i32,
     b: i32,
 }
 
 impl Affine {
-    /// `Affine` constructor ...
+    /// `Affine` constructor takes the two keys for the Affine cipher and returns a
+    /// corresponding Affine struct.
     pub fn new(a: i32, b: i32) -> Self {
         Self { a, b }
     }
 }
 
 impl Cipher for Affine {
-    /// `encipher` method ...
+    /// `encipher` method enciphers the given plaintext (a str reference) using the Affine cipher
+    /// and returns the ciphertext as a `String` object.
     ///
     /// ```
     /// use ciphers::Cipher;
@@ -38,7 +53,8 @@ impl Cipher for Affine {
         String::from_utf8(ctext).unwrap()
     }
 
-    /// `decipher` method ...
+    /// `decipher` method deciphers the given ciphertext (a str reference) using the Affine cipher
+    /// and returns the plaintext as a `String` object.
     ///
     /// ```W
     /// use ciphers::Cipher;

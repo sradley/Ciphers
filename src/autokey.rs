@@ -1,16 +1,30 @@
 //! # Autokey Cipher
 //!
-//! ...
+//! Implements the functionality for the Autokey cipher.
+//!
+//! The following excerpt is from [Wikipedia](https://en.wikipedia.org/wiki/Autokey_cipher).
+//! > An autokey cipher (also known as the autoclave cipher) is a cipher that incorporates the
+//! message (the plaintext) into the key. The key is generated from the message in some automated
+//! fashion, sometimes by selecting certain letters from the text or, more commonly, by adding a
+//! short primer key to the front of the message.
+//!
+//! > There are two forms of autokey cipher: key-autokey and text-autokey ciphers. A key-autokey
+//! cipher uses previous members of the keystream to determine the next element in the keystream. A
+//! text-autokey uses the previous message text to determine the next element in the keystream.
+//!
+//! > In modern cryptography, self-synchronising stream ciphers are autokey ciphers.
 
 use crate::{Cipher, TABULA_RECTA};
 
-/// `Autokey` struct ...
+/// `Autokey` struct contains the key for the Autokey cipher, and implements the functionality of
+/// the `Cipher` trait using the Autokey cipher method.
 pub struct Autokey {
     key: String,
 }
 
 impl Autokey {
-    /// `Autokey` constructor ...
+    /// `Autokey` constructor takes the key for the Autokey cipher and returns a corresponding
+    /// Autokey struct.
     pub fn new(key: &str) -> Self {
         Self {
             key: String::from(key),
@@ -19,7 +33,8 @@ impl Autokey {
 }
 
 impl Cipher for Autokey {
-    /// `encipher` method ...
+    /// `encipher` method enciphers the given plaintext (a str reference) using the Autokey cipher
+    /// and returns the ciphertext as a `String` object.
     ///
     /// ```
     /// use ciphers::Cipher;
@@ -50,7 +65,8 @@ impl Cipher for Autokey {
         String::from_utf8(ctext).unwrap()
     }
 
-    /// `decipher` method ...
+    /// `decipher` method deciphers the given ciphertext (a str reference) using the Autokey cipher
+    /// and returns the plaintext as a `String` object.
     ///
     /// ```
     /// use ciphers::Cipher;

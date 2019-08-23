@@ -1,17 +1,30 @@
 //! # Columnar Transposition Cipher
 //!
-//! ...
+//! Implements the functionality for the Columnar Transpositon cipher.
+//!
+//! The following excerpt is from
+//! [Wikipedia](https://en.wikipedia.org/wiki/Transposition_cipher#Columnar_transposition).
+//! > In a columnar transposition, the message is written out in rows of a fixed length, and then
+//! read out again column by column, and the columns are chosen in some scrambled order. Both the
+//! width of the rows and the permutation of the columns are usually defined by a keyword.
+//!
+//! > For example, the keyword ZEBRAS is of length 6 (so the rows are of length 6), and the
+//! permutation is defined by the alphabetical order of the letters in the keyword. In this case,
+//! the order would be "6 3 2 4 1 5".
 
 use crate::Cipher;
 use std::collections::HashMap;
 
-/// `ColumnarTransposition` struct ...
+/// `ColumnarTransposition` struct contains the key for the Columnar Transposition cipher, and
+/// implements the functionality of the `Cipher` trait using the Columnar Transposition cipher
+/// method.
 pub struct ColumnarTransposition {
     key: String,
 }
 
 impl ColumnarTransposition {
-    /// `ColumnarTransposition` constructor ...
+    /// `ColumnarTransposition` constructor takes the key for the Columnar Transposition cipher and
+    /// returns a corresponding ColumnarTransposition struct.
     pub fn new(key: &str) -> Self {
         Self {
             key: String::from(key),
@@ -20,7 +33,8 @@ impl ColumnarTransposition {
 }
 
 impl Cipher for ColumnarTransposition {
-    /// `encipher` method ...
+    /// `encipher` method enciphers the given plaintext (a str reference) using the Columnar
+    /// Transposition cipher and returns the ciphertext as a `String` object.
     ///
     /// ```
     /// use ciphers::Cipher;
@@ -54,7 +68,8 @@ impl Cipher for ColumnarTransposition {
         String::from_utf8(ctext).unwrap()
     }
 
-    /// `decipher` method ...
+    /// `decipher` method deciphers the given ciphertext (a str reference) using the Columnar
+    /// Transposition cipher and returns the plaintext as a `String` object.
     ///
     /// ```
     /// use ciphers::Cipher;

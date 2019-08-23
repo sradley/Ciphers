@@ -1,7 +1,7 @@
 use ciphers::caesar::Caesar;
 use ciphers::Cipher;
 
-/// `encipher_rot1_small` test function ...
+/// `encipher_rot1_small` test function.
 #[test]
 fn encipher_rot1_small() {
     let caesar = Caesar::new(1);
@@ -10,7 +10,7 @@ fn encipher_rot1_small() {
     assert_eq!(ctext, "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
 }
 
-/// `decipher_rot1_small` test function ...
+/// `decipher_rot1_small` test function.
 #[test]
 fn decipher_rot1_small() {
     let caesar = Caesar::new(1);
@@ -19,7 +19,7 @@ fn decipher_rot1_small() {
     assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `encipher_rot25_small` test function ...
+/// `encipher_rot25_small` test function.
 #[test]
 fn encipher_rot25_small() {
     let caesar = Caesar::new(25);
@@ -28,7 +28,7 @@ fn encipher_rot25_small() {
     assert_eq!(ctext, "CDEDMCSGDDZRSVZKKNESGDBZRSKD");
 }
 
-/// `decipher_rot25_small` test function ...
+/// `decipher_rot25_small` test function.
 #[test]
 fn decipher_rot25_small() {
     let caesar = Caesar::new(25);
@@ -37,7 +37,7 @@ fn decipher_rot25_small() {
     assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }
 
-/// `encipher_rot1_large` test function ...
+/// `encipher_rot1_large` test function.
 #[test]
 fn encipher_rot1_large() {
     let caesar = Caesar::new(1);
@@ -49,7 +49,7 @@ fn encipher_rot1_large() {
     );
 }
 
-/// `decipher_rot1_large` test function ...
+/// `decipher_rot1_large` test function.
 #[test]
 fn decipher_rot1_large() {
     let caesar = Caesar::new(1);
@@ -61,7 +61,7 @@ fn decipher_rot1_large() {
     );
 }
 
-/// `encipher_rot25_large` test function ...
+/// `encipher_rot25_large` test function.
 #[test]
 fn encipher_rot25_large() {
     let caesar = Caesar::new(25);
@@ -73,7 +73,7 @@ fn encipher_rot25_large() {
     );
 }
 
-/// `decipher_rot25_large` test function ...
+/// `decipher_rot25_large` test function.
 #[test]
 fn decipher_rot25_large() {
     let caesar = Caesar::new(25);

@@ -1,23 +1,32 @@
 //! # Rail-fence Cipher
 //!
-//! ...
+//! Implements the functionality for the Rail-fence cipher.
+//!
+//! The following is an excerpt from [Wikipedia](https://en.wikipedia.org/wiki/Rail_fence_cipher).
+//! > In the rail fence cipher, the plain text is written downwards and diagonally on successive
+//! "rails" of an imaginary fence, then moving up when the bottom rail is reached. When the top rail
+//! is reached, the message is written downwards again until the whole plaintext is written out. The
+//! message is then read off in rows.
 
 use crate::Cipher;
 
-/// `RailFence` struct ...
+/// `RailFence` struct contains the key for the Rail-fence cipher, and implements the functionality
+/// of the `Cipher` trait using the Rail-fence cipher method.
 pub struct RailFence {
     key: usize,
 }
 
 impl RailFence {
-    /// `RailFence` constructor ...
+    /// `RailFence` constructor takes the key for the Rail-fence cipher and returns a corresponding
+    /// RailFence struct.
     pub fn new(key: usize) -> Self {
         Self { key }
     }
 }
 
 impl Cipher for RailFence {
-    /// `encipher` method ...
+    /// `encipher` method enciphers the given plaintext (a str reference) using the Rail-fence
+    /// cipher and returns the ciphertext as a `String` object.
     ///
     /// ```
     /// use ciphers::Cipher;
@@ -60,7 +69,8 @@ impl Cipher for RailFence {
         String::from_utf8(ctext).unwrap()
     }
 
-    /// `decipher` method ...
+    /// `decipher` method deciphers the given ciphertext (a str reference) using the Rail-fence
+    /// cipher and returns the plaintext as a `String` object.
     ///
     /// ```
     /// use ciphers::Cipher;

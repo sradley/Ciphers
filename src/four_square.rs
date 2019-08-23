@@ -1,6 +1,19 @@
 //! # Four-Square Cipher
 //!
-//! ...
+//! Implements the functionality for the Four-Square cipher.
+//!
+//! The following excerpt is from [Wikipedia](https://en.wikipedia.org/wiki/Four-square_cipher).
+//! > The four-square cipher is a manual symmetric encryption technique. It was invented by the
+//! famous French cryptographer Felix Delastelle.
+//!
+//! > The technique encrypts pairs of letters (digraphs), and thus falls into a category of ciphers
+//! known as polygraphic substitution ciphers. This adds significant strength to the encryption when
+//! compared with monographic substitution ciphers which operate on single characters. The use of
+//! digraphs makes the four-square technique less susceptible to frequency analysis attacks, as the
+//! analysis must be done on 676 possible digraphs rather than just 26 for monographic substitution.
+//!
+//! > The frequency analysis of digraphs is possible, but considerably more difficult - and it
+//! generally requires a much larger ciphertext in order to be useful.
 //!
 //! TODO: handle unwraps (i.e. when trying to find a letter that's not in the alphabet)
 
@@ -11,14 +24,16 @@ static ALPHABET: [u8; 25] = [
     90,
 ];
 
-/// `FourSquare` struct ...
+/// `FourSquare` struct contains the two keys for the Four-Square cipher, and implements the
+/// functionality of the `Cipher` trait using the Four-Square cipher method.
 pub struct FourSquare {
     key1: String,
     key2: String,
 }
 
 impl FourSquare {
-    /// `FourSquare` constructor ...
+    /// `FourSquare` constructor constructor takes the two keys for the Four-Square cipher and
+    /// returns a corresponding FourSquare struct.
     pub fn new(key1: &str, key2: &str) -> Self {
         assert_eq!(key1.len(), 25);
         assert_eq!(key2.len(), 25);
@@ -30,7 +45,8 @@ impl FourSquare {
 }
 
 impl Cipher for FourSquare {
-    /// `encipher` method ...
+    /// `encipher` method enciphers the given plaintext (a str reference) using the Four-Square
+    /// cipher and returns the ciphertext as a `String` object.
     ///
     /// ```
     /// use ciphers::Cipher;
@@ -65,7 +81,8 @@ impl Cipher for FourSquare {
         String::from_utf8(ctext).unwrap()
     }
 
-    /// `decipher` method ...
+    /// `decipher` method deciphers the given ciphertext (a str reference) using the Four-Square
+    /// cipher and returns the plaintext as a `String` object.
     ///
     /// ```
     /// use ciphers::Cipher;

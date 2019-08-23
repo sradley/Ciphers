@@ -1,19 +1,28 @@
 //! # Polybius Square Cipher
 //!
-//! ...
+//! Implements the functionality for the Polybius Square cipher.
+//!
+//! The following excerpt is from [Wikipedia](https://en.wikipedia.org/wiki/Polybius_square).
+//! > In cryptography, the Polybius square, also known as the Polybius checkerboard, is a device
+//! invented by the Ancient Greeks Cleoxenus and Democleitus, and perfected by the Ancient Greek
+//! historian and scholar Polybius, for fractionating plaintext characters so that they can be
+//! represented by a smaller set of symbols.
 //!
 //! TODO: handle unwraps (i.e. when trying to find a character that's not in the square)
 
 use crate::Cipher;
 
-/// `PolybiusSquare` struct ...
+/// `PolybiusSquare` struct contains the key and specified characters for the Polybius Square
+/// cipher, and implements the functionality of the `Cipher` trait using the Polybius Square cipher
+/// method.
 pub struct PolybiusSquare {
     key: String,
     chars: String,
 }
 
 impl PolybiusSquare {
-    /// `PolybiusSquare` constructor ...
+    /// `PolybiusSquare` constructor takes the key and specified characters for the Polybius Square
+    /// cipher and returns a corresponding PolybiusSquare struct.
     pub fn new(key: &str, chars: &str) -> Self {
         assert_eq!(key.len(), chars.len() * chars.len());
         Self {
@@ -24,7 +33,8 @@ impl PolybiusSquare {
 }
 
 impl Cipher for PolybiusSquare {
-    /// `encipher` method ...
+    /// `encipher` method enciphers the given plaintext (a str reference) using the Polybius Square
+    /// cipher and returns the ciphertext as a `String` object.
     ///
     /// ```
     /// use ciphers::Cipher;
@@ -49,7 +59,8 @@ impl Cipher for PolybiusSquare {
         String::from_utf8(ctext).unwrap()
     }
 
-    /// `decipher` method ...
+    /// `decipher` method deciphers the given ciphertext (a str reference) using the Polybius Square
+    /// cipher and returns the plaintext as a `String` object.
     ///
     /// ```
     /// use ciphers::Cipher;

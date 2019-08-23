@@ -64,6 +64,6 @@ There are currently **6 different ciphers to be implemented**.
 
 ## 5. Known Issues
  * Very little in the way of input validation.
- * Can't handle lowercase characters or non-alpha characters.
+ * Can't handle lowercase characters.
  * The Columnar Transposition cipher can't deal with repeated letters in its
    keyword.

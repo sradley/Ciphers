@@ -1,7 +1,7 @@
 use ciphers::four_square::FourSquare;
 use ciphers::Cipher;
 
-/// `encipher_small` test function ...
+/// `encipher_small` test function.
 #[test]
 fn encipher_small() {
     let four_square = FourSquare::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", "MFNBDCRHSAXYOGVITUEWLQZKP");
@@ -10,7 +10,7 @@ fn encipher_small() {
     assert_eq!(ctext, "TIYBFHTIZBSY");
 }
 
-/// `decipher_small` test function ...
+/// `decipher_small` test function.
 #[test]
 fn decipher_small() {
     let four_square = FourSquare::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", "MFNBDCRHSAXYOGVITUEWLQZKP");
@@ -19,7 +19,7 @@ fn decipher_small() {
     assert_eq!(ptext, "ATTACKATDAWN");
 }
 
-/// `encipher_large` test function ...
+/// `encipher_large` test function.
 #[test]
 fn encipher_large() {
     let four_square = FourSquare::new("ABCDEFGHIJKLMNOPQRSTUVWXY", "ZYXWVUTSRQPONMLKJIHGFEDCB");
@@ -31,7 +31,7 @@ fn encipher_large() {
     );
 }
 
-/// `decipher_large` test function ...
+/// `decipher_large` test function.
 #[test]
 fn decipher_large() {
     let four_square = FourSquare::new("ABCDEFGHIJKLMNOPQRSTUVWXY", "ZYXWVUTSRQPONMLKJIHGFEDCB");
