@@ -41,3 +41,21 @@ fn decipher_large() {
         "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
     );
 }
+
+/// `encipher_lowercase` test function.
+#[test]
+fn encipher_lowercase() {
+    let four_square = FourSquare::new("zgptfoihmuwdrcnykeqaxvsbl", "mfnbdcrhsaxyogvituewlqzkp");
+
+    let ctext = four_square.encipher("attackatdawn");
+    assert_eq!(ctext, "TIYBFHTIZBSY");
+}
+
+/// `decipher_lowercase` test function.
+#[test]
+fn decipher_lowercase() {
+    let four_square = FourSquare::new("zgptfoihmuwdrcnykeqaxvsbl", "mfnbdcrhsaxyogvituewlqzkp");
+
+    let ptext = four_square.decipher("tiybfhtizbsy");
+    assert_eq!(ptext, "ATTACKATDAWN");
+}

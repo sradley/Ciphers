@@ -41,3 +41,21 @@ fn decipher_large() {
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
+
+/// `encipher_lowercase` test function.
+#[test]
+fn encipher_lowercase() {
+    let porta = Porta::new("fortification");
+
+    let ctext = porta.encipher("defendtheeastwallofthecastle");
+    assert_eq!(ctext, "SYNNJSCVRNRLAHUTUKUCVRYRLANY");
+}
+
+/// `decipher_lowercase` test function.
+#[test]
+fn decipher_lowercase() {
+    let porta = Porta::new("fortification");
+
+    let ptext = porta.decipher("synnjscvrnrlahutukucvryrlany");
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+}

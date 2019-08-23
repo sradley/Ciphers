@@ -41,3 +41,21 @@ fn decipher_large() {
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
+
+/// `encipher_lowercase` test function.
+#[test]
+fn encipher_lowercase() {
+    let rail_fence = RailFence::new(4);
+
+    let ctext = rail_fence.encipher("defendtheeastwallofthecastle");
+    assert_eq!(ctext, "DTTFSEDHSWOTATFNEAALHCLEELEE");
+}
+
+/// `decipher_lowercase` test function.
+#[test]
+fn decipher_lowercase() {
+    let rail_fence = RailFence::new(4);
+
+    let ptext = rail_fence.decipher("dttfsedhswotatfneaalhcleelee");
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+}

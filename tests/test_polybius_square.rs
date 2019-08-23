@@ -97,3 +97,24 @@ fn decipher_zebra_large() {
         "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
     );
 }
+
+/// `encipher_lowercase` test function.
+#[test]
+fn encipher_lowercase() {
+    let ps = PolybiusSquare::new("phqgiumeaylnofdxkrcvstzwb", "abcde");
+
+    let ctext = ps.encipher("defendtheeastwallofthecastle");
+    assert_eq!(
+        ctext,
+        "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC"
+    );
+}
+
+/// `decipher_lowercase` test function.
+#[test]
+fn decipher_lowercase() {
+    let ps = PolybiusSquare::new("phqgiumeaylnofdxkrcvstzwb", "abcde");
+
+    let ptext = ps.decipher("cebccdbccbceebabbcbcbdeaebedbdcacacccdebabbcddbdeaebcabc");
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+}

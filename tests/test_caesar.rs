@@ -83,3 +83,21 @@ fn decipher_rot25_large() {
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
+
+/// `encipher_lowercase` test function.
+#[test]
+fn encipher_lowercase() {
+    let caesar = Caesar::new(1);
+
+    let ctext = caesar.encipher("defendtheeastwallofthecastle");
+    assert_eq!(ctext, "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
+}
+
+/// `decipher_lowercase` test function.
+#[test]
+fn decipher_lowercase() {
+    let caesar = Caesar::new(1);
+
+    let ptext = caesar.decipher("efgfoeuiffbtuxbmmpguifdbtumf");
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+}

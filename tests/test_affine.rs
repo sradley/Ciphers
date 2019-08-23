@@ -41,3 +41,21 @@ fn decipher_large() {
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
+
+/// `encipher_lowercase` test function.
+#[test]
+fn encipher_lowercase() {
+    let affine = Affine::new(7, 11);
+
+    let ctext = affine.encipher("defendtheeastwallofthecastle");
+    assert_eq!(ctext, "GNUNYGOINNLHOJLKKFUOINZLHOKN");
+}
+
+/// `decipher_lowercase` test function.
+#[test]
+fn decipher_lowercase() {
+    let affine = Affine::new(7, 11);
+
+    let ptext = affine.decipher("gnunygoinnlhojlkkfuoinzlhokn");
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+}

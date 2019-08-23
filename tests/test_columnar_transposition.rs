@@ -6,7 +6,7 @@ fn encipher_small() {
     let ct = ColumnarTransposition::new("GERMAN");
 
     let ctext = ct.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
-    assert_eq!(ctext, "NALCEHWTTDTTFSEELEEDSOAFEAHL")
+    assert_eq!(ctext, "NALCEHWTTDTTFSEELEEDSOAFEAHL");
 }
 
 /// `decipher_small` test function.
@@ -40,4 +40,22 @@ fn decipher_large() {
         ptext,
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
+}
+
+/// `encipher_lowercase` test function.
+#[test]
+fn encipher_lowercase() {
+    let ct = ColumnarTransposition::new("german");
+
+    let ctext = ct.encipher("defendtheeastwallofthecastle");
+    assert_eq!(ctext, "NALCEHWTTDTTFSEELEEDSOAFEAHL");
+}
+
+/// `decipher_lowercase` test function.
+#[test]
+fn decipher_lowercase() {
+    let ct = ColumnarTransposition::new("german");
+
+    let ptext = ct.decipher("nalcehwttdttfseeleedsoafeahl");
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
 }

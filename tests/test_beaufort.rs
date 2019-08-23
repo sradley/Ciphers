@@ -41,3 +41,21 @@ fn decipher_large() {
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
+
+/// `encipher_lowercase` test function.
+#[test]
+fn encipher_lowercase() {
+    let beaufort = Beaufort::new("fortification");
+
+    let ctext = beaufort.encipher("defendtheeastwallofthecastle");
+    assert_eq!(ctext, "CKMPVCPVWPIWUJOGIUAPVWRIWUUK");
+}
+
+/// `decipher_lowercase` test function.
+#[test]
+fn decipher_lowercase() {
+    let beaufort = Beaufort::new("fortification");
+
+    let ptext = beaufort.decipher("ckmpvcpvwpiwujogiuapvwriwuuk");
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+}

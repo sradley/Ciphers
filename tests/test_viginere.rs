@@ -41,3 +41,21 @@ fn decipher_large() {
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
+
+/// `encipher_lowercase` test function.
+#[test]
+fn encipher_lowercase() {
+    let vigenere = Vigenere::new("fortification");
+
+    let ctext = vigenere.encipher("defendtheeastwallofthecastle");
+    assert_eq!(ctext, "ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
+}
+
+/// `decipher_lowercase` test function.
+#[test]
+fn decipher_lowercase() {
+    let vigenere = Vigenere::new("fortification");
+
+    let ptext = vigenere.decipher("iswxvibjexiggbocewkbjeviggqs");
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+}

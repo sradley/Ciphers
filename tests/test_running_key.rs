@@ -41,3 +41,21 @@ fn decipher_large() {
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
+
+/// `encipher_lowercase` test function.
+#[test]
+fn encipher_lowercase() {
+    let running_key = RunningKey::new("howdoestheduckknowthatsaidvictor");
+
+    let ctext = running_key.encipher("defendtheeastwallofthecastle");
+    assert_eq!(ctext, "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
+}
+
+/// `decipher_lowercase` test function.
+#[test]
+fn decipher_lowercase() {
+    let running_key = RunningKey::new("howdoestheduckknowthatsaidvictor");
+
+    let ptext = running_key.decipher("ksbhbhlalidmvgkyzkyahxuaawgm");
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+}

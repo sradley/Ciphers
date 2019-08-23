@@ -48,3 +48,24 @@ fn decipher_large() {
         "ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ"
     );
 }
+
+/// `encipher_lowercase` test function.
+#[test]
+fn encipher_lowercase() {
+    let adfgvx = ADFGVX::new("ph0qg64mea1yl2nofdxkr3cvs5zw7bj9uti8", "german");
+
+    let ctext = adfgvx.encipher("defendtheeastwallofthecastle");
+    assert_eq!(
+        ctext,
+        "FFDVDFADFXFGFGAVFAFFDXDXFFDVDFFDGGAGVGVXFAGGDGADFADVFXGX"
+    );
+}
+
+/// `decipher_lowercase` test function.
+#[test]
+fn decipher_lowercase() {
+    let adfgvx = ADFGVX::new("ph0qg64mea1yl2nofdxkr3cvs5zw7bj9uti8", "german");
+
+    let ptext = adfgvx.decipher("ffdvdfadfxfgfgavfaffdxdxffdvdffdggagvgvxfaggdgadfadvfxgx");
+    assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
+}

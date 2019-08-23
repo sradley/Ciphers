@@ -41,3 +41,21 @@ fn decipher_large() {
         "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     );
 }
+
+/// `encipher_lowercase` test function.
+#[test]
+fn encipher_lowercase() {
+    let atbash = Atbash::new();
+
+    let ctext = atbash.encipher("attackatdawn");
+    assert_eq!(ctext, "ZGGZXPZGWZDM");
+}
+
+/// `decipher_lowercase` test function.
+#[test]
+fn decipher_lowercase() {
+    let atbash = Atbash::new();
+
+    let ptext = atbash.decipher("zggzxpzgwzdm");
+    assert_eq!(ptext, "ATTACKATDAWN");
+}

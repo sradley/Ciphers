@@ -41,3 +41,21 @@ fn decipher_large() {
         "ABCDEFGHIXKLMNOPQRSTUVWXYZABCDEFGHIXKLMNOPQRSTUVWXYZ"
     );
 }
+
+/// `encipher_lowercase` test function.
+#[test]
+fn encipher_lowercase() {
+    let playfair = Playfair::new("zgptfoihmuwdrcnykeqaxvsbl");
+
+    let ctext = playfair.encipher("defendtheeastwallofthecastle");
+    assert_eq!(ctext, "RKPAWRPMYSELZCLFXUZFRSNQBPSA");
+}
+
+/// `decipher_lowercase` test function.
+#[test]
+fn decipher_lowercase() {
+    let playfair = Playfair::new("zgptfoihmuwdrcnykeqaxvsbl");
+
+    let ptext = playfair.decipher("rkpawrpmyselzclfxuzfrsnqbpsa");
+    assert_eq!(ptext, "DEFENDTHEXASTWALLOFTHECASTLE");
+}
