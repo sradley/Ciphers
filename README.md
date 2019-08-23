@@ -2,29 +2,26 @@
 Ciphers is a Rust library that provides implementations of several different
 classical ciphers.
 
-Currently supported ciphers:
- * Affine
- * Atbash
- * Autokey
- * Beaufort
- * Caesar
- * Columnar Transposition
- * Polybius Square
- * Porta
- * Rail-fence
- * Running Key
- * Simple Substitution
- * Vigenere
- * Four-Square
- * Playfair
- * ADFGX
- * ADFGVX
+## Table of Contents
+1. [Supported Ciphers]()
+2. [Installation]()
+3. [Example Usage]()
+4. [To be Implemented]()
+5. [Known Issues]()
 
-## 1. Installation
+## 1. Supported Ciphers
+| Transposition          | Monoalphabetic      | Polyalphabetic | Polygraphic | Other  |
+| ---------------------- | ------------------- | -------------- | ----------- | ------ |
+| Rail-fence             | Simple Substitution | Vigenere       | Playfair    | ADFGX  |
+| Columnar Transposition | Caesar              | Beaufort       | Four-Square | ADFGVX |
+|                        | Affine              | Autokey        |             |        |
+|                        | Polybius Square     | Running Key    |             |        |
+|                        | Atbash              | Porta          |             |        |
+
+## 2. Installation
 ...
 
-## 2. Example Usage
-
+## 3. Example Usage
 E.g. using the Vigenere cipher.
 ```rust
 use ciphers::Cipher;
@@ -42,17 +39,14 @@ let ptext = vigenere.decipher(ctext);
 println!("{}", ptext);
 ```
 
-## 3. To be Implemented
- * Rot13
- * Gronsfeld
- * Bifid
- * Trifid
- * Transposition
- * Straddle Checkerboard
- * Hill
+## 4. To be Implemented
+| Transposition | Monoalphabetic | Polyalphabetic | Polygraphic | Other                 |
+| ------------- | -------------- | -------------- | ----------- | --------------------- |
+|               | Rot13          | Gronsfeld      | Hill        | Bifid                 |
+|               |                |                |             | Trifid                |
+|               |                |                |             | Straddle Checkerboard |
 
-## 4. Current Issues
-
+## 5. Known Issues
  * Very little in the way of input validation.
  * Can't handle lowercase characters or non-alpha characters.
  * The Columnar Transposition cipher can't deal with repeated letters in its
