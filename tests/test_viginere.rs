@@ -1,5 +1,4 @@
-use ciphers::vigenere::Vigenere;
-use ciphers::Cipher;
+use ciphers::{Cipher, Vigenere};
 
 /// `encipher_small` test function.
 #[test]

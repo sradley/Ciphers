@@ -1,5 +1,4 @@
-use ciphers::rail_fence::RailFence;
-use ciphers::Cipher;
+use ciphers::{Cipher, RailFence};
 
 /// `encipher_small` test function.
 #[test]

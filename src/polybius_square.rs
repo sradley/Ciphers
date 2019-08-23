@@ -37,8 +37,7 @@ impl Cipher for PolybiusSquare {
     /// cipher and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::polybius_square::PolybiusSquare;
+    /// use ciphers::{Cipher, PolybiusSquare};
     ///
     /// let ps = PolybiusSquare::new("PHQGIUMEAYLNOFDXKRCVSTZWB", "ABCDE");
     ///
@@ -63,8 +62,7 @@ impl Cipher for PolybiusSquare {
     /// cipher and returns the plaintext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::polybius_square::PolybiusSquare;
+    /// use ciphers::{Cipher, PolybiusSquare};
     ///
     /// let ps = PolybiusSquare::new("PHQGIUMEAYLNOFDXKRCVSTZWB", "ABCDE");
     ///

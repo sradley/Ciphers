@@ -32,8 +32,7 @@ ciphers = "0.1.0"
 E.g. using the **Vigenere** cipher.
 
 ```rust
-use ciphers::Cipher;
-use ciphers::vigenere::Vigenere;
+use ciphers::{Cipher, Vigenere};
 
 fn main() {
     let vigenere = Vigenere::new("EXAMPLEKEY");

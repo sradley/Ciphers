@@ -1,5 +1,4 @@
-use ciphers::porta::Porta;
-use ciphers::Cipher;
+use ciphers::{Cipher, Porta};
 
 /// `encipher_small` test function.
 #[test]

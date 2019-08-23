@@ -1,5 +1,4 @@
-use ciphers::caesar::Caesar;
-use ciphers::Cipher;
+use ciphers::{Caesar, Cipher};
 
 /// `encipher_rot1_small` test function.
 #[test]

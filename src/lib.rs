@@ -2,24 +2,40 @@
 //!
 //! Ciphers is a Rust library that provides implementations of many different classical ciphers.
 
+mod adfgvx;
+mod adfgx;
+mod affine;
+mod atbash;
+mod autokey;
+mod beaufort;
+mod caesar;
+mod columnar_transposition;
+mod four_square;
+mod playfair;
+mod polybius_square;
+mod porta;
+mod rail_fence;
+mod running_key;
+mod substitution;
+mod vigenere;
+
 // re-exports
-pub mod adfgvx;
-pub mod adfgx;
-pub mod affine;
-pub mod atbash;
-pub mod autokey;
-pub mod beaufort;
-pub mod caesar;
-pub mod columnar_transposition;
-pub mod four_square;
-pub mod playfair;
-pub mod polybius_square;
-pub mod porta;
-pub mod rail_fence;
-pub mod rot13;
-pub mod running_key;
-pub mod substitution;
-pub mod vigenere;
+pub use adfgvx::ADFGVX;
+pub use adfgx::ADFGX;
+pub use affine::Affine;
+pub use atbash::Atbash;
+pub use autokey::Autokey;
+pub use beaufort::Beaufort;
+pub use caesar::Caesar;
+pub use columnar_transposition::ColumnarTransposition;
+pub use four_square::FourSquare;
+pub use playfair::Playfair;
+pub use polybius_square::PolybiusSquare;
+pub use porta::Porta;
+pub use rail_fence::RailFence;
+pub use running_key::RunningKey;
+pub use substitution::Substitution;
+pub use vigenere::Vigenere;
 
 /// `Cipher` trait defines the implementation for cipher functionality.
 pub trait Cipher {

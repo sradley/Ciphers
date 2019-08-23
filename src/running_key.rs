@@ -31,8 +31,7 @@ impl Cipher for RunningKey {
     /// cipher and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::running_key::RunningKey;
+    /// use ciphers::{Cipher, RunningKey};
     ///
     /// let running_key = RunningKey::new("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
     ///
@@ -62,8 +61,7 @@ impl Cipher for RunningKey {
     /// cipher and returns the plaintext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::running_key::RunningKey;
+    /// use ciphers::{Cipher, RunningKey};
     ///
     /// let running_key = RunningKey::new("HOWDOESTHEDUCKKNOWTHATSAIDVICTOR");
     ///

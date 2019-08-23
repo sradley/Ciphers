@@ -49,8 +49,7 @@ impl Cipher for FourSquare {
     /// cipher and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::four_square::FourSquare;
+    /// use ciphers::{Cipher, FourSquare};
     ///
     /// let four_square = FourSquare::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", "MFNBDCRHSAXYOGVITUEWLQZKP");
     ///
@@ -85,8 +84,7 @@ impl Cipher for FourSquare {
     /// cipher and returns the plaintext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::four_square::FourSquare;
+    /// use ciphers::{Cipher, FourSquare};
     ///
     /// let four_square = FourSquare::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", "MFNBDCRHSAXYOGVITUEWLQZKP");
     ///

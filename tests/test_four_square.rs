@@ -1,5 +1,4 @@
-use ciphers::four_square::FourSquare;
-use ciphers::Cipher;
+use ciphers::{Cipher, FourSquare};
 
 /// `encipher_small` test function.
 #[test]

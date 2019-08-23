@@ -40,8 +40,7 @@ impl Cipher for ADFGX {
     /// and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::adfgx::ADFGX;
+    /// use ciphers::{Cipher, ADFGX};
     ///
     /// let adfgx = ADFGX::new("PHQGMEAYNOFDXKRCVSZWBUTIL", "GERMAN");
     ///
@@ -59,8 +58,7 @@ impl Cipher for ADFGX {
     /// and returns the plaintext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::adfgx::ADFGX;
+    /// use ciphers::{Cipher, ADFGX};
     ///
     /// let adfgx = ADFGX::new("PHQGMEAYNOFDXKRCVSZWBUTIL", "GERMAN");
     ///

@@ -1,5 +1,4 @@
-use ciphers::affine::Affine;
-use ciphers::Cipher;
+use ciphers::{Affine, Cipher};
 
 /// `encipher_small` test function.
 #[test]

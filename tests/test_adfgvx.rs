@@ -1,5 +1,4 @@
-use ciphers::adfgvx::ADFGVX;
-use ciphers::Cipher;
+use ciphers::{Cipher, ADFGVX};
 
 /// `encipher_small` test function.
 #[test]

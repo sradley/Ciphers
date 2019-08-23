@@ -1,5 +1,4 @@
-use ciphers::substitution::Substitution;
-use ciphers::Cipher;
+use ciphers::{Cipher, Substitution};
 
 /// `encipher_small` test function.
 #[test]

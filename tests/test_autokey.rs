@@ -1,5 +1,4 @@
-use ciphers::autokey::Autokey;
-use ciphers::Cipher;
+use ciphers::{Autokey, Cipher};
 
 /// `encipher_small` test function.
 #[test]

@@ -36,8 +36,7 @@ impl Cipher for Affine {
     /// and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::affine::Affine;
+    /// use ciphers::{Cipher, Affine};
     ///
     /// let affine = Affine::new(7, 11);
     ///
@@ -57,8 +56,7 @@ impl Cipher for Affine {
     /// and returns the plaintext as a `String` object.
     ///
     /// ```W
-    /// use ciphers::Cipher;
-    /// use ciphers::affine::Affine;
+    /// use ciphers::{Cipher, Affine};
     ///
     /// let affine = Affine::new(7, 11);
     ///

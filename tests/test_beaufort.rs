@@ -1,5 +1,4 @@
-use ciphers::beaufort::Beaufort;
-use ciphers::Cipher;
+use ciphers::{Beaufort, Cipher};
 
 /// `encipher_small` test function.
 #[test]

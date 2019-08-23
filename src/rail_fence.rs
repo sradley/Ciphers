@@ -29,8 +29,7 @@ impl Cipher for RailFence {
     /// cipher and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::rail_fence::RailFence;
+    /// use ciphers::{Cipher, RailFence};
     ///
     /// let rail_fence = RailFence::new(4);
     ///
@@ -73,8 +72,7 @@ impl Cipher for RailFence {
     /// cipher and returns the plaintext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::rail_fence::RailFence;
+    /// use ciphers::{Cipher, RailFence};
     ///
     /// let rail_fence = RailFence::new(4);
     ///

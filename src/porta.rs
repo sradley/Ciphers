@@ -48,8 +48,7 @@ impl Cipher for Porta {
     /// and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::porta::Porta;
+    /// use ciphers::{Cipher, Porta};
     ///
     /// let porta = Porta::new("FORTIFICATION");
     ///
@@ -78,8 +77,7 @@ impl Cipher for Porta {
     /// and returns the plaintext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::porta::Porta;
+    /// use ciphers::{Cipher, Porta};
     ///
     /// let porta = Porta::new("FORTIFICATION");
     ///

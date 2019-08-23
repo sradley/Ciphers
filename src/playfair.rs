@@ -43,8 +43,7 @@ impl Cipher for Playfair {
     /// and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::playfair::Playfair;
+    /// use ciphers::{Cipher, Playfair};
     ///
     /// let playfair = Playfair::new("ZGPTFOIHMUWDRCNYKEQAXVSBL");
     ///
@@ -93,8 +92,7 @@ impl Cipher for Playfair {
     /// and returns the plaintext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::playfair::Playfair;
+    /// use ciphers::{Cipher, Playfair};
     ///
     /// let playfair = Playfair::new("ZGPTFOIHMUWDRCNYKEQAXVSBL");
     ///

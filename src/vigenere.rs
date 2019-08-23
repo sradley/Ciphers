@@ -41,8 +41,7 @@ impl Cipher for Vigenere {
     /// and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::vigenere::Vigenere;
+    /// use ciphers::{Cipher, Vigenere};
     ///
     /// let vigenere = Vigenere::new("FORTIFICATION");
     ///
@@ -70,8 +69,7 @@ impl Cipher for Vigenere {
     /// and returns the plaintext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::vigenere::Vigenere;
+    /// use ciphers::{Cipher, Vigenere};
     ///
     /// let vigenere = Vigenere::new("FORTIFICATION");
     ///

@@ -36,8 +36,7 @@ impl Cipher for Caesar {
     /// and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::caesar::Caesar;
+    /// use ciphers::{Cipher, Caesar};
     ///
     /// let caesar = Caesar::new(1);
     ///
@@ -57,8 +56,7 @@ impl Cipher for Caesar {
     /// and returns the plaintext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::caesar::Caesar;
+    /// use ciphers::{Cipher, Caesar};
     ///
     /// let caesar = Caesar::new(1);
     ///

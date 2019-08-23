@@ -1,5 +1,4 @@
-use ciphers::polybius_square::PolybiusSquare;
-use ciphers::Cipher;
+use ciphers::{Cipher, PolybiusSquare};
 
 /// `encipher_abcde_small` test function.
 #[test]

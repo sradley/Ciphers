@@ -1,5 +1,4 @@
-use ciphers::playfair::Playfair;
-use ciphers::Cipher;
+use ciphers::{Cipher, Playfair};
 
 /// `encipher_small` test function.
 #[test]

@@ -1,5 +1,4 @@
-use ciphers::columnar_transposition::ColumnarTransposition;
-use ciphers::Cipher;
+use ciphers::{Cipher, ColumnarTransposition};
 
 /// `encipher_small` test function.
 #[test]

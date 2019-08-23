@@ -38,8 +38,7 @@ impl Cipher for Substitution {
     /// Substitution cipher and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::substitution::Substitution;
+    /// use ciphers::{Cipher, Substitution};
     ///
     /// let substitution = Substitution::new("PHQGIUMEAYLNOFDXJKRCVSTZWB");
     ///
@@ -58,8 +57,7 @@ impl Cipher for Substitution {
     /// Substitution cipher and returns the plaintext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::substitution::Substitution;
+    /// use ciphers::{Cipher, Substitution};
     ///
     /// let substitution = Substitution::new("PHQGIUMEAYLNOFDXJKRCVSTZWB");
     ///

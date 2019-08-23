@@ -37,8 +37,7 @@ impl Cipher for ColumnarTransposition {
     /// Transposition cipher and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::columnar_transposition::ColumnarTransposition;
+    /// use ciphers::{Cipher, ColumnarTransposition};
     ///
     /// let ct = ColumnarTransposition::new("GERMAN");
     ///
@@ -72,8 +71,7 @@ impl Cipher for ColumnarTransposition {
     /// Transposition cipher and returns the plaintext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::columnar_transposition::ColumnarTransposition;
+    /// use ciphers::{Cipher, ColumnarTransposition};
     ///
     /// let ct = ColumnarTransposition::new("GERMAN");
     ///

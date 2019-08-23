@@ -30,8 +30,7 @@ impl Cipher for Atbash {
     /// and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::atbash::Atbash;
+    /// use ciphers::{Cipher, Atbash};
     ///
     /// let atbash = Atbash::new();
     ///
@@ -50,8 +49,7 @@ impl Cipher for Atbash {
     /// Note that the Atbash cipher is reciprocal.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::atbash::Atbash;
+    /// use ciphers::{Cipher, Atbash};
     ///
     /// let atbash = Atbash::new();
     ///

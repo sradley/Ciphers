@@ -1,5 +1,4 @@
-use ciphers::atbash::Atbash;
-use ciphers::Cipher;
+use ciphers::{Atbash, Cipher};
 
 /// `encipher_small` test function.
 #[test]

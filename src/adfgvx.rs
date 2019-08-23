@@ -42,8 +42,7 @@ impl Cipher for ADFGVX {
     /// and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::adfgvx::ADFGVX;
+    /// use ciphers::{Cipher, ADFGVX};
     ///
     /// let adfgvx = ADFGVX::new("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8", "GERMAN");
     ///
@@ -61,8 +60,7 @@ impl Cipher for ADFGVX {
     /// and returns the plaintext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::adfgvx::ADFGVX;
+    /// use ciphers::{Cipher, ADFGVX};
     ///
     /// let adfgvx = ADFGVX::new("PH0QG64MEA1YL2NOFDXKR3CVS5ZW7BJ9UTI8", "GERMAN");
     ///

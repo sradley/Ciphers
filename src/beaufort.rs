@@ -34,8 +34,7 @@ impl Cipher for Beaufort {
     /// and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::beaufort::Beaufort;
+    /// use ciphers::{Cipher, Beaufort};
     ///
     /// let beaufort = Beaufort::new("FORTIFICATION");
     ///
@@ -68,8 +67,7 @@ impl Cipher for Beaufort {
     /// Note that the Beaufort cipher is reciprocal.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::beaufort::Beaufort;
+    /// use ciphers::{Cipher, Beaufort};
     ///
     /// let beaufort = Beaufort::new("FORTIFICATION");
     ///

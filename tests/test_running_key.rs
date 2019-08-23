@@ -1,5 +1,4 @@
-use ciphers::running_key::RunningKey;
-use ciphers::Cipher;
+use ciphers::{Cipher, RunningKey};
 
 /// `encipher_small` test function.
 #[test]

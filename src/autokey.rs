@@ -37,8 +37,7 @@ impl Cipher for Autokey {
     /// and returns the ciphertext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::autokey::Autokey;
+    /// use ciphers::{Cipher, Autokey};
     ///
     /// let autokey = Autokey::new("FORTIFICATION");
     ///
@@ -69,8 +68,7 @@ impl Cipher for Autokey {
     /// and returns the plaintext as a `String` object.
     ///
     /// ```
-    /// use ciphers::Cipher;
-    /// use ciphers::autokey::Autokey;
+    /// use ciphers::{Cipher, Autokey};
     ///
     /// let autokey = Autokey::new("FORTIFICATION");
     ///
