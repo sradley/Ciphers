@@ -35,10 +35,10 @@ E.g. using the **Vigenere** cipher.
 use ciphers::{Cipher, Vigenere};
 
 fn main() {
-    let vigenere = Vigenere::new("EXAMPLEKEY");
+    let vigenere = Vigenere::new("examplekey");
 
     // encipher
-    let ctext = vigenere.encipher("SOMEEXAMPLETEXTHERE");
+    let ctext = vigenere.encipher("someexampletexthere");
     println!("ciphertext: {}", ctext);
 
     // decipher
@@ -63,6 +63,5 @@ There are currently **6 different ciphers to be implemented**.
 
 ## 5. Backlog
  * Input validation.
- * Handling lowercase characters.
  * The Columnar Transposition cipher can't deal with repeated letters in its
    keyword.

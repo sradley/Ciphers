@@ -26,8 +26,8 @@ impl PolybiusSquare {
     pub fn new(key: &str, chars: &str) -> Self {
         assert_eq!(key.len(), chars.len() * chars.len());
         Self {
-            key: String::from(key),
-            chars: String::from(chars),
+            key: key.to_ascii_uppercase(),
+            chars: chars.to_ascii_uppercase(),
         }
     }
 }
@@ -45,6 +45,7 @@ impl Cipher for PolybiusSquare {
     /// assert_eq!(ctext, "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
     /// ```
     fn encipher(&self, ptext: &str) -> String {
+        let ptext = ptext.to_ascii_uppercase();
         let chars = self.chars.as_bytes();
         let mut ctext: Vec<u8> = Vec::with_capacity(ptext.len());
 
@@ -71,6 +72,7 @@ impl Cipher for PolybiusSquare {
     /// ```
     fn decipher(&self, ctext: &str) -> String {
         assert_eq!(ctext.len() % 2, 0);
+        let ctext = ctext.to_ascii_uppercase();
 
         let key = self.key.as_bytes();
         let ctext = ctext.as_bytes();

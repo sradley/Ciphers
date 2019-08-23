@@ -44,6 +44,7 @@ impl Cipher for Caesar {
     /// assert_eq!(ctext, "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
     /// ```
     fn encipher(&self, ptext: &str) -> String {
+        let ptext = ptext.to_ascii_uppercase();
         let ctext = ptext
             .bytes()
             .map(move |c| (c + self.key - 65) % 26 + 65)
@@ -64,6 +65,7 @@ impl Cipher for Caesar {
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> String {
+        let ctext = ctext.to_ascii_uppercase();
         let ptext = ctext
             .bytes()
             .map(move |c| (c + (26 - self.key) - 65) % 26 + 65)

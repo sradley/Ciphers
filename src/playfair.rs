@@ -33,7 +33,7 @@ impl Playfair {
     pub fn new(key: &str) -> Self {
         assert_eq!(key.len(), 25);
         Self {
-            key: String::from(key),
+            key: key.to_ascii_uppercase(),
         }
     }
 }
@@ -51,6 +51,7 @@ impl Cipher for Playfair {
     /// assert_eq!(ctext, "RKPAWRPMYSELZCLFXUZFRSNQBPSA");
     /// ```
     fn encipher(&self, ptext: &str) -> String {
+        let ptext = ptext.to_ascii_uppercase();
         let mut ptext: Vec<u8> = ptext.bytes().collect();
         if ptext.len() % 2 != 0 {
             ptext.push(88);
@@ -100,6 +101,7 @@ impl Cipher for Playfair {
     /// assert_eq!(ptext, "DEFENDTHEXASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> String {
+        let ctext = ctext.to_ascii_uppercase();
         let ctext = ctext.as_bytes();
         let key = self.key.as_bytes();
 

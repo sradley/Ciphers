@@ -38,6 +38,7 @@ impl Cipher for Atbash {
     /// assert_eq!(ctext, "ZGGZXPZGWZDM");
     /// ```
     fn encipher(&self, ptext: &str) -> String {
+        let ptext = ptext.to_ascii_uppercase();
         let ctext = ptext.bytes().map(|c| 90 - c + 65).collect();
 
         String::from_utf8(ctext).unwrap()
@@ -57,6 +58,7 @@ impl Cipher for Atbash {
     /// assert_eq!(ptext, "ATTACKATDAWN");
     /// ```
     fn decipher(&self, ctext: &str) -> String {
-        self.encipher(ctext)
+        let ctext = ctext.to_ascii_uppercase();
+        self.encipher(&ctext)
     }
 }

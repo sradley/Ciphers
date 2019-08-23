@@ -28,7 +28,7 @@ impl Substitution {
     pub fn new(key: &str) -> Self {
         assert_eq!(key.len(), 26);
         Self {
-            key: String::from(key),
+            key: key.to_ascii_uppercase(),
         }
     }
 }
@@ -46,6 +46,7 @@ impl Cipher for Substitution {
     /// assert_eq!(ctext, "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
     /// ```
     fn encipher(&self, ptext: &str) -> String {
+        let ptext = ptext.to_ascii_uppercase();
         let key = self.key.as_bytes();
 
         let ctext = ptext.bytes().map(move |c| key[(c - 65) as usize]).collect();
@@ -65,6 +66,7 @@ impl Cipher for Substitution {
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> String {
+        let ctext = ctext.to_ascii_uppercase();
         let ptext = ctext
             .bytes()
             .map(move |c| self.key.find(move |i| i == c as char).unwrap() as u8 + 65)

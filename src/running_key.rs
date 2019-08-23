@@ -21,7 +21,7 @@ impl RunningKey {
     /// corresponding RunningKey struct.
     pub fn new(key: &str) -> Self {
         Self {
-            key: String::from(key),
+            key: key.to_ascii_uppercase(),
         }
     }
 }
@@ -40,6 +40,7 @@ impl Cipher for RunningKey {
     /// ```
     fn encipher(&self, ptext: &str) -> String {
         assert!(self.key.len() >= ptext.len());
+        let ptext = ptext.to_ascii_uppercase();
 
         let key = self.key.as_bytes();
 
@@ -70,6 +71,7 @@ impl Cipher for RunningKey {
     /// ```
     fn decipher(&self, ctext: &str) -> String {
         assert!(self.key.len() >= ctext.len());
+        let ctext = ctext.to_ascii_uppercase();
 
         let key = self.key.as_bytes();
 

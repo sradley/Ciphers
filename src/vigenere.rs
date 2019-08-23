@@ -31,7 +31,7 @@ impl Vigenere {
     /// Vigenere struct.
     pub fn new(key: &str) -> Self {
         Self {
-            key: String::from(key),
+            key: key.to_ascii_uppercase(),
         }
     }
 }
@@ -49,6 +49,7 @@ impl Cipher for Vigenere {
     /// assert_eq!(ctext, "ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
     /// ```
     fn encipher(&self, ptext: &str) -> String {
+        let ptext = ptext.to_ascii_uppercase();
         let key = self.key.as_bytes();
 
         let ctext = ptext
@@ -77,6 +78,7 @@ impl Cipher for Vigenere {
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> String {
+        let ctext = ctext.to_ascii_uppercase();
         let key = self.key.as_bytes();
 
         let ptext = ctext

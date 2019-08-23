@@ -44,6 +44,8 @@ impl Cipher for Affine {
     /// assert_eq!(ctext, "GNUNYGOINNLHOJLKKFUOINZLHOKN");
     /// ```
     fn encipher(&self, ptext: &str) -> String {
+        let ptext = ptext.to_ascii_uppercase();
+
         let ctext = ptext
             .bytes()
             .map(move |c| ((self.a * (c as i32 - 65) + self.b) % 26) as u8 + 65)
@@ -64,6 +66,7 @@ impl Cipher for Affine {
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> String {
+        let ctext = ctext.to_ascii_uppercase();
         let a_inv = invmod(self.a, 26).unwrap();
 
         let ptext = ctext

@@ -38,7 +38,7 @@ impl Porta {
     /// Porta struct.
     pub fn new(key: &str) -> Self {
         Self {
-            key: String::from(key),
+            key: key.to_ascii_uppercase(),
         }
     }
 }
@@ -56,6 +56,7 @@ impl Cipher for Porta {
     /// assert_eq!(ctext, "SYNNJSCVRNRLAHUTUKUCVRYRLANY");
     /// ```
     fn encipher(&self, ptext: &str) -> String {
+        let ptext = ptext.to_ascii_uppercase();
         let key = self.key.as_bytes();
 
         let ctext = ptext

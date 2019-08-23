@@ -38,8 +38,8 @@ impl FourSquare {
         assert_eq!(key1.len(), 25);
         assert_eq!(key2.len(), 25);
         Self {
-            key1: String::from(key1),
-            key2: String::from(key2),
+            key1: key1.to_ascii_uppercase(),
+            key2: key2.to_ascii_uppercase(),
         }
     }
 }
@@ -57,6 +57,7 @@ impl Cipher for FourSquare {
     /// assert_eq!(ctext, "TIYBFHTIZBSY");
     /// ```
     fn encipher(&self, ptext: &str) -> String {
+        let ptext = ptext.to_ascii_uppercase();
         let mut ptext: Vec<u8> = ptext.bytes().collect();
         if ptext.len() % 2 != 0 {
             ptext.push(88);
@@ -93,6 +94,7 @@ impl Cipher for FourSquare {
     /// ```
     fn decipher(&self, ctext: &str) -> String {
         assert_eq!(ctext.len() % 2, 0);
+        let ctext = ctext.to_ascii_uppercase();
         let ctext = ctext.as_bytes();
 
         let mut ptext = Vec::with_capacity(ctext.len());

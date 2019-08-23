@@ -27,7 +27,7 @@ impl ColumnarTransposition {
     /// returns a corresponding ColumnarTransposition struct.
     pub fn new(key: &str) -> Self {
         Self {
-            key: String::from(key),
+            key: key.to_ascii_uppercase(),
         }
     }
 }
@@ -45,6 +45,7 @@ impl Cipher for ColumnarTransposition {
     /// assert_eq!(ctext, "NALCEHWTTDTTFSEELEEDSOAFEAHL")
     /// ```
     fn encipher(&self, ptext: &str) -> String {
+        let ptext = ptext.to_ascii_uppercase();
         let mut key: Vec<u8> = self.key.bytes().collect();
         let ptext = ptext.as_bytes();
         let mut matrix: HashMap<u8, Vec<u8>> = HashMap::with_capacity(key.len());
@@ -79,6 +80,7 @@ impl Cipher for ColumnarTransposition {
     /// assert_eq!(ptext, "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> String {
+        let ctext = ctext.to_ascii_uppercase();
         let key: Vec<u8> = self.key.bytes().collect();
         let ctext = ctext.as_bytes();
         let mut matrix: HashMap<u8, Vec<u8>> = HashMap::with_capacity(key.len());
