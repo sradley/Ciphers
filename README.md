@@ -1,15 +1,17 @@
 # Ciphers
-Ciphers is a Rust library that provides implementations of several different
+
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![crates.io](https://meritbadge.herokuapp.com/ciphers)](https://crates.io/crates/ciphers)
+[![Released API docs](https://docs.rs/ciphers/badge.svg)](https://docs.rs/ciphers)
+
+Ciphers is a Rust library that provides implementations of many different
 classical ciphers.
 
-## Table of Contents
-1. [Supported Ciphers]()
-2. [Installation]()
-3. [Example Usage]()
-4. [To be Implemented]()
-5. [Known Issues]()
+**Get started** by looking at the [documentation](https://docs.rs/ciphers)
 
 ## 1. Supported Ciphers
+There are currently **16 different supported ciphers**.
+
 | Transposition          | Monoalphabetic      | Polyalphabetic | Polygraphic | Other  |
 | ---------------------- | ------------------- | -------------- | ----------- | ------ |
 | Rail-fence             | Simple Substitution | Vigenere       | Playfair    | ADFGX  |
@@ -19,10 +21,15 @@ classical ciphers.
 |                        | Atbash              | Porta          |             |        |
 
 ## 2. Installation
-...
+Simply put the following in your **Cargo.toml**.
+
+```toml
+[dependencies]
+ciphers = "0.1.0"
+```
 
 ## 3. Example Usage
-E.g. using the Vigenere cipher.
+E.g. using the **Vigenere** cipher.
 ```rust
 use ciphers::Cipher;
 use ciphers::vigenere::Vigenere;
@@ -40,6 +47,8 @@ println!("{}", ptext);
 ```
 
 ## 4. To be Implemented
+There are currently 6 different ciphers to be implemented.
+
 | Transposition | Monoalphabetic | Polyalphabetic | Polygraphic | Other                 |
 | ------------- | -------------- | -------------- | ----------- | --------------------- |
 |               | Rot13          | Gronsfeld      | Hill        | Bifid                 |
