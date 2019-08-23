@@ -20,14 +20,13 @@
 
 use crate::{Cipher, CipherResult, TABULA_RECTA};
 
-/// `Vigenere` struct contains the key for the Vigenere cipher, and implements the functionality of
-/// the `Cipher` trait using the Vigenere cipher method.
+/// A Vigenere cipher implementation.
 pub struct Vigenere {
     key: String,
 }
 
 impl Vigenere {
-    /// `Vigenere` constructor takes the key for the Vigenere cipher and returns a corresponding
+    /// Takes the key for the Vigenere cipher and returns a corresponding
     /// Vigenere struct.
     pub fn new(key: &str) -> Self {
         Self {
@@ -37,9 +36,10 @@ impl Vigenere {
 }
 
 impl Cipher for Vigenere {
-    /// `encipher` method enciphers the given plaintext (a str reference) using the Vignere cipher
-    /// and returns the ciphertext as a `String` object.
+    /// Enciphers the given plaintext (a str reference) using the Vignere cipher
+    /// and returns the ciphertext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Vigenere};
     ///
@@ -66,9 +66,10 @@ impl Cipher for Vigenere {
         Ok(String::from_utf8(ctext).unwrap())
     }
 
-    /// `decipher` method deciphers the given ciphertext (a str reference) using the Vigenere cipher
-    /// and returns the plaintext as a `String` object.
+    /// Deciphers the given ciphertext (a str reference) using the Vigenere cipher
+    /// and returns the plaintext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Vigenere};
     ///

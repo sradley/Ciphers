@@ -38,11 +38,11 @@ fn main() {
     let vigenere = Vigenere::new("examplekey");
 
     // encipher
-    let ctext = vigenere.encipher("someexampletexthere");
+    let ctext = vigenere.encipher("someexampletexthere").unwrap();
     println!("ciphertext: {}", ctext);
 
     // decipher
-    let ptext = vigenere.decipher(&ctext);
+    let ptext = vigenere.decipher(&ctext).unwrap();
     println!("plaintext:  {}", ptext);
 }
 ```
@@ -55,11 +55,11 @@ plaintext:  SOMEEXAMPLETEXTHERE
 ## 4. To be Implemented
 There are currently **7 different ciphers to be implemented**.
 
-| Transposition        | Monoalphabetic | Polyalphabetic | Polygraphic | Other                 |
-| -------------------- | -------------- | -------------- | ----------- | --------------------- |
-| Double Transposition | Rot13          | Gronsfeld      | Hill        | Bifid                 |
-|                      |                |                |             | Trifid                |
-|                      |                |                |             | Straddle Checkerboard |
+| Transposition | Monoalphabetic | Polyalphabetic | Polygraphic | Other                 |
+| ------------- | -------------- | -------------- | ----------- | --------------------- |
+|               | Rot13          | Gronsfeld      | Hill        | Bifid                 |
+|               |                |                |             | Trifid                |
+|               |                |                |             | Straddle Checkerboard |
 
 ## 5. Backlog
  * Input validation.

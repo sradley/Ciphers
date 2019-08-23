@@ -14,21 +14,21 @@
 
 use crate::{Cipher, CipherResult};
 
-/// `Atbash` struct implements the functionality of the `Cipher` trait using the Atbash cipher
-/// method.
+/// An Atbash cipher implementation.
 pub struct Atbash;
 
 impl Atbash {
-    /// `Atbash` constructor returns a new Atbash struct.
+    /// Returns a new Atbash struct.
     pub fn new() -> Self {
         Self {}
     }
 }
 
 impl Cipher for Atbash {
-    /// `encipher` method enciphers the given plaintext (a str reference) using the Atbash cipher
-    /// and returns the ciphertext as a `String` object.
+    /// Enciphers the given plaintext (a str reference) using the Atbash cipher
+    /// and returns the ciphertext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Atbash};
     ///
@@ -44,11 +44,12 @@ impl Cipher for Atbash {
         Ok(String::from_utf8(ctext).unwrap())
     }
 
-    /// `decipher` method deciphers the given ciphertext (a str reference) using the Atbash cipher
-    /// and returns the plaintext as a `String` object.
+    /// Deciphers the given ciphertext (a str reference) using the Atbash cipher
+    /// and returns the plaintext as a `CipherResult`.
     ///
     /// Note that the Atbash cipher is reciprocal.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Atbash};
     ///

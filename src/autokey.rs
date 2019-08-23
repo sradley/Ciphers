@@ -16,14 +16,13 @@
 
 use crate::{Cipher, CipherResult, TABULA_RECTA};
 
-/// `Autokey` struct contains the key for the Autokey cipher, and implements the functionality of
-/// the `Cipher` trait using the Autokey cipher method.
+/// An Autokey cipher implementation.
 pub struct Autokey {
     key: String,
 }
 
 impl Autokey {
-    /// `Autokey` constructor takes the key for the Autokey cipher and returns a corresponding
+    /// Takes the key for the Autokey cipher and returns a corresponding
     /// Autokey struct.
     pub fn new(key: &str) -> Self {
         Self {
@@ -33,9 +32,10 @@ impl Autokey {
 }
 
 impl Cipher for Autokey {
-    /// `encipher` method enciphers the given plaintext (a str reference) using the Autokey cipher
-    /// and returns the ciphertext as a `String` object.
+    /// Enciphers the given plaintext (a str reference) using the Autokey cipher
+    /// and returns the ciphertext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Autokey};
     ///
@@ -65,9 +65,10 @@ impl Cipher for Autokey {
         Ok(String::from_utf8(ctext).unwrap())
     }
 
-    /// `decipher` method deciphers the given ciphertext (a str reference) using the Autokey cipher
-    /// and returns the plaintext as a `String` object.
+    /// Deciphers the given ciphertext (a str reference) using the Autokey cipher
+    /// and returns the plaintext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Autokey};
     ///

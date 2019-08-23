@@ -43,19 +43,20 @@ pub enum CipherInputError {
     NotAlphabetic,
     NotAlphanumeric,
     NotInAlphabet,
+    BadAlphabet,
 }
 
 /// `CipherResult` type ...
 pub type CipherResult = Result<String, CipherInputError>;
 
-/// `Cipher` trait defines the implementation for cipher functionality.
+/// Defines the implementation for cipher functionality.
 pub trait Cipher {
-    /// `encipher` method should take plaintext as a string reference, and return the ciphertext as
-    /// a String object.
+    /// Should take plaintext as a string reference, and return the enciphered ciphertext as
+    /// a `CipherResult`.
     fn encipher(&self, ptext: &str) -> CipherResult;
 
-    /// `decipher` method should take the ciphertext as a string reference, and return the plaintext
-    /// as a String object.
+    /// Should take the ciphertext as a string reference, and return the deciphered plaintext
+    /// as a `CipherResult`.
     fn decipher(&self, ctext: &str) -> CipherResult;
 }
 

@@ -10,14 +10,13 @@
 
 use crate::{Cipher, CipherResult};
 
-/// `RailFence` struct contains the key for the Rail-fence cipher, and implements the functionality
-/// of the `Cipher` trait using the Rail-fence cipher method.
+/// A Rail-fence cipher implementation.
 pub struct RailFence {
     key: usize,
 }
 
 impl RailFence {
-    /// `RailFence` constructor takes the key for the Rail-fence cipher and returns a corresponding
+    /// Takes the key for the Rail-fence cipher and returns a corresponding
     /// RailFence struct.
     pub fn new(key: usize) -> Self {
         Self { key }
@@ -25,9 +24,10 @@ impl RailFence {
 }
 
 impl Cipher for RailFence {
-    /// `encipher` method enciphers the given plaintext (a str reference) using the Rail-fence
-    /// cipher and returns the ciphertext as a `String` object.
+    /// Enciphers the given plaintext (a str reference) using the Rail-fence
+    /// cipher and returns the ciphertext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, RailFence};
     ///
@@ -69,9 +69,10 @@ impl Cipher for RailFence {
         Ok(String::from_utf8(ctext).unwrap())
     }
 
-    /// `decipher` method deciphers the given ciphertext (a str reference) using the Rail-fence
-    /// cipher and returns the plaintext as a `String` object.
+    /// Deciphers the given ciphertext (a str reference) using the Rail-fence
+    /// cipher and returns the plaintext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, RailFence};
     ///

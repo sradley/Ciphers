@@ -10,14 +10,13 @@
 
 use crate::{Cipher, CipherResult, TABULA_RECTA};
 
-/// `RunningKey` struct contains the key for the Running Key cipher, and implements the
-/// functionality of the `Cipher` trait using the Running Key cipher method.
+/// A Running Key cipher implementation.
 pub struct RunningKey {
     key: String,
 }
 
 impl RunningKey {
-    /// `RunningKey` constructor takes the key for the Running Key cipher and returns a
+    /// Takes the key for the Running Key cipher and returns a
     /// corresponding RunningKey struct.
     pub fn new(key: &str) -> Self {
         Self {
@@ -27,9 +26,10 @@ impl RunningKey {
 }
 
 impl Cipher for RunningKey {
-    /// `encipher` method enciphers the given plaintext (a str reference) using the Running Key
-    /// cipher and returns the ciphertext as a `String` object.
+    /// Enciphers the given plaintext (a str reference) using the Running Key
+    /// cipher and returns the ciphertext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, RunningKey};
     ///
@@ -58,9 +58,10 @@ impl Cipher for RunningKey {
         Ok(String::from_utf8(ctext).unwrap())
     }
 
-    /// `decipher` method deciphers the given ciphertext (a str reference) using the Running Key
-    /// cipher and returns the plaintext as a `String` object.
+    /// Deciphers the given ciphertext (a str reference) using the Running Key
+    /// cipher and returns the plaintext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, RunningKey};
     ///

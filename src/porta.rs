@@ -27,14 +27,13 @@ static PORTA_TABLEU: [[u8; 13]; 13] = [
     [90, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89],
 ];
 
-/// `Porta` struct contains the key for the Porta cipher, and implements the functionality of
-/// the `Cipher` trait using the Porta cipher method.
+/// A Porta cipher implementation.
 pub struct Porta {
     key: String,
 }
 
 impl Porta {
-    /// `Porta` constructor takes the key for the Porta cipher and returns a corresponding
+    /// Takes the key for the Porta cipher and returns a corresponding
     /// Porta struct.
     pub fn new(key: &str) -> Self {
         Self {
@@ -44,9 +43,10 @@ impl Porta {
 }
 
 impl Cipher for Porta {
-    /// `encipher` method enciphers the given plaintext (a str reference) using the Porta cipher
-    /// and returns the ciphertext as a `String` object.
+    /// Enciphers the given plaintext (a str reference) using the Porta cipher
+    /// and returns the ciphertext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Porta};
     ///
@@ -74,11 +74,12 @@ impl Cipher for Porta {
         Ok(String::from_utf8(ctext).unwrap())
     }
 
-    /// `decipher` method deciphers the given ciphertext (a str reference) using the Porta cipher
-    /// and returns the plaintext as a `String` object.
+    /// Deciphers the given ciphertext (a str reference) using the Porta cipher
+    /// and returns the plaintext as a `CipherResult`.
     /// 
     /// Note that the Porta cipher is reciprocal.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Porta};
     ///

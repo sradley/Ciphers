@@ -16,14 +16,13 @@
 
 use crate::{Cipher, CipherResult};
 
-/// `Substitution` struct contains the key for the Simple Substitution cipher, and implements the
-/// functionality of the `Cipher` trait using the Simple Substitution cipher method.
+/// A Simple Substitution cipher implementation.
 pub struct Substitution {
     key: String,
 }
 
 impl Substitution {
-    /// `Substitution` constructor takes the key for the Simple Substitution cipher and returns a
+    /// Takes the key for the Simple Substitution cipher and returns a
     /// corresponding Substitution struct.
     pub fn new(key: &str) -> Self {
         assert_eq!(key.len(), 26);
@@ -34,9 +33,10 @@ impl Substitution {
 }
 
 impl Cipher for Substitution {
-    /// `encipher` method enciphers the given plaintext (a str reference) using the Simple
-    /// Substitution cipher and returns the ciphertext as a `String` object.
+    /// Enciphers the given plaintext (a str reference) using the Simple
+    /// Substitution cipher and returns the ciphertext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Substitution};
     ///
@@ -54,9 +54,10 @@ impl Cipher for Substitution {
         Ok(String::from_utf8(ctext).unwrap())
     }
 
-    /// `decipher` method deciphers the given ciphertext (a str reference) using the Simple
-    /// Substitution cipher and returns the plaintext as a `String` object.
+    /// Deciphers the given ciphertext (a str reference) using the Simple
+    /// Substitution cipher and returns the plaintext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Substitution};
     ///

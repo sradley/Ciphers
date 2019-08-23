@@ -12,16 +12,14 @@
 
 use crate::{Cipher, CipherResult};
 
-/// `PolybiusSquare` struct contains the key and specified characters for the Polybius Square
-/// cipher, and implements the functionality of the `Cipher` trait using the Polybius Square cipher
-/// method.
+/// A Polybius Square cipher implementation.
 pub struct PolybiusSquare {
     key: String,
     chars: String,
 }
 
 impl PolybiusSquare {
-    /// `PolybiusSquare` constructor takes the key and specified characters for the Polybius Square
+    /// Takes the key and specified characters for the Polybius Square
     /// cipher and returns a corresponding PolybiusSquare struct.
     pub fn new(key: &str, chars: &str) -> Self {
         assert_eq!(key.len(), chars.len() * chars.len());
@@ -33,9 +31,10 @@ impl PolybiusSquare {
 }
 
 impl Cipher for PolybiusSquare {
-    /// `encipher` method enciphers the given plaintext (a str reference) using the Polybius Square
-    /// cipher and returns the ciphertext as a `String` object.
+    /// Enciphers the given plaintext (a str reference) using the Polybius Square
+    /// cipher and returns the ciphertext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, PolybiusSquare};
     ///
@@ -59,9 +58,10 @@ impl Cipher for PolybiusSquare {
         Ok(String::from_utf8(ctext).unwrap())
     }
 
-    /// `decipher` method deciphers the given ciphertext (a str reference) using the Polybius Square
-    /// cipher and returns the plaintext as a `String` object.
+    /// Deciphers the given ciphertext (a str reference) using the Polybius Square
+    /// cipher and returns the plaintext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, PolybiusSquare};
     ///

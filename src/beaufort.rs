@@ -13,14 +13,13 @@
 
 use crate::{Cipher, CipherResult, TABULA_RECTA};
 
-/// `Beaufort` struct contains the key for the Beaufort cipher, and implements the functionality of
-/// the `Cipher` trait using the Beaufort cipher method.
+/// A Beaufort cipher implementation.
 pub struct Beaufort {
     key: String,
 }
 
 impl Beaufort {
-    /// `Beaufort` constructor takes the key for the Beaufort cipher and returns a corresponding
+    /// Takes the key for the Beaufort cipher and returns a corresponding
     /// Beaufort struct.
     pub fn new(key: &str) -> Self {
         Self {
@@ -30,9 +29,10 @@ impl Beaufort {
 }
 
 impl Cipher for Beaufort {
-    /// `encipher` method enciphers the given plaintext (a str reference) using the Beaufort cipher
-    /// and returns the ciphertext as a `String` object.
+    /// Enciphers the given plaintext (a str reference) using the Beaufort cipher
+    /// and returns the ciphertext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Beaufort};
     ///
@@ -62,11 +62,12 @@ impl Cipher for Beaufort {
         Ok(String::from_utf8(ctext).unwrap())
     }
 
-    /// `decipher` method deciphers the given ciphertext (a str reference) using the Beaufort cipher
-    /// and returns the plaintext as a `String` object.
+    /// Deciphers the given ciphertext (a str reference) using the Beaufort cipher
+    /// and returns the plaintext as a `CipherResult`.
     ///
     /// Note that the Beaufort cipher is reciprocal.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Beaufort};
     ///

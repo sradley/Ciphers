@@ -14,15 +14,14 @@
 
 use crate::{Cipher, PolybiusSquare, ColumnarTransposition, CipherResult};
 
-/// `ADFGX` struct contains the key and keyword for the ADFGX cipher, and implements the
-/// functionality of the `Cipher` trait using the ADFGX cipher method.
+/// An ADFGX cipher implementation.
 pub struct ADFGX {
     key: String,
     keyword: String,
 }
 
 impl ADFGX {
-    /// `ADFGX` constructor takes the key and keyword for the ADFGX cipher and returns a
+    /// Takes the key and keyword for the ADFGX cipher and returns a
     /// corresponding ADFGX struct.
     pub fn new(key: &str, keyword: &str) -> Self {
         assert_eq!(key.len(), 25);
@@ -34,9 +33,10 @@ impl ADFGX {
 }
 
 impl Cipher for ADFGX {
-    /// `encipher` method enciphers the given plaintext (a str reference) using the ADFGX cipher
-    /// and returns the ciphertext as a `String` object.
+    /// Enciphers the given plaintext (a str reference) using the ADFGX cipher
+    /// and returns the ciphertext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, ADFGX};
     ///
@@ -52,9 +52,10 @@ impl Cipher for ADFGX {
         ct.encipher(&ps.encipher(ptext)?)
     }
 
-    /// `decipher` method deciphers the given ciphertext (a str reference) using the ADFGX cipher
-    /// and returns the plaintext as a `String` object.
+    /// Deciphers the given ciphertext (a str reference) using the ADFGX cipher
+    /// and returns the plaintext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, ADFGX};
     ///

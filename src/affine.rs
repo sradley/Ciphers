@@ -16,15 +16,14 @@
 
 use crate::{Cipher, CipherResult};
 
-/// `Affine` struct stores the two keys for the Affine cipher, and implements the functionality of
-/// the `Cipher` trait using the Affine cipher method.
+/// An Affine cipher implementation.
 pub struct Affine {
     a: i32,
     b: i32,
 }
 
 impl Affine {
-    /// `Affine` constructor takes the two keys for the Affine cipher and returns a
+    /// Takes the two keys for the Affine cipher and returns a
     /// corresponding Affine struct.
     pub fn new(a: i32, b: i32) -> Self {
         Self { a, b }
@@ -32,9 +31,10 @@ impl Affine {
 }
 
 impl Cipher for Affine {
-    /// `encipher` method enciphers the given plaintext (a str reference) using the Affine cipher
-    /// and returns the ciphertext as a `String` object.
+    /// Enciphers the given plaintext (a str reference) using the Affine cipher
+    /// and returns the ciphertext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Affine};
     ///
@@ -54,10 +54,11 @@ impl Cipher for Affine {
         Ok(String::from_utf8(ctext).unwrap())
     }
 
-    /// `decipher` method deciphers the given ciphertext (a str reference) using the Affine cipher
-    /// and returns the plaintext as a `String` object.
+    /// Deciphers the given ciphertext (a str reference) using the Affine cipher
+    /// and returns the plaintext as a `CipherResult`.
     ///
-    /// ```W
+    /// # Example
+    /// ```
     /// use ciphers::{Cipher, Affine};
     ///
     /// let affine = Affine::new(7, 11);

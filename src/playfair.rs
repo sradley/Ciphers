@@ -21,14 +21,13 @@
 
 use crate::{Cipher, CipherResult};
 
-/// `Playfair` struct contains the key for the Playfair cipher, and implements the functionality of
-/// the `Cipher` trait using the Plaiyfair cipher method.
+/// A Playfair cipher implementation
 pub struct Playfair {
     key: String,
 }
 
 impl Playfair {
-    /// `Playfair` constructor takes the key for the Playfair cipher and returns a corresponding
+    /// Takes the key for the Playfair cipher and returns a corresponding
     /// Playfair struct.
     pub fn new(key: &str) -> Self {
         assert_eq!(key.len(), 25);
@@ -39,9 +38,10 @@ impl Playfair {
 }
 
 impl Cipher for Playfair {
-    /// `encipher` method enciphers the given plaintext (a str reference) using the Playfair cipher
-    /// and returns the ciphertext as a `String` object.
+    /// Enciphers the given plaintext (a str reference) using the Playfair cipher
+    /// and returns the ciphertext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Playfair};
     ///
@@ -89,9 +89,10 @@ impl Cipher for Playfair {
         Ok(String::from_utf8(ctext).unwrap())
     }
 
-    /// `decipher` method deciphers the given ciphertext (a str reference) using the Playfair cipher
-    /// and returns the plaintext as a `String` object.
+    /// Deciphers the given ciphertext (a str reference) using the Playfair cipher
+    /// and returns the plaintext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Playfair};
     ///

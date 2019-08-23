@@ -15,15 +15,13 @@
 use crate::{Cipher, CipherResult};
 use std::collections::HashMap;
 
-/// `ColumnarTransposition` struct contains the key for the Columnar Transposition cipher, and
-/// implements the functionality of the `Cipher` trait using the Columnar Transposition cipher
-/// method.
+/// A Columnar Transposition cipher implementation.
 pub struct ColumnarTransposition {
     key: String,
 }
 
 impl ColumnarTransposition {
-    /// `ColumnarTransposition` constructor takes the key for the Columnar Transposition cipher and
+    /// Takes the key for the Columnar Transposition cipher and
     /// returns a corresponding ColumnarTransposition struct.
     pub fn new(key: &str) -> Self {
         Self {
@@ -33,9 +31,10 @@ impl ColumnarTransposition {
 }
 
 impl Cipher for ColumnarTransposition {
-    /// `encipher` method enciphers the given plaintext (a str reference) using the Columnar
-    /// Transposition cipher and returns the ciphertext as a `String` object.
+    /// Enciphers the given plaintext (a str reference) using the Columnar
+    /// Transposition cipher and returns the ciphertext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, ColumnarTransposition};
     ///
@@ -69,9 +68,10 @@ impl Cipher for ColumnarTransposition {
         Ok(String::from_utf8(ctext).unwrap())
     }
 
-    /// `decipher` method deciphers the given ciphertext (a str reference) using the Columnar
-    /// Transposition cipher and returns the plaintext as a `String` object.
+    /// Deciphers the given ciphertext (a str reference) using the Columnar
+    /// Transposition cipher and returns the plaintext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, ColumnarTransposition};
     ///

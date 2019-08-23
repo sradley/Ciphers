@@ -17,14 +17,13 @@
 
 use crate::{Cipher, CipherResult};
 
-/// `Caesar` struct contains the key for the Caesar cipher, and implements the functionality of
-/// the `Cipher` trait using the Caesar cipher method.
+/// A Caesar cipher implementation.
 pub struct Caesar {
     key: u8,
 }
 
 impl Caesar {
-    /// `Caesar` constructor takes the key for the Caesar cipher and returns a corresponding
+    /// Takes the key for the Caesar cipher and returns a corresponding
     /// Caesar struct.
     pub fn new(key: u8) -> Self {
         Self { key }
@@ -32,9 +31,10 @@ impl Caesar {
 }
 
 impl Cipher for Caesar {
-    /// `encipher` method enciphers the given plaintext (a str reference) using the Caesar cipher
-    /// and returns the ciphertext as a `String` object.
+    /// Enciphers the given plaintext (a str reference) using the Caesar cipher
+    /// and returns the ciphertext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Caesar};
     ///
@@ -53,9 +53,10 @@ impl Cipher for Caesar {
         Ok(String::from_utf8(ctext).unwrap())
     }
 
-    /// `decipher` method deciphers the given ciphertext (a str reference) using the Caesar cipher
-    /// and returns the plaintext as a `String` object.
+    /// Deciphers the given ciphertext (a str reference) using the Caesar cipher
+    /// and returns the plaintext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, Caesar};
     ///

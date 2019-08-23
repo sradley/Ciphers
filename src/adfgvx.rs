@@ -8,7 +8,7 @@
 //!
 //! > Invented by Lieutenant Fritz Nebel (1891–1977) and introduced in March 1918, the cipher was a
 //! fractionating transposition cipher which combined a modified Polybius square with a single
-//! columnar transposition.
+//! columnar transposition.W
 //!
 //! > The cipher is named after the six possible letters used in the ciphertext: A, D, F, G, V and
 //! X. The letters were chosen deliberately because they are very different from one another in the
@@ -16,15 +16,14 @@
 
 use crate::{Cipher, PolybiusSquare, ColumnarTransposition, CipherResult};
 
-/// `ADFGVX` struct contains the key and keyword for the ADFGVX cipher, and implements the
-/// functionality of the `Cipher` trait using the ADFGVX cipher method.
+/// An ADFGVX cipher implementation.
 pub struct ADFGVX {
     key: String,
     keyword: String,
 }
 
 impl ADFGVX {
-    /// `ADFGVX` constructor takes the key and keyword for the ADFGVX cipher and returns a
+    /// Takes the key and keyword for the ADFGVX cipher and returns a
     /// corresponding ADFGVX struct.
     pub fn new(key: &str, keyword: &str) -> Self {
         assert_eq!(key.len(), 36);
@@ -36,9 +35,10 @@ impl ADFGVX {
 }
 
 impl Cipher for ADFGVX {
-    /// `encipher` method enciphers the given plaintext (a str reference) using the ADFGVX cipher
-    /// and returns the ciphertext as a `String` object.
+    /// Enciphers the given plaintext (a str reference) using the ADFGVX cipher
+    /// and returns the ciphertext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, ADFGVX};
     ///
@@ -54,9 +54,10 @@ impl Cipher for ADFGVX {
         ct.encipher(&ps.encipher(ptext)?)
     }
 
-    /// `decipher` method deciphers the given ciphertext (a str reference) using the ADFGVX cipher
-    /// and returns the plaintext as a `String` object.
+    /// Deciphers the given ciphertext (a str reference) using the ADFGVX cipher
+    /// and returns the plaintext as a `CipherResult`.
     ///
+    /// # Example
     /// ```
     /// use ciphers::{Cipher, ADFGVX};
     ///
