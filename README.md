@@ -30,20 +30,28 @@ ciphers = "0.1.0"
 
 ## 3. Example Usage
 E.g. using the **Vigenere** cipher.
+
 ```rust
 use ciphers::Cipher;
 use ciphers::vigenere::Vigenere;
 
-let vigenere = Vigenere::new(String::from("EXAMPLEKEY"));
-let ptext = String::from("SOMEXAMPLETEXTHERE");
+fn main() {
+    let vigenere = Vigenere::new(String::from("EXAMPLEKEY"));
+    let ptext = String::from("SOMEEXAMPLETEXTHERE");
 
-// encipher
-let ctext = vigenere.encipher(ptext);
-println!("{}", ctext);
+    // encipher
+    let ctext = vigenere.encipher(ptext);
+    println!("ciphertext: {}", ctext);
 
-// decipher
-let ptext = vigenere.decipher(ctext);
-println!("{}", ptext);
+    // decipher
+    let ptext = vigenere.decipher(ctext);
+    println!("plaintext:  {}", ptext);
+}
+```
+
+```sh
+ciphertext: WLMQTIEWTJIQEJISIBI
+plaintext:  SOMEEXAMPLETEXTHERE
 ```
 
 ## 4. To be Implemented
