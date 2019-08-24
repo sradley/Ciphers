@@ -31,6 +31,9 @@ impl Playfair {
     /// Playfair struct.
     pub fn new(key: &str) -> Self {
         assert_eq!(key.len(), 25);
+        // ensure that key is of length 25
+        // ensure that there are no repeated letters in the key
+
         Self {
             key: key.to_ascii_uppercase(),
         }
@@ -52,6 +55,9 @@ impl Cipher for Playfair {
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
+        // ensure that ptext is ascii
+        // ensure that every character in ptext is contained within the key
+
         let mut ptext: Vec<u8> = ptext.bytes().collect();
         if ptext.len() % 2 != 0 {
             ptext.push(88);
@@ -103,6 +109,8 @@ impl Cipher for Playfair {
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
         let ctext = ctext.to_ascii_uppercase();
+        // ensure that ctext is ascii
+        // ensure that ctext is even
         let ctext = ctext.as_bytes();
         let key = self.key.as_bytes();
 

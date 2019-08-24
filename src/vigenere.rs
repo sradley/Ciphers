@@ -29,6 +29,7 @@ impl Vigenere {
     /// Takes the key for the Vigenere cipher and returns a corresponding
     /// Vigenere struct.
     pub fn new(key: &str) -> Self {
+        // ensure that key is alphabetic
         Self {
             key: key.to_ascii_uppercase(),
         }
@@ -50,6 +51,8 @@ impl Cipher for Vigenere {
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
+        // ensure that ptext is alphabetic
+
         let key = self.key.as_bytes();
 
         let ctext = ptext
@@ -80,6 +83,8 @@ impl Cipher for Vigenere {
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
         let ctext = ctext.to_ascii_uppercase();
+        // ensure that ctext is alphabetic
+
         let key = self.key.as_bytes();
 
         let ptext = ctext

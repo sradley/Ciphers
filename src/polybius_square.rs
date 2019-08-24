@@ -22,6 +22,11 @@ impl PolybiusSquare {
     /// Takes the key and specified characters for the Polybius Square
     /// cipher and returns a corresponding PolybiusSquare struct.
     pub fn new(key: &str, chars: &str) -> Self {
+        // ensure that key is ascii
+        // ensure that there are no repeated letters in the key
+        // ensure that chars is ascii
+        // ensure that there are no repeated letters in the chars
+        // ensure that key.len == chars.len^2
         assert_eq!(key.len(), chars.len() * chars.len());
         Self {
             key: key.to_ascii_uppercase(),
@@ -44,7 +49,10 @@ impl Cipher for PolybiusSquare {
     /// assert_eq!(ctext.unwrap(), "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
+        // ensure that ptext is ascii
         let ptext = ptext.to_ascii_uppercase();
+        // ensure that every character in ptext is contained within the key
+
         let chars = self.chars.as_bytes();
         let mut ctext: Vec<u8> = Vec::with_capacity(ptext.len());
 
@@ -71,8 +79,11 @@ impl Cipher for PolybiusSquare {
     /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
+        // ensure that ctext is ascii
+        // ensure that ctext.len is even
         assert_eq!(ctext.len() % 2, 0);
         let ctext = ctext.to_ascii_uppercase();
+        // ensure that every character in ctext is contained within the chars
 
         let key = self.key.as_bytes();
         let ctext = ctext.as_bytes();

@@ -19,6 +19,7 @@ impl RunningKey {
     /// Takes the key for the Running Key cipher and returns a
     /// corresponding RunningKey struct.
     pub fn new(key: &str) -> Self {
+        // ensure that key is alphabetic
         Self {
             key: key.to_ascii_uppercase(),
         }
@@ -40,7 +41,9 @@ impl Cipher for RunningKey {
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
         assert!(self.key.len() >= ptext.len());
+        // ensure that ptext is shorter than (or equal in length to) the key
         let ptext = ptext.to_ascii_uppercase();
+        // ensure that ptext is alphabetic
 
         let key = self.key.as_bytes();
 
@@ -72,7 +75,9 @@ impl Cipher for RunningKey {
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
         assert!(self.key.len() >= ctext.len());
+        // ensure that ptext is shorter than (or equal in length to) the key
         let ctext = ctext.to_ascii_uppercase();
+        // ensure that ctext is alphabetic
 
         let key = self.key.as_bytes();
 

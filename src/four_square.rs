@@ -35,7 +35,11 @@ impl FourSquare {
     /// returns a corresponding FourSquare struct.
     pub fn new(key1: &str, key2: &str) -> Self {
         assert_eq!(key1.len(), 25);
+        // ensure key1 is of length 25
+        // ensure key1 has no repeated characters
         assert_eq!(key2.len(), 25);
+        // ensure key2 is of length 25
+        // ensure key2 has no repeated characters
         Self {
             key1: key1.to_ascii_uppercase(),
             key2: key2.to_ascii_uppercase(),

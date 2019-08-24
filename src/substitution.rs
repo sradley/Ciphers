@@ -26,6 +26,8 @@ impl Substitution {
     /// corresponding Substitution struct.
     pub fn new(key: &str) -> Self {
         assert_eq!(key.len(), 26);
+        // ensure that key is alphabetic
+        // ensure that there are no repeated letters in the key
         Self {
             key: key.to_ascii_uppercase(),
         }
@@ -47,6 +49,8 @@ impl Cipher for Substitution {
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
+        // ensure that ptext is alphabetic
+
         let key = self.key.as_bytes();
 
         let ctext = ptext.bytes().map(move |c| key[(c - 65) as usize]).collect();
@@ -68,6 +72,8 @@ impl Cipher for Substitution {
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
         let ctext = ctext.to_ascii_uppercase();
+        // ensure that ctext is alphabetic
+
         let ptext = ctext
             .bytes()
             .map(move |c| self.key.find(move |i| i == c as char).unwrap() as u8 + 65)

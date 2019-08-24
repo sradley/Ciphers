@@ -19,6 +19,7 @@ impl RailFence {
     /// Takes the key for the Rail-fence cipher and returns a corresponding
     /// RailFence struct.
     pub fn new(key: usize) -> Self {
+        // ensure key > 0
         Self { key }
     }
 }
@@ -38,6 +39,8 @@ impl Cipher for RailFence {
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
+        // ensure ptext is ascii
+
         let mut ctext = Vec::with_capacity(ptext.len());
         let ptext: Vec<u8> = ptext.bytes().collect();
 
@@ -83,6 +86,8 @@ impl Cipher for RailFence {
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
         let ctext = ctext.to_ascii_uppercase();
+        // ensure ctext is ascii
+
         let mut ptext = vec![0u8; ctext.len()];
         let ctext: Vec<u8> = ctext.bytes().collect();
         let mut k = 0usize;

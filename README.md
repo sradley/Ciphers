@@ -62,6 +62,32 @@ There are currently **7 different ciphers to be implemented**.
 |               |                |                |             | Straddle Checkerboard |
 
 ## 5. Backlog
+ * Refactor Four-Square to use custom alphabets.
  * Input validation.
  * The Columnar Transposition cipher can't deal with repeated letters in its
    keyword.
+
+# 6. Random Notes
+Alphabetic-only ciphers:
+ * Caesar
+ * Affine
+ * Atbash
+ * Autokey
+ * Beaufort
+ * Vigenere -
+ * Porta -
+ * Simple Substitution -
+ * Running Key -
+
+Alphanumeric-only ciphers:
+
+All-ascii ciphers (remove uppercase validation):
+ * Columnar Transposition
+ * Rail-fence -
+
+Alphabet-specific (but all-ascii) ciphers (remove uppercase validation):
+ * Four-Square
+ * Polybius Square -
+ * Playfair
+ * ADFGX
+ * ADFGVX

@@ -42,6 +42,7 @@ pub use vigenere::Vigenere;
 pub enum CipherInputError {
     NotAlphabetic,
     NotAlphanumeric,
+    NotAscii,
     NotInAlphabet,
     BadAlphabet,
 }

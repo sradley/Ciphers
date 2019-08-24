@@ -36,6 +36,8 @@ impl Porta {
     /// Takes the key for the Porta cipher and returns a corresponding
     /// Porta struct.
     pub fn new(key: &str) -> Self {
+        // ensure key is alphabetic
+
         Self {
             key: key.to_ascii_uppercase(),
         }
@@ -57,6 +59,8 @@ impl Cipher for Porta {
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
         let ptext = ptext.to_ascii_uppercase();
+        // ensure ptext is alphabetic
+        
         let key = self.key.as_bytes();
 
         let ctext = ptext
