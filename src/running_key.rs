@@ -8,7 +8,7 @@
 //! Usually, the book to be used would be agreed ahead of time, while the passage to be used would
 //! be chosen randomly for each message and secretly indicated somewhere in the message.
 
-use crate::{Cipher, CipherResult, TABULA_RECTA};
+use crate::{Cipher, CipherResult, CipherInputError, TABULA_RECTA, input};
 
 /// A Running Key cipher implementation.
 pub struct RunningKey {
@@ -19,7 +19,9 @@ impl RunningKey {
     /// Takes the key for the Running Key cipher and returns a
     /// corresponding RunningKey struct.
     pub fn new(key: &str) -> Self {
-        // ensure that key is alphabetic
+        input::is_alpha(key)
+            .expect("`key` must be alphabetic");
+
         Self {
             key: key.to_ascii_uppercase(),
         }
@@ -40,11 +42,14 @@ impl Cipher for RunningKey {
     /// assert_eq!(ctext.unwrap(), "KSBHBHLALIDMVGKYZKYAHXUAAWGM");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
-        assert!(self.key.len() >= ptext.len());
-        // ensure that ptext is shorter than (or equal in length to) the key
-        let ptext = ptext.to_ascii_uppercase();
-        // ensure that ptext is alphabetic
+        if self.key.len() < ptext.len() {
+            return Err(CipherInputError::BadInput(
+                String::from("`ptext` cannot be longer than the key")
+            ))
+        }
+        input::is_alpha(ptext)?;
 
+        let ptext = ptext.to_ascii_uppercase();
         let key = self.key.as_bytes();
 
         let ctext = ptext
@@ -74,11 +79,14 @@ impl Cipher for RunningKey {
     /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
-        assert!(self.key.len() >= ctext.len());
-        // ensure that ptext is shorter than (or equal in length to) the key
-        let ctext = ctext.to_ascii_uppercase();
-        // ensure that ctext is alphabetic
+        if self.key.len() < ctext.len() {
+            return Err(CipherInputError::BadInput(
+                String::from("`ctext` cannot be longer than the key")
+            ))
+        }
+        input::is_alpha(ctext)?;
 
+        let ctext = ctext.to_ascii_uppercase();
         let key = self.key.as_bytes();
 
         let ptext = ctext

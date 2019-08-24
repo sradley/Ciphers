@@ -12,7 +12,7 @@
 //! available, which one was used in encryption can be used as a key, but this does not provide
 //! significantly more security.
 
-use crate::{Cipher, CipherResult};
+use crate::{Cipher, CipherResult, input};
 
 /// An Atbash cipher implementation.
 pub struct Atbash;
@@ -38,6 +38,8 @@ impl Cipher for Atbash {
     /// assert_eq!(ctext.unwrap(), "ZGGZXPZGWZDM");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
+        input::is_alpha(ptext)?;
+
         let ptext = ptext.to_ascii_uppercase();
         let ctext = ptext.bytes().map(|c| 90 - c + 65).collect();
 
@@ -59,6 +61,8 @@ impl Cipher for Atbash {
     /// assert_eq!(ptext.unwrap(), "ATTACKATDAWN");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
+        input::is_alpha(ctext)?;
+
         let ctext = ctext.to_ascii_uppercase();
         self.encipher(&ctext)
     }

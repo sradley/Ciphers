@@ -9,7 +9,7 @@
 //! > The 13 cipher alphabets it uses are
 //! reciprocal, so enciphering is the same as deciphering.
 
-use crate::{Cipher, CipherResult};
+use crate::{Cipher, CipherResult, input};
 
 static PORTA_TABLEU: [[u8; 13]; 13] = [
     [78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90],
@@ -36,7 +36,8 @@ impl Porta {
     /// Takes the key for the Porta cipher and returns a corresponding
     /// Porta struct.
     pub fn new(key: &str) -> Self {
-        // ensure key is alphabetic
+        input::is_alpha(key)
+            .expect("`key` must be alphabetic");
 
         Self {
             key: key.to_ascii_uppercase(),
@@ -58,9 +59,9 @@ impl Cipher for Porta {
     /// assert_eq!(ctext.unwrap(), "SYNNJSCVRNRLAHUTUKUCVRYRLANY");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
+        input::is_alpha(ptext)?;
+
         let ptext = ptext.to_ascii_uppercase();
-        // ensure ptext is alphabetic
-        
         let key = self.key.as_bytes();
 
         let ctext = ptext

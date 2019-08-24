@@ -15,7 +15,7 @@
 //! with all single-alphabet substitution ciphers, the Caesar cipher is easily broken and in modern
 //! practice offers essentially no communications security.
 
-use crate::{Cipher, CipherResult};
+use crate::{Cipher, CipherResult, input};
 
 /// A Caesar cipher implementation.
 pub struct Caesar {
@@ -44,6 +44,8 @@ impl Cipher for Caesar {
     /// assert_eq!(ctext.unwrap(), "EFGFOEUIFFBTUXBMMPGUIFDBTUMF");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
+        input::is_alpha(ptext)?;
+
         let ptext = ptext.to_ascii_uppercase();
         let ctext = ptext
             .bytes()
@@ -66,6 +68,8 @@ impl Cipher for Caesar {
     /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
+        input::is_alpha(ctext)?;
+
         let ctext = ctext.to_ascii_uppercase();
         let ptext = ctext
             .bytes()

@@ -12,7 +12,7 @@
 //! permutation is defined by the alphabetical order of the letters in the keyword. In this case,
 //! the order would be "6 3 2 4 1 5".
 
-use crate::{Cipher, CipherResult};
+use crate::{Cipher, CipherResult, input};
 use std::collections::HashMap;
 
 /// A Columnar Transposition cipher implementation.
@@ -24,8 +24,11 @@ impl ColumnarTransposition {
     /// Takes the key for the Columnar Transposition cipher and
     /// returns a corresponding ColumnarTransposition struct.
     pub fn new(key: &str) -> Self {
+        input::is_ascii(key)
+            .expect("`key` must be valid ascii");
+
         Self {
-            key: key.to_ascii_uppercase(),
+            key: String::from(key),
         }
     }
 }
@@ -44,7 +47,7 @@ impl Cipher for ColumnarTransposition {
     /// assert_eq!(ctext.unwrap(), "NALCEHWTTDTTFSEELEEDSOAFEAHL")
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
-        let ptext = ptext.to_ascii_uppercase();
+        input::is_ascii(ptext)?;
 
         let mut key: Vec<u8> = self.key.bytes().collect();
         let ptext = ptext.as_bytes();
@@ -81,7 +84,7 @@ impl Cipher for ColumnarTransposition {
     /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
-        let ctext = ctext.to_ascii_uppercase();
+        input::is_ascii(ctext)?;
 
         let key: Vec<u8> = self.key.bytes().collect();
         let ctext = ctext.as_bytes();

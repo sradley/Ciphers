@@ -67,27 +67,10 @@ There are currently **7 different ciphers to be implemented**.
  * The Columnar Transposition cipher can't deal with repeated letters in its
    keyword.
 
-# 6. Random Notes
-Alphabetic-only ciphers:
- * Caesar
- * Affine
- * Atbash
- * Autokey
- * Beaufort
- * Vigenere -
- * Porta -
- * Simple Substitution -
- * Running Key -
-
-Alphanumeric-only ciphers:
-
-All-ascii ciphers (remove uppercase validation):
- * Columnar Transposition
- * Rail-fence -
-
+## 6. Random Notes
 Alphabet-specific (but all-ascii) ciphers (remove uppercase validation):
  * Four-Square
- * Polybius Square -
- * Playfair
- * ADFGX
- * ADFGVX
+
+## 7. Tests to Write
+ * All the panic cases.
+ * All the cases where the function returns an Err Result.

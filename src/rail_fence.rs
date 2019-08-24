@@ -8,7 +8,7 @@
 //! is reached, the message is written downwards again until the whole plaintext is written out. The
 //! message is then read off in rows.
 
-use crate::{Cipher, CipherResult};
+use crate::{Cipher, CipherResult, input};
 
 /// A Rail-fence cipher implementation.
 pub struct RailFence {
@@ -19,7 +19,10 @@ impl RailFence {
     /// Takes the key for the Rail-fence cipher and returns a corresponding
     /// RailFence struct.
     pub fn new(key: usize) -> Self {
-        // ensure key > 0
+        if key == 0 {
+            panic!("`key` must be greater than 0")
+        }
+
         Self { key }
     }
 }
@@ -38,8 +41,7 @@ impl Cipher for RailFence {
     /// assert_eq!(ctext.unwrap(), "DTTFSEDHSWOTATFNEAALHCLEELEE");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
-        let ptext = ptext.to_ascii_uppercase();
-        // ensure ptext is ascii
+        input::is_ascii(ptext)?;
 
         let mut ctext = Vec::with_capacity(ptext.len());
         let ptext: Vec<u8> = ptext.bytes().collect();
@@ -85,8 +87,7 @@ impl Cipher for RailFence {
     /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
-        let ctext = ctext.to_ascii_uppercase();
-        // ensure ctext is ascii
+        input::is_ascii(ctext)?;
 
         let mut ptext = vec![0u8; ctext.len()];
         let ctext: Vec<u8> = ctext.bytes().collect();

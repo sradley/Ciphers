@@ -14,7 +14,7 @@
 //! out a keyword, removing repeated letters in it, then writing all the remaining letters in the
 //! alphabet in the usual order.
 
-use crate::{Cipher, CipherResult};
+use crate::{Cipher, CipherResult, input};
 
 /// A Simple Substitution cipher implementation.
 pub struct Substitution {
@@ -25,9 +25,14 @@ impl Substitution {
     /// Takes the key for the Simple Substitution cipher and returns a
     /// corresponding Substitution struct.
     pub fn new(key: &str) -> Self {
-        assert_eq!(key.len(), 26);
-        // ensure that key is alphabetic
-        // ensure that there are no repeated letters in the key
+        if key.len() != 26 {
+            panic!("`key` must be 26 chars in length");
+        }
+        input::is_alpha(key)
+            .expect("`key` must be alphabetic");
+        input::no_repeated_chars(key)
+            .expect("`key` cannot contain repeated chars");
+
         Self {
             key: key.to_ascii_uppercase(),
         }
@@ -48,9 +53,9 @@ impl Cipher for Substitution {
     /// assert_eq!(ctext.unwrap(), "GIUIFGCEIIPRCTPNNDUCEIQPRCNI");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
-        let ptext = ptext.to_ascii_uppercase();
-        // ensure that ptext is alphabetic
+        input::is_alpha(ptext)?;
 
+        let ptext = ptext.to_ascii_uppercase();
         let key = self.key.as_bytes();
 
         let ctext = ptext.bytes().map(move |c| key[(c - 65) as usize]).collect();
@@ -71,8 +76,8 @@ impl Cipher for Substitution {
     /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
+        input::is_alpha(ctext)?;
         let ctext = ctext.to_ascii_uppercase();
-        // ensure that ctext is alphabetic
 
         let ptext = ctext
             .bytes()

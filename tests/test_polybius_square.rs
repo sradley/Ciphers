@@ -106,7 +106,7 @@ fn encipher_lowercase() {
     let ctext = ps.encipher("defendtheeastwallofthecastle");
     assert_eq!(
         ctext.unwrap(),
-        "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC"
+        "cebccdbccbceebabbcbcbdeaebedbdcacacccdebabbcddbdeaebcabc"
     );
 }
 
@@ -116,5 +116,5 @@ fn decipher_lowercase() {
     let ps = PolybiusSquare::new("phqgiumeaylnofdxkrcvstzwb", "abcde");
 
     let ptext = ps.decipher("cebccdbccbceebabbcbcbdeaebedbdcacacccdebabbcddbdeaebcabc");
-    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "defendtheeastwallofthecastle");
 }

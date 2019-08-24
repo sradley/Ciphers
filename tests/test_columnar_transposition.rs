@@ -48,7 +48,7 @@ fn encipher_lowercase() {
     let ct = ColumnarTransposition::new("german");
 
     let ctext = ct.encipher("defendtheeastwallofthecastle");
-    assert_eq!(ctext.unwrap(), "NALCEHWTTDTTFSEELEEDSOAFEAHL");
+    assert_eq!(ctext.unwrap(), "nalcehwttdttfseeleedsoafeahl");
 }
 
 /// `decipher_lowercase` test function.
@@ -57,5 +57,5 @@ fn decipher_lowercase() {
     let ct = ColumnarTransposition::new("german");
 
     let ptext = ct.decipher("nalcehwttdttfseeleedsoafeahl");
-    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "defendtheeastwallofthecastle");
 }

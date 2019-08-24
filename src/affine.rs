@@ -14,7 +14,9 @@
 //! > As such, it has the weaknesses of all substitution ciphers. Each letter is enciphered with the
 //! function (ax + b) mod 26, where b is the magnitude of the shift.
 
-use crate::{Cipher, CipherResult};
+use crate::{Cipher, CipherResult, input};
+
+static RELATIVE_PRIMES: [i32; 12] = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
 
 /// An Affine cipher implementation.
 pub struct Affine {
@@ -26,6 +28,18 @@ impl Affine {
     /// Takes the two keys for the Affine cipher and returns a
     /// corresponding Affine struct.
     pub fn new(a: i32, b: i32) -> Self {
+        if !(0 < a || a < 26) {
+            panic!("`a` must be in the range [1, 26)")
+        }
+        if !(0 <= b || b < 26) {
+            panic!("`b` must be in the range [0, 26)")
+        }
+
+        // a must be relatively prime to 26
+        if !RELATIVE_PRIMES.contains(&a) {
+            panic!("`a` must be relatively prime to 26")
+        }
+
         Self { a, b }
     }
 }
@@ -44,8 +58,9 @@ impl Cipher for Affine {
     /// assert_eq!(ctext.unwrap(), "GNUNYGOINNLHOJLKKFUOINZLHOKN");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
-        let ptext = ptext.to_ascii_uppercase();
+        input::is_alpha(ptext)?;
 
+        let ptext = ptext.to_ascii_uppercase();
         let ctext = ptext
             .bytes()
             .map(move |c| ((self.a * (c as i32 - 65) + self.b) % 26) as u8 + 65)
@@ -67,6 +82,8 @@ impl Cipher for Affine {
     /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
+        input::is_alpha(ctext)?;
+
         let ctext = ctext.to_ascii_uppercase();
         let a_inv = invmod(self.a, 26).unwrap();
 

@@ -66,6 +66,6 @@ fn encipher_lowercase() {
 fn decipher_lowercase() {
     let adfgx = ADFGX::new("phqgmeaynofdxkrcvszwbutil", "german");
 
-    let ptext = adfgx.decipher("ffdgddadxdafafxaafafdxdxxfdgdagddxxfafadafdxddxddadgxxgx");
-    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
+    let ptext = adfgx.decipher("FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
+    assert_eq!(ptext.unwrap(), "defendtheeastwallofthecastle");
 }

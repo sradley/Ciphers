@@ -48,7 +48,7 @@ fn encipher_lowercase() {
     let rail_fence = RailFence::new(4);
 
     let ctext = rail_fence.encipher("defendtheeastwallofthecastle");
-    assert_eq!(ctext.unwrap(), "DTTFSEDHSWOTATFNEAALHCLEELEE");
+    assert_eq!(ctext.unwrap(), "dttfsedhswotatfneaalhcleelee");
 }
 
 /// `decipher_lowercase` test function.
@@ -57,5 +57,5 @@ fn decipher_lowercase() {
     let rail_fence = RailFence::new(4);
 
     let ptext = rail_fence.decipher("dttfsedhswotatfneaalhcleelee");
-    assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "defendtheeastwallofthecastle");
 }

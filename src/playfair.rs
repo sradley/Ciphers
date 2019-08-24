@@ -19,23 +19,31 @@
 //!
 //! TODO: handle unwraps (i.e. when trying to find a character that's not in the square)
 
-use crate::{Cipher, CipherResult};
+use crate::{Cipher, CipherResult, CipherInputError, input};
 
 /// A Playfair cipher implementation
 pub struct Playfair {
     key: String,
+    pad: char,
 }
 
 impl Playfair {
     /// Takes the key for the Playfair cipher and returns a corresponding
     /// Playfair struct.
-    pub fn new(key: &str) -> Self {
-        assert_eq!(key.len(), 25);
-        // ensure that key is of length 25
-        // ensure that there are no repeated letters in the key
+    pub fn new(key: &str, pad: char) -> Self {
+        if key.len() != 25 {
+            panic!("`key` must be 25 chars in length")
+        }
+        input::no_repeated_chars(key)
+            .expect("`key` cannot contain repeated chars");
+
+        match key.find(pad) {
+            None => panic!("`key` must contain `pad`"),
+            _ => (),
+        }
 
         Self {
-            key: key.to_ascii_uppercase(),
+            key: String::from(key), pad,
         }
     }
 }
@@ -48,19 +56,18 @@ impl Cipher for Playfair {
     /// ```
     /// use ciphers::{Cipher, Playfair};
     ///
-    /// let playfair = Playfair::new("ZGPTFOIHMUWDRCNYKEQAXVSBL");
+    /// let playfair = Playfair::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", 'X');
     ///
     /// let ctext = playfair.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     /// assert_eq!(ctext.unwrap(), "RKPAWRPMYSELZCLFXUZFRSNQBPSA");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
-        let ptext = ptext.to_ascii_uppercase();
-        // ensure that ptext is ascii
-        // ensure that every character in ptext is contained within the key
+        input::is_ascii(ptext)?;
+        input::in_alphabet(ptext, &self.key)?;
 
         let mut ptext: Vec<u8> = ptext.bytes().collect();
         if ptext.len() % 2 != 0 {
-            ptext.push(88);
+            ptext.push(self.pad as u8);
         }
 
         let key = self.key.as_bytes();
@@ -68,7 +75,7 @@ impl Cipher for Playfair {
         let mut ctext = Vec::with_capacity(ptext.len());
         for i in (0..ptext.len()).step_by(2) {
             if ptext[i] == ptext[i + 1] {
-                ptext[i + 1] = 88;
+                ptext[i + 1] = self.pad as u8;
             }
 
             let yx1 = key.iter().position(|&c| c == ptext[i]).unwrap();
@@ -102,15 +109,20 @@ impl Cipher for Playfair {
     /// ```
     /// use ciphers::{Cipher, Playfair};
     ///
-    /// let playfair = Playfair::new("ZGPTFOIHMUWDRCNYKEQAXVSBL");
+    /// let playfair = Playfair::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", 'X');
     ///
     /// let ptext = playfair.decipher("RKPAWRPMYSELZCLFXUZFRSNQBPSA");
     /// assert_eq!(ptext.unwrap(), "DEFENDTHEXASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
-        let ctext = ctext.to_ascii_uppercase();
-        // ensure that ctext is ascii
-        // ensure that ctext is even
+        input::is_ascii(ctext)?;
+        input::in_alphabet(ctext, &self.key)?;
+        if ctext.len() % 2 != 0 {
+            return Err(CipherInputError::BadInput(
+                String::from("`ctext` must contain an even number of chars")
+            ))
+        }
+
         let ctext = ctext.as_bytes();
         let key = self.key.as_bytes();
 

@@ -2,33 +2,47 @@
 //! 
 //! ...
 
+use std::collections::HashSet;
 use crate::{CipherResult, CipherInputError};
 
-fn handle_alpha(input: &str) -> CipherResult {
+pub fn is_alpha(input: &str) -> CipherResult {
     for c in input.chars() {
         if !c.is_ascii_alphabetic() {
             return Err(CipherInputError::NotAlphabetic)
         }
     }
-    Ok(())
+    Ok(String::new())
 }
 
-fn handle_alphanum(input: &str) -> CipherResult {
-    for c in input.chars() {
-        if !c.is_ascii_alphanumeric() {
-            return Err(CipherInputError::NotAlphanumeric)
-        }
-    }
-    Ok(())
-}
-
-fn handle_ascii(input: &str) -> CipherResult {
+pub fn is_ascii(input: &str) -> CipherResult {
     for c in input.chars() {
         if !c.is_ascii() {
             return Err(CipherInputError::NotAscii)
         }
     }
-    Ok(())
+    Ok(String::new())
 }
 
-fn valid_alphabet() -> 
+pub fn in_alphabet(input: &str, alphabet: &str) -> CipherResult {
+    for c in input.chars() {
+        match alphabet.find(c) {
+            None => return Err(CipherInputError::NotInAlphabet),
+            _ => (),
+        }
+    }
+    Ok(String::new())
+}
+
+pub fn no_repeated_chars(input: &str) -> CipherResult {
+    let mut bytes = HashSet::new();
+
+    for b in input.bytes() {
+        if bytes.contains(&b) {
+            return Err(CipherInputError::BadAlphabet)
+        }
+
+        bytes.insert(b);
+    }
+
+    Ok(String::new())
+}

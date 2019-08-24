@@ -3,7 +3,7 @@ use ciphers::{Cipher, Playfair};
 /// `encipher_small` test function.
 #[test]
 fn encipher_small() {
-    let playfair = Playfair::new("ZGPTFOIHMUWDRCNYKEQAXVSBL");
+    let playfair = Playfair::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", 'X');
 
     let ctext = playfair.encipher("DEFENDTHEEASTWALLOFTHECASTLE");
     assert_eq!(ctext.unwrap(), "RKPAWRPMYSELZCLFXUZFRSNQBPSA");
@@ -12,7 +12,7 @@ fn encipher_small() {
 /// `decipher_small` test function.
 #[test]
 fn decipher_small() {
-    let playfair = Playfair::new("ZGPTFOIHMUWDRCNYKEQAXVSBL");
+    let playfair = Playfair::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", 'X');
 
     let ptext = playfair.decipher("RKPAWRPMYSELZCLFXUZFRSNQBPSA");
     assert_eq!(ptext.unwrap(), "DEFENDTHEXASTWALLOFTHECASTLE");
@@ -21,7 +21,7 @@ fn decipher_small() {
 /// `encipher_large` test function.
 #[test]
 fn encipher_large() {
-    let playfair = Playfair::new("ZYXWVUTSRQPONMLKIHGFEDCBA");
+    let playfair = Playfair::new("ZYXWVUTSRQPONMLKIHGFEDCBA", 'X');
 
     let ctext = playfair.encipher("ABCDEFGHIIKLMNOPQRSTUVWXYZABCDEFGHIIKLMNOPQRSTUVWXYZ");
     assert_eq!(
@@ -33,7 +33,7 @@ fn encipher_large() {
 /// `decipher_large` test function.
 #[test]
 fn decipher_large() {
-    let playfair = Playfair::new("ZYXWVUTSRQPONMLKIHGFEDCBA");
+    let playfair = Playfair::new("ZYXWVUTSRQPONMLKIHGFEDCBA", 'X');
 
     let ptext = playfair.decipher("EABCAKFGHYFPLMNOUQRSQZVWXYEABCAKFGHYFPLMNOUQRSQZVWXY");
     assert_eq!(
@@ -45,17 +45,17 @@ fn decipher_large() {
 /// `encipher_lowercase` test function.
 #[test]
 fn encipher_lowercase() {
-    let playfair = Playfair::new("zgptfoihmuwdrcnykeqaxvsbl");
+    let playfair = Playfair::new("zgptfoihmuwdrcnykeqaxvsbl", 'x');
 
     let ctext = playfair.encipher("defendtheeastwallofthecastle");
-    assert_eq!(ctext.unwrap(), "RKPAWRPMYSELZCLFXUZFRSNQBPSA");
+    assert_eq!(ctext.unwrap(), "rkpawrpmyselzclfxuzfrsnqbpsa");
 }
 
 /// `decipher_lowercase` test function.
 #[test]
 fn decipher_lowercase() {
-    let playfair = Playfair::new("zgptfoihmuwdrcnykeqaxvsbl");
+    let playfair = Playfair::new("zgptfoihmuwdrcnykeqaxvsbl", 'x');
 
     let ptext = playfair.decipher("rkpawrpmyselzclfxuzfrsnqbpsa");
-    assert_eq!(ptext.unwrap(), "DEFENDTHEXASTWALLOFTHECASTLE");
+    assert_eq!(ptext.unwrap(), "defendthexastwallofthecastle");
 }

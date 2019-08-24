@@ -18,7 +18,7 @@
 //! > In the 19th century the scheme was misattributed to Blaise de Vigenère (1523 – 1596), and so
 //! acquired its present name.
 
-use crate::{Cipher, CipherResult, TABULA_RECTA};
+use crate::{Cipher, CipherResult, TABULA_RECTA, input};
 
 /// A Vigenere cipher implementation.
 pub struct Vigenere {
@@ -29,7 +29,9 @@ impl Vigenere {
     /// Takes the key for the Vigenere cipher and returns a corresponding
     /// Vigenere struct.
     pub fn new(key: &str) -> Self {
-        // ensure that key is alphabetic
+        input::is_alpha(key)
+            .expect("`key` must be alphabetic");
+
         Self {
             key: key.to_ascii_uppercase(),
         }
@@ -50,9 +52,9 @@ impl Cipher for Vigenere {
     /// assert_eq!(ctext.unwrap(), "ISWXVIBJEXIGGBOCEWKBJEVIGGQS");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
-        let ptext = ptext.to_ascii_uppercase();
-        // ensure that ptext is alphabetic
+        input::is_alpha(ptext)?;
 
+        let ptext = ptext.to_ascii_uppercase();
         let key = self.key.as_bytes();
 
         let ctext = ptext
@@ -82,9 +84,9 @@ impl Cipher for Vigenere {
     /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
-        let ctext = ctext.to_ascii_uppercase();
-        // ensure that ctext is alphabetic
+        input::is_alpha(ctext)?;
 
+        let ctext = ctext.to_ascii_uppercase();
         let key = self.key.as_bytes();
 
         let ptext = ctext

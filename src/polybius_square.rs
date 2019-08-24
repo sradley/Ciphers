@@ -10,7 +10,7 @@
 //!
 //! TODO: handle unwraps (i.e. when trying to find a character that's not in the square)
 
-use crate::{Cipher, CipherResult};
+use crate::{Cipher, CipherResult, CipherInputError, input};
 
 /// A Polybius Square cipher implementation.
 pub struct PolybiusSquare {
@@ -21,16 +21,23 @@ pub struct PolybiusSquare {
 impl PolybiusSquare {
     /// Takes the key and specified characters for the Polybius Square
     /// cipher and returns a corresponding PolybiusSquare struct.
-    pub fn new(key: &str, chars: &str) -> Self {
-        // ensure that key is ascii
-        // ensure that there are no repeated letters in the key
-        // ensure that chars is ascii
-        // ensure that there are no repeated letters in the chars
-        // ensure that key.len == chars.len^2
-        assert_eq!(key.len(), chars.len() * chars.len());
+    pub fn new(key: &str, chars: &str) -> Self {        
+        input::is_ascii(key)
+            .expect("`key` must be valid ascii");
+        input::no_repeated_chars(key)
+            .expect("`key` cannot contain repeated chars");
+        input::is_ascii(chars)
+            .expect("`chars` must be valid ascii");
+        input::no_repeated_chars(chars)
+            .expect("`chars` cannot contain repeated chars");
+
+        if key.len() != chars.len() * chars.len() {
+            panic!("error: the length of chars must be the sqrt of the length of the key")
+        }
+        
         Self {
-            key: key.to_ascii_uppercase(),
-            chars: chars.to_ascii_uppercase(),
+            key: String::from(key),
+            chars: String::from(chars),
         }
     }
 }
@@ -49,9 +56,8 @@ impl Cipher for PolybiusSquare {
     /// assert_eq!(ctext.unwrap(), "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
-        // ensure that ptext is ascii
-        let ptext = ptext.to_ascii_uppercase();
-        // ensure that every character in ptext is contained within the key
+        input::is_ascii(ptext)?;
+        input::in_alphabet(ptext, &self.key)?;
 
         let chars = self.chars.as_bytes();
         let mut ctext: Vec<u8> = Vec::with_capacity(ptext.len());
@@ -79,11 +85,13 @@ impl Cipher for PolybiusSquare {
     /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
-        // ensure that ctext is ascii
-        // ensure that ctext.len is even
-        assert_eq!(ctext.len() % 2, 0);
-        let ctext = ctext.to_ascii_uppercase();
-        // ensure that every character in ctext is contained within the chars
+        input::is_ascii(ctext)?;
+        input::in_alphabet(ctext, &self.chars)?;
+        if ctext.len() % 2 != 0 {
+            return Err(CipherInputError::BadInput(
+                String::from("`ctext` must contain an even number of chars")
+            ))
+        }
 
         let key = self.key.as_bytes();
         let ctext = ctext.as_bytes();

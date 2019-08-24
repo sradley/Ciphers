@@ -19,6 +19,8 @@ mod running_key;
 mod substitution;
 mod vigenere;
 
+mod input;
+
 // re-exports
 pub use adfgvx::ADFGVX;
 pub use adfgx::ADFGX;
@@ -45,6 +47,7 @@ pub enum CipherInputError {
     NotAscii,
     NotInAlphabet,
     BadAlphabet,
+    BadInput(String),
 }
 
 /// `CipherResult` type ...

@@ -14,7 +14,7 @@
 //!
 //! > In modern cryptography, self-synchronising stream ciphers are autokey ciphers.
 
-use crate::{Cipher, CipherResult, TABULA_RECTA};
+use crate::{Cipher, CipherResult, TABULA_RECTA, input};
 
 /// An Autokey cipher implementation.
 pub struct Autokey {
@@ -25,6 +25,9 @@ impl Autokey {
     /// Takes the key for the Autokey cipher and returns a corresponding
     /// Autokey struct.
     pub fn new(key: &str) -> Self {
+        input::is_alpha(key)
+            .expect("`key` must be alphabetic");
+
         Self {
             key: key.to_ascii_uppercase(),
         }
@@ -45,6 +48,8 @@ impl Cipher for Autokey {
     /// assert_eq!(ctext.unwrap(), "ISWXVIBJEXIGGZEQPBIMOIGAKMHE");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
+        input::is_alpha(ptext)?;
+
         let ptext = ptext.to_ascii_uppercase();
         let key = self.key.as_bytes();
         let ptext: Vec<u8> = ptext.bytes().collect();
@@ -78,6 +83,8 @@ impl Cipher for Autokey {
     /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
+        input::is_alpha(ctext)?;
+
         let ctext = ctext.to_ascii_uppercase();
         let key = self.key.as_bytes();
         let ctext: Vec<u8> = ctext.bytes().collect();
