@@ -24,7 +24,10 @@ impl ADFGX {
     /// Takes the key and keyword for the ADFGX cipher and returns a
     /// corresponding ADFGX struct.
     pub fn new(key: &str, keyword: &str) -> Self {
-        assert_eq!(key.len(), 25);
+        if key.len() != 25 {
+            panic!("`key` must be 25 chars in length")
+        }
+        
         Self {
             key: String::from(key),
             keyword: String::from(keyword),

@@ -26,7 +26,10 @@ impl ADFGVX {
     /// Takes the key and keyword for the ADFGVX cipher and returns a
     /// corresponding ADFGVX struct.
     pub fn new(key: &str, keyword: &str) -> Self {
-        assert_eq!(key.len(), 36);
+        if key.len() != 36 {
+            panic!("`key` must be 36 chars in length")
+        }
+        
         Self {
             key: String::from(key),
             keyword: String::from(keyword),
