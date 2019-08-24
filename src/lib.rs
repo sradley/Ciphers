@@ -43,10 +43,8 @@ pub use vigenere::Vigenere;
 #[derive(Debug)]
 pub enum CipherInputError {
     NotAlphabetic,
-    NotAlphanumeric,
     NotAscii,
     NotInAlphabet,
-    BadAlphabet,
     BadInput(String),
 }
 

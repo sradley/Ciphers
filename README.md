@@ -62,15 +62,9 @@ There are currently **7 different ciphers to be implemented**.
 |               |                |                |             | Straddle Checkerboard |
 
 ## 5. Backlog
- * Refactor Four-Square to use custom alphabets.
- * Input validation.
  * The Columnar Transposition cipher can't deal with repeated letters in its
    keyword.
 
-## 6. Random Notes
-Alphabet-specific (but all-ascii) ciphers (remove uppercase validation):
- * Four-Square
-
-## 7. Tests to Write
+## 6. Tests to Write
  * All the panic cases.
  * All the cases where the function returns an Err Result.

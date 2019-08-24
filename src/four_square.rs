@@ -17,32 +17,52 @@
 //!
 //! TODO: handle unwraps (i.e. when trying to find a letter that's not in the alphabet)
 
-use crate::{Cipher, CipherResult};
-
-static ALPHABET: [u8; 25] = [
-    65, 66, 67, 68, 69, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
-    90,
-];
+use crate::{Cipher, CipherResult, CipherInputError, input};
 
 /// A Four-Square cipher implementation.
 pub struct FourSquare {
     key1: String,
     key2: String,
+    alphabet: Vec<u8>,
+    pad: u8,
 }
 
 impl FourSquare {
     /// Takes the two keys for the Four-Square cipher and
     /// returns a corresponding FourSquare struct.
-    pub fn new(key1: &str, key2: &str) -> Self {
-        assert_eq!(key1.len(), 25);
-        // ensure key1 is of length 25
-        // ensure key1 has no repeated characters
-        assert_eq!(key2.len(), 25);
-        // ensure key2 is of length 25
-        // ensure key2 has no repeated characters
+    pub fn new(key1: &str, key2: &str, alphabet: &str, pad: char) -> Self {
+        if key1.len() != 25 {
+            panic!("`key1` must be 25 chars in length")
+        }
+        input::no_repeated_chars(key1)
+            .expect("`key1` cannot contain repeated chars");
+        input::in_alphabet(key1, alphabet)
+            .expect("all chars in `key1` must be contained in `alphabet`");
+
+        if key2.len() != 25 {
+            panic!("`key2` must be 25 chars in length")
+        }
+        input::no_repeated_chars(key2)
+            .expect("`key2` cannot contain repeated chars");
+        input::in_alphabet(key2, alphabet)
+            .expect("all chars in `key2` must be contained in `alphabet`");
+
+        if alphabet.len() != 25 {
+            panic!("`alphabet` must be 25 chars in length")
+        }
+        input::no_repeated_chars(alphabet)
+            .expect("`alphabet` cannot contain repeated chars");
+
+        match alphabet.find(pad) {
+            None => panic!("`alphabet` must contain `pad`"),
+            _ => (),
+        }
+
         Self {
-            key1: key1.to_ascii_uppercase(),
-            key2: key2.to_ascii_uppercase(),
+            key1: String::from(key1),
+            key2: String::from(key2),
+            alphabet: alphabet.bytes().collect(),
+            pad: pad as u8,
         }
     }
 }
@@ -55,16 +75,20 @@ impl Cipher for FourSquare {
     /// ```
     /// use ciphers::{Cipher, FourSquare};
     ///
-    /// let four_square = FourSquare::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", "MFNBDCRHSAXYOGVITUEWLQZKP");
+    /// let four_square = FourSquare::new(
+    ///     "ZGPTFOIHMUWDRCNYKEQAXVSBL",
+    ///     "MFNBDCRHSAXYOGVITUEWLQZKP",
+    ///     "ABCDEFGHIKLMNOPQRSTUVWXYZ",
+    ///     'X',
+    /// );
     ///
     /// let ctext = four_square.encipher("ATTACKATDAWN");
     /// assert_eq!(ctext.unwrap(), "TIYBFHTIZBSY");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
-        let ptext = ptext.to_ascii_uppercase();
         let mut ptext: Vec<u8> = ptext.bytes().collect();
         if ptext.len() % 2 != 0 {
-            ptext.push(88);
+            ptext.push(self.pad);
         }
 
         let key1 = self.key1.as_bytes();
@@ -72,8 +96,14 @@ impl Cipher for FourSquare {
 
         let mut ctext = Vec::with_capacity(ptext.len());
         for i in (0..ptext.len()).step_by(2) {
-            let yx1 = ALPHABET.iter().position(|&c| c == ptext[i]).unwrap();
-            let yx2 = ALPHABET.iter().position(|&c| c == ptext[i + 1]).unwrap();
+            let yx1 = match self.alphabet.iter().position(|&c| c == ptext[i]) {
+                Some(val) => val,
+                None => return Err(CipherInputError::NotInAlphabet),
+            };
+            let yx2 = match self.alphabet.iter().position(|&c| c == ptext[i + 1]) {
+                Some(val) => val,
+                None => return Err(CipherInputError::NotInAlphabet),
+            };
 
             let (y1, x1) = (yx1 / 5, yx1 % 5);
             let (y2, x2) = (yx2 / 5, yx2 % 5);
@@ -92,26 +122,36 @@ impl Cipher for FourSquare {
     /// ```
     /// use ciphers::{Cipher, FourSquare};
     ///
-    /// let four_square = FourSquare::new("ZGPTFOIHMUWDRCNYKEQAXVSBL", "MFNBDCRHSAXYOGVITUEWLQZKP");
+    /// let four_square = FourSquare::new(
+    ///     "ZGPTFOIHMUWDRCNYKEQAXVSBL",
+    ///     "MFNBDCRHSAXYOGVITUEWLQZKP",
+    ///     "ABCDEFGHIKLMNOPQRSTUVWXYZ",
+    ///     'X',
+    /// );
     ///
     /// let ptext = four_square.decipher("TIYBFHTIZBSY");
     /// assert_eq!(ptext.unwrap(), "ATTACKATDAWN");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
         assert_eq!(ctext.len() % 2, 0);
-        let ctext = ctext.to_ascii_uppercase();
         let ctext = ctext.as_bytes();
 
         let mut ptext = Vec::with_capacity(ctext.len());
         for i in (0..ctext.len()).step_by(2) {
-            let yx1 = self.key1.find(|c| c == ctext[i] as char).unwrap();
-            let yx2 = self.key2.find(|c| c == ctext[i + 1] as char).unwrap();
+            let yx1 = match self.key1.find(|c| c == ctext[i] as char) {
+                Some(val) => val,
+                None => return Err(CipherInputError::NotInAlphabet),
+            };
+            let yx2 = match self.key2.find(|c| c == ctext[i + 1] as char) {
+                Some(val) => val,
+                None => return Err(CipherInputError::NotInAlphabet),
+            };
 
             let (y1, x2) = (yx1 / 5, yx1 % 5);
             let (y2, x1) = (yx2 / 5, yx2 % 5);
 
-            ptext.push(ALPHABET[y1 * 5 + x1]);
-            ptext.push(ALPHABET[y2 * 5 + x2]);
+            ptext.push(self.alphabet[y1 * 5 + x1]);
+            ptext.push(self.alphabet[y2 * 5 + x2]);
         }
 
         Ok(String::from_utf8(ptext).unwrap())

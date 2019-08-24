@@ -1,4 +1,4 @@
-//! # Input Handling
+//! # Input Validation
 //! 
 //! ...
 
@@ -38,7 +38,9 @@ pub fn no_repeated_chars(input: &str) -> CipherResult {
 
     for b in input.bytes() {
         if bytes.contains(&b) {
-            return Err(CipherInputError::BadAlphabet)
+            return Err(CipherInputError::BadInput(
+                String::from("`input` contains repeated chars")
+            ))
         }
 
         bytes.insert(b);

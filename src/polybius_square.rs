@@ -32,7 +32,7 @@ impl PolybiusSquare {
             .expect("`chars` cannot contain repeated chars");
 
         if key.len() != chars.len() * chars.len() {
-            panic!("error: the length of chars must be the sqrt of the length of the key")
+            panic!("`chars` must be of length sqrt(key.len())")
         }
         
         Self {

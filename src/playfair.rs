@@ -24,7 +24,7 @@ use crate::{Cipher, CipherResult, CipherInputError, input};
 /// A Playfair cipher implementation
 pub struct Playfair {
     key: String,
-    pad: char,
+    pad: u8,
 }
 
 impl Playfair {
@@ -42,9 +42,7 @@ impl Playfair {
             _ => (),
         }
 
-        Self {
-            key: String::from(key), pad,
-        }
+        Self { key: String::from(key), pad: pad as u8 }
     }
 }
 
@@ -67,7 +65,7 @@ impl Cipher for Playfair {
 
         let mut ptext: Vec<u8> = ptext.bytes().collect();
         if ptext.len() % 2 != 0 {
-            ptext.push(self.pad as u8);
+            ptext.push(self.pad);
         }
 
         let key = self.key.as_bytes();
@@ -75,7 +73,7 @@ impl Cipher for Playfair {
         let mut ctext = Vec::with_capacity(ptext.len());
         for i in (0..ptext.len()).step_by(2) {
             if ptext[i] == ptext[i + 1] {
-                ptext[i + 1] = self.pad as u8;
+                ptext[i + 1] = self.pad;
             }
 
             let yx1 = key.iter().position(|&c| c == ptext[i]).unwrap();
