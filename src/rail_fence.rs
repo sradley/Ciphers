@@ -8,7 +8,7 @@
 //! is reached, the message is written downwards again until the whole plaintext is written out. The
 //! message is then read off in rows.
 
-use crate::{Cipher, CipherResult, input};
+use crate::{input, Cipher, CipherResult};
 
 /// A Rail-fence cipher implementation.
 pub struct RailFence {

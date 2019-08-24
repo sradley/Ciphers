@@ -19,7 +19,7 @@
 //!
 //! TODO: handle unwraps (i.e. when trying to find a character that's not in the square)
 
-use crate::{Cipher, CipherResult, CipherInputError, input};
+use crate::{input, Cipher, CipherInputError, CipherResult};
 
 /// A Playfair cipher implementation
 pub struct Playfair {
@@ -34,15 +34,17 @@ impl Playfair {
         if key.len() != 25 {
             panic!("`key` must be 25 chars in length")
         }
-        input::no_repeated_chars(key)
-            .expect("`key` cannot contain repeated chars");
+        input::no_repeated_chars(key).expect("`key` cannot contain repeated chars");
 
         match key.find(pad) {
             None => panic!("`key` must contain `pad`"),
             _ => (),
         }
 
-        Self { key: String::from(key), pad: pad as u8 }
+        Self {
+            key: String::from(key),
+            pad: pad as u8,
+        }
     }
 }
 
@@ -116,9 +118,9 @@ impl Cipher for Playfair {
         input::is_ascii(ctext)?;
         input::in_alphabet(ctext, &self.key)?;
         if ctext.len() % 2 != 0 {
-            return Err(CipherInputError::BadInput(
-                String::from("`ctext` must contain an even number of chars")
-            ))
+            return Err(CipherInputError::BadInput(String::from(
+                "`ctext` must contain an even number of chars",
+            )));
         }
 
         let ctext = ctext.as_bytes();

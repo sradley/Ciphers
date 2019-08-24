@@ -12,7 +12,7 @@
 //! The letters were chosen deliberately because they are very different from one another in the
 //! Morse code. That reduced the possibility of operator error.
 
-use crate::{Cipher, PolybiusSquare, ColumnarTransposition, CipherResult};
+use crate::{Cipher, CipherResult, ColumnarTransposition, PolybiusSquare};
 
 /// An ADFGX cipher implementation.
 pub struct ADFGX {

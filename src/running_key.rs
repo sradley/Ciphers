@@ -8,7 +8,7 @@
 //! Usually, the book to be used would be agreed ahead of time, while the passage to be used would
 //! be chosen randomly for each message and secretly indicated somewhere in the message.
 
-use crate::{Cipher, CipherResult, CipherInputError, TABULA_RECTA, input};
+use crate::{input, Cipher, CipherInputError, CipherResult, TABULA_RECTA};
 
 /// A Running Key cipher implementation.
 pub struct RunningKey {
@@ -19,8 +19,7 @@ impl RunningKey {
     /// Takes the key for the Running Key cipher and returns a
     /// corresponding RunningKey struct.
     pub fn new(key: &str) -> Self {
-        input::is_alpha(key)
-            .expect("`key` must be alphabetic");
+        input::is_alpha(key).expect("`key` must be alphabetic");
 
         Self {
             key: key.to_ascii_uppercase(),
@@ -43,9 +42,9 @@ impl Cipher for RunningKey {
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
         if self.key.len() < ptext.len() {
-            return Err(CipherInputError::BadInput(
-                String::from("`ptext` cannot be longer than the key")
-            ))
+            return Err(CipherInputError::BadInput(String::from(
+                "`ptext` cannot be longer than the key",
+            )));
         }
         input::is_alpha(ptext)?;
 
@@ -80,9 +79,9 @@ impl Cipher for RunningKey {
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
         if self.key.len() < ctext.len() {
-            return Err(CipherInputError::BadInput(
-                String::from("`ctext` cannot be longer than the key")
-            ))
+            return Err(CipherInputError::BadInput(String::from(
+                "`ctext` cannot be longer than the key",
+            )));
         }
         input::is_alpha(ctext)?;
 

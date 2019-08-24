@@ -18,7 +18,7 @@
 //! > In the 19th century the scheme was misattributed to Blaise de Vigenère (1523 – 1596), and so
 //! acquired its present name.
 
-use crate::{Cipher, CipherResult, TABULA_RECTA, input};
+use crate::{input, Cipher, CipherResult, TABULA_RECTA};
 
 /// A Vigenere cipher implementation.
 pub struct Vigenere {
@@ -29,8 +29,7 @@ impl Vigenere {
     /// Takes the key for the Vigenere cipher and returns a corresponding
     /// Vigenere struct.
     pub fn new(key: &str) -> Self {
-        input::is_alpha(key)
-            .expect("`key` must be alphabetic");
+        input::is_alpha(key).expect("`key` must be alphabetic");
 
         Self {
             key: key.to_ascii_uppercase(),

@@ -12,7 +12,7 @@
 //! available, which one was used in encryption can be used as a key, but this does not provide
 //! significantly more security.
 
-use crate::{Cipher, CipherResult, input};
+use crate::{input, Cipher, CipherResult};
 
 /// An Atbash cipher implementation.
 pub struct Atbash;

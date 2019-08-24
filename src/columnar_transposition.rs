@@ -12,7 +12,7 @@
 //! permutation is defined by the alphabetical order of the letters in the keyword. In this case,
 //! the order would be "6 3 2 4 1 5".
 
-use crate::{Cipher, CipherResult, input};
+use crate::{input, Cipher, CipherResult};
 use std::collections::HashMap;
 
 /// A Columnar Transposition cipher implementation.
@@ -24,8 +24,7 @@ impl ColumnarTransposition {
     /// Takes the key for the Columnar Transposition cipher and
     /// returns a corresponding ColumnarTransposition struct.
     pub fn new(key: &str) -> Self {
-        input::is_ascii(key)
-            .expect("`key` must be valid ascii");
+        input::is_ascii(key).expect("`key` must be valid ascii");
 
         Self {
             key: String::from(key),

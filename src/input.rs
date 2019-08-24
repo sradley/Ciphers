@@ -1,14 +1,14 @@
 //! # Input Validation
-//! 
+//!
 //! ...
 
+use crate::{CipherInputError, CipherResult};
 use std::collections::HashSet;
-use crate::{CipherResult, CipherInputError};
 
 pub fn is_alpha(input: &str) -> CipherResult {
     for c in input.chars() {
         if !c.is_ascii_alphabetic() {
-            return Err(CipherInputError::NotAlphabetic)
+            return Err(CipherInputError::NotAlphabetic);
         }
     }
     Ok(String::new())
@@ -17,7 +17,7 @@ pub fn is_alpha(input: &str) -> CipherResult {
 pub fn is_ascii(input: &str) -> CipherResult {
     for c in input.chars() {
         if !c.is_ascii() {
-            return Err(CipherInputError::NotAscii)
+            return Err(CipherInputError::NotAscii);
         }
     }
     Ok(String::new())
@@ -38,9 +38,9 @@ pub fn no_repeated_chars(input: &str) -> CipherResult {
 
     for b in input.bytes() {
         if bytes.contains(&b) {
-            return Err(CipherInputError::BadInput(
-                String::from("`input` contains repeated chars")
-            ))
+            return Err(CipherInputError::BadInput(String::from(
+                "`input` contains repeated chars",
+            )));
         }
 
         bytes.insert(b);

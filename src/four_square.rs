@@ -17,7 +17,7 @@
 //!
 //! TODO: handle unwraps (i.e. when trying to find a letter that's not in the alphabet)
 
-use crate::{Cipher, CipherResult, CipherInputError, input};
+use crate::{input, Cipher, CipherInputError, CipherResult};
 
 /// A Four-Square cipher implementation.
 pub struct FourSquare {
@@ -34,24 +34,21 @@ impl FourSquare {
         if key1.len() != 25 {
             panic!("`key1` must be 25 chars in length")
         }
-        input::no_repeated_chars(key1)
-            .expect("`key1` cannot contain repeated chars");
+        input::no_repeated_chars(key1).expect("`key1` cannot contain repeated chars");
         input::in_alphabet(key1, alphabet)
             .expect("all chars in `key1` must be contained in `alphabet`");
 
         if key2.len() != 25 {
             panic!("`key2` must be 25 chars in length")
         }
-        input::no_repeated_chars(key2)
-            .expect("`key2` cannot contain repeated chars");
+        input::no_repeated_chars(key2).expect("`key2` cannot contain repeated chars");
         input::in_alphabet(key2, alphabet)
             .expect("all chars in `key2` must be contained in `alphabet`");
 
         if alphabet.len() != 25 {
             panic!("`alphabet` must be 25 chars in length")
         }
-        input::no_repeated_chars(alphabet)
-            .expect("`alphabet` cannot contain repeated chars");
+        input::no_repeated_chars(alphabet).expect("`alphabet` cannot contain repeated chars");
 
         match alphabet.find(pad) {
             None => panic!("`alphabet` must contain `pad`"),

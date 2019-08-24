@@ -10,7 +10,7 @@
 //!
 //! TODO: handle unwraps (i.e. when trying to find a character that's not in the square)
 
-use crate::{Cipher, CipherResult, CipherInputError, input};
+use crate::{input, Cipher, CipherInputError, CipherResult};
 
 /// A Polybius Square cipher implementation.
 pub struct PolybiusSquare {
@@ -21,20 +21,16 @@ pub struct PolybiusSquare {
 impl PolybiusSquare {
     /// Takes the key and specified characters for the Polybius Square
     /// cipher and returns a corresponding PolybiusSquare struct.
-    pub fn new(key: &str, chars: &str) -> Self {        
-        input::is_ascii(key)
-            .expect("`key` must be valid ascii");
-        input::no_repeated_chars(key)
-            .expect("`key` cannot contain repeated chars");
-        input::is_ascii(chars)
-            .expect("`chars` must be valid ascii");
-        input::no_repeated_chars(chars)
-            .expect("`chars` cannot contain repeated chars");
+    pub fn new(key: &str, chars: &str) -> Self {
+        input::is_ascii(key).expect("`key` must be valid ascii");
+        input::no_repeated_chars(key).expect("`key` cannot contain repeated chars");
+        input::is_ascii(chars).expect("`chars` must be valid ascii");
+        input::no_repeated_chars(chars).expect("`chars` cannot contain repeated chars");
 
         if key.len() != chars.len() * chars.len() {
             panic!("`chars` must be of length sqrt(key.len())")
         }
-        
+
         Self {
             key: String::from(key),
             chars: String::from(chars),
@@ -88,9 +84,9 @@ impl Cipher for PolybiusSquare {
         input::is_ascii(ctext)?;
         input::in_alphabet(ctext, &self.chars)?;
         if ctext.len() % 2 != 0 {
-            return Err(CipherInputError::BadInput(
-                String::from("`ctext` must contain an even number of chars")
-            ))
+            return Err(CipherInputError::BadInput(String::from(
+                "`ctext` must contain an even number of chars",
+            )));
         }
 
         let key = self.key.as_bytes();

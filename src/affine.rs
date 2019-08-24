@@ -14,7 +14,7 @@
 //! > As such, it has the weaknesses of all substitution ciphers. Each letter is enciphered with the
 //! function (ax + b) mod 26, where b is the magnitude of the shift.
 
-use crate::{Cipher, CipherResult, input};
+use crate::{input, Cipher, CipherResult};
 
 static RELATIVE_PRIMES: [i32; 12] = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
 

@@ -11,7 +11,7 @@
 //! Vigenère square but in reverse order starting with the letter "Z" in the first row, where the
 //! first row and the last column serve the same purpose.
 
-use crate::{Cipher, CipherResult, TABULA_RECTA, input};
+use crate::{input, Cipher, CipherResult, TABULA_RECTA};
 
 /// A Beaufort cipher implementation.
 pub struct Beaufort {
@@ -22,8 +22,7 @@ impl Beaufort {
     /// Takes the key for the Beaufort cipher and returns a corresponding
     /// Beaufort struct.
     pub fn new(key: &str) -> Self {
-        input::is_alpha(key)
-            .expect("`key` must be alphabetic");
+        input::is_alpha(key).expect("`key` must be alphabetic");
 
         Self {
             key: key.to_ascii_uppercase(),

@@ -15,7 +15,7 @@
 //! with all single-alphabet substitution ciphers, the Caesar cipher is easily broken and in modern
 //! practice offers essentially no communications security.
 
-use crate::{Cipher, CipherResult, input};
+use crate::{input, Cipher, CipherResult};
 
 /// A Caesar cipher implementation.
 pub struct Caesar {

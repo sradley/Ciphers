@@ -14,7 +14,7 @@
 //! out a keyword, removing repeated letters in it, then writing all the remaining letters in the
 //! alphabet in the usual order.
 
-use crate::{Cipher, CipherResult, input};
+use crate::{input, Cipher, CipherResult};
 
 /// A Simple Substitution cipher implementation.
 pub struct Substitution {
@@ -28,10 +28,8 @@ impl Substitution {
         if key.len() != 26 {
             panic!("`key` must be 26 chars in length");
         }
-        input::is_alpha(key)
-            .expect("`key` must be alphabetic");
-        input::no_repeated_chars(key)
-            .expect("`key` cannot contain repeated chars");
+        input::is_alpha(key).expect("`key` must be alphabetic");
+        input::no_repeated_chars(key).expect("`key` cannot contain repeated chars");
 
         Self {
             key: key.to_ascii_uppercase(),
