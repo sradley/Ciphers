@@ -64,7 +64,8 @@ There are currently **7 different ciphers to be implemented**.
 ## 5. Backlog
  * The Columnar Transposition cipher can't deal with repeated letters in its
    keyword.
+ * Document panic cases, and cases where a Result(Err(...)) may be returned.
 
 ## 6. Tests to Write
  * All the panic cases.
- * All the cases where the function returns an Err Result.
+ * All the cases where the function returns a Result(Err(...)).
