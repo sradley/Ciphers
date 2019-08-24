@@ -16,8 +16,6 @@
 //! > The frequency analysis of bigrams is possible, but considerably more difficult. With 600
 //! possible bigrams rather than the 26 possible monograms (single symbols, usually letters in this
 //! context), a considerably larger cipher text is required in order to be useful.
-//!
-//! TODO: handle unwraps (i.e. when trying to find a character that's not in the square)
 
 use crate::{input, Cipher, CipherInputError, CipherResult};
 
@@ -78,8 +76,14 @@ impl Cipher for Playfair {
                 ptext[i + 1] = self.pad;
             }
 
-            let yx1 = key.iter().position(|&c| c == ptext[i]).unwrap();
-            let yx2 = key.iter().position(|&c| c == ptext[i + 1]).unwrap();
+            let yx1 = match key.iter().position(|&c| c == ptext[i]) {
+                Some(val) => val,
+                None => return Err(CipherInputError::NotInAlphabet),
+            };
+            let yx2 = match key.iter().position(|&c| c == ptext[i + 1]) {
+                Some(val) => val,
+                None => return Err(CipherInputError::NotInAlphabet),
+            };
 
             let (y1, x1) = (yx1 / 5, yx1 % 5);
             let (y2, x2) = (yx2 / 5, yx2 % 5);
@@ -128,8 +132,14 @@ impl Cipher for Playfair {
 
         let mut ptext = Vec::with_capacity(ctext.len());
         for i in (0..ctext.len()).step_by(2) {
-            let yx1 = key.iter().position(|&c| c == ctext[i]).unwrap();
-            let yx2 = key.iter().position(|&c| c == ctext[i + 1]).unwrap();
+            let yx1 = match key.iter().position(|&c| c == ctext[i]) {
+                Some(val) => val,
+                None => return Err(CipherInputError::NotInAlphabet),
+            };
+            let yx2 = match key.iter().position(|&c| c == ctext[i + 1]) {
+                Some(val) => val,
+                None => return Err(CipherInputError::NotInAlphabet),
+            };
 
             let (y1, x1) = (yx1 / 5, yx1 % 5);
             let (y2, x2) = (yx2 / 5, yx2 % 5);

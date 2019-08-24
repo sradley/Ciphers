@@ -7,8 +7,6 @@
 //! invented by the Ancient Greeks Cleoxenus and Democleitus, and perfected by the Ancient Greek
 //! historian and scholar Polybius, for fractionating plaintext characters so that they can be
 //! represented by a smaller set of symbols.
-//!
-//! TODO: handle unwraps (i.e. when trying to find a character that's not in the square)
 
 use crate::{input, Cipher, CipherInputError, CipherResult};
 
@@ -59,7 +57,10 @@ impl Cipher for PolybiusSquare {
         let mut ctext: Vec<u8> = Vec::with_capacity(ptext.len());
 
         for c in ptext.bytes() {
-            let i = self.key.find(move |j| j == c as char).unwrap();
+            let i = match self.key.find(move |j| j == c as char) {
+                Some(val) => val,
+                None => return Err(CipherInputError::NotInAlphabet),
+            };
 
             ctext.push(chars[i / chars.len()]);
             ctext.push(chars[i % chars.len()]);
@@ -94,8 +95,14 @@ impl Cipher for PolybiusSquare {
         let mut ptext: Vec<u8> = Vec::with_capacity(ctext.len());
 
         for i in (0..ctext.len()).step_by(2) {
-            let y = self.chars.find(|c| c == ctext[i] as char).unwrap();
-            let x = self.chars.find(|c| c == ctext[i + 1] as char).unwrap();
+            let y = match self.chars.find(|c| c == ctext[i] as char) {
+                Some(val) => val,
+                None => return Err(CipherInputError::NotInAlphabet),
+            };
+            let x = match self.chars.find(|c| c == ctext[i + 1] as char) {
+                Some(val) => val,
+                None => return Err(CipherInputError::NotInAlphabet),
+            };
 
             ptext.push(key[y * self.chars.len() + x]);
         }

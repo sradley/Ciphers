@@ -14,8 +14,6 @@
 //!
 //! > The frequency analysis of digraphs is possible, but considerably more difficult - and it
 //! generally requires a much larger ciphertext in order to be useful.
-//!
-//! TODO: handle unwraps (i.e. when trying to find a letter that's not in the alphabet)
 
 use crate::{input, Cipher, CipherInputError, CipherResult};
 
