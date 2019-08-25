@@ -25,9 +25,11 @@ impl PolybiusSquare {
         input::is_ascii(chars).expect("`chars` must be valid ascii");
         input::no_repeated_chars(chars).expect("`chars` cannot contain repeated chars");
 
-        if key.len() != chars.len() * chars.len() {
-            panic!("`chars` must be of length sqrt(key.len())")
-        }
+        assert_eq!(
+            key.len(),
+            chars.len() * chars.len(),
+            "`chars` must be of length sqrt(key.len())"
+        );
 
         Self {
             key: String::from(key),
@@ -50,7 +52,6 @@ impl Cipher for PolybiusSquare {
     /// assert_eq!(ctext.unwrap(), "CEBCCDBCCBCEEBABBCBCBDEAEBEDBDCACACCCDEBABBCDDBDEAEBCABC");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
-        input::is_ascii(ptext)?;
         input::in_alphabet(ptext, &self.key)?;
 
         let chars = self.chars.as_bytes();
@@ -82,7 +83,6 @@ impl Cipher for PolybiusSquare {
     /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
-        input::is_ascii(ctext)?;
         input::in_alphabet(ctext, &self.chars)?;
         if ctext.len() % 2 != 0 {
             return Err(CipherInputError::BadInput(String::from(

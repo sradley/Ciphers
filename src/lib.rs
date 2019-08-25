@@ -40,7 +40,7 @@ pub use substitution::Substitution;
 pub use vigenere::Vigenere;
 
 /// `CipherInputError` enum ...
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum CipherInputError {
     NotAlphabetic,
     NotAscii,

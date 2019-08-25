@@ -28,17 +28,12 @@ impl Affine {
     /// Takes the two keys for the Affine cipher and returns a
     /// corresponding Affine struct.
     pub fn new(a: i32, b: i32) -> Self {
-        if !(0 < a || a < 26) {
-            panic!("`a` must be in the range [1, 26)")
-        }
-        if !(0 <= b || b < 26) {
-            panic!("`b` must be in the range [0, 26)")
-        }
-
-        // a must be relatively prime to 26
-        if !RELATIVE_PRIMES.contains(&a) {
-            panic!("`a` must be relatively prime to 26")
-        }
+        assert!(0 < a && a < 26, "`a` must be in the range [1, 26)");
+        assert!(0 <= b && b < 26, "`b` must be in the range [0, 26)");
+        assert!(
+            RELATIVE_PRIMES.contains(&a),
+            "`a` must be relatively prime to 26"
+        );
 
         Self { a, b }
     }

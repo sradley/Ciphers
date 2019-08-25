@@ -69,3 +69,10 @@ fn decipher_lowercase() {
     let ptext = adfgx.decipher("FFDGDDADXDAFAFXAAFAFDXDXXFDGDAGDDXXFAFADAFDXDDXDDADGXXGX");
     assert_eq!(ptext.unwrap(), "defendtheeastwallofthecastle");
 }
+
+/// `key_not_25_chars` test function.
+#[test]
+#[should_panic]
+fn key_not_25_chars() {
+    ADFGX::new("phqgmeaynofdxkrcvszwbuti", "german");
+}

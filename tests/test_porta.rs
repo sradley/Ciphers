@@ -1,4 +1,4 @@
-use ciphers::{Cipher, Porta};
+use ciphers::{Cipher, CipherInputError, Porta};
 
 /// `encipher_small` test function.
 #[test]
@@ -58,4 +58,20 @@ fn decipher_lowercase() {
 
     let ptext = porta.decipher("synnjscvrnrlahutukucvryrlany");
     assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
+}
+
+/// `key_non_alpha` test function.
+#[test]
+#[should_panic]
+fn key_non_alpha() {
+    Porta::new("fortific4ti0n");
+}
+
+/// `ptext_non_alpha` test function.
+#[test]
+fn ptext_non_alpha() {
+    let porta = Porta::new("fortification");
+
+    let ctext = porta.encipher("defendtheeastw4llofthecastle");
+    assert_eq!(ctext, Err(CipherInputError::NotAlphabetic));
 }

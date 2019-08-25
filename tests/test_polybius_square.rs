@@ -1,4 +1,4 @@
-use ciphers::{Cipher, PolybiusSquare};
+use ciphers::{Cipher, CipherInputError, PolybiusSquare};
 
 /// `encipher_abcde_small` test function.
 #[test]
@@ -117,4 +117,77 @@ fn decipher_lowercase() {
 
     let ptext = ps.decipher("cebccdbccbceebabbcbcbdeaebedbdcacacccdebabbcddbdeaebcabc");
     assert_eq!(ptext.unwrap(), "defendtheeastwallofthecastle");
+}
+
+/// `key_non_ascii` test function.
+#[test]
+#[should_panic]
+fn key_non_ascii() {
+    PolybiusSquare::new("phqgiumèaylnofdxkrcvstzwb", "abcde");
+}
+
+/// `chars_non_ascii` test function.
+#[test]
+#[should_panic]
+fn chars_non_ascii() {
+    PolybiusSquare::new("phqgiumeaylnofdxkrcvstzwb", "abcdè");
+}
+
+/// `key_repeated_chars` test function.
+#[test]
+#[should_panic]
+fn key_repeated_chars() {
+    PolybiusSquare::new("phqgiomeaylnofdxkrcvstzwb", "abcde");
+}
+
+/// `chars_repeated_chars` test function.
+#[test]
+#[should_panic]
+fn chars_repeated_chars() {
+    PolybiusSquare::new("phqgiumeaylnofdxkrcvstzwb", "accde");
+}
+
+/// `key_wrong_length` test function.
+#[test]
+#[should_panic]
+fn key_wrong_length() {
+    PolybiusSquare::new("phqgiumeaylnofdxkrcvstzw", "abcde");
+}
+
+/// `chars_wrong_length` test function.
+#[test]
+#[should_panic]
+fn chars_wrong_length() {
+    PolybiusSquare::new("phqgiumeaylnofdxkrcvstzwb", "abcd");
+}
+
+/// `ptext_not_in_key` test function.
+#[test]
+fn ptext_not_in_key() {
+    let ps = PolybiusSquare::new("phqgiumeaylnofdxkrcvstzwb", "abcde");
+
+    let ctext = ps.encipher("djfendtheeastwallofthecasjle");
+    assert_eq!(ctext, Err(CipherInputError::NotInAlphabet));
+}
+/// `ctext_not_in_chars` test function.
+#[test]
+fn ctext_not_in_chars() {
+    let ps = PolybiusSquare::new("phqgiumeaylnofdxkrcvstzwb", "abcde");
+
+    let ptext = ps.decipher("cebccdbccbceebabbcbcbdeazbedbdcacacccdebabbcddbdeaebcabc");
+    assert_eq!(ptext, Err(CipherInputError::NotInAlphabet));
+}
+
+/// `ctext_uneven_chars` test function.
+#[test]
+fn ctext_uneven_chars() {
+    let ps = PolybiusSquare::new("phqgiumeaylnofdxkrcvstzwb", "abcde");
+
+    let ptext = ps.decipher("cebccdbccbceebabbcbcbdeaebedbdcacacccdebabbcddbdeaebcac");
+    assert_eq!(
+        ptext,
+        Err(CipherInputError::BadInput(String::from(
+            "`ctext` must contain an even number of chars"
+        )))
+    );
 }

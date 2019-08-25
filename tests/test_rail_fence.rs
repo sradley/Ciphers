@@ -1,4 +1,4 @@
-use ciphers::{Cipher, RailFence};
+use ciphers::{Cipher, CipherInputError, RailFence};
 
 /// `encipher_small` test function.
 #[test]
@@ -58,4 +58,29 @@ fn decipher_lowercase() {
 
     let ptext = rail_fence.decipher("dttfsedhswotatfneaalhcleelee");
     assert_eq!(ptext.unwrap(), "defendtheeastwallofthecastle");
+}
+
+/// `key_eq_0` test function.
+#[test]
+#[should_panic]
+fn key_eq_0() {
+    RailFence::new(0);
+}
+
+/// `ptext_non_ascii` test function.
+#[test]
+fn ptext_non_ascii() {
+    let rail_fence = RailFence::new(4);
+
+    let ctext = rail_fence.encipher("dèfèndtheeastwallofthecastlè");
+    assert_eq!(ctext, Err(CipherInputError::NotAscii));
+}
+
+/// `ctext_non_ascii` test function.
+#[test]
+fn ctext_non_ascii() {
+    let rail_fence = RailFence::new(4);
+
+    let ptext = rail_fence.decipher("dttfsèdhswotatfneaalhclèèlèè");
+    assert_eq!(ptext, Err(CipherInputError::NotAscii));
 }

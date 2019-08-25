@@ -1,4 +1,4 @@
-use ciphers::{Caesar, Cipher};
+use ciphers::{Caesar, Cipher, CipherInputError};
 
 /// `encipher_rot1_small` test function.
 #[test]
@@ -100,4 +100,22 @@ fn decipher_lowercase() {
 
     let ptext = caesar.decipher("efgfoeuiffbtuxbmmpguifdbtumf");
     assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
+}
+
+/// `ptext_non_alpha` test function.
+#[test]
+fn ptext_non_alpha() {
+    let caesar = Caesar::new(1);
+
+    let ctext = caesar.encipher("d3f3ndtheeastwallofthecastle");
+    assert_eq!(ctext, Err(CipherInputError::NotAlphabetic));
+}
+
+/// `ctext_non_alpha` test function.
+#[test]
+fn ctext_non_alpha() {
+    let caesar = Caesar::new(1);
+
+    let ptext = caesar.decipher("3f6fo3uiffbtuxbmmpguifdbtumf");
+    assert_eq!(ptext, Err(CipherInputError::NotAlphabetic));
 }

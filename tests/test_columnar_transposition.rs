@@ -1,4 +1,4 @@
-use ciphers::{Cipher, ColumnarTransposition};
+use ciphers::{Cipher, CipherInputError, ColumnarTransposition};
 
 /// `encipher_small` test function.
 #[test]
@@ -58,4 +58,29 @@ fn decipher_lowercase() {
 
     let ptext = ct.decipher("nalcehwttdttfseeleedsoafeahl");
     assert_eq!(ptext.unwrap(), "defendtheeastwallofthecastle");
+}
+
+/// `key_non_ascii` test function.
+#[test]
+#[should_panic]
+fn key_non_ascii() {
+    ColumnarTransposition::new("gèrman");
+}
+
+/// `ptext_non_ascii` test function.
+#[test]
+fn ptext_non_ascii() {
+    let ct = ColumnarTransposition::new("german");
+
+    let ctext = ct.encipher("dèfèndthèèastwallofthècastlè");
+    assert_eq!(ctext, Err(CipherInputError::NotAscii));
+}
+
+/// `ctext_non_ascii` test function.
+#[test]
+fn ctext_non_ascii() {
+    let ct = ColumnarTransposition::new("german");
+
+    let ptext = ct.decipher("nalcèhwttdttfsèèlèèdsoafèahl");
+    assert_eq!(ptext, Err(CipherInputError::NotAscii));
 }

@@ -21,7 +21,7 @@ use crate::{input, Cipher, CipherInputError, CipherResult};
 pub struct FourSquare {
     key1: String,
     key2: String,
-    alphabet: Vec<u8>,
+    alphabet: String,
     pad: u8,
 }
 
@@ -29,34 +29,26 @@ impl FourSquare {
     /// Takes the two keys for the Four-Square cipher and
     /// returns a corresponding FourSquare struct.
     pub fn new(key1: &str, key2: &str, alphabet: &str, pad: char) -> Self {
-        if key1.len() != 25 {
-            panic!("`key1` must be 25 chars in length")
-        }
+        assert_eq!(alphabet.len(), 25, "alphabet` must be 25 chars in length");
+        input::is_ascii(alphabet).expect("`alphabet` must be valid ascii");
+        input::no_repeated_chars(alphabet).expect("`alphabet` cannot contain repeated chars");
+
+        assert_eq!(key1.len(), 25, "`key1` must be 25 chars in length");
         input::no_repeated_chars(key1).expect("`key1` cannot contain repeated chars");
         input::in_alphabet(key1, alphabet)
             .expect("all chars in `key1` must be contained in `alphabet`");
 
-        if key2.len() != 25 {
-            panic!("`key2` must be 25 chars in length")
-        }
+        assert_eq!(key2.len(), 25, "`key2` must be 25 chars in length");
         input::no_repeated_chars(key2).expect("`key2` cannot contain repeated chars");
         input::in_alphabet(key2, alphabet)
             .expect("all chars in `key2` must be contained in `alphabet`");
 
-        if alphabet.len() != 25 {
-            panic!("`alphabet` must be 25 chars in length")
-        }
-        input::no_repeated_chars(alphabet).expect("`alphabet` cannot contain repeated chars");
-
-        match alphabet.find(pad) {
-            None => panic!("`alphabet` must contain `pad`"),
-            _ => (),
-        }
+        assert_ne!(alphabet.find(pad), None, "`alphabet` must contain `pad`");
 
         Self {
             key1: String::from(key1),
             key2: String::from(key2),
-            alphabet: alphabet.bytes().collect(),
+            alphabet: String::from(alphabet),
             pad: pad as u8,
         }
     }
@@ -81,6 +73,8 @@ impl Cipher for FourSquare {
     /// assert_eq!(ctext.unwrap(), "TIYBFHTIZBSY");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
+        input::in_alphabet(ptext, &self.alphabet)?;
+
         let mut ptext: Vec<u8> = ptext.bytes().collect();
         if ptext.len() % 2 != 0 {
             ptext.push(self.pad);
@@ -91,11 +85,11 @@ impl Cipher for FourSquare {
 
         let mut ctext = Vec::with_capacity(ptext.len());
         for i in (0..ptext.len()).step_by(2) {
-            let yx1 = match self.alphabet.iter().position(|&c| c == ptext[i]) {
+            let yx1 = match self.alphabet.bytes().position(|c| c == ptext[i]) {
                 Some(val) => val,
                 None => return Err(CipherInputError::NotInAlphabet),
             };
-            let yx2 = match self.alphabet.iter().position(|&c| c == ptext[i + 1]) {
+            let yx2 = match self.alphabet.bytes().position(|c| c == ptext[i + 1]) {
                 Some(val) => val,
                 None => return Err(CipherInputError::NotInAlphabet),
             };
@@ -128,7 +122,13 @@ impl Cipher for FourSquare {
     /// assert_eq!(ptext.unwrap(), "ATTACKATDAWN");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
-        assert_eq!(ctext.len() % 2, 0);
+        input::in_alphabet(ctext, &self.alphabet)?;
+        if ctext.len() % 2 != 0 {
+            return Err(CipherInputError::BadInput(String::from(
+                "`ctext` must contain an even number of chars",
+            )));
+        }
+
         let ctext = ctext.as_bytes();
 
         let mut ptext = Vec::with_capacity(ctext.len());
@@ -145,8 +145,8 @@ impl Cipher for FourSquare {
             let (y1, x2) = (yx1 / 5, yx1 % 5);
             let (y2, x1) = (yx2 / 5, yx2 % 5);
 
-            ptext.push(self.alphabet[y1 * 5 + x1]);
-            ptext.push(self.alphabet[y2 * 5 + x2]);
+            ptext.push(self.alphabet.as_bytes()[y1 * 5 + x1]);
+            ptext.push(self.alphabet.as_bytes()[y2 * 5 + x2]);
         }
 
         Ok(String::from_utf8(ptext).unwrap())

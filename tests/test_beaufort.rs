@@ -1,4 +1,4 @@
-use ciphers::{Beaufort, Cipher};
+use ciphers::{Beaufort, Cipher, CipherInputError};
 
 /// `encipher_small` test function.
 #[test]
@@ -58,4 +58,20 @@ fn decipher_lowercase() {
 
     let ptext = beaufort.decipher("ckmpvcpvwpiwujogiuapvwriwuuk");
     assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
+}
+
+/// `key_non_alpha` test function.
+#[test]
+#[should_panic]
+fn key_non_alpha() {
+    Beaufort::new("f0rtification");
+}
+
+/// `ptext_non_alpha` test function.
+#[test]
+fn ptext_non_alpha() {
+    let beaufort = Beaufort::new("fortification");
+
+    let ctext = beaufort.encipher("d3f3ndtheeastwallofthecastle");
+    assert_eq!(ctext, Err(CipherInputError::NotAlphabetic));
 }

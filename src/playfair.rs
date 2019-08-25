@@ -29,15 +29,11 @@ impl Playfair {
     /// Takes the key for the Playfair cipher and returns a corresponding
     /// Playfair struct.
     pub fn new(key: &str, pad: char) -> Self {
-        if key.len() != 25 {
-            panic!("`key` must be 25 chars in length")
-        }
+        assert_eq!(key.len(), 25, "`key` must be 25 chars in length");
+        input::is_ascii(key).expect("`key` must be valid ascii");
         input::no_repeated_chars(key).expect("`key` cannot contain repeated chars");
 
-        match key.find(pad) {
-            None => panic!("`key` must contain `pad`"),
-            _ => (),
-        }
+        assert_ne!(key.find(pad), None, "`key` must contain `pad`");
 
         Self {
             key: String::from(key),
@@ -60,7 +56,6 @@ impl Cipher for Playfair {
     /// assert_eq!(ctext.unwrap(), "RKPAWRPMYSELZCLFXUZFRSNQBPSA");
     /// ```
     fn encipher(&self, ptext: &str) -> CipherResult {
-        input::is_ascii(ptext)?;
         input::in_alphabet(ptext, &self.key)?;
 
         let mut ptext: Vec<u8> = ptext.bytes().collect();
@@ -119,7 +114,6 @@ impl Cipher for Playfair {
     /// assert_eq!(ptext.unwrap(), "DEFENDTHEXASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
-        input::is_ascii(ctext)?;
         input::in_alphabet(ctext, &self.key)?;
         if ctext.len() % 2 != 0 {
             return Err(CipherInputError::BadInput(String::from(

@@ -81,9 +81,6 @@ impl Cipher for Beaufort {
     /// assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
     /// ```
     fn decipher(&self, ctext: &str) -> CipherResult {
-        input::is_alpha(ctext)?;
-
-        let ctext = ctext.to_ascii_uppercase();
         self.encipher(&ctext)
     }
 }

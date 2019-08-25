@@ -1,4 +1,4 @@
-use ciphers::{Atbash, Cipher};
+use ciphers::{Atbash, Cipher, CipherInputError};
 
 /// `encipher_small` test function.
 #[test]
@@ -58,4 +58,22 @@ fn decipher_lowercase() {
 
     let ptext = atbash.decipher("zggzxpzgwzdm");
     assert_eq!(ptext.unwrap(), "ATTACKATDAWN");
+}
+
+/// `ptext_non_alpha` test function.
+#[test]
+fn ptext_non_alpha() {
+    let atbash = Atbash::new();
+
+    let ctext = atbash.encipher("4ttack4tdawn");
+    assert_eq!(ctext, Err(CipherInputError::NotAlphabetic));
+}
+
+/// `ctext_non_alpha` test function.
+#[test]
+fn ctext_non_alpha() {
+    let atbash = Atbash::new();
+
+    let ptext = atbash.decipher("z66zxpzgwzdm");
+    assert_eq!(ptext, Err(CipherInputError::NotAlphabetic));
 }

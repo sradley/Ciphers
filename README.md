@@ -62,8 +62,6 @@ There are currently **6 different ciphers to be implemented**.
 |               |                |                |             | Straddle Checkerboard |
 
 ## 5. Backlog
- * The Columnar Transposition cipher can't deal with repeated letters in its
-   keyword.
  * Document panic cases, and cases where a Result(Err(...)) may be returned.
 
 ## 6. Tests to Write

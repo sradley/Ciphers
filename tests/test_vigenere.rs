@@ -1,4 +1,4 @@
-use ciphers::{Cipher, Vigenere};
+use ciphers::{Cipher, CipherInputError, Vigenere};
 
 /// `encipher_small` test function.
 #[test]
@@ -58,4 +58,29 @@ fn decipher_lowercase() {
 
     let ptext = vigenere.decipher("iswxvibjexiggbocewkbjeviggqs");
     assert_eq!(ptext.unwrap(), "DEFENDTHEEASTWALLOFTHECASTLE");
+}
+
+/// `key_non_alpha` test function.
+#[test]
+#[should_panic]
+fn key_non_alpha() {
+    Vigenere::new("fortific4tion");
+}
+
+/// `ptext_non_alpha` test function.
+#[test]
+fn ptext_non_alpha() {
+    let vigenere = Vigenere::new("fortification");
+
+    let ctext = vigenere.encipher("def3ndtheeastwallofthecastle");
+    assert_eq!(ctext, Err(CipherInputError::NotAlphabetic));
+}
+
+/// `ctext_non_alpha` test function.
+#[test]
+fn ctext_non_alpha() {
+    let vigenere = Vigenere::new("fortification");
+
+    let ptext = vigenere.decipher("iswxvibjexiggbocewkbj3viggqs");
+    assert_eq!(ptext, Err(CipherInputError::NotAlphabetic));
 }
