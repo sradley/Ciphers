@@ -35,6 +35,9 @@ pub struct Porta {
 impl Porta {
     /// Takes the key for the Porta cipher and returns a corresponding
     /// Porta struct.
+    /// 
+    /// # Panics
+    /// * If `key` is not alphabetic.
     pub fn new(key: &str) -> Self {
         input::is_alpha(key).expect("`key` must be alphabetic");
 

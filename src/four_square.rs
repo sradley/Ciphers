@@ -28,6 +28,18 @@ pub struct FourSquare {
 impl FourSquare {
     /// Takes the two keys for the Four-Square cipher and
     /// returns a corresponding FourSquare struct.
+    /// 
+    /// # Panics
+    /// * If `alphabet` is not 25 chars in length.
+    /// * If `alphabet` is not valid ascii.
+    /// * If `alphabet` contains repeated chars.
+    /// * If `key1` is not 25 chars in length.
+    /// * If `key1` contains repeated chars.
+    /// * If any of the chars in `key1` are not contained in `alphabet`.
+    /// * If `key2` is not 25 chars in length.
+    /// * If `key2` contains repeated chars.
+    /// * If any of the chars in `key2` are not contained in `alphabet`.
+    /// * If `pad` is not contained in `alphabet`.
     pub fn new(key1: &str, key2: &str, alphabet: &str, pad: char) -> Self {
         assert_eq!(alphabet.len(), 25, "alphabet` must be 25 chars in length");
         input::is_ascii(alphabet).expect("`alphabet` must be valid ascii");

@@ -23,6 +23,9 @@ pub struct ColumnarTransposition {
 impl ColumnarTransposition {
     /// Takes the key for the Columnar Transposition cipher and
     /// returns a corresponding ColumnarTransposition struct.
+    /// 
+    /// # Panics
+    /// * If `key` is not valid ascii.
     pub fn new(key: &str) -> Self {
         input::is_ascii(key).expect("`key` must be valid ascii");
 

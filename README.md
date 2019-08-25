@@ -60,10 +60,3 @@ There are currently **6 different ciphers to be implemented**.
 |               | Rot13          | Gronsfeld      | Hill        | Bifid                 |
 |               |                |                |             | Trifid                |
 |               |                |                |             | Straddle Checkerboard |
-
-## 5. Backlog
- * Document panic cases, and cases where a Result(Err(...)) may be returned.
-
-## 6. Tests to Write
- * All the panic cases.
- * All the cases where the function returns a Result(Err(...)).

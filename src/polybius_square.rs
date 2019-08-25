@@ -19,6 +19,13 @@ pub struct PolybiusSquare {
 impl PolybiusSquare {
     /// Takes the key and specified characters for the Polybius Square
     /// cipher and returns a corresponding PolybiusSquare struct.
+    /// 
+    /// # Panics
+    /// * If `key` is not valid ascii.
+    /// * If `key` contains repeated chars.
+    /// * If `chars` is not valid ascii.
+    /// * If `chars` contains repeated chars.
+    /// * If `chars` is not of length `sqrt(key.len())`, or `key` is not of `length chars.len()^2`.
     pub fn new(key: &str, chars: &str) -> Self {
         input::is_ascii(key).expect("`key` must be valid ascii");
         input::no_repeated_chars(key).expect("`key` cannot contain repeated chars");

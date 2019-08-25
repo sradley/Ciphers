@@ -21,6 +21,9 @@ pub struct Beaufort {
 impl Beaufort {
     /// Takes the key for the Beaufort cipher and returns a corresponding
     /// Beaufort struct.
+    /// 
+    /// # Panics
+    /// * If `key` is not alphabetic.
     pub fn new(key: &str) -> Self {
         input::is_alpha(key).expect("`key` must be alphabetic");
 

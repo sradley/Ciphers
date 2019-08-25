@@ -23,6 +23,12 @@ pub struct ADFGX {
 impl ADFGX {
     /// Takes the key and keyword for the ADFGX cipher and returns a
     /// corresponding ADFGX struct.
+    /// 
+    /// # Panics
+    /// * If `key` is not 25 chars in length.
+    /// * If `key` contains repeated chars.
+    /// * If `key` is not valid ascii.
+    /// * If `keyword` is not valid ascii.
     pub fn new(key: &str, keyword: &str) -> Self {
         assert_eq!(key.len(), 25, "`key` must be 25 chars in length");
 

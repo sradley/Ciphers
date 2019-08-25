@@ -28,6 +28,12 @@ pub struct Playfair {
 impl Playfair {
     /// Takes the key for the Playfair cipher and returns a corresponding
     /// Playfair struct.
+    /// 
+    /// # Panics
+    /// * If `key` is not 25 chars in length.
+    /// * If `key` is not valid ascii.
+    /// * If `key` contains repeated characters.
+    /// * If `pad` is not contained within `key`.
     pub fn new(key: &str, pad: char) -> Self {
         assert_eq!(key.len(), 25, "`key` must be 25 chars in length");
         input::is_ascii(key).expect("`key` must be valid ascii");

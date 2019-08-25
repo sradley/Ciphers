@@ -27,6 +27,11 @@ pub struct Affine {
 impl Affine {
     /// Takes the two keys for the Affine cipher and returns a
     /// corresponding Affine struct.
+    /// 
+    /// # Panics
+    /// * If `a` is outside the range [1, 26).
+    /// * If `b` is outside the range [0, 26).
+    /// * If `a` is not relatively prime to 26.
     pub fn new(a: i32, b: i32) -> Self {
         assert!(0 < a && a < 26, "`a` must be in the range [1, 26)");
         assert!(0 <= b && b < 26, "`b` must be in the range [0, 26)");

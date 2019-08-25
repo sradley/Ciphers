@@ -18,6 +18,9 @@ pub struct RunningKey {
 impl RunningKey {
     /// Takes the key for the Running Key cipher and returns a
     /// corresponding RunningKey struct.
+    /// 
+    /// # Panics
+    /// * If `key` is not alphabetic.
     pub fn new(key: &str) -> Self {
         input::is_alpha(key).expect("`key` must be alphabetic");
 

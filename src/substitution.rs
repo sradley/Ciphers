@@ -24,6 +24,11 @@ pub struct Substitution {
 impl Substitution {
     /// Takes the key for the Simple Substitution cipher and returns a
     /// corresponding Substitution struct.
+    /// 
+    /// # Panics
+    /// * If `key` is not 26 chars in length.
+    /// * If `key` is not alphabetic.
+    /// * If `key` contains repeated chars.
     pub fn new(key: &str) -> Self {
         assert_eq!(key.len(), 26, "`key` must be 26 chars in length");
         input::is_alpha(key).expect("`key` must be alphabetic");

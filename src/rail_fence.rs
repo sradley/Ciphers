@@ -18,6 +18,9 @@ pub struct RailFence {
 impl RailFence {
     /// Takes the key for the Rail-fence cipher and returns a corresponding
     /// RailFence struct.
+    /// 
+    /// # Panics
+    /// * If `key` is less than or equal to 0.
     pub fn new(key: usize) -> Self {
         assert!(key > 0, "`key` must be greater than 0");
 
