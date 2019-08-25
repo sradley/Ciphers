@@ -28,7 +28,7 @@ pub struct FourSquare {
 impl FourSquare {
     /// Takes the two keys for the Four-Square cipher and
     /// returns a corresponding FourSquare struct.
-    /// 
+    ///
     /// # Panics
     /// * If `alphabet` is not 25 chars in length.
     /// * If `alphabet` is not valid ascii.

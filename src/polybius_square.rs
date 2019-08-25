@@ -19,7 +19,7 @@ pub struct PolybiusSquare {
 impl PolybiusSquare {
     /// Takes the key and specified characters for the Polybius Square
     /// cipher and returns a corresponding PolybiusSquare struct.
-    /// 
+    ///
     /// # Panics
     /// * If `key` is not valid ascii.
     /// * If `key` contains repeated chars.

@@ -24,7 +24,7 @@ pub struct Substitution {
 impl Substitution {
     /// Takes the key for the Simple Substitution cipher and returns a
     /// corresponding Substitution struct.
-    /// 
+    ///
     /// # Panics
     /// * If `key` is not 26 chars in length.
     /// * If `key` is not alphabetic.

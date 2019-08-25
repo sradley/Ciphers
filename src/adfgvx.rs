@@ -25,7 +25,7 @@ pub struct ADFGVX {
 impl ADFGVX {
     /// Takes the key and keyword for the ADFGVX cipher and returns a
     /// corresponding ADFGVX struct.
-    /// 
+    ///
     /// # Panics
     /// * If `key` is not 36 chars in length.
     /// * If `key` contains repeated chars.

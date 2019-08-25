@@ -28,7 +28,7 @@ pub struct Playfair {
 impl Playfair {
     /// Takes the key for the Playfair cipher and returns a corresponding
     /// Playfair struct.
-    /// 
+    ///
     /// # Panics
     /// * If `key` is not 25 chars in length.
     /// * If `key` is not valid ascii.

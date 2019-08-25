@@ -23,7 +23,7 @@ pub struct ADFGX {
 impl ADFGX {
     /// Takes the key and keyword for the ADFGX cipher and returns a
     /// corresponding ADFGX struct.
-    /// 
+    ///
     /// # Panics
     /// * If `key` is not 25 chars in length.
     /// * If `key` contains repeated chars.

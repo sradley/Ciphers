@@ -27,7 +27,7 @@ pub struct Affine {
 impl Affine {
     /// Takes the two keys for the Affine cipher and returns a
     /// corresponding Affine struct.
-    /// 
+    ///
     /// # Panics
     /// * If `a` is outside the range [1, 26).
     /// * If `b` is outside the range [0, 26).

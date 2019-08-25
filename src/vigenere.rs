@@ -28,7 +28,7 @@ pub struct Vigenere {
 impl Vigenere {
     /// Takes the key for the Vigenere cipher and returns a corresponding
     /// Vigenere struct.
-    /// 
+    ///
     /// # Panics
     /// * If `key` is not alphabetic.
     pub fn new(key: &str) -> Self {

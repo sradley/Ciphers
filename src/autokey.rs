@@ -24,7 +24,7 @@ pub struct Autokey {
 impl Autokey {
     /// Takes the key for the Autokey cipher and returns a corresponding
     /// Autokey struct.
-    /// 
+    ///
     /// # Panics
     /// * If `key` is not alphabetic.
     pub fn new(key: &str) -> Self {
